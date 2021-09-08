@@ -1,0 +1,26 @@
+{
+  "name": "botclient",
+  "version": "0.0.1",
+  "description": "An **unofficial** webapp to login as a discord bot using bot-token. <br>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarkGuy10/BotClient.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarkGuy10/BotClient/issues"
+  },
+  "homepage": "https://github.com/DarkGuy10/BotClient#readme",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "discord.js": "^13.1.0"
+  },
+  "devDependencies": {
+    "electron-nightly": "^16.0.0-nightly.20210903"
+  }
+}
