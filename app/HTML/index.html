@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./../node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
+    <script src="./../../node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
     <script
       type="module"
       src="https://unpkg.com/@skyra/discord-components-core"
     ></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./../CSS/style.css">
     <title>BotClient-alpha</title>
 </head>
 <body>
     <div class="loadingWrapper" id="loadingWrapper">
         <div>
-            <video src="./Assets/loading.webm" class="loadingGif" id="loadingGif" autoplay loop></video>
+            <video src="./../Assets/loading.webm" class="loadingGif" id="loadingGif" autoplay loop></video>
             <p class="loadingText">Loading BotClient-alpha</p>
         </div>
     </div>
@@ -35,7 +35,7 @@
                 </ul>
             </div>
             <div class="clientUserArea" id="clientUserArea">
-                <img src="./Assets/icon.png" alt="" id="clientUserAvatar"  class="clientUserAvatar">
+                <img src="./../Assets/icon.png" alt="" id="clientUserAvatar"  class="clientUserAvatar">
                 <div class="clientUserTag" id="clientUserTag">
                     <span class="clientUsername" id="clientUsername"></span>
                     <span class="clientDiscriminator" id="clientDiscriminator"></span>
@@ -57,6 +57,6 @@
         </div>
 
     </div>
-    <script src="script.js"></script>
+    <script src="./../JS/script.js"></script>
 </body>
 </html>

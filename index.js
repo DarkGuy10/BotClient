@@ -23,7 +23,7 @@ app.on('ready', () => {
 			contextIsolation: false,
 		},
     });
-    mainWindow.loadFile(`${__dirname}/app/index.html`);
+    mainWindow.loadFile(`${__dirname}/app/HTML/index.html`);
     mainWindow.setMenu(null);
   mainWindow.openDevTools(); //for testing
     mainWindow.on('closed', () => {
