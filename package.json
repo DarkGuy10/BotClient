@@ -1,7 +1,7 @@
 {
   "name": "botclient",
-  "version": "0.0.1",
-  "description": "An **unofficial** webapp to login as a discord bot using bot-token. <br>",
+  "version": "0.0.2",
+  "description": "An unofficial Electron-based discord client to login as a discord bot using a bot-token",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,5 +22,9 @@
   },
   "devDependencies": {
     "electron-nightly": "^16.0.0-nightly.20210903"
+  },
+  "engines": {
+    "node": ">=16.6.0",
+    "npm": ">=7.0.0"
   }
 }
