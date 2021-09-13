@@ -11,10 +11,16 @@ class Client extends oldClient {
         super(clientOptions);
         this.mainWindow = mainWindow;
 
-        this.on('messageCreate', message => {
+        this.on('messageCreate', async message => {
             if(message.channel.type !== 'GUILD_TEXT') return;
-            message.authorAvatarURL = message.author.displayAvatarURL(),
-            message.authorVerifiedBot = message.author.flags?.has('VERIFIED_BOT')
+            if(message.type === 'REPLY'){
+                message.repliesTo = await message.fetchReference();
+                message.repliesTo.authorAvatarURL = message.repliesTo.author.displayAvatarURL();
+                message.repliesTo.authorVerifiedBot = message.repliesTo.author.flags?.has('VERIFIED_BOT');
+            }
+            message.authorAvatarURL = message.author.displayAvatarURL();
+            message.authorVerifiedBot = message.author.flags?.has('VERIFIED_BOT');
+            message.stickers.forEach(sticker => sticker.URL = sticker.url);
             this.mainWindow.webContents.send('messageCreate', message, message.channel);
         });
     }
