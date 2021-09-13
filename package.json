@@ -1,6 +1,6 @@
 {
   "name": "botclient",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "An unofficial Electron-based discord client to login as a discord bot using a bot-token",
   "main": "index.js",
   "scripts": {
