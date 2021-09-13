@@ -242,6 +242,9 @@ input:focus {
 
 .messageArea {
     width: 100%;
+    display: block;
+    outline: none;
+    border: none;
     flex-grow: 1;
     overflow-y: scroll;
 }
@@ -275,6 +278,10 @@ input:focus {
 	color: #b9bbbe;
 	font-size: 15px;
 	padding: 12px 18px;
+}
+
+.discord-message-body {
+    white-space: pre-wrap;
 }
 
 .userListPane {
