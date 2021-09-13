@@ -1,4 +1,4 @@
-const { TextChannel } = require('discord.js');
+const { TextChannel, Message } = require('discord.js');
 const { app, BrowserWindow, ipcMain} = require('electron');
 const Client = require('./app/Structures/Client');
 
@@ -45,7 +45,7 @@ ipcMain.on('login', (event, token) => {
         client = null;
     }
     client = new Client({
-        intents: ['GUILDS', 'DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILD_MEMBERS']
+        intents: ['GUILDS', 'DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_EMOJIS_AND_STICKERS']
     }, mainWindow);
 
     client.login(token).catch(error => {
@@ -84,10 +84,16 @@ const loadOneChannel = async (event, id) => {
 
     try{
         let messages = await channel.messages.fetch({limit: 50});
-        messages.forEach(message => {
-            message.authorAvatarURL = message.author.displayAvatarURL(),
-            message.authorVerifiedBot = message.author.flags?.has('VERIFIED_BOT')
-        });
+        for(const message of messages.values()){
+            if(message.type === 'REPLY'){
+                message.repliesTo = await message.fetchReference();
+                message.repliesTo.authorAvatarURL = message.repliesTo.author.displayAvatarURL();
+                message.repliesTo.authorVerifiedBot = message.repliesTo.author.flags?.has('VERIFIED_BOT');
+            }
+            message.authorAvatarURL = message.author.displayAvatarURL();
+            message.authorVerifiedBot = message.author.flags?.has('VERIFIED_BOT');
+            message.stickers.forEach(sticker => sticker.URL = sticker.url);
+        }
         const members = channel.members;
         event.reply('load-one-channel', channel, messages, members);
     } catch(error) {
