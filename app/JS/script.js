@@ -1,5 +1,5 @@
 // Global variables
-const { Message, TextChannel, CategoryChannel, MessageEmbed, MessageAttachment } = require("discord.js");
+const { Message, TextChannel, CategoryChannel, MessageEmbed, MessageAttachment, Sticker } = require("discord.js");
 const { ipcRenderer } = require("electron");
 const messageArea = document.querySelector('discord-messages');
 const messageField = document.querySelector('#messageField');
@@ -112,7 +112,7 @@ ipcRenderer.on('load-one-channel', (event, channel, messages, members) => {
 });
 
 // <=== DISCORD CLIENT EVENTS RELAYED THROUGH IPC EVENTS ===>
-ipcRenderer.on('messageCreate', async (event, message, channel) => {
+ipcRenderer.on('messageCreate', (event, message, channel) => {
     if(channel.id !== currentChannelId)
         return;
     addMessageElement(message);
@@ -134,14 +134,40 @@ const addMessageElement = message => {
     const fullyScrolled = messageArea.scrollTop + messageArea.clientHeight >= messageArea.scrollHeight;
 
     const messageElement = document.createElement('discord-message');
-    messageElement.setAttribute('author', message.author.username);
-    messageElement.setAttribute('avatar', message.authorAvatarURL);
-    messageElement.setAttribute('bot', message.author.bot);
-    messageElement.setAttribute('verified', message.authorVerifiedBot);
-    messageElement.setAttribute('timestamp', message.createdTimestamp);
-    messageElement.innerHTML = format(message);
 
-    // <=== PARSE IMAGE ATTACHMENTS ===>
+    messageElement.setAttributes({
+        author: message.author.username,
+        avatar: message.authorAvatarURL,
+        bot: message.author.bot,
+        verified: message.authorVerifiedBot,
+        timestamp: parseTimestamp(message.createdTimestamp),
+        edited: message.editedTimestamp ? true : false
+    });
+
+    if(message.type === 'REPLY'){
+        const replyElement = document.createElement('discord-reply');
+        replyElement.setAttributes({
+            slot: 'reply',
+            edited: message.repliesTo.editedTimestamp ? true : false,
+            author: message.repliesTo.author.username,
+            avatar: message.repliesTo.authorAvatarURL,
+            bot: message.repliesTo.author.bot,
+            verified: message.repliesTo.authorVerifiedBot,
+            attachment: message.repliesTo.editedTimestamp ? true : false
+        });
+
+        const allowance = 80 - message.repliesTo.author.username.length;
+        const replyContent = message.repliesTo.content.substring(0, allowance) + (message.repliesTo.content.length >= allowance ? '...' : '');
+        replyElement.innerText = replyContent;
+        messageElement.appendChild(replyElement);
+    }
+    
+    messageElement.innerHTML += format(message);
+
+    // <=== PARSE IMAGE ATTACHMENTS AND STICKERS SIMILARLY ===>
+    message.stickers.forEach(sticker => {
+        parseSticker(sticker, messageElement);
+    })
     const allowedImageTypes = ['image/png', 'image/jpeg', 'image/gif', 'image/webp'];
     const imageAttachments = [...message.attachments.values()].filter(attachment => allowedImageTypes.includes(attachment.contentType));
     imageAttachments.forEach(attachment => {
@@ -158,25 +184,64 @@ const addMessageElement = message => {
 
     messageArea.appendChild(messageElement);
     
-    // <=== AUTOSCROLLING ===> BROKEN
+    // <=== AUTOSCROLLING ===> HOPEFULLY FIXED
     if(fullyScrolled)
-        messageArea.scrollTo(0, messageArea.scrollHeight);
+        setTimeout(() => {
+            messageArea.scrollTo(0, messageArea.scrollHeight);
+        }, 700);
+    
 };
 
 /**
  * Parse image attachments into components
  * @param {MessageAttachment} imageAttachment The attachment to parse
- * @param {HTMLElement} messageElement The <discord-message> element represnting the message this attachment belongs to
+ * @param {Element} messageElement The <discord-message> element represnting the message this attachment belongs to
  */
 const parseImageAttachments = (imageAttachment, messageElement) => {
     const attachment = document.createElement('discord-attachment');
     attachment.setAttribute('slot', 'attachments');
     attachment.setAttribute('url', imageAttachment.url);
 
-    attachment.setAttribute('height', Math.min(imageAttachment.height, 300));
-    attachment.setAttribute('width', (imageAttachment.height > 300) ? imageAttachment.width / imageAttachment.height * 300 : imageAttachment.width);
+    // <=== RESIZE IMAGE ===>
+    const biggerSide = (imageAttachment.height > imageAttachment.width) ? 'height' : 'width';
+    const allowance = biggerSide === 'height' ? 300 : 500;
+    attachment.setAttribute(biggerSide, Math.min(imageAttachment[biggerSide], allowance));
 
     attachment.setAttribute('alt', imageAttachment.name);
+    messageElement.appendChild(attachment);
+};
+
+
+/**
+ * Parse tenor video embeds to <discord-tenor-vide> components
+ * @param {MessageEmbed} embed The tenor video embed
+ * @param {Element} messageElement The <discord-message> element representing the message this embed belongs to
+ */
+const parseTenorVideo = (embed, messageElement) => {
+    const tenorVideoElement = document.createElement('discord-tenor-video');
+    // <=== RESIZE VIDEO ===>
+    const biggerSide = (embed.video.height > embed.video.width) ? 'height' : 'width';
+    const allowance = biggerSide === 'height' ? 300 : 400;
+    tenorVideoElement.setAttributes({
+        slot: 'attachments',
+        url: embed.video.url,
+    });
+    tenorVideoElement.setAttribute(`${biggerSide}`, Math.min(embed.video[biggerSide], allowance));
+    messageElement.appendChild(tenorVideoElement);
+}
+
+
+/**
+ * Parse stickers into components [similar to image attachments]
+ * @param {Sticker} sticker The sticker to parse
+ * @param {Element} messageElement The <discord-message> element represnting the message this sticker belongs to
+ */
+const parseSticker = (sticker, messageElement) => {
+    const attachment = document.createElement('discord-attachment');
+    attachment.setAttribute('slot', 'attachments');
+    attachment.setAttribute('url', sticker.URL);
+    attachment.setAttribute('width', 150);
+    attachment.setAttribute('alt', sticker.name);
     messageElement.appendChild(attachment);
 };
 
@@ -186,6 +251,10 @@ const parseImageAttachments = (imageAttachment, messageElement) => {
  * @param {HTMLElement} messageElement The <discord-message> element represnting the message this embed belongs to
  */
 const parseMessageEmbed = (embed, messageElement) => {
+    // <=== TENOR VIDEO EMBEDS SHOULD BE PARSED DIFFERENTLY ===>
+    if(embed.provider?.name === 'Tenor')
+        return parseTenorVideo(embed, messageElement);
+
     const embedElement = document.createElement('discord-embed');
     embedElement.setAttribute('slot', 'embeds');
     if(embed.author?.name) embedElement.setAttribute('author-name', embed.author.name);
@@ -196,7 +265,7 @@ const parseMessageEmbed = (embed, messageElement) => {
     if(embed.footer?.iconURL) embedElement.setAttribute('footer-image', embed.footer.iconURL);
     if(embed.image?.url) embedElement.setAttribute('image', embed.image.url);
     if(embed.url) embedElement.setAttribute('url', embed.url);
-    if(embed.timestamp) embedElement.setAttribute('timestamp', embed.timestamp);
+    if(embed.timestamp) embedElement.setAttribute('timestamp', parseTimestamp(embed.timestamp));
     if(embed.video){
         embedElement.setAttribute('video', embed.video.url);
         embedElement.setAttribute('provider', embed.provider.name);
@@ -295,6 +364,7 @@ const format = message => {
  */
 const sanitizeHTML = str => {
 	const temp = document.createElement('div');
+    temp.style.whiteSpace = 'pre';
 	temp.textContent = str;
 	return temp.innerHTML;
 };
@@ -325,3 +395,14 @@ const parseTimestamp = timestamp => {
 Array.prototype.pushArray = function(arr) {
     this.push.apply(this, arr);
 };
+
+/**
+ * Assign multiple attributes at once
+ * @param {any} attrs Object with attributes as keys
+ */
+Element.prototype.setAttributes = function(attrs) {
+    for(var key in attrs) {
+        this.setAttribute(key, attrs[key]);
+    }
+}
+  
