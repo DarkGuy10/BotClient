@@ -253,7 +253,7 @@ const parseImageAttachments = (imageAttachment, messageElement) => {
 
     // <=== RESIZE IMAGE ===>
     const biggerSide = (imageAttachment.height > imageAttachment.width) ? 'height' : 'width';
-    const allowance = biggerSide === 'height' ? 300 : 500;
+    const allowance = biggerSide === 'height' ? 300 : 400;
     attachment.setAttribute(biggerSide, Math.min(imageAttachment[biggerSide], allowance));
 
     attachment.setAttribute('alt', imageAttachment.name);
