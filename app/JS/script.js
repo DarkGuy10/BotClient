@@ -8,10 +8,20 @@ const channelHeader = document.querySelector('#channelHeader');
 const channelList = document.querySelector('#channelList');
 const loadingWrapper = document.querySelector('#loadingWrapper');
 const loadingGif = document.querySelector('#loadingGif');
+const fileUploadButton = document.querySelector('#fileUploadButton');
+
+const uploadForm = document.querySelector('#uploadForm');
+const uploadCommentField = document.querySelector('#uploadCommentField');
+const uploadConfirmWrapper = document.querySelector('#uploadConfirmWrapper');
+const uploadConfirm = document.querySelector('#uploadConfirm');
+const uploadFileName = document.querySelector('#uploadFileName');
+const uploadTo = document.querySelector('#uploadTo strong');
+const uploadIsSpoiler = document.querySelector('#uploadIsSpoiler');
+const uploadCancelButton = document.querySelector('#uploadCancelButton');
 
 const token = window.localStorage.getItem('token');
 let clientUser, loaded = false;
-let currentGuildId, currentChannelId, channelsInCurrentGuild;
+let currentGuildId, currentChannel = {}, channelsInCurrentGuild, currentFileObject;
 
 // ******************* CHECK LOGIN *******************
 if(!token)
@@ -28,16 +38,48 @@ const clearLoadingScreen = async () => {
     return true;
 }
 
-// ******************* HANDLING MESSAGE BOX *******************
+// ******************* HANDLING MESSAGING *******************
 messageField.addEventListener('keyup', event => {
     if(event.key != 'Enter' || !messageField.value.trim()) return;
-    ipcRenderer.send('message', messageField.value.trim(), currentChannelId);
+    ipcRenderer.send('message', currentChannel.id, messageField.value.trim());
     messageField.value = "";
 });
 
+// ******************* HANDLING FILE UPLOADS *******************
+fileUploadButton.addEventListener('click', event => {
+    ipcRenderer.send('upload-files', currentChannel.id);
+});
+
+uploadForm.addEventListener('submit', event => {
+    event.preventDefault();
+    if(!currentFileObject) return closeUploadDialog();
+    if(uploadIsSpoiler.checked) currentFileObject.name = `SPOILER_${currentFileObject.name}`;
+    ipcRenderer.send('message', currentChannel.id, uploadCommentField.value.trim(), [currentFileObject]);
+    closeUploadDialog();
+});
+
+uploadCancelButton.addEventListener('click', event => {
+    closeUploadDialog();
+});
+
+const openUploadDialog = fileObject => {
+    currentFileObject = fileObject;
+    uploadFileName.textContent = currentFileObject.name;
+    uploadTo.textContent = `#${currentChannel.name}`;
+    uploadCommentField.value = '';
+    uploadIsSpoiler.checked = false;
+    uploadConfirmWrapper.style.display = 'block';
+};
+
+const closeUploadDialog = () => {
+    uploadConfirmWrapper.style.display = 'none';
+    currentFileObject = {};
+};
 
 // ******************* HANDLING IPC RENDERER EVENTS *******************
 ipcRenderer.on('error', (event, code, message) => {
+    if(code == 500)
+        clearLoadingScreen()
     alert(`${code} ${message}`)
     if(code === 'TOKEN_INVALID'){
         window.localStorage.removeItem('token');
@@ -102,7 +144,8 @@ ipcRenderer.on('load-one-channel', (event, channel, messages, members) => {
     channelHeader.innerHTML = `<i class="fas fa-hashtag" style="color:#b9bbbe; font-size: 18px"></i> ${channel.name}`;
     
     messageField.setAttribute('placeholder', `Message #${channel.name}`);
-    currentChannelId = channel.id;
+    currentChannel.name = channel.name;
+    currentChannel.id = channel.id;
     
     // Loads messages [limit : 50]
     messageArea.innerHTML = '';
@@ -111,9 +154,15 @@ ipcRenderer.on('load-one-channel', (event, channel, messages, members) => {
     });
 });
 
+ipcRenderer.on('upload-files', (event, fileObjects) => {
+    fileObjects.forEach(fileObject => {
+        openUploadDialog(fileObject);
+    });
+});
+
 // <=== DISCORD CLIENT EVENTS RELAYED THROUGH IPC EVENTS ===>
 ipcRenderer.on('messageCreate', (event, message, channel) => {
-    if(channel.id !== currentChannelId)
+    if(channel.id !== currentChannel.id)
         return;
     addMessageElement(message);
 });

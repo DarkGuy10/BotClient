@@ -1,5 +1,5 @@
 const { TextChannel, Message } = require('discord.js');
-const { app, BrowserWindow, ipcMain} = require('electron');
+const { app, BrowserWindow, ipcMain, dialog} = require('electron');
 const Client = require('./app/Structures/Client');
 
 /**
@@ -47,7 +47,6 @@ ipcMain.on('login', (event, token) => {
     client = new Client({
         intents: ['GUILDS', 'DIRECT_MESSAGES', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_EMOJIS_AND_STICKERS']
     }, mainWindow);
-
     client.login(token).catch(error => {
         console.log(error);
         event.reply('error', error.code, error.message);
@@ -102,11 +101,37 @@ const loadOneChannel = async (event, id) => {
     }
 };
 
-ipcMain.on('message', async (event, content, channelId) => {
+ipcMain.on('message', async (event, channelID, content, files) => {
     try {
-        await client.channels.cache.get(channelId).send(content);
+        let messagePayload = {};
+        if(content) messagePayload.content = content;
+        if(files) messagePayload.files = files;
+        await client.channels.cache.get(channelID).send(messagePayload);
     } catch (error) {
         event.reply('error', error.code, error.message);
         console.error(error);
     };
+});
+
+ipcMain.on('upload-files', async (event, channelID) => {
+    try {
+        const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+            title: 'File Upload',
+            defaultPath: `~/`,
+            buttonLabel: 'Open',
+            filters: [
+                { name: 'All Files', extensions: ['*'] }
+            ],
+            properties: ['openFile', 'showHiddenFiles']
+        });
+        if(canceled) return;
+        const fileObjects = filePaths.map(each => new Object({
+            attachment: each,
+            name: each.split('/').pop()
+        }));
+        event.reply('upload-files', fileObjects);
+    } catch (error) {
+        event.reply('error', error.code, error.message);
+        console.error(error);
+    }
 });

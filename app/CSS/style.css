@@ -1,6 +1,3 @@
-@font-face {font-family: "Whitney-Medium"; src: url("https://db.onlinewebfonts.com/t/3d18e5b9c54ab7a3fecf7d36dc931eb6.eot"); src: url("https://db.onlinewebfonts.com/t/3d18e5b9c54ab7a3fecf7d36dc931eb6.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/3d18e5b9c54ab7a3fecf7d36dc931eb6.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/3d18e5b9c54ab7a3fecf7d36dc931eb6.woff") format("woff"), url("https://db.onlinewebfonts.com/t/3d18e5b9c54ab7a3fecf7d36dc931eb6.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/3d18e5b9c54ab7a3fecf7d36dc931eb6.svg#Whitney-Medium") format("svg"); } 
-@font-face {font-family: "Whitney"; src: url("https://db.onlinewebfonts.com/t/7234adf2685474c81e28858c37d40610.eot"); src: url("https://db.onlinewebfonts.com/t/7234adf2685474c81e28858c37d40610.eot?#iefix") format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/7234adf2685474c81e28858c37d40610.woff2") format("woff2"), url("https://db.onlinewebfonts.com/t/7234adf2685474c81e28858c37d40610.woff") format("woff"), url("https://db.onlinewebfonts.com/t/7234adf2685474c81e28858c37d40610.ttf") format("truetype"), url("https://db.onlinewebfonts.com/t/7234adf2685474c81e28858c37d40610.svg#Whitney") format("svg"); } 
-
 * {
     box-sizing: border-box;
 }
@@ -9,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%; height: 100%;
+    text-rendering: optimizeLegibility;
 }
 
 input:focus {
@@ -20,7 +18,7 @@ input:focus {
     height: 100%;
     position: fixed;
     top: 0; left: 0;
-    z-index: 99;
+    z-index: 98;
     display: flex;
 }
 
@@ -57,6 +55,196 @@ input:focus {
     text-align: center;
     cursor: default;
     user-select: none;
+}
+
+/* *********************** FILE UPLOAD BOX *********************** */
+.uploadConfirmWrapper {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+@keyframes scale-center {
+    0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0.4;}
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+.uploadConfirm {
+    display: flex;
+    position: fixed;
+    left: 50%; top: 50%;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    width: 530px;
+    height: auto;
+    background-color: #36393f;
+    border-radius: 7px;
+    animation: scale-center 0.2s 1;
+}
+
+.uploadConfirmInner {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.uploadFileName {
+    color: white;
+    font-size: 20px;
+    font-family: "Whitney-Bold";
+    font-style: normal;
+    font-weight: 700;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: baseline;
+    white-space: nowrap;
+    user-select: none;
+    cursor: default;
+}
+
+.uploadTo {
+    color: var(--header-secondary);
+    font-size: 14px;
+    font-family: Whitney-Book;
+    font-weight: 400;
+    padding: 7px 0;
+    vertical-align: baseline;
+    user-select: none;
+}
+
+.uploadTo strong {
+    color: white;
+    font-family: Whitney-Medium;
+    font-weight: 500;
+}
+
+.uploadCommentLabel {
+    color: var(--header-primary);
+    font-family: Whitney-Medium;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    user-select: none;
+    margin-top: 15px;
+}
+
+.uploadCommentLabel span {
+    color: var(--header-secondary);
+    margin-left: 5px;
+}
+
+.uploadCommentField {
+    display: block;
+    width: 100%;
+    background-color: var(--channeltextarea-background);
+	border-radius: 8px;
+	border-width: 0px;
+	padding: 12px 18px;
+    margin-top: 5px;
+
+	font-size: 14px;
+    font-weight: 400;
+    color: var(--text-normal);
+}
+
+.uploadConfirmFooter {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    padding: 20px;
+    background-color: #2f3136;
+    border-radius: 0 0 7px 7px;
+}
+
+.spoilerCheckBoxWrapper {
+    flex-grow: 1;    
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Whitney-Book;
+    color: var(--text-normal);
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    height: 38px;
+    padding: 7px 0;
+}
+
+input.uploadIsSpoiler {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.spoilerCheckmark {
+    height: 24px;
+    width: 24px;
+    background-color: transparent;
+    border: 1px solid #72767d;
+    border-radius: 3px;
+    padding: 2px;
+}
+
+.spoilerCheckBoxWrapper input:checked ~ .spoilerCheckmark {
+    border-color: var(--control-brand-foreground);
+}
+
+.spoilerCheckBoxWrapper input:checked ~ .spoilerCheckmark svg path{
+    fill: hsl(235, calc(var(--saturation-factor, 1) * 85.6%), 64.7%);
+}
+
+.spoilerCheckBoxWrapper span {
+    padding-left: 8px;
+    padding-top: 3px;
+    vertical-align: baseline;
+}
+
+.uploadCancelButton {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: Whitney-Medium;
+    line-height: 16px;
+    background-color: transparent;
+    outline: none;
+    border-width: 0;
+    border-radius: 4px;
+    padding: 10px 24px;
+    height: 38px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.uploadCancelButton:hover {
+    text-decoration: underline;
+}
+
+.uploadSuccessButton {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: Whitney-Medium;
+    line-height: 16px;
+    background-color: var(--brand-experiment);
+    outline: none;
+    border-width: 0;
+    border-radius: 4px;
+    padding: 10px 24px;
+    height: 38px;
+    cursor: pointer;
+    user-select: none;
+
+    -webkit-transition: background-color .17s ease,color .17s ease;
+    transition: background-color .17s ease,color .17s ease;
+}
+
+.uploadSuccessButton:hover {
+    background-color: var(--brand-experiment-560);
 }
 
 /* *********************** Guild List Pane *********************** */
@@ -267,17 +455,38 @@ input:focus {
     width: 100%;
     height: 60px;
     flex-shrink: 0;
-    padding: 10px;
+    padding: 0 10px 15px;
+    display: flex;
+    flex-direction: row;
 }
-.messageField {
+
+.inputArea .messageField {
     display: block;
-	width: 100%;
+	flex-grow: 1;
 	background-color: #40444b;
-	border-radius: 5px;
+	border-radius: 0 5px 5px 0;
 	border-width: 0px;
 	color: #b9bbbe;
 	font-size: 15px;
-	padding: 12px 18px;
+	padding: 12px 18px 12px 0;
+}
+
+.inputArea .fileUploadButton {
+    flex-shrink: 0;
+    font-size: 20px;
+    padding: 12px 18px;
+    color: #b9bbbe;
+    background-color: #40444b;
+    border-radius: 5px 0 0 5px;
+    border-width: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.inputArea .fileUploadButton:hover {
+    outline: none;
+    border-width: 0;
+    color: #fff;
 }
 
 .discord-message-body {
@@ -286,7 +495,7 @@ input:focus {
 
 .userListPane {
     height: 100%;
-    width: 275px;
+    width: 250px;
     padding: 10px;
     flex-shrink: 0;
     background-color: #2f3136;
