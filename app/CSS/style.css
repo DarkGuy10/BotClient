@@ -301,11 +301,11 @@ input.uploadIsSpoiler {
     background-color: transparent;
     flex-shrink: 0;
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-    font-family: 'Whitney-Medium';
+    font-family: 'Ginto';
     color: white;
-    padding: 17px 18px;
-    letter-spacing: 0.4px;
+    padding: 16px 18px;
     font-size: 16px;
+    line-height: 20px;
     font-weight: 600;
     cursor: default;
     overflow: hidden;
@@ -417,11 +417,11 @@ input.uploadIsSpoiler {
     background-color: transparent;
     flex-shrink: 0;
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-    font-family: 'Whitney-Medium';
+    font-family: 'Ginto';
     color: white;
     padding: 16px 18px;
-    letter-spacing: 0.4px;
     font-size: 16px;
+    line-height: 20px;
     font-weight: 600;
     cursor: default;
     overflow: hidden;
