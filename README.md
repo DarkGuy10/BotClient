@@ -1,4 +1,4 @@
-# BotClient v0.1.0-alpha
+# BotClient v0.2.0-alpha
 An **unofficial** Electron-based discord client to login as a discord bot using a `bot-token`. <br>
 The app is currently in alpha; expect bugs.
 
@@ -10,8 +10,9 @@ The app is currently in alpha; expect bugs.
 * ✅ Stickers
 * Emojis
 * Mentions
-* ✅ Message replies
-* File upload
+* Replying to messages
+* ✅ Rendering message replies
+* ✅ File upload
 * DM messaging
 * Common app-context-menu
 

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.2.0-alpha
+* Added file upload
+* Fixed fonts to match original client
+* Fixed image attachment resize to match original client
+* Fixed styling to match original client's `.dark-theme`
+
 ## v0.1.0-alpha
 * Temp fix for auto-scrolling
 * Added sticker support
