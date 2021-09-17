@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.2.1-alpha
+* Added svg for uploadButton
+* Refactor: rename color/bgcolors to `.dark-theme` variables
+* Fixed styling for messageField to match originl client
+
 ## v0.2.0-alpha
 * Added file upload
 * Fixed fonts to match original client
