@@ -50,7 +50,7 @@ input:focus {
     margin: 0;
     color: whitesmoke;
     font-weight: normal;
-    font-family: 'Whitney-Medium', 'Arial';
+    font-family: 'Whitney-Medium';
     font-size: 17px;
     text-align: center;
     cursor: default;
@@ -109,7 +109,7 @@ input:focus {
 .uploadTo {
     color: var(--header-secondary);
     font-size: 14px;
-    font-family: Whitney-Book;
+    font-family: 'Whitney-Book';
     font-weight: 400;
     padding: 7px 0;
     vertical-align: baseline;
@@ -118,13 +118,13 @@ input:focus {
 
 .uploadTo strong {
     color: white;
-    font-family: Whitney-Medium;
+    font-family: 'Whitney-Medium';
     font-weight: 500;
 }
 
 .uploadCommentLabel {
     color: var(--header-primary);
-    font-family: Whitney-Medium;
+    font-family: 'Whitney-Medium';
     font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
@@ -164,7 +164,7 @@ input:focus {
     flex-grow: 1;    
     font-size: 14px;
     font-weight: 400;
-    font-family: Whitney-Book;
+    font-family: 'Whitney-Book';
     color: var(--text-normal);
     cursor: pointer;
     user-select: none;
@@ -208,7 +208,7 @@ input.uploadIsSpoiler {
     color: #fff;
     font-size: 14px;
     font-weight: 500;
-    font-style: Whitney-Medium;
+    font-style: 'Whitney-Medium';
     line-height: 16px;
     background-color: transparent;
     outline: none;
@@ -228,7 +228,7 @@ input.uploadIsSpoiler {
     color: #fff;
     font-size: 14px;
     font-weight: 500;
-    font-style: Whitney-Medium;
+    font-style: 'Whitney-Medium';
     line-height: 16px;
     background-color: var(--brand-experiment);
     outline: none;
@@ -251,7 +251,7 @@ input.uploadIsSpoiler {
 .guildListPane {
     height: 100%;
     width: 70px;
-    background-color: #202225;
+    background-color: var(--background-tertiary);
     flex-shrink: 0;
 }
 
@@ -289,7 +289,7 @@ input.uploadIsSpoiler {
 .leftPane {
     height: 100%;
     width: 250px;
-    background-color: #2f3136;
+    background-color: var(--background-secondary);
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
@@ -321,7 +321,7 @@ input.uploadIsSpoiler {
 .clientUserArea {
     width: 100%;
     height: 55px;
-    background-color: #292b2f;
+    background-color: var(--background-secondary-alt);
     flex-shrink: 0;
     display: flex;
     flex-direction: row;
@@ -337,7 +337,7 @@ input.uploadIsSpoiler {
 }
 
 .clientUserTag{
-    font-family: 'Whitney-Medium', 'Arial';
+    font-family: 'Whitney-Medium';
     display: flex;
     flex-direction: column;
     padding: 5px 6px;
@@ -372,10 +372,10 @@ input.uploadIsSpoiler {
     background-color: rgba(0, 0, 0, 0.2);
 }
 .channelElement {
-    font-family: 'Whitney-Medium', 'Arial';
+    font-family: 'Whitney-Medium';
     font-size: 100%;
     line-height: 16px;
-    color: #b9bbbe;
+    color: var(--channels-default);
     padding: 8px 14px;
     margin-top: 3px;
     user-select: none;
@@ -389,7 +389,7 @@ input.uploadIsSpoiler {
 .channelElement:not(.categoryChannel):hover{
     cursor: pointer;
     background-color: #393c43;
-    color: #dcddde;
+    color: var(--interactive-hover);
 }
 
 .categoryChannel {
@@ -407,7 +407,7 @@ input.uploadIsSpoiler {
 .mainPane {
     height: 100%;
     flex-grow: 1;
-    background-color: #36393f;
+    background-color: var(--background-primary);
     display: flex;
     flex-direction: column;
 }
@@ -418,7 +418,7 @@ input.uploadIsSpoiler {
     flex-shrink: 0;
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     font-family: 'Ginto';
-    color: white;
+    color: var(--header-primary);
     padding: 16px 18px;
     font-size: 16px;
     line-height: 20px;
@@ -463,10 +463,10 @@ input.uploadIsSpoiler {
 .inputArea .messageField {
     display: block;
 	flex-grow: 1;
-	background-color: #40444b;
+	background-color: var(--channeltextarea-background);
 	border-radius: 0 5px 5px 0;
 	border-width: 0px;
-	color: #b9bbbe;
+	color: var(--text-normal);
 	font-size: 15px;
 	padding: 12px 18px 12px 0;
 }
@@ -475,8 +475,8 @@ input.uploadIsSpoiler {
     flex-shrink: 0;
     font-size: 20px;
     padding: 12px 18px;
-    color: #b9bbbe;
-    background-color: #40444b;
+    color: var(--text-normal);
+    background-color: var(--channeltextarea-background);
     border-radius: 5px 0 0 5px;
     border-width: 0;
     outline: none;
@@ -498,5 +498,5 @@ input.uploadIsSpoiler {
     width: 250px;
     padding: 10px;
     flex-shrink: 0;
-    background-color: #2f3136;
+    background-color: var(--background-secondary)
 }
