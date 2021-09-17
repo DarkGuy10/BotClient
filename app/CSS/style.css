@@ -464,20 +464,21 @@ input.uploadIsSpoiler {
     display: block;
 	flex-grow: 1;
 	background-color: var(--channeltextarea-background);
-	border-radius: 0 5px 5px 0;
+	border-radius: 0 8px 8px 0;
 	border-width: 0px;
 	color: var(--text-normal);
-	font-size: 15px;
+	font-size: 16px;
+    font-family: 'Whitney-Book';
 	padding: 12px 18px 12px 0;
 }
 
 .inputArea .fileUploadButton {
     flex-shrink: 0;
     font-size: 20px;
-    padding: 12px 18px;
-    color: var(--text-normal);
+    padding: 10px 18px;
+    fill: var(--interactive-normal);
     background-color: var(--channeltextarea-background);
-    border-radius: 5px 0 0 5px;
+    border-radius: 8px 0 0 8px;
     border-width: 0;
     outline: none;
     cursor: pointer;
@@ -486,7 +487,7 @@ input.uploadIsSpoiler {
 .inputArea .fileUploadButton:hover {
     outline: none;
     border-width: 0;
-    color: #fff;
+    fill: var(--interactive-hover);
 }
 
 .discord-message-body {
