@@ -20,11 +20,11 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "discord.js": "^13.1.0"
   },
-  "devDependencies": {
-    "electron-nightly": "^16.0.0-nightly.20210903"
-  },
   "engines": {
     "node": ">=16.6.0",
-    "npm": ">=7.0.0"
+    "npm": ">=7.24.2"
+  },
+  "devDependencies": {
+    "electron-nightly": "^17.0.0-nightly.20211015"
   }
 }
