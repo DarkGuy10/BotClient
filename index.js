@@ -2,6 +2,8 @@ const { TextChannel, Message } = require('discord.js');
 const { app, BrowserWindow, ipcMain, dialog} = require('electron');
 const Client = require('./app/Structures/Client');
 
+console.log(process.version);
+
 /**
  * @type {BrowserWindow}
  */
@@ -82,7 +84,7 @@ const loadOneChannel = async (event, id) => {
     if(channel.type !== 'GUILD_TEXT') return;
 
     try{
-        let messages = await channel.messages.fetch({limit: 50});
+        let messages = await channel.messages.fetch({limit: 100});
         for(const message of messages.values()){
             if(message.type === 'REPLY'){
                 message.repliesTo = await message.fetchReference();
