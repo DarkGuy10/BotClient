@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.2.2-alpha
+* Updated dependencies
+* Changed preload message count to 100
+
 ## v0.2.1-alpha
 * Added svg for uploadButton
 * Refactor: rename color/bgcolors to `.dark-theme` variables
