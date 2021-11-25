@@ -1,6 +1,9 @@
-# BotClient v0.2.1-alpha
+# BotClient v0.2.2-alpha
 An **unofficial** Electron-based discord client to login as a discord bot using a `bot-token`. <br>
 The app is currently in alpha; expect bugs.
+
+### Important
+[Join the support server please](https://discord.com/invite/aZSrxwNUFD)
 
 ### To-add
 * ✅ Fix autoscrolling (temp)
@@ -34,6 +37,6 @@ The app uses [@skyra/discord-components-core](https://github.com/skyra-project/d
 ### Contribution
 For contributions, create a fork and pull a PR to the `main` branch. <br>
 For bug reports, open an issue on this repo. <br>
-Join the [support server](https://discord.gg/rJ9v3P6tXW) for more.
+Join the [support server](https://discord.gg/aZSrxwNUFD) for more.
 
 ##### Note: This is a totally unofficial project. Also, I'm not at all responsible for any misuse of the botclient.
