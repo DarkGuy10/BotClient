@@ -3,6 +3,7 @@ An **unofficial** Electron-based discord client to login as a discord bot using 
 The app is currently in alpha; expect bugs.
 
 ### Important
+[How to Setup?](setup.md)\
 [Join the support server please](https://discord.com/invite/aZSrxwNUFD)
 
 ### To-add
