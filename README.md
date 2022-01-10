@@ -1,4 +1,7 @@
 # BotClient v0.2.2-alpha
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An **unofficial** Electron-based discord client to login as a discord bot using a `bot-token`. <br>
 The app is currently in alpha; expect bugs.
@@ -47,3 +50,23 @@ For bug reports, open an issue on this repo. <br>
 Join the [support server](https://discord.gg/aZSrxwNUFD) for more.
 
 ##### Note: This is a totally unofficial project. Also, I'm not at all responsible for any misuse of the botclient.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Duckulus"><img src="https://avatars.githubusercontent.com/u/76813487?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Duckulus</b></sub></a><br /><a href="https://github.com/DarkGuy10/BotClient/commits?author=Duckulus" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
