@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "DarkGuy10",
+      "name": "DarkGuy10",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62807269?v=4",
+      "profile": "https://promptfolio.vercel.app",
+      "contributions": [
+        "code",
+        "doc",
+        "projectManagement"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "BotClient",
+  "projectOwner": "DarkGuy10",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
