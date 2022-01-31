@@ -10,11 +10,7 @@ import {
 	DiscordReply,
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
-import {
-	decimalToHexColor,
-	parseMarkdown,
-	parseTimestamp,
-} from './../../scripts'
+import { decimalToHexColor, parseMarkdown, parseTimestamp } from './../../utils'
 
 const MessageElement = props => {
 	const {

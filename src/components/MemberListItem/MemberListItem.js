@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './MemberListItem.module.css'
-import { decimalToHexColor } from './../../scripts'
+import { decimalToHexColor } from './../../utils'
 
 const MemberListItem = props => {
 	const { member } = props
