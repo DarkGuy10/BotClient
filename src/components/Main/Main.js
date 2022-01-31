@@ -1,10 +1,8 @@
 import { DiscordMessages } from '@skyra/discord-components-react'
 import React, { Component, createRef } from 'react'
-import layout from './../styles/layout.module.css'
-import styles from './../styles/main.module.css'
-import MessageElement from './MessageElement'
-import MessageField from './MessageField'
-import { SVGChannels } from './SVGHandler'
+import styles from './Main.module.css'
+import { MessageElement, MessageField } from './../'
+import { SVGChannels } from './../SVGHandler'
 const { ipcRenderer } = window.require('electron')
 
 function Header(props) {
@@ -110,7 +108,7 @@ class Main extends Component {
 		const { currentChannel } = this.props
 		const { loadedMessages } = this.state
 		return (
-			<div className={layout.main}>
+			<div className={styles.main}>
 				<Header channel={currentChannel} />
 				<DiscordMessages
 					noBackground={true}

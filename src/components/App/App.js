@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import Login from './Login'
-import Layout from './Layout'
+import { Login, Layout } from '..'
 import Markdown from 'markdown-to-jsx'
-import AlertManager, { popAlertHelper, pushAlertHelper } from './AlertManager'
-import styles from './../styles/bootloop.module.css'
-import bootloopvideo from './../assets/images/bootloop.webm'
+import AlertManager, {
+	popAlertHelper,
+	pushAlertHelper,
+} from './../AlertManager/AlertManager'
+import styles from './App.module.css'
+import bootloopvideo from './../../assets/images/bootloop.webm'
 const { ipcRenderer } = window.require('electron')
 
 class App extends Component {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import layout from './../styles/layout.module.css'
-import styles from './../styles/channelnav.module.css'
-import { SVGCogsThick, SVGChannels } from './SVGHandler'
+import styles from './ChannelNav.module.css'
+import { SVGCogsThick, SVGChannels } from './../SVGHandler'
 const { ipcRenderer } = window.require('electron')
 
 function ListItem(props) {
@@ -75,7 +74,7 @@ class ChannelNav extends Component {
 		const { currentGuild, currentChannel } = this.props
 		const channels = orderChannels(this.state.channels)
 		return (
-			<div className={layout.channelNav}>
+			<div className={styles.channelNav}>
 				<div className={styles.header}>
 					<span>{currentGuild.name}</span>
 				</div>

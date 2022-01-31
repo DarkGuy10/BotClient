@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import layout from './../styles/layout.module.css'
-import styles from './../styles/guildnav.module.css'
+import styles from './GuildNav.module.css'
 const { ipcRenderer } = window.require('electron')
 
 function ListItem(props) {
@@ -38,7 +37,7 @@ class GuildNav extends Component {
 		const { guilds } = this.state
 		const { currentGuild, selectGuild } = this.props
 		return (
-			<div className={layout.guildNav}>
+			<div className={styles.guildNav}>
 				{guilds.map((guild, index) => (
 					<ListItem
 						key={index}

@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react'
-import ImagePreview from './ImagePreview/ImagePreview'
-import styles from './../styles/messagefield.module.css'
-import { SVGUpload } from './SVGHandler'
+import { ImagePreview } from './../'
+import styles from './MessageField.module.css'
+import { SVGUpload } from './../SVGHandler'
 const { ipcRenderer } = window.require('electron')
 
 class MessageField extends Component {

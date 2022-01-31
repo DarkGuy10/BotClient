@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './../styles/alertmanager.module.css'
+import styles from './AlertManager.module.css'
 
 function Alert(props) {
 	return (

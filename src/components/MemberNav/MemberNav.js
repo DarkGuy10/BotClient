@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import layout from './../styles/layout.module.css'
-import MemberListItem from './MemberListItem'
-import styles from './../styles/membernav.module.css'
+import { MemberListItem } from './../'
+import styles from './MemberNav.module.css'
 const { ipcRenderer } = window.require('electron')
 
 class MemberNav extends Component {
@@ -30,7 +29,7 @@ class MemberNav extends Component {
 		const { members } = this.state
 		const { hoisted, online, offline } = orderMembers(members)
 		return (
-			<div className={layout.memberNav}>
+			<div className={styles.memberNav}>
 				{[...hoisted].map(([role, members], key) => (
 					<div key={key}>
 						<h2 className={styles.header}>

@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import styles from './../styles/layout.module.css'
-import GuildNav from './GuildNav'
-import ChannelNav from './ChannelNav'
-import Main from './Main'
-import MemberNav from './MemberNav'
+import styles from './Layout.module.css'
+import { GuildNav, ChannelNav, Main, MemberNav } from './../'
 const { ipcRenderer } = window.require('electron')
 
 class Layout extends Component {
