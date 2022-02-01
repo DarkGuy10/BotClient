@@ -8,8 +8,9 @@ const { ipcRenderer } = window.require('electron')
 class App extends Component {
 	constructor(props) {
 		super(props)
+
 		this.state = {
-			token: window.localStorage.getItem('token'),
+			token: ipcRenderer.sendSync('get', 'token'),
 			clientUser: null,
 			clientIsReady: false,
 			alerts: [],
@@ -17,24 +18,36 @@ class App extends Component {
 
 		this.handleLogin = token => {
 			ipcRenderer.send('login', token)
-
-			ipcRenderer.on('login', () => {
-				window.localStorage.setItem('token', token)
-				this.setState({ ...this.state, token: token })
-			})
-
-			ipcRenderer.on('ready', (event, clientUser) => {
-				this.pushAlert({
-					type: 'success',
-					message: `Successfully logged in as ${clientUser.tag}`,
-				})
-				this.setState({
-					...this.state,
-					clientIsReady: true,
-					clientUser: clientUser,
-				})
-			})
 		}
+
+		ipcRenderer.on('login', (event, token) => {
+			this.setState({ ...this.state, token: token })
+		})
+
+		ipcRenderer.on('ready', (event, clientUser) => {
+			this.pushAlert({
+				type: 'success',
+				message: `Successfully logged in as ${clientUser.tag}`,
+			})
+			this.setState({
+				...this.state,
+				clientIsReady: true,
+				clientUser: clientUser,
+			})
+		})
+
+		ipcRenderer.on('logout', () => {
+			this.pushAlert({
+				type: 'success',
+				message: 'Successfully logged out',
+			})
+			this.setState({
+				...this.state,
+				token: null,
+				clientUser: null,
+				clientIsReady: false,
+			})
+		})
 
 		/**
 		 * Push an alert.

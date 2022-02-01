@@ -4,6 +4,8 @@ const Client = require('./structures/Client')
 const { app, BrowserWindow, shell, ipcMain, dialog } = require('electron')
 const isDev = require('electron-is-dev')
 const { Guild, BaseGuildTextChannel } = require('discord.js')
+const Store = require('electron-store')
+const appData = new Store()
 
 /**
  * @type {BrowserWindow}
@@ -30,6 +32,7 @@ function createMainWindow() {
 			? 'http://localhost:3000'
 			: `file://${path.join(__dirname, '../build/index.html')}`
 	)
+	mainWindow.maximize()
 	mainWindow.setMenu(null)
 
 	mainWindow.webContents.on('will-navigate', (event, url) => {
@@ -68,27 +71,24 @@ let currentGuild
 // ^^ These will make things easier than sending channel and guild data for every invocations
 
 ipcMain.on('login', async (event, token) => {
-	if (client) {
-		// prevents creation of extra clients
-		client.destroy()
-		client = null
-	}
-	client = new Client(
-		{
-			intents: [
-				'GUILDS',
-				'DIRECT_MESSAGES',
-				'GUILD_MESSAGES',
-				'GUILD_MEMBERS',
-				'GUILD_PRESENCES',
-				'GUILD_EMOJIS_AND_STICKERS',
-			],
-		},
-		mainWindow
-	)
+	if (!client)
+		client = new Client(
+			{
+				intents: [
+					'GUILDS',
+					'DIRECT_MESSAGES',
+					'GUILD_MESSAGES',
+					'GUILD_MEMBERS',
+					'GUILD_PRESENCES',
+					'GUILD_EMOJIS_AND_STICKERS',
+				],
+			},
+			mainWindow
+		)
 	try {
 		await client.login(token)
-		event.reply('login')
+		appData.set('token', token)
+		event.reply('login', token)
 		client.once('ready', () => {
 			event.reply('ready', client.clientUserData)
 		})
@@ -96,6 +96,13 @@ ipcMain.on('login', async (event, token) => {
 		console.log(error)
 		event.reply('error', error.message)
 	}
+})
+
+ipcMain.on('logout', event => {
+	appData.delete('token')
+	client.destroy()
+	client = null
+	event.reply('logout')
 })
 
 ipcMain.handle('guilds', () => {
@@ -235,4 +242,8 @@ ipcMain.handle('selectChannel', async (event, id) => {
 
 ipcMain.on('messageCreate', (event, messageOptions) => {
 	currentChannel.send(messageOptions)
+})
+
+ipcMain.on('get', (event, key) => {
+	event.returnValue = appData.get(key)
 })

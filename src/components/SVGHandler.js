@@ -10,6 +10,7 @@ import { ReactComponent as SVGUpload } from './../assets/svg/upload.svg'
 import { ReactComponent as SVGSpoilerHidden } from './../assets/svg/spoiler-hidden.svg'
 import { ReactComponent as SVGSpoilerVisible } from './../assets/svg/spoiler-visible.svg'
 import { ReactComponent as SVGTrashCan } from './../assets/svg/trash-can.svg'
+import { ReactComponent as SVGLogout } from './../assets/svg/logout.svg'
 
 const SVGChannels = {
 	GUILD_TEXT: <SVGText />,
@@ -24,6 +25,7 @@ const SVGChannels = {
 export {
 	SVGChannels,
 	SVGCogsThick,
+	SVGLogout,
 	SVGUpload,
 	SVGSpoilerHidden,
 	SVGSpoilerVisible,
