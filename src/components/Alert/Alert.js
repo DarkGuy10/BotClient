@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styles from './AlertManager.module.css'
+import styles from './Alert.module.css'
 
 class Alert extends Component {
 	defaultTimeout = 4000

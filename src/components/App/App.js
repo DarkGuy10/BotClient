@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Login, Layout } from '..'
+import { Login, Layout, AlertManager } from './..'
 import Markdown from 'markdown-to-jsx'
-import AlertManager from './../AlertManager/AlertManager'
 import styles from './App.module.css'
 import bootloopvideo from './../../assets/images/bootloop.webm'
 const { ipcRenderer } = window.require('electron')

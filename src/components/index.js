@@ -1,4 +1,6 @@
 import App from './App/App'
+import Alert from './Alert/Alert'
+import AlertManager from './AlertManager/AlertManager'
 import Login from './Login/Login'
 import Layout from './Layout/Layout'
 import ChannelNav from './ChannelNav/ChannelNav'
@@ -12,6 +14,8 @@ import UploadElement from './UploadElement/UploadElement'
 
 export {
 	App,
+	Alert,
+	AlertManager,
 	Login,
 	Layout,
 	ChannelNav,
