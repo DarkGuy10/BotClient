@@ -422,3 +422,88 @@ code {
 		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
 		Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
 }
+
+ul,
+ol {
+	list-style: none;
+}
+
+a,
+abbr,
+acronym,
+address,
+applet,
+big,
+blockquote,
+body,
+caption,
+cite,
+dd,
+del,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+object,
+ol,
+p,
+pre,
+q,
+s,
+samp,
+small,
+span,
+strike,
+strong,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr,
+tt,
+ul,
+var {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+.divider {
+	z-index: 1;
+	height: 0;
+	border-top: thin solid var(--background-modifier-accent);
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	position: relative;
+	-webkit-box-flex: 0;
+	pointer-events: none;
+	box-sizing: border-box;
+	--divider-color: hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%);
+}
