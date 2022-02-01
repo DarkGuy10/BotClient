@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react'
 import styles from './MessageField.module.css'
 import { SVGUpload } from './../SVGHandler'
-import UploadElement from '../UploadElement/UploadElement'
+import UploadElement from './../'
 const { ipcRenderer } = window.require('electron')
 
 class MessageField extends Component {
