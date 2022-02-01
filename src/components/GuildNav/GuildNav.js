@@ -9,7 +9,7 @@ function ListItem(props) {
 				<span className={props.selected ? styles.selected : ''}></span>
 			</div>
 			<img
-				src={props.guild.added.iconURL}
+				src={props.guild.iconURL}
 				alt={props.guild.name}
 				className={styles.icon}
 				onClick={() => {

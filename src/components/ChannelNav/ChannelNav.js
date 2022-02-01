@@ -4,14 +4,14 @@ import { SVGCogsThick, SVGChannels } from './../SVGHandler'
 const { ipcRenderer } = window.require('electron')
 
 function ListItem(props) {
-	const isPrivate = props.channel.added.isPrivate
-	const isRules = props.channel.added.isRules
+	const isPrivate = props.channel.isPrivate
+	const isRules = props.channel.isRules
 	const isCategory = props.channel.type === 'GUILD_CATEGORY'
 	const isParentCollapsed = props.collpasedCategoriesId.includes(
 		props.channel.parentId
 	)
 	const isCollapsed = props.collpasedCategoriesId.includes(props.channel.id)
-	const isViewable = props.channel.added.viewable
+	const isViewable = props.channel.viewable
 	const svgType = isRules
 		? 'RULES'
 		: `${props.channel.type}${isPrivate && !isCategory ? '_LIMITED' : ''}`
@@ -132,13 +132,13 @@ class ChannelNav extends Component {
 function orderChannels(channels) {
 	const categories = channels
 		.filter(channel => channel.type === 'GUILD_CATEGORY')
-		.sort((a, b) => a.added.position - b.added.position)
+		.sort((a, b) => a.position - b.position)
 	const texts = channels
 		.filter(channel => ['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
-		.sort((a, b) => a.added.position - b.added.position)
+		.sort((a, b) => a.position - b.position)
 	const voices = channels
 		.filter(channel => channel.type === 'GUILD_VOICE')
-		.sort((a, b) => a.added.position - b.added.position)
+		.sort((a, b) => a.position - b.position)
 	const result = [
 		...texts.filter(channel => !channel.parentId),
 		...voices.filter(channel => !channel.parentId),

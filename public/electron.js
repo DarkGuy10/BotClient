@@ -102,9 +102,7 @@ ipcMain.handle('guilds', () => {
 	const guilds = [...client.guilds.cache.values()].map(guild => {
 		return {
 			...guild,
-			added: {
-				iconURL: guild.iconURL(),
-			},
+			iconURL: guild.iconURL(),
 		}
 	})
 	return guilds
@@ -114,14 +112,12 @@ ipcMain.handle('channels', () => {
 	const channels = [...currentGuild.channels.cache.values()].map(channel => {
 		return {
 			...channel,
-			added: {
-				viewable: channel.viewable,
-				position: channel.position,
-				isPrivate: !channel
-					.permissionsFor(channel.guild.roles.everyone)
-					.has('VIEW_CHANNEL'),
-				isRules: channel.id === channel.guild.rulesChannelID,
-			},
+			viewable: channel.viewable,
+			position: channel.position,
+			isPrivate: !channel
+				.permissionsFor(channel.guild.roles.everyone)
+				.has('VIEW_CHANNEL'),
+			isRules: channel.id === channel.guild.rulesChannelID,
 		}
 	})
 	return channels
@@ -226,7 +222,7 @@ ipcMain.handle('selectChannel', async (event, id) => {
 		currentChannel = await client.channels.fetch(id)
 		return {
 			...currentChannel,
-			added: { viewable: currentChannel.viewable },
+			viewable: currentChannel.viewable,
 		}
 	} catch (error) {
 		console.log(error)

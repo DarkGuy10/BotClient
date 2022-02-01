@@ -6,8 +6,8 @@ import { SVGChannels } from './../SVGHandler'
 const { ipcRenderer } = window.require('electron')
 
 function Header(props) {
-	const isPrivate = !props.channel.added.isPrivate
-	const isRules = props.channel.added.isRules
+	const isPrivate = !props.channel.isPrivate
+	const isRules = props.channel.isRules
 	const svgType = isRules
 		? 'RULES'
 		: `${props.channel.type}${isPrivate ? '_LIMITED' : ''}`

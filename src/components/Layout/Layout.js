@@ -34,7 +34,7 @@ class Layout extends Component {
 
 			const allowedChannelTypes = ['GUILD_TEXT', 'GUILD_NEWS', 'DM']
 
-			if (!currentChannel.added.viewable)
+			if (!currentChannel.viewable)
 				return this.props.pushAlert({
 					type: 'warning',
 					message: `Channel ${currentChannel.name} [ID:${currentChannel.id}] is not viewable (missing permissions).`,
