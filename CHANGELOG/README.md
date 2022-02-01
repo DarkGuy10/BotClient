@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.3.0-alpha-1
+## v0.3.0-alpha
 
 -   Complete React rewrite
 -   Added a neat alert management system
@@ -10,6 +10,8 @@
 -   Added scripts to `package.json`
 -   Added other dependencies (check `package.json`)
 -   Added prettier hook for linting
+-   Re-organized project structure
+-   Updated file upload to match discord
 
 ## v0.2.2-alpha
 
