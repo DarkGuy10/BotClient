@@ -1,4 +1,4 @@
-# BotClient v0.3.0-alpha-1
+# BotClient v0.3.0-alpha
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -6,16 +6,17 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-An **unofficial** Electron-based discord client to login as a discord bot using a `bot-token`. <br>
-The app is currently in alpha; expect bugs.
+An unofficial client for logging in as a discord bot. <br>
+The workflow and UI is kept as close to original discord as possible <br>
+[](setup/assets/window.png)
 
-### Important
+##### Note: The Client is currently in early development and is bound to have bugs. If you have any problems or questions about the BotClient feel free to join our [support server](https://discord.com/invite/aZSrxwNUFD) on Discord.
 
-[Join the support server please](https://discord.com/invite/aZSrxwNUFD)
+[How to Setup?](setup/setup.md)
 
-### Contribution
+## Contribution
 
-For contributions, create a fork and pull a PR to the `main` branch. <br>
+For contributions, create a fork and pull a PR to the `development` branch. <br>
 For bug reports, open an issue on this repo. <br>
 Join the [support server](https://discord.gg/aZSrxwNUFD) for more.
 
