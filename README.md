@@ -7,12 +7,12 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An unofficial client for logging in as a discord bot. <br>
-The workflow and UI is kept as close to original discord as possible <br>
-[](setup/assets/window.png)
+The workflow and UI has been kept as close to original discord as possible <br>
+![](setup/assets/window.png)
 
 ##### Note: The Client is currently in early development and is bound to have bugs. If you have any problems or questions about the BotClient feel free to join our [support server](https://discord.com/invite/aZSrxwNUFD) on Discord.
 
-[How to Setup?](setup/setup.md)
+### [How to Setup?](setup/setup.md)
 
 ## Contribution
 
