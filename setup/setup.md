@@ -43,10 +43,9 @@ yarn start
 Now a window should open that prompts you to enter a token. Enter the bot token that you saved earlier.
 ![](assets/login.png)
 
-If everything worked properly, you should have successfully logged in with a window similar to this
-![](assets/window.png)
+If everything worked properly, you should have successfully logged in!
 
-You can logout using the button shown here
+You can logout using the button shown here\
 ![](assets/logout.png)
 
 ### And that's it! Keep in mind that the Client is still in early development. If you have any problems or questions about the BotClient feel free to join our [support server](https://discord.com/invite/aZSrxwNUFD) on Discord.
