@@ -1,6 +1,9 @@
-# BotClient v0.2.2-alpha
+# BotClient v0.3.0-alpha-1
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An **unofficial** Electron-based discord client to login as a discord bot using a `bot-token`. <br>
@@ -8,40 +11,7 @@ The app is currently in alpha; expect bugs.
 
 ### Important
 
-[How to Setup?](setup/setup.md)\
 [Join the support server please](https://discord.com/invite/aZSrxwNUFD)
-
-### To-add
-
--   ✅ Fix autoscrolling (temp)
--   Channel member list
--   ✅ Video embed support
--   ✅ Gif embed support
--   ✅ Stickers
--   Emojis
--   Mentions
--   Replying to messages
--   ✅ Rendering message replies
--   ✅ File upload
--   DM messaging
--   Common app-context-menu
-
-### Known bugs
-
-### Low Priority To-do
-
--   ✅ Organize `/app` structure
--   ✅ Comments
--   Documentation
--   Markdown parsing
-
-### Dependencies
-
--   `electron-nightly@16.0.0-nightly.20210903`
--   `discord.js@13.1.0`
--   `@fortawesome/fontawesome-free@5.15.4`
-
-The app uses [@skyra/discord-components-core](https://github.com/skyra-project/discord-components/) to imitate discord chat styling.
 
 ### Contribution
 
