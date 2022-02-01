@@ -71,20 +71,24 @@ let currentGuild
 // ^^ These will make things easier than sending channel and guild data for every invocations
 
 ipcMain.on('login', async (event, token) => {
-	if (!client)
-		client = new Client(
-			{
-				intents: [
-					'GUILDS',
-					'DIRECT_MESSAGES',
-					'GUILD_MESSAGES',
-					'GUILD_MEMBERS',
-					'GUILD_PRESENCES',
-					'GUILD_EMOJIS_AND_STICKERS',
-				],
-			},
-			mainWindow
-		)
+	if (client) {
+		// Prevents client from getting duplicated
+		client.destroy()
+		client = null
+	}
+	client = new Client(
+		{
+			intents: [
+				'GUILDS',
+				'DIRECT_MESSAGES',
+				'GUILD_MESSAGES',
+				'GUILD_MEMBERS',
+				'GUILD_PRESENCES',
+				'GUILD_EMOJIS_AND_STICKERS',
+			],
+		},
+		mainWindow
+	)
 	try {
 		await client.login(token)
 		appData.set('token', token)
