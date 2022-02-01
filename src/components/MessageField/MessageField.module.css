@@ -1,0 +1,117 @@
+.form {
+	position: relative;
+	z-index: 2;
+	flex-shrink: 0;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-top: -8px;
+}
+
+.channelTextArea {
+	margin-bottom: 24px;
+	background-color: var(--background-primary);
+	position: relative;
+	width: 100%;
+	text-indent: 0;
+	border-radius: 8px;
+}
+
+.container {
+	background-color: var(--channeltextarea-background);
+	max-height: 50vh;
+	border-radius: 8px;
+}
+
+.channelAttachmentArea {
+	display: flex;
+	gap: 24px;
+	margin: 0 0 2px 6px;
+	padding: 20px 10px 10px;
+	overflow-x: auto;
+}
+
+.inner {
+	padding-left: 16px;
+	display: flex;
+	position: relative;
+}
+
+.uploadInput {
+	position: relative;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}
+
+.fileUpload {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+	font-size: 0px;
+}
+
+.attachWrapper {
+	position: sticky;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	align-self: stretch;
+}
+
+.attachButton {
+	cursor: pointer;
+	margin-left: -16px;
+	height: 44px;
+	padding: 10px 16px;
+	position: sticky;
+	top: 0;
+	width: auto;
+	background: transparent;
+	border: 0;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	border-radius: 3px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	user-select: none;
+}
+
+.attachButtonInner {
+	height: 24px;
+}
+
+.attachButtonInner svg path {
+	transform-origin: 50% 50%;
+	width: 24px;
+	height: 24px;
+}
+
+.attachButton:hover svg path {
+	fill: var(--interactive-hover);
+}
+
+.textArea {
+	flex-grow: 1;
+}
+
+.textAreaSlate {
+	display: block;
+	height: 44px;
+	width: 100%;
+	background-color: var(--channeltextarea-background);
+	border-radius: 0 8px 8px 0;
+	border-width: 0px;
+	font-family: var(--font-primary);
+	padding: 12px 18px 12px 0;
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.375rem;
+	color: var(--text-normal);
+}

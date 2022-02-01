@@ -1,0 +1,88 @@
+.container {
+	margin-left: 8px;
+	border-radius: 4px;
+	padding: 1px 8px;
+	height: 44px;
+	display: flex;
+	align-items: center;
+	color: var(--channels-default);
+	user-select: none;
+}
+
+.container:hover {
+	background-color: var(--background-modifier-hover);
+	color: var(--interactive-hover);
+	cursor: pointer;
+}
+
+.offline {
+	opacity: 0.3;
+}
+
+.offline:hover {
+	opacity: 1;
+}
+
+.avatar {
+	width: 32px;
+	border-radius: 100%;
+	margin-right: 12px;
+}
+
+.content {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	flex: 1 1 auto;
+}
+
+.nameAndDecorators {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.name {
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 500;
+	flex: 0 1 auto;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.roleColor {
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 16px;
+	font-weight: 600;
+	font-family: var(--font-primary);
+}
+
+.subText {
+	margin-top: -2px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: var(--font-primary);
+}
+
+.activity {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	line-height: 16px;
+	color: var(--channels-default);
+	font-weight: 500;
+}
+
+.activityText {
+	flex: 0 1 auto;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

@@ -1,0 +1,509 @@
+@font-face {
+	font-family: 'Ginto';
+	src: url('./assets/fonts/Ginto.woff') format('woff');
+	font-weight: 600;
+}
+@font-face {
+	font-family: 'Whitney-Book';
+	src: url('./assets/fonts/Whitney-Book.woff') format('woff');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'Whitney-Medium';
+	src: url('./assets/fonts/Whitney-Medium.woff') format('woff');
+	font-weight: 500;
+}
+@font-face {
+	font-family: 'Whitney';
+	src: url('./assets/fonts/Whitney-Medium.woff') format('woff');
+}
+@font-face {
+	font-family: 'Whitney-Semibold';
+	src: url('./assets/fonts/Whitney-Semibold.woff') format('woff');
+	font-weight: 600;
+}
+@font-face {
+	font-family: 'Whitney-Bold';
+	src: url('./assets/fonts/Whitney-Bold.woff') format('woff');
+	font-weight: 700;
+}
+
+:root {
+	--header-primary: #fff;
+	--header-secondary: #b9bbbe;
+	--text-normal: #dcddde;
+	--text-muted: #72767d;
+	--text-link: hsl(197, calc(var(--saturation-factor, 1) * 100%), 47.8%);
+	--text-link-low-saturation: hsl(
+		197,
+		calc(var(--saturation-factor, 1) * 100%),
+		52.9%
+	);
+	--text-positive: hsl(139, calc(var(--saturation-factor, 1) * 66.8%), 58.6%);
+	--text-warning: hsl(38, calc(var(--saturation-factor, 1) * 95.7%), 54.1%);
+	--text-danger: hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%);
+	--text-brand: hsl(235, calc(var(--saturation-factor, 1) * 86.1%), 77.5%);
+	--interactive-normal: #b9bbbe;
+	--interactive-hover: #dcddde;
+	--interactive-active: #fff;
+	--interactive-muted: #4f545c;
+	--background-primary: #36393f;
+	--background-secondary: #2f3136;
+	--background-secondary-alt: #292b2f;
+	--background-tertiary: #202225;
+	--background-accent: #4f545c;
+	--background-floating: #18191c;
+	--background-mobile-primary: #36393f;
+	--background-mobile-secondary: #2f3136;
+	--background-modifier-hover: rgba(79, 84, 92, 0.16);
+	--background-modifier-active: rgba(79, 84, 92, 0.24);
+	--background-modifier-selected: rgba(79, 84, 92, 0.32);
+	--background-modifier-accent: hsla(0, 0%, 100%, 0.06);
+	--info-positive-text: #fff;
+	--info-warning-text: #fff;
+	--info-danger-text: #fff;
+	--info-help-background: hsla(
+		197,
+		calc(var(--saturation-factor, 1) * 100%),
+		47.8%,
+		0.1
+	);
+	--info-help-foreground: hsl(
+		197,
+		calc(var(--saturation-factor, 1) * 100%),
+		47.8%
+	);
+	--info-help-text: #fff;
+	--status-warning-text: #000;
+	--scrollbar-thin-thumb: #202225;
+	--scrollbar-thin-track: transparent;
+	--scrollbar-auto-thumb: #202225;
+	--scrollbar-auto-track: hsl(
+		210,
+		calc(var(--saturation-factor, 1) * 9.8%),
+		20%
+	);
+	--scrollbar-auto-scrollbar-color-thumb: #202225;
+	--scrollbar-auto-scrollbar-color-track: #2f3136;
+	--elevation-stroke: 0 0 0 1px rgba(4, 4, 5, 0.15);
+	--elevation-low: 0 1px 0 rgba(4, 4, 5, 0.2), 0 1.5px 0 rgba(6, 6, 7, 0.05),
+		0 2px 0 rgba(4, 4, 5, 0.05);
+	--elevation-medium: 0 4px 4px rgba(0, 0, 0, 0.16);
+	--elevation-high: 0 8px 16px rgba(0, 0, 0, 0.24);
+	--logo-primary: #fff;
+	--control-brand-foreground: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 86.1%),
+		77.5%
+	);
+	--control-brand-foreground-new: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 86.1%),
+		77.5%
+	);
+	--background-mentioned: hsla(
+		38,
+		calc(var(--saturation-factor, 1) * 95.7%),
+		54.1%,
+		0.1
+	);
+	--background-mentioned-hover: hsla(
+		38,
+		calc(var(--saturation-factor, 1) * 95.7%),
+		54.1%,
+		0.08
+	);
+	--background-message-hover: rgba(4, 4, 5, 0.07);
+	--channels-default: #8e9297;
+	--guild-header-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+	--channeltextarea-background: #40444b;
+	--activity-card-background: #202225;
+	--textbox-markdown-syntax: #8e9297;
+	--deprecated-card-bg: rgba(32, 34, 37, 0.6);
+	--deprecated-card-editable-bg: rgba(32, 34, 37, 0.3);
+	--deprecated-store-bg: #36393f;
+	--deprecated-quickswitcher-input-background: #72767d;
+	--deprecated-quickswitcher-input-placeholder: hsla(0, 0%, 100%, 0.3);
+	--deprecated-text-input-bg: rgba(0, 0, 0, 0.1);
+	--deprecated-text-input-border: rgba(0, 0, 0, 0.3);
+	--deprecated-text-input-border-hover: #040405;
+	--deprecated-text-input-border-disabled: #202225;
+	--deprecated-text-input-prefix: #dcddde;
+	--brand-experiment-100: hsl(
+		240,
+		calc(var(--saturation-factor, 1) * 77.8%),
+		98.2%
+	);
+	--brand-experiment-130: hsl(
+		236,
+		calc(var(--saturation-factor, 1) * 87.5%),
+		96.9%
+	);
+	--brand-experiment-160: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 84.6%),
+		94.9%
+	);
+	--brand-experiment-200: hsl(
+		236,
+		calc(var(--saturation-factor, 1) * 83.3%),
+		92.9%
+	);
+	--brand-experiment-230: hsl(
+		236,
+		calc(var(--saturation-factor, 1) * 87%),
+		91%
+	);
+	--brand-experiment-260: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 86.2%),
+		88.6%
+	);
+	--brand-experiment-300: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 86.1%),
+		85.9%
+	);
+	--brand-experiment-330: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 85.1%),
+		81.6%
+	);
+	--brand-experiment-360: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 86.1%),
+		77.5%
+	);
+	--brand-experiment-400: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 86.1%),
+		71.8%
+	);
+	--brand-experiment-430: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 85.7%),
+		69.8%
+	);
+	--brand-experiment-460: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 85.5%),
+		67.5%
+	);
+	--brand-experiment: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%
+	);
+	--brand-experiment-500: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%
+	);
+	--brand-experiment-530: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 66.7%),
+		58.8%
+	);
+	--brand-experiment-560: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 51.4%),
+		52.4%
+	);
+	--brand-experiment-600: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 46.7%),
+		44.1%
+	);
+	--brand-experiment-630: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 46.7%),
+		38.2%
+	);
+	--brand-experiment-660: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 47.1%),
+		33.3%
+	);
+	--brand-experiment-700: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 47%),
+		25.9%
+	);
+	--brand-experiment-730: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 46.8%),
+		24.3%
+	);
+	--brand-experiment-760: hsl(
+		234,
+		calc(var(--saturation-factor, 1) * 46.9%),
+		22.2%
+	);
+	--brand-experiment-800: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 47.5%),
+		19.4%
+	);
+	--brand-experiment-830: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 47.4%),
+		14.9%
+	);
+	--brand-experiment-860: hsl(
+		235,
+		calc(var(--saturation-factor, 1) * 46.9%),
+		9.6%
+	);
+	--brand-experiment-900: hsl(
+		233,
+		calc(var(--saturation-factor, 1) * 50%),
+		3.1%
+	);
+	--brand-experiment-05a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.05
+	);
+	--brand-experiment-10a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.1
+	);
+	--brand-experiment-15a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.15
+	);
+	--brand-experiment-20a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.2
+	);
+	--brand-experiment-25a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.25
+	);
+	--brand-experiment-30a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.3
+	);
+	--brand-experiment-35a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.35
+	);
+	--brand-experiment-40a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.4
+	);
+	--brand-experiment-45a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.45
+	);
+	--brand-experiment-50a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.5
+	);
+	--brand-experiment-55a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.55
+	);
+	--brand-experiment-60a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.6
+	);
+	--brand-experiment-65a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.65
+	);
+	--brand-experiment-70a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.7
+	);
+	--brand-experiment-75a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.75
+	);
+	--brand-experiment-80a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.8
+	);
+	--brand-experiment-85a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.85
+	);
+	--brand-experiment-90a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.9
+	);
+	--brand-experiment-95a: hsla(
+		235,
+		calc(var(--saturation-factor, 1) * 85.6%),
+		64.7%,
+		0.95
+	);
+	--font-primary: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-display: Ginto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-code: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+		'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
+		'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
+		monospace;
+	--font-headline: Ginto Nord, Ginto, 'Helvetica Neue', Helvetica, Arial,
+		sans-serif;
+
+	margin: 0;
+	padding: 0;
+	background-color: var(--background-secondary);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+input:focus {
+	outline: none;
+}
+
+a {
+	color: var(--text-link-low-saturation);
+	text-decoration: none;
+	word-break: break-word;
+}
+
+a:hover {
+	color: var(--text-link);
+	text-decoration: underline;
+}
+
+code {
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	text-indent: 0;
+	white-space: pre-wrap;
+	background: var(--background-tertiary);
+	border: 1px solid var(--background-tertiary);
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	border-radius: 4px;
+	color: var(--header-secondary);
+	font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console,
+		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+a,
+abbr,
+acronym,
+address,
+applet,
+big,
+blockquote,
+body,
+caption,
+cite,
+dd,
+del,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+object,
+ol,
+p,
+pre,
+q,
+s,
+samp,
+small,
+span,
+strike,
+strong,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr,
+tt,
+ul,
+var {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+
+.divider {
+	z-index: 1;
+	height: 0;
+	border-top: thin solid var(--background-modifier-accent);
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	position: relative;
+	-webkit-box-flex: 0;
+	pointer-events: none;
+	box-sizing: border-box;
+	--divider-color: hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%);
+}
