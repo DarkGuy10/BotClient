@@ -36,6 +36,21 @@
 	}
 }
 
+.popping {
+	animation: popOff 0.1s 1 cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes popOff {
+	0% {
+		opacity: 1;
+		scale: 1;
+	}
+	100% {
+		opacity: 0.5;
+		scale: 0.7;
+	}
+}
+
 .error {
 	color: var(--text-danger);
 }
