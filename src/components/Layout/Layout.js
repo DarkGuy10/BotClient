@@ -55,12 +55,13 @@ class Layout extends Component {
 
 	render() {
 		const { currentChannel, currentGuild } = this.state
-		const { clientUser } = this.props
+		const { clientUser, pushAlert } = this.props
 		return (
 			<div className={styles.wrapper}>
 				<GuildNav
 					currentGuild={currentGuild}
 					selectGuild={this.selectGuild}
+					pushAlert={pushAlert}
 				/>
 
 				{currentGuild && currentChannel ? (
@@ -70,10 +71,12 @@ class Layout extends Component {
 							currentGuild={currentGuild}
 							currentChannel={currentChannel}
 							selectChannel={this.selectChannel}
+							pushAlert={pushAlert}
 						/>
 						<Main
 							currentChannel={currentChannel}
 							currentGuild={currentGuild}
+							pushAlert={pushAlert}
 						/>
 					</>
 				) : null}
