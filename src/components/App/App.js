@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { Login, Layout } from '..'
 import Markdown from 'markdown-to-jsx'
-import AlertManager, {
-	popAlertHelper,
-	pushAlertHelper,
-} from './../AlertManager/AlertManager'
+import AlertManager from './../AlertManager/AlertManager'
 import styles from './App.module.css'
 import bootloopvideo from './../../assets/images/bootloop.webm'
 const { ipcRenderer } = window.require('electron')
@@ -16,8 +13,7 @@ class App extends Component {
 			token: window.localStorage.getItem('token'),
 			clientUser: null,
 			clientIsReady: false,
-			alerts: new Map(),
-			latestAlertID: -1,
+			alerts: [],
 		}
 
 		this.handleLogin = token => {
@@ -43,19 +39,13 @@ class App extends Component {
 
 		/**
 		 * Push an alert.
-		 * @param {RawAlert} rawAlert An object containing raw alert data. NOTE : raw alert objects do not have an `alertID` property
-		 * @param {Number?} popTimeout The number of milliseconds before this alert disapperas. Defaults to 3500
+		 * @param {RawAlert} rawAlert An object containing raw alert data.
 		 */
-		this.pushAlert = (rawAlert, popTimeout) => {
-			pushAlertHelper(this, rawAlert, popTimeout)
-		}
-
-		/**
-		 * Pop an alert.
-		 * @param {Number} alertID The `alertID` property of the alert to be popped
-		 */
-		this.popAlert = alertID => {
-			popAlertHelper(this, alertID)
+		this.pushAlert = rawAlert => {
+			this.setState({
+				...this.state,
+				alerts: [...this.state.alerts, rawAlert],
+			})
 		}
 	}
 
@@ -68,15 +58,13 @@ class App extends Component {
 			})
 		})
 
-		this.pushAlert(
-			{
-				type: 'system',
-				message: (
-					<Markdown>{`Welcome to **BotClient v${process.env.REACT_APP_VERSION}**!<br>Need help? Join the [support server]('https://discord.com/invite/aZSrxwNUFD')<br>Want to contribute? Checkout the [github repo](${process.env.REACT_APP_REPOSITORY})`}</Markdown>
-				),
-			},
-			6000
-		)
+		this.pushAlert({
+			type: 'system',
+			message: (
+				<Markdown>{`Welcome to **BotClient v${process.env.REACT_APP_VERSION}**!<br>Need help? Join the [support server]('https://discord.com/invite/aZSrxwNUFD')<br>Want to contribute? Checkout the [github repo](${process.env.REACT_APP_REPOSITORY})`}</Markdown>
+			),
+			popTimeout: 6000,
+		})
 		if (this.state.token) this.handleLogin(this.state.token)
 	}
 
