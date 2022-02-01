@@ -5,13 +5,15 @@
 -   Complete React rewrite
 -   Added a neat alert management system
 -   Fixed "stuck on bootloop" issue
--   Fixed CSS for channels
+-   Switched to appdata instead of localstorage
+-   Added logout feature
+-   Updated file upload to match discord
+-   Fixed CSS to match discord
 -   Switched to `yarn` package manager
 -   Added scripts to `package.json`
 -   Added other dependencies (check `package.json`)
 -   Added prettier hook for linting
 -   Re-organized project structure
--   Updated file upload to match discord
 
 ## v0.2.2-alpha
 
