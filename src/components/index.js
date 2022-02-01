@@ -8,8 +8,7 @@ import MemberNav from './MemberNav/MemberNav'
 import MemberListItem from './MemberListItem/MemberListItem'
 import MessageElement from './MessageElement/MessageElement'
 import MessageField from './MessageField/MessageField'
-import ImagePreview from './ImagePreview/ImagePreview'
-import ImagePreviewElement from './ImagePreviewElement/ImagePreviewElement'
+import UploadElement from './UploadElement/UploadElement'
 
 export {
 	App,
@@ -22,6 +21,5 @@ export {
 	MemberListItem,
 	MessageElement,
 	MessageField,
-	ImagePreview,
-	ImagePreviewElement,
+	UploadElement,
 }
