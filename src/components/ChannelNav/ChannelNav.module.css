@@ -183,7 +183,8 @@
 	font-weight: 500;
 }
 
-.settings {
+.settings,
+.logout {
 	height: 32px;
 	width: 32px;
 	color: var(--interactive-normal);
@@ -195,7 +196,8 @@
 	cursor: pointer;
 }
 
-.settings:hover {
+.settings:hover,
+.logout:hover {
 	color: var(--interactive-hover);
 	background-color: var(--background-modifier-selected);
 }

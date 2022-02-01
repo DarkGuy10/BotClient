@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './ChannelNav.module.css'
-import { SVGCogsThick, SVGChannels } from './../SVGHandler'
+import { SVGCogsThick, SVGChannels, SVGLogout } from './../SVGHandler'
 const { ipcRenderer } = window.require('electron')
 
 function ListItem(props) {
@@ -112,6 +112,14 @@ class ChannelNav extends Component {
 							#{this.props.clientUser.discriminator}
 						</span>
 					</div>
+					<button
+						className={styles.logout}
+						onClick={() => {
+							ipcRenderer.send('logout')
+						}}
+					>
+						<SVGLogout />
+					</button>
 					<button
 						className={styles.settings}
 						onClick={() => {
