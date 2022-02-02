@@ -1,10 +1,12 @@
 import React from 'react'
 import styles from './MemberListItem.module.css'
 import { decimalToHexColor } from './../../utils'
+import { BotTag } from '..'
 
 const MemberListItem = props => {
 	const { member } = props
-	const { color, avatarURL, displayName, presence } = member
+	const { color, avatarURL, displayName, presence, isVerifiedBot, user } =
+		member
 	let subText = ''
 	if (presence?.activities?.length) {
 		const activity = presence.activities[0]
@@ -73,6 +75,7 @@ const MemberListItem = props => {
 								{member.displayName}
 							</span>
 						</div>
+						{user.bot ? <BotTag verified={isVerifiedBot} /> : null}
 					</div>
 					<div className={styles.subText}>
 						{subText ? (

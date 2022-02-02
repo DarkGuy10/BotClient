@@ -1,0 +1,33 @@
+.botTag {
+	height: 15px;
+	padding: 0 4px;
+	margin-top: 1px;
+	border-radius: 3px;
+	margin-left: 4px;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	background: var(--brand-experiment);
+	color: #fff;
+	font-size: 0.625rem;
+	text-transform: uppercase;
+	display: inline-flex;
+	-webkit-box-align: center;
+	align-items: center;
+	text-indent: 0;
+	white-space: nowrap;
+}
+
+.botTag svg {
+	width: 15px;
+	height: 15px;
+	margin-left: -4px;
+	display: inline-block;
+}
+
+.botText {
+	font-size: 10px;
+	line-height: 15px;
+	position: relative;
+	font-weight: 500;
+	font-family: var(--font-primary);
+}
