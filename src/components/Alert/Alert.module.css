@@ -10,6 +10,7 @@
 	background-color: var(--background-tertiary);
 	font-size: 16px;
 	font-family: var(--font-primary);
+	font-weight: 500;
 
 	animation: slideIn 0.17s 1 cubic-bezier(0.23, 1, 0.32, 1);
 }
