@@ -193,6 +193,7 @@ ipcMain.handle('members', async () => {
 			presence: member.presence,
 			color: member.displayColor,
 			isHoisted: member.roles.hoist ? true : false,
+			isVerifiedBot: member.user.flags?.has('VERIFIED_BOT'),
 			roles: {
 				...member.roles,
 				hoist: {

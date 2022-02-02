@@ -19,6 +19,7 @@ import { ReactComponent as SVGMimeCode } from './../assets/svg/mime-code.svg'
 import { ReactComponent as SVGMimeZip } from './../assets/svg/mime-zip.svg'
 import { ReactComponent as SVGMimeText } from './../assets/svg/mime-text.svg'
 import { ReactComponent as SVGMimeUnkown } from './../assets/svg/mime-unknown.svg'
+import { ReactComponent as SVGBotTagVerified } from './../assets/svg/bot-tag-verified.svg'
 
 const SVGChannels = {
 	GUILD_TEXT: <SVGText />,
@@ -50,4 +51,5 @@ export {
 	SVGSpoilerVisible,
 	SVGTrashCan,
 	SVGMimes,
+	SVGBotTagVerified,
 }

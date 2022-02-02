@@ -1,6 +1,7 @@
 import App from './App/App'
 import Alert from './Alert/Alert'
 import AlertManager from './AlertManager/AlertManager'
+import BotTag from './BotTag/BotTag'
 import Login from './Login/Login'
 import Layout from './Layout/Layout'
 import ChannelNav from './ChannelNav/ChannelNav'
@@ -16,6 +17,7 @@ export {
 	App,
 	Alert,
 	AlertManager,
+	BotTag,
 	Login,
 	Layout,
 	ChannelNav,
