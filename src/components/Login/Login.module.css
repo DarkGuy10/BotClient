@@ -46,7 +46,8 @@
 	border-width: 0px;
 	color: var(--text-normal);
 	font-size: 16px;
-	font-family: 'Whitney-Book';
+	font-family: var(--font-primary);
+	font-weight: 300;
 	padding: 10px 15px;
 	margin: 10px 0;
 	background-color: var(--deprecated-text-input-bg);
