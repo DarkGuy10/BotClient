@@ -49,15 +49,28 @@ class MessageField extends Component {
 
 		this.handleUpload = ({ target }) => {
 			const { files } = this.state
-			const fileObjects = [...target.files].map(file => {
-				return {
-					filename: file.name,
-					path: file.path,
-					src: URL.createObjectURL(file),
-					spoiler: false,
-					mime: file.type,
+			const { pushAlert } = this.props
+			const allowedFileSize = 8000000 //bytes
+
+			for (const file of [...target.files])
+				if (file.size > allowedFileSize) {
+					pushAlert({
+						type: 'error',
+						message: `File [filename:${file.name}] goes over allowed size limit (8Mb)`,
+					})
 				}
-			})
+
+			const fileObjects = [...target.files]
+				.filter(file => file.size < allowedFileSize)
+				.map(file => {
+					return {
+						filename: file.name,
+						path: file.path,
+						src: URL.createObjectURL(file),
+						spoiler: false,
+						mime: file.type,
+					}
+				})
 			this.setState({ ...this.state, files: [...files, ...fileObjects] })
 			this.focusInput()
 		}
