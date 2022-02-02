@@ -20,7 +20,7 @@
 
 .memberNav {
 	height: 100%;
-	width: 250px;
+	width: var(--member-nav-width);
 	padding: 0 3px;
 	flex-shrink: 0;
 	background-color: var(--background-secondary);

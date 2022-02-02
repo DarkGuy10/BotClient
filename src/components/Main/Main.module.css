@@ -1,6 +1,9 @@
 .main {
 	height: 100%;
-	width: calc(100% - 70px - 250px - 250px);
+	width: calc(
+		100% - var(--guild-nav-width) - var(--channel-nav-width) -
+			var(--member-nav-width)
+	);
 	background-color: var(--background-primary);
 	display: flex;
 	flex-direction: column;
