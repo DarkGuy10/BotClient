@@ -55,6 +55,7 @@ class MessageField extends Component {
 					path: file.path,
 					src: URL.createObjectURL(file),
 					spoiler: false,
+					mime: file.type,
 				}
 			})
 			this.setState({ ...this.state, files: [...files, ...fileObjects] })
@@ -96,12 +97,16 @@ class MessageField extends Component {
 							<>
 								<ul className={styles.channelAttachmentArea}>
 									{files.map(
-										({ filename, src, spoiler }, key) => (
+										(
+											{ filename, src, mime, spoiler },
+											key
+										) => (
 											<UploadElement
 												key={key}
 												index={key}
 												filename={filename}
 												src={src}
+												mime={mime}
 												spoiler={spoiler}
 												toggleSpoiler={
 													this.toggleSpoiler
