@@ -50,6 +50,10 @@ class Client extends oldClient {
 			}
 			this.transmit('messageCreate', sendObject)
 		})
+
+		this.on('error', error => {
+			this.transmit('error', `[${error.code}] ${error.message}`)
+		})
 	}
 
 	/**

@@ -98,7 +98,7 @@ ipcMain.on('login', async (event, token) => {
 		})
 	} catch (error) {
 		console.log(error)
-		event.reply('error', error.message)
+		event.reply('error', `[${error.code}] ${error.message}`)
 	}
 })
 
@@ -245,8 +245,13 @@ ipcMain.handle('selectChannel', async (event, id) => {
 	}
 })
 
-ipcMain.on('messageCreate', (event, messageOptions) => {
-	currentChannel.send(messageOptions)
+ipcMain.on('messageCreate', async (event, messageOptions) => {
+	try {
+		await currentChannel.send(messageOptions)
+	} catch (error) {
+		console.log(error)
+		event.reply('error', `[${error.code}] ${error.message}`)
+	}
 })
 
 ipcMain.on('get', (event, key) => {

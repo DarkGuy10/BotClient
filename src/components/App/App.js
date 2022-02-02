@@ -20,6 +20,27 @@ class App extends Component {
 			ipcRenderer.send('login', token)
 		}
 
+		/**
+		 * Push an alert.
+		 * @param {RawAlert} rawAlert An object containing raw alert data.
+		 */
+		this.pushAlert = rawAlert => {
+			this.setState({
+				...this.state,
+				alerts: [...this.state.alerts, rawAlert],
+			})
+		}
+	}
+
+	componentDidMount() {
+		// Handle all errors from discord client
+		ipcRenderer.on('error', (event, error) => {
+			this.pushAlert({
+				type: 'error',
+				message: error,
+			})
+		})
+
 		ipcRenderer.on('login', (event, token) => {
 			this.setState({ ...this.state, token: token })
 		})
@@ -46,27 +67,6 @@ class App extends Component {
 				token: null,
 				clientUser: null,
 				clientIsReady: false,
-			})
-		})
-
-		/**
-		 * Push an alert.
-		 * @param {RawAlert} rawAlert An object containing raw alert data.
-		 */
-		this.pushAlert = rawAlert => {
-			this.setState({
-				...this.state,
-				alerts: [...this.state.alerts, rawAlert],
-			})
-		}
-	}
-
-	componentDidMount() {
-		// Handle all errors from discord client
-		ipcRenderer.on('error', (event, error) => {
-			this.pushAlert({
-				type: 'error',
-				message: error,
 			})
 		})
 
