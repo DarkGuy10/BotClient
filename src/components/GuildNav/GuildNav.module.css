@@ -1,6 +1,6 @@
 .guildNav {
 	height: 100%;
-	width: 70px;
+	width: var(--guild-nav-width);
 	background-color: var(--background-tertiary);
 	flex-shrink: 0;
 	display: flex;
