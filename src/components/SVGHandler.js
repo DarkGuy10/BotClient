@@ -11,6 +11,14 @@ import { ReactComponent as SVGSpoilerHidden } from './../assets/svg/spoiler-hidd
 import { ReactComponent as SVGSpoilerVisible } from './../assets/svg/spoiler-visible.svg'
 import { ReactComponent as SVGTrashCan } from './../assets/svg/trash-can.svg'
 import { ReactComponent as SVGLogout } from './../assets/svg/logout.svg'
+import { ReactComponent as SVGMimeVideo } from './../assets/svg/mime-video.svg'
+import { ReactComponent as SVGMimeAudio } from './../assets/svg/mime-audio.svg'
+import { ReactComponent as SVGMimeImage } from './../assets/svg/mime-image.svg'
+import { ReactComponent as SVGMimePdf } from './../assets/svg/mime-pdf.svg'
+import { ReactComponent as SVGMimeCode } from './../assets/svg/mime-code.svg'
+import { ReactComponent as SVGMimeZip } from './../assets/svg/mime-zip.svg'
+import { ReactComponent as SVGMimeText } from './../assets/svg/mime-text.svg'
+import { ReactComponent as SVGMimeUnkown } from './../assets/svg/mime-unknown.svg'
 
 const SVGChannels = {
 	GUILD_TEXT: <SVGText />,
@@ -22,6 +30,17 @@ const SVGChannels = {
 	GUILD_CATEGORY: <SVGDropDown />,
 }
 
+const SVGMimes = {
+	VIDEO: <SVGMimeVideo />,
+	AUDIO: <SVGMimeAudio />,
+	IMAGE: <SVGMimeImage />,
+	CODE: <SVGMimeCode />,
+	ZIP: <SVGMimeZip />,
+	PDF: <SVGMimePdf />,
+	TEXT: <SVGMimeText />,
+	UNKNOWN: <SVGMimeUnkown />,
+}
+
 export {
 	SVGChannels,
 	SVGCogsThick,
@@ -30,4 +49,5 @@ export {
 	SVGSpoilerHidden,
 	SVGSpoilerVisible,
 	SVGTrashCan,
+	SVGMimes,
 }
