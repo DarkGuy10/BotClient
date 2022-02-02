@@ -7,21 +7,11 @@ class Login extends Component {
 		super(props)
 		this.state = {
 			token: '',
-			inProgress: false,
 		}
 
 		this.handleSubmit = event => {
 			event.preventDefault()
-			//this.setState({ ...this.state, inProgress: true }) // will fix later
-			try {
-				this.props.handleLogin(this.state.token)
-			} catch (error) {
-				this.setState({ ...this.state, inProgress: false })
-				this.props.pushAlert({
-					type: 'error',
-					message: error,
-				})
-			}
+			this.props.handleLogin(this.state.token)
 		}
 	}
 
