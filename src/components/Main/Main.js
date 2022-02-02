@@ -105,7 +105,7 @@ class Main extends Component {
 	}
 
 	render() {
-		const { currentChannel } = this.props
+		const { currentChannel, pushAlert } = this.props
 		const { loadedMessages } = this.state
 		return (
 			<div className={styles.main}>
@@ -119,7 +119,10 @@ class Main extends Component {
 						<MessageElement key={index} message={message} />
 					))}
 				</DiscordMessages>
-				<MessageField currentChannel={currentChannel} />
+				<MessageField
+					currentChannel={currentChannel}
+					pushAlert={pushAlert}
+				/>
 			</div>
 		)
 	}
