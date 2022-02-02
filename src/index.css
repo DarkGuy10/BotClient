@@ -4,26 +4,22 @@
 	font-weight: 600;
 }
 @font-face {
-	font-family: 'Whitney-Book';
+	font-family: 'Whitney';
 	src: url('./assets/fonts/Whitney-Book.woff') format('woff');
 	font-weight: 400;
 }
 @font-face {
-	font-family: 'Whitney-Medium';
+	font-family: 'Whitney';
 	src: url('./assets/fonts/Whitney-Medium.woff') format('woff');
 	font-weight: 500;
 }
 @font-face {
 	font-family: 'Whitney';
-	src: url('./assets/fonts/Whitney-Medium.woff') format('woff');
-}
-@font-face {
-	font-family: 'Whitney-Semibold';
 	src: url('./assets/fonts/Whitney-Semibold.woff') format('woff');
 	font-weight: 600;
 }
 @font-face {
-	font-family: 'Whitney-Bold';
+	font-family: 'Whitney';
 	src: url('./assets/fonts/Whitney-Bold.woff') format('woff');
 	font-weight: 700;
 }
@@ -390,44 +386,6 @@
 * {
 	box-sizing: border-box;
 }
-
-input:focus {
-	outline: none;
-}
-
-a {
-	color: var(--text-link-low-saturation);
-	text-decoration: none;
-	word-break: break-word;
-}
-
-a:hover {
-	color: var(--text-link);
-	text-decoration: underline;
-}
-
-code {
-	font-size: 0.875rem;
-	line-height: 1.125rem;
-	text-indent: 0;
-	white-space: pre-wrap;
-	background: var(--background-tertiary);
-	border: 1px solid var(--background-tertiary);
-	display: block;
-	overflow-x: auto;
-	padding: 0.5em;
-	border-radius: 4px;
-	color: var(--header-secondary);
-	font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console,
-		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
-		Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
-}
-
-ul,
-ol {
-	list-style: none;
-}
-
 a,
 abbr,
 acronym,
@@ -438,6 +396,7 @@ blockquote,
 body,
 caption,
 cite,
+code,
 dd,
 del,
 dfn,
@@ -490,6 +449,47 @@ var {
 	font-family: inherit;
 	font-size: 100%;
 	vertical-align: baseline;
+}
+
+input:focus {
+	outline: none;
+}
+
+a {
+	color: var(--text-link-low-saturation);
+	text-decoration: none;
+	word-break: break-word;
+}
+
+a:hover {
+	color: var(--text-link);
+	text-decoration: underline;
+}
+
+code {
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	text-indent: 0;
+	white-space: pre-wrap;
+	background: var(--background-tertiary);
+	border: 1px solid var(--background-tertiary);
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	border-radius: 4px;
+	color: var(--header-secondary);
+	font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console,
+		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+		Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+strong {
+	font-weight: 600;
 }
 
 .divider {
