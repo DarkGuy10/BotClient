@@ -7,6 +7,7 @@
 -   Fixed "stuck on bootloop" issue
 -   Switched to appdata instead of localstorage
 -   Added logout feature
+-   Added member list
 -   Updated file upload to match discord
 -   Fixed CSS to match discord
 -   Switched to `yarn` package manager
