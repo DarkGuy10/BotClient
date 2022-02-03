@@ -10,7 +10,12 @@ import {
 	DiscordReply,
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
-import { decimalToHexColor, parseMarkdown, parseTimestamp } from './../../utils'
+import {
+	decimalToHexColor,
+	parseMarkdown,
+	parseTimestamp,
+	parseTwemojis,
+} from './../../utils'
 
 const MessageElement = props => {
 	const {
@@ -60,10 +65,10 @@ const MessageElement = props => {
 					edited={repliesTo.editedTimestamp ? true : false}
 					roleColor={decimalToHexColor(repliesTo.member?.color)}
 				>
-					{shorten(repliesTo)}
+					{parseTwemojis(parseMarkdown(shorten(repliesTo)))}
 				</DiscordReply>
 			) : null}
-			{parseMarkdown(content)}
+			{parseTwemojis(parseMarkdown(content))}
 
 			{stickers.map((sticker, key) => (
 				<DiscordAttachment
@@ -155,7 +160,7 @@ const MessageElement = props => {
 					<DiscordEmbed key={key} {...options}>
 						{content ? (
 							<DiscordEmbedDescription slot="description">
-								{parseMarkdown(content)}
+								{parseTwemojis(parseMarkdown(content))}
 							</DiscordEmbedDescription>
 						) : null}
 						{fields.length ? (
@@ -186,7 +191,7 @@ const MessageElement = props => {
 						) : null}
 
 						<DiscordEmbedFooter {...footerOptions}>
-							{footer?.text ?? ''}
+							{footer?.text ? parseTwemojis(footer.text) : ''}
 						</DiscordEmbedFooter>
 					</DiscordEmbed>
 				)

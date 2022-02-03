@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './ChannelNav.module.css'
 import { SVGCogsThick, SVGChannels, SVGLogout } from './../SVGHandler'
+import { parseTwemojis } from '../../utils'
 const { ipcRenderer } = window.require('electron')
 
 function ListItem(props) {
@@ -32,7 +33,7 @@ function ListItem(props) {
 			}}
 		>
 			{SVGChannels[svgType]}
-			<div>{props.channel.name}</div>
+			<div>{parseTwemojis(props.channel.name)}</div>
 		</div>
 	)
 }

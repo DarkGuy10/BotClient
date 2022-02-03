@@ -86,3 +86,7 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+
+.activityText img {
+	vertical-align: -0.25em;
+}

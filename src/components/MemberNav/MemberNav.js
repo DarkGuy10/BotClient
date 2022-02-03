@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { parseTwemojis } from '../../utils'
 import { MemberListItem } from './../'
 import styles from './MemberNav.module.css'
 const { ipcRenderer } = window.require('electron')
@@ -34,7 +35,7 @@ class MemberNav extends Component {
 					<div key={key}>
 						<h2 className={styles.header}>
 							<span>
-								{role.name} — {members.length}{' '}
+								{parseTwemojis(role.name)} — {members.length}{' '}
 							</span>
 						</h2>
 						{members.map((member, key) => (

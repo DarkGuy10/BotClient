@@ -3,6 +3,7 @@ import React, { Component, createRef } from 'react'
 import styles from './Main.module.css'
 import { MessageElement, MessageField } from './../'
 import { SVGChannels } from './../SVGHandler'
+import { parseTwemojis } from '../../utils'
 const { ipcRenderer } = window.require('electron')
 
 function Header(props) {
@@ -14,8 +15,10 @@ function Header(props) {
 	return (
 		<div className={styles.header}>
 			{SVGChannels[svgType]}
-			<h1>{props.channel.name}</h1>
-			{props.channel.topic ? <h2>{props.channel.topic}</h2> : null}
+			<h1>{parseTwemojis(props.channel.name)}</h1>
+			{props.channel.topic ? (
+				<h2>{parseTwemojis(props.channel.topic)}</h2>
+			) : null}
 		</div>
 	)
 }

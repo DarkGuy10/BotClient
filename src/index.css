@@ -512,3 +512,9 @@ strong {
 	box-sizing: border-box;
 	--divider-color: hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%);
 }
+
+img.twemoji {
+	height: 1em;
+	width: 1em;
+	vertical-align: -0.1em;
+}

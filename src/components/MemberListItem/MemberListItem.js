@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './MemberListItem.module.css'
-import { decimalToHexColor } from './../../utils'
+import { decimalToHexColor, parseTwemojis } from './../../utils'
 import { BotTag } from '..'
 
 const MemberListItem = props => {
@@ -81,7 +81,7 @@ const MemberListItem = props => {
 						{subText ? (
 							<div className={styles.activity}>
 								<div className={styles.activityText}>
-									{subText}
+									{parseTwemojis(subText)}
 								</div>
 							</div>
 						) : null}
