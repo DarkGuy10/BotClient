@@ -20,6 +20,10 @@ import { ReactComponent as SVGMimeZip } from './../assets/svg/mime-zip.svg'
 import { ReactComponent as SVGMimeText } from './../assets/svg/mime-text.svg'
 import { ReactComponent as SVGMimeUnkown } from './../assets/svg/mime-unknown.svg'
 import { ReactComponent as SVGBotTagVerified } from './../assets/svg/bot-tag-verified.svg'
+import { ReactComponent as SVGRadioUnchecked } from './../assets/svg/radio-unchecked.svg'
+import { ReactComponent as SVGRadioChecked } from './../assets/svg/radio-checked.svg'
+import { ReactComponent as SVGToggleUnchecked } from './../assets/svg/toggle-unchecked.svg'
+import { ReactComponent as SVGToggleChecked } from './../assets/svg/toggle-checked.svg'
 
 const SVGChannels = {
 	GUILD_TEXT: <SVGText />,
@@ -52,4 +56,8 @@ export {
 	SVGTrashCan,
 	SVGMimes,
 	SVGBotTagVerified,
+	SVGRadioUnchecked,
+	SVGRadioChecked,
+	SVGToggleUnchecked,
+	SVGToggleChecked,
 }
