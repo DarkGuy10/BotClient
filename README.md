@@ -16,7 +16,7 @@ The workflow and UI has been kept as close to original discord as possible <br>
 
 ## Contribution
 
-For contributions, create a fork and pull a PR to the `development` branch. <br>
+For contributions, create a fork and pull a PR to the `main` branch. <br>
 For bug reports, open an issue on this repo. <br>
 Join the [support server](https://discord.gg/aZSrxwNUFD) for more.
 
