@@ -1,0 +1,67 @@
+.control {
+	flex: 0 0 auto;
+}
+
+.container {
+	border-radius: 14px;
+	cursor: pointer;
+	position: relative;
+	width: 40px;
+	height: 24px;
+	opacity: 1;
+	background-color: inherit;
+	transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.container > svg {
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 28px;
+	height: 18px;
+	margin: 3px;
+}
+
+.checked {
+	background-color: hsl(
+		139,
+		calc(var(--saturation-factor, 1) * 47.3%),
+		43.9%
+	);
+}
+
+.unchecked {
+	background-color: hsl(218, calc(var(--saturation-factor, 1) * 4.6%), 46.9%);
+}
+
+.container.checked > svg {
+	left: -3px;
+	animation: check 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.container.unchecked > svg {
+	left: 12px;
+	animation: check 0.3s reverse cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+
+@keyframes check {
+	0% {
+		left: -3px;
+	}
+	100% {
+		left: 12px;
+	}
+}
+
+.disabled {
+	opacity: 0.3;
+}
+
+.input {
+	position: absolute;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 14px;
+	cursor: pointer;
+}
