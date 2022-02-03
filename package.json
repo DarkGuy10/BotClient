@@ -34,7 +34,7 @@
 		"react-eject": "react-scripts eject",
 		"electron-build": "electron-builder",
 		"build": "yarn react-build && yarn electron-build",
-		"start": "concurrently -k \"BROWSER=none yarn react-start\" \"wait-on tcp:3000 && electron .\"",
+		"start": "concurrently -k \"yarn react-start\" \"wait-on tcp:127.0.0.1:3000 && electron .\"",
 		"prepare": "husky install"
 	},
 	"eslintConfig": {
