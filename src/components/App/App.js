@@ -41,6 +41,10 @@ class App extends Component {
 			})
 		})
 
+		ipcRenderer.on('forcedAppStateUpdate', (event, newStates) => {
+			this.setState({ ...this.state, ...newStates })
+		})
+
 		ipcRenderer.on('login', (event, token) => {
 			this.setState({ ...this.state, token: token })
 		})

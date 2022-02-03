@@ -99,6 +99,10 @@ ipcMain.on('login', async (event, token) => {
 	} catch (error) {
 		console.log(error)
 		event.reply('error', `[${error.code}] ${error.message}`)
+		if (appData.has('token')) {
+			event.reply('forcedAppStateUpdate', { token: '' })
+			appData.delete('token')
+		}
 	}
 })
 
