@@ -31,7 +31,7 @@ cd BotClient
 Then you need to install the required dependencies:
 
 ```
-yarn add
+yarn
 ```
 
 Now you can run the Client using:
