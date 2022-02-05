@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest] # ubuntu-latest
 
     steps:
       - name: Check out Git repository
@@ -33,9 +33,5 @@ jobs:
           # If the commit is tagged with a version (e.g. "v1.0.0"), release the app after building
           # release: ${{ startsWith(github.ref, 'refs/tags/v') }}
           
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.3.1
-        with:
-          name: Built File for ${{ matrix.os }} 
-          path: ./
-          if-no-files-found: error
+      - name: Tree
+        run: tree
