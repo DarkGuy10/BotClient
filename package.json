@@ -79,7 +79,7 @@
 				{
 					"name": "@electron-forge/maker-zip",
 					"platforms": [
-						"windows",
+						"win32",
 						"linux"
 					]
 				}
