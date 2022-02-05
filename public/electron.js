@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 const path = require('path')
-const Client = require('./structures/Client')
+const Client = require('./structures/Client/Client')
 const { app, BrowserWindow, shell, ipcMain, dialog } = require('electron')
 const isDev = require('electron-is-dev')
 const { Guild, BaseGuildTextChannel } = require('discord.js')
