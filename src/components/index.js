@@ -12,6 +12,8 @@ import MemberListItem from './MemberListItem/MemberListItem'
 import MessageElement from './MessageElement/MessageElement'
 import MessageField from './MessageField/MessageField'
 import UploadElement from './UploadElement/UploadElement'
+import ToggleButton from './ToggleButton/ToggleButton'
+import UserSettings from './UserSettings/UserSettings'
 
 export {
 	App,
@@ -28,4 +30,6 @@ export {
 	MessageElement,
 	MessageField,
 	UploadElement,
+	ToggleButton,
+	UserSettings,
 }

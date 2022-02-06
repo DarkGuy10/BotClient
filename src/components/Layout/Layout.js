@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './Layout.module.css'
-import { GuildNav, ChannelNav, Main, MemberNav } from './../'
+import { GuildNav, ChannelNav, Main, MemberNav, UserSettings } from './../'
 const { ipcRenderer } = window.require('electron')
 
 class Layout extends Component {
@@ -9,6 +9,15 @@ class Layout extends Component {
 		this.state = {
 			currentGuild: null,
 			currentChannel: null,
+			isUserSettingsOpen: false,
+		}
+
+		this.openUserSettings = () => {
+			this.setState({ ...this.state, isUserSettingsOpen: true })
+		}
+
+		this.closeUserSettings = () => {
+			this.setState({ ...this.state, isUserSettingsOpen: false })
 		}
 
 		this.selectGuild = async id => {
@@ -54,8 +63,8 @@ class Layout extends Component {
 	}
 
 	render() {
-		const { currentChannel, currentGuild } = this.state
-		const { clientUser, pushAlert } = this.props
+		const { currentChannel, currentGuild, isUserSettingsOpen } = this.state
+		const { clientUser, pushAlert, AppState } = this.props
 		return (
 			<div className={styles.wrapper}>
 				<GuildNav
@@ -72,6 +81,7 @@ class Layout extends Component {
 							currentChannel={currentChannel}
 							selectChannel={this.selectChannel}
 							pushAlert={pushAlert}
+							openUserSettings={this.openUserSettings}
 						/>
 						<Main
 							currentChannel={currentChannel}
@@ -82,6 +92,12 @@ class Layout extends Component {
 				) : null}
 				{currentChannel && currentChannel.type !== 'DM' ? (
 					<MemberNav currentChannel={currentChannel} />
+				) : null}
+				{isUserSettingsOpen ? (
+					<UserSettings
+						closeUserSettings={this.closeUserSettings}
+						AppState={AppState}
+					/>
 				) : null}
 			</div>
 		)

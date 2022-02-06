@@ -24,6 +24,7 @@ import { ReactComponent as SVGRadioUnchecked } from './../assets/svg/radio-unche
 import { ReactComponent as SVGRadioChecked } from './../assets/svg/radio-checked.svg'
 import { ReactComponent as SVGToggleUnchecked } from './../assets/svg/toggle-unchecked.svg'
 import { ReactComponent as SVGToggleChecked } from './../assets/svg/toggle-checked.svg'
+import { ReactComponent as SVGCloseButton } from './../assets/svg/close-button.svg'
 
 const SVGChannels = {
 	GUILD_TEXT: <SVGText />,
@@ -60,4 +61,5 @@ export {
 	SVGRadioChecked,
 	SVGToggleUnchecked,
 	SVGToggleChecked,
+	SVGCloseButton,
 }

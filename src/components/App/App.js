@@ -93,6 +93,7 @@ class App extends Component {
 						<Layout
 							clientUser={clientUser}
 							pushAlert={this.pushAlert}
+							AppState={this.state}
 						/>
 					) : (
 						<BootLoop />
