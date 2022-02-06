@@ -91,7 +91,7 @@ ipcMain.on('login', async (event, token) => {
 	)
 	try {
 		await client.login(token)
-		appData.set('token', token)
+		if (appData.get('Storage.saveToken', true)) appData.set('token', token)
 		event.reply('login', token)
 		client.once('ready', () => {
 			event.reply('ready', client.clientUserData)

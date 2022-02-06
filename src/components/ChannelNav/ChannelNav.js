@@ -72,7 +72,7 @@ class ChannelNav extends Component {
 	}
 
 	render() {
-		const { currentGuild, currentChannel, pushAlert } = this.props
+		const { currentGuild, currentChannel, openUserSettings } = this.props
 		const channels = orderChannels(this.state.channels)
 		return (
 			<div className={styles.channelNav}>
@@ -124,10 +124,7 @@ class ChannelNav extends Component {
 					<button
 						className={styles.settings}
 						onClick={() => {
-							pushAlert({
-								type: 'system',
-								message: 'Feature in development, coming soon.',
-							})
+							openUserSettings()
 						}}
 					>
 						<SVGCogsThick />
