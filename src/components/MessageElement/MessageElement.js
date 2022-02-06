@@ -147,8 +147,8 @@ const MessageElement = props => {
 
 				if (video) {
 					options['video'] = video.url
-					options['provider'] = provider?.name
-					options['image'] = thumbnail.url
+					if (provider?.name) options['provider'] = provider.name
+					if (thumbnail?.url) options['image'] = thumbnail.url
 				} else {
 					if (embed.thumbnail?.url)
 						options['thumbnail'] = embed.thumbnail.url
