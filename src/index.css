@@ -4,6 +4,11 @@
 	font-weight: 600;
 }
 @font-face {
+	font-family: 'Ginto';
+	src: url('./assets/fonts/Ginto-Heavy.woff') format('woff');
+	font-weight: 700;
+}
+@font-face {
 	font-family: 'Whitney';
 	src: url('./assets/fonts/Whitney-Book.woff') format('woff');
 	font-weight: 400;
