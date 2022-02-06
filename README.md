@@ -1,7 +1,7 @@
 # BotClient v0.3.0-alpha
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An unofficial client for logging in as a discord bot. <br>
@@ -32,6 +32,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://promptfolio.vercel.app"><img src="https://avatars.githubusercontent.com/u/62807269?v=4?s=100" width="100px;" alt=""/><br /><sub><b>DarkGuy10</b></sub></a><br /><a href="https://github.com/DarkGuy10/BotClient/commits?author=DarkGuy10" title="Code">💻</a> <a href="https://github.com/DarkGuy10/BotClient/commits?author=DarkGuy10" title="Documentation">📖</a> <a href="#projectManagement-DarkGuy10" title="Project Management">📆</a></td>
     <td align="center"><a href="https://github.com/Duckulus"><img src="https://avatars.githubusercontent.com/u/76813487?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Duckulus</b></sub></a><br /><a href="https://github.com/DarkGuy10/BotClient/commits?author=Duckulus" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/jerbear2008"><img src="https://avatars.githubusercontent.com/u/38813665?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jerbear4328</b></sub></a><br /><a href="https://github.com/DarkGuy10/BotClient/commits?author=jerbear2008" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ipxter"><img src="https://avatars.githubusercontent.com/u/56973869?v=4?s=100" width="100px;" alt=""/><br /><sub><b>pxter</b></sub></a><br /><a href="https://github.com/DarkGuy10/BotClient/issues?q=author%3Aipxter" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
