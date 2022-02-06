@@ -258,6 +258,20 @@ ipcMain.on('messageCreate', async (event, messageOptions) => {
 	}
 })
 
-ipcMain.on('get', (event, key) => {
-	event.returnValue = appData.get(key)
+ipcMain.on('AppData', (event, method, arg) => {
+	switch (method) {
+		case 'set':
+			appData.set(arg[0], arg[1])
+			break
+		case 'get':
+			event.returnValue = appData.get(arg[0], arg[1])
+			break
+		case 'has':
+			event.returnValue = appData.has(arg)
+			break
+		case 'delete':
+			appData.delete(arg)
+			break
+		default:
+	}
 })
