@@ -2,7 +2,7 @@
 	"name": "botclient",
 	"description": "A discord botclient made using electron, react and discord.js",
 	"author": "DarkGuy10",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"private": true,
 	"license": "MIT",
 	"repository": {
