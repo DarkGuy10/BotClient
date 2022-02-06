@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.4.0-alpha
+
+-   Added User Settings (persistant login)
+-   Create `AppData` service
+-   Re-brand logo and bootloops
+
 ## v0.3.0-alpha
 
 -   Complete React rewrite
