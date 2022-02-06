@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Login, Layout, AlertManager } from './..'
+import { AppData } from './../../services/'
 import Markdown from 'markdown-to-jsx'
 import styles from './App.module.css'
 import bootloopvideo from './../../assets/images/bootloop.webm'
@@ -10,7 +11,7 @@ class App extends Component {
 		super(props)
 
 		this.state = {
-			token: ipcRenderer.sendSync('get', 'token'),
+			token: AppData.get('token'),
 			clientUser: null,
 			clientIsReady: false,
 			alerts: [],
