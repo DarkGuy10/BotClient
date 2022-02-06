@@ -3,7 +3,8 @@ import { Login, Layout, AlertManager } from './..'
 import { AppData } from './../../services/'
 import Markdown from 'markdown-to-jsx'
 import styles from './App.module.css'
-import bootloopvideo from './../../assets/images/bootloop.webm'
+import bootloop1 from './../../assets/images/bootloop1.gif'
+import bootloop2 from './../../assets/images/bootloop2.gif'
 const { ipcRenderer } = window.require('electron')
 
 class App extends Component {
@@ -111,15 +112,12 @@ class App extends Component {
 	}
 }
 
-function BootLoop() {
+const BootLoop = () => {
+	const bootloops = [bootloop1, bootloop2]
+	const bootloop = bootloops[Math.floor(Math.random() * bootloops.length)]
 	return (
 		<div className={styles.wrapper}>
-			<video
-				src={bootloopvideo}
-				className={styles.video}
-				autoPlay={true}
-				loop={true}
-			></video>
+			<img src={bootloop} alt="" className={styles.media} />
 			<p className={styles.caption}>Loading BotClient...</p>
 		</div>
 	)
