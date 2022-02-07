@@ -121,6 +121,9 @@ class Main extends Component {
 					{loadedMessages.map((message, index) => (
 						<MessageElement key={index} message={message} />
 					))}
+					<div
+						className={styles.scrollerSpacer}
+					/>
 				</DiscordMessages>
 				<MessageField
 					currentChannel={currentChannel}

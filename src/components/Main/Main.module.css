@@ -79,3 +79,7 @@
 	border-radius: 6px;
 	background-color: var(--scrollbar-auto-scrollbar-color-thumb);
 }
+
+.scrollerSpacer{
+	height: 30px;
+}
