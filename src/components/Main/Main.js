@@ -82,12 +82,12 @@ class Main extends Component {
 				})
 
 			// Scroll to bottom *if* user is already fully scrolled *with* a
-			// 20 pixel margin for snappy, unannoying autoscroll
-			if (this.messageRef.current) {
+			// 50 pixel margin for snappy, unannoying autoscroll
+			if (this.messageRef.current && this._isMounted) {
 				// for some reason, messageRef gets unmounted, causing current to become undefined
 				const { clientHeight, scrollHeight, scrollTop } =
 					this.messageRef.current
-				if (scrollTop + clientHeight >= scrollHeight - 20)
+				if (scrollTop + clientHeight >= scrollHeight - 50)
 					this.scrollToBottom()
 			}
 		})
