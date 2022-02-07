@@ -374,6 +374,58 @@
 		64.7%,
 		0.95
 	);
+	--info-positive-background: hsla(
+		139,
+		calc(var(--saturation-factor, 1) * 47.3%),
+		43.9%,
+		0.1
+	);
+	--info-positive-foreground: hsl(
+		139,
+		calc(var(--saturation-factor, 1) * 47.3%),
+		43.9%
+	);
+	--info-warning-background: hsla(
+		38,
+		calc(var(--saturation-factor, 1) * 95.7%),
+		54.1%,
+		0.1
+	);
+	--info-warning-foreground: hsl(
+		38,
+		calc(var(--saturation-factor, 1) * 95.7%),
+		54.1%
+	);
+	--info-danger-background: hsla(
+		359,
+		calc(var(--saturation-factor, 1) * 82.6%),
+		59.4%,
+		0.1
+	);
+	--info-danger-foreground: hsl(
+		359,
+		calc(var(--saturation-factor, 1) * 82.6%),
+		59.4%
+	);
+	--status-positive-background: hsl(
+		139,
+		calc(var(--saturation-factor, 1) * 47.3%),
+		43.9%
+	);
+	--status-positive-text: #fff;
+	--status-warning-background: hsl(
+		38,
+		calc(var(--saturation-factor, 1) * 95.7%),
+		54.1%
+	);
+	--status-danger-background: hsl(
+		359,
+		calc(var(--saturation-factor, 1) * 82.6%),
+		59.4%
+	);
+	--status-danger-text: #fff;
+	--focus-primary: hsl(197, calc(var(--saturation-factor, 1) * 100%), 47.8%);
+
 	--font-primary: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	--font-display: Ginto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	--font-code: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
@@ -522,4 +574,18 @@ img.twemoji {
 	height: 1em;
 	width: 1em;
 	vertical-align: -0.1em;
+}
+
+/* Overrides for @skyra/discord-components */
+.discord-message-markup {
+	white-space: pre-wrap;
+}
+
+.discord-message {
+	margin: 1.0625rem 0 !important;
+	padding: 0 16px !important;
+}
+
+.discord-highlight-mention {
+	border-left: 2px solid var(--info-warning-foreground);
 }
