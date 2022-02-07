@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const path = require('path')
 const Client = require('./structures/Client/Client')
-const { app, BrowserWindow, shell, ipcMain, dialog } = require('electron')
+const { app, BrowserWindow, shell, ipcMain } = require('electron')
 const isDev = require('electron-is-dev')
 const { Guild, BaseGuildTextChannel } = require('discord.js')
 const Store = require('electron-store')
@@ -161,6 +161,28 @@ ipcMain.handle('messages', async (event, limit) => {
 						displayName: message.member.displayName,
 				  },
 			stickers: [...message.stickers.values()],
+			mentions: {
+				members: [...message.mentions.members].map(([id, each]) => {
+					return [
+						id,
+						{
+							...each,
+							color: each.displayColor,
+							displayName: each.displayName,
+						},
+					]
+				}),
+				users: [...message.mentions.users],
+				roles: [...message.mentions.roles],
+				everyone: message.mentions.everyone,
+				channels: [...message.mentions.channels],
+				me:
+					message.mentions.roles.find(
+						role =>
+							message.guild.me.roles.botRole?.id === role.id ||
+							message.guild.me.roles.cache.has(role.id)
+					) || message.mentions.users.has(client.user.id),
+			},
 			repliesTo:
 				message.type === 'REPLY'
 					? {
@@ -274,4 +296,8 @@ ipcMain.on('AppData', (event, method, arg) => {
 			break
 		default:
 	}
+})
+
+ipcMain.on('fetchUser', async (event, id) => {
+	event.returnValue = await client.users.fetch(id)
 })
