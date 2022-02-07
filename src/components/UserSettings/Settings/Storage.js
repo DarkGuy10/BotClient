@@ -12,7 +12,7 @@ const Storage = props => {
 				<div className={styles.container}>
 					<div className={styles.labelRow}>
 						<label htmlFor="saveToken">
-							Persistant Login (save bot token in App Data).
+							Persistent Login (save bot token in App Data).
 						</label>
 						<ToggleButton
 							onCheck={() => {
