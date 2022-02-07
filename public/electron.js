@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
 const path = require('path')
 const Client = require('./structures/Client/Client')
+const {
+	serializeMessage,
+	serializeGuild,
+	serializeGuildChannel,
+	serializeGuildMember,
+} = require('./serializers')
 const { app, BrowserWindow, shell, ipcMain } = require('electron')
 const isDev = require('electron-is-dev')
 const { Guild, BaseGuildTextChannel } = require('discord.js')
@@ -114,27 +120,16 @@ ipcMain.on('logout', event => {
 })
 
 ipcMain.handle('guilds', () => {
-	const guilds = [...client.guilds.cache.values()].map(guild => {
-		return {
-			...guild,
-			iconURL: guild.iconURL(),
-		}
-	})
+	const guilds = [...client.guilds.cache.values()].map(guild =>
+		serializeGuild(guild)
+	)
 	return guilds
 })
 
 ipcMain.handle('channels', () => {
-	const channels = [...currentGuild.channels.cache.values()].map(channel => {
-		return {
-			...channel,
-			viewable: channel.viewable,
-			position: channel.position,
-			isPrivate: !channel
-				.permissionsFor(channel.guild.roles.everyone)
-				.has('VIEW_CHANNEL'),
-			isRules: channel.id === channel.guild.rulesChannelID,
-		}
-	})
+	const channels = [...currentGuild.channels.cache.values()].map(channel =>
+		serializeGuildChannel(channel)
+	)
 	return channels
 })
 
@@ -143,68 +138,7 @@ ipcMain.handle('messages', async (event, limit) => {
 		await currentChannel.messages.fetch({
 			limit: limit,
 		})
-	).map(async message => {
-		let repliesTo
-		if (message.type === 'REPLY') repliesTo = await message.fetchReference()
-		return {
-			...message,
-			author: {
-				...message.author,
-				avatarURL: message.author.displayAvatarURL(),
-				isVerifiedBot: message.author.flags?.has('VERIFIED_BOT'),
-			},
-			member: !message.member
-				? null
-				: {
-						...message.member,
-						color: message.member.displayColor,
-						displayName: message.member.displayName,
-				  },
-			stickers: [...message.stickers.values()],
-			mentions: {
-				members: [...message.mentions.members].map(([id, each]) => {
-					return [
-						id,
-						{
-							...each,
-							color: each.displayColor,
-							displayName: each.displayName,
-						},
-					]
-				}),
-				users: [...message.mentions.users],
-				roles: [...message.mentions.roles],
-				everyone: message.mentions.everyone,
-				channels: [...message.mentions.channels],
-				me:
-					message.mentions.roles.find(
-						role =>
-							message.guild.me.roles.botRole?.id === role.id ||
-							message.guild.me.roles.cache.has(role.id)
-					) || message.mentions.users.has(client.user.id),
-			},
-			repliesTo:
-				message.type === 'REPLY'
-					? {
-							...repliesTo.toJSON(),
-							author: {
-								...repliesTo.author,
-								avatarURL: repliesTo.author.displayAvatarURL(),
-								isVerifiedBot:
-									repliesTo.author.flags?.has('VERIFIED_BOT'),
-							},
-							member: !repliesTo.member
-								? null
-								: {
-										...repliesTo.member,
-										color: repliesTo.member.displayColor,
-										displayName:
-											repliesTo.member.displayName,
-								  },
-					  }
-					: null,
-		}
-	})
+	).map(async message => serializeMessage(message))
 
 	const messages = []
 	for (const promise of promises) messages.push(await promise)
@@ -212,24 +146,9 @@ ipcMain.handle('messages', async (event, limit) => {
 })
 
 ipcMain.handle('members', async () => {
-	const members = [...currentChannel.members.values()].map(member => {
-		return {
-			...member,
-			displayName: member.displayName,
-			presence: member.presence,
-			color: member.displayColor,
-			isHoisted: member.roles.hoist ? true : false,
-			isVerifiedBot: member.user.flags?.has('VERIFIED_BOT'),
-			roles: {
-				...member.roles,
-				hoist: {
-					...member.roles.hoist,
-					position: member.roles.hoist?.position,
-				},
-			},
-			avatarURL: member.user.displayAvatarURL(),
-		}
-	})
+	const members = [...currentChannel.members.values()].map(member =>
+		serializeGuildMember(member)
+	)
 	return members
 })
 
