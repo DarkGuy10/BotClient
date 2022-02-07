@@ -4014,6 +4014,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-scripts: 5.0.0
+    react-string-replace: ^0.4.4
     react-twemoji: ^0.4.0
     wait-on: ^6.0.0
     web-vitals: ^2.1.0
@@ -9067,7 +9068,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.10, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0":
+"lodash@npm:^4.17.10, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.7.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -11364,6 +11365,15 @@ __metadata:
   bin:
     react-scripts: bin/react-scripts.js
   checksum: 55ffad0d68ee6345326f5803c1925ae44b46cc33cb1cad9bcb68fd1784acfb3876bc12118b3079bc4d934834ae0197a9776baa0a06df0263831acc91ac42df29
+  languageName: node
+  linkType: hard
+
+"react-string-replace@npm:^0.4.4":
+  version: 0.4.4
+  resolution: "react-string-replace@npm:0.4.4"
+  dependencies:
+    lodash: ^4.17.4
+  checksum: 88c41d5b0d97c9d0a9de5eb029e48ac8e3d088989329efc5333df7e85bd1b388ef61adc938b614beb122e65f3f472bffe69ab72c8dece046ab4ddd7f538f10a0
   languageName: node
   linkType: hard
 
