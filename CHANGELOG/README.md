@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.4.1-alpha
+
+-   Refactored a bunch of stuff; no bug fixes, no features added.
+
 ## v0.4.0-alpha
 
 -   Added User Settings (persistant login)
