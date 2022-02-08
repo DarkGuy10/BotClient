@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './MessageElement.module.css'
 import {
 	DiscordAttachment,
 	DiscordEmbed,
@@ -51,6 +52,7 @@ const MessageElement = props => {
 			timestamp={parseTimestamp(createdTimestamp)}
 			edited={editedTimestamp ? true : false}
 			roleColor={decimalToHexColor(member?.color) || '#fff'}
+			className={styles.message}
 		>
 			{type === 'REPLY' ? (
 				<DiscordReply
