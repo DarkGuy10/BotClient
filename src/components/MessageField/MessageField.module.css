@@ -22,6 +22,11 @@
 	border-radius: 8px;
 }
 
+.editedBorders {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
 .channelAttachmentArea {
 	display: flex;
 	gap: 24px;

@@ -1,0 +1,69 @@
+.attachedBars {
+	background: var(--background-secondary);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.clipContainer {
+	overflow: hidden;
+	padding-top: 3px;
+	margin-top: -3px;
+}
+
+.inner {
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+}
+
+.replyBar {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	-webkit-box-align: center;
+	align-items: center;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	background: var(--background-secondary);
+	cursor: pointer;
+}
+
+.replyLabel {
+	-webkit-box-flex: 1;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	margin-left: 16px;
+	font-size: 14px;
+	line-height: 18px;
+	color: var(--header-secondary);
+	font-family: var(--font-primary);
+}
+
+.name {
+	font-weight: 600;
+}
+
+.actions {
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-box-flex: 0;
+}
+
+.closeButton {
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	cursor: pointer;
+	color: var(--interactive-normal);
+	line-height: 0;
+	padding: 8px 18px 8px 16px;
+}
+
+.closeButton svg {
+	width: 16px;
+	height: 16px;
+}
+
+.closeButton:hover svg path {
+	fill: var(--interactive-hover);
+}

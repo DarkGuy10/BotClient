@@ -28,9 +28,11 @@ class Main extends Component {
 
 	constructor(props) {
 		super(props)
-		this.state = {
+		this.initialState = {
 			loadedMessages: [],
+			replyingTo: null,
 		}
+		this.state = { ...this.initialState }
 
 		this.messageRef = createRef()
 
@@ -55,8 +57,7 @@ class Main extends Component {
 			const { loadedMessages } = this.state
 			if (!currentChannel) return
 
-			if (clearPreviousMessages)
-				this.setState({ ...this.state, loadedMessages: [] })
+			if (clearPreviousMessages) this.setState({ ...this.initialState })
 
 			const messages = [
 				...(await ipcRenderer.invoke('messages', limit)),
@@ -68,6 +69,10 @@ class Main extends Component {
 					: [...loadedMessages, ...messages],
 			})
 			if (clearPreviousMessages) this.scrollToBottom()
+		}
+
+		this.handleReply = (message = null) => {
+			this.setState({ ...this.state, replyingTo: message })
 		}
 
 		// Add new messages to loadedMessages *if* they belong from
@@ -109,7 +114,7 @@ class Main extends Component {
 
 	render() {
 		const { currentChannel, pushAlert } = this.props
-		const { loadedMessages } = this.state
+		const { loadedMessages, replyingTo } = this.state
 		return (
 			<div className={styles.main}>
 				<Header channel={currentChannel} />
@@ -119,12 +124,19 @@ class Main extends Component {
 					ref={this.messageRef}
 				>
 					{loadedMessages.map((message, index) => (
-						<MessageElement key={index} message={message} />
+						<MessageElement
+							key={index}
+							message={message}
+							handleReply={this.handleReply}
+							replying={replyingTo?.id === message.id}
+						/>
 					))}
 				</DiscordMessages>
 				<MessageField
 					currentChannel={currentChannel}
 					pushAlert={pushAlert}
+					handleReply={this.handleReply}
+					replyingTo={replyingTo}
 				/>
 			</div>
 		)

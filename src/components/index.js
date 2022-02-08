@@ -15,6 +15,7 @@ import UploadElement from './UploadElement/UploadElement'
 import ToggleButton from './ToggleButton/ToggleButton'
 import ToggleElement from './ToggleElement/ToggleElement'
 import UserSettings from './UserSettings/UserSettings'
+import ReplyBar from './ReplyBar/ReplyBar'
 
 export {
 	App,
@@ -34,4 +35,5 @@ export {
 	ToggleButton,
 	ToggleElement,
 	UserSettings,
+	ReplyBar,
 }

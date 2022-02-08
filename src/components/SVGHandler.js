@@ -1,4 +1,5 @@
 import { ReactComponent as SVGCogsThick } from './../assets/svg/cogs-thick.svg'
+import { ReactComponent as SVGCloseButtonCircle } from './../assets/svg/close-button-circle.svg'
 import { ReactComponent as SVGText } from './../assets/svg/text.svg'
 import { ReactComponent as SVGTextLimited } from './../assets/svg/text-limited.svg'
 import { ReactComponent as SVGVoice } from './../assets/svg/voice.svg'
@@ -25,6 +26,7 @@ import { ReactComponent as SVGRadioChecked } from './../assets/svg/radio-checked
 import { ReactComponent as SVGToggleUnchecked } from './../assets/svg/toggle-unchecked.svg'
 import { ReactComponent as SVGToggleChecked } from './../assets/svg/toggle-checked.svg'
 import { ReactComponent as SVGCloseButton } from './../assets/svg/close-button.svg'
+import { ReactComponent as SVGReplyButton } from './../assets/svg/reply-button.svg'
 
 const SVGChannels = {
 	GUILD_TEXT: <SVGText />,
@@ -50,6 +52,7 @@ const SVGMimes = {
 export {
 	SVGChannels,
 	SVGCogsThick,
+	SVGCloseButtonCircle,
 	SVGLogout,
 	SVGUpload,
 	SVGSpoilerHidden,
@@ -62,4 +65,5 @@ export {
 	SVGToggleUnchecked,
 	SVGToggleChecked,
 	SVGCloseButton,
+	SVGReplyButton,
 }
