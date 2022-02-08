@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './MessageElement.module.css'
 import {
 	DiscordAttachment,
 	DiscordEmbed,
@@ -54,8 +53,11 @@ const MessageElement = props => {
 			timestamp={parseTimestamp(createdTimestamp)}
 			edited={editedTimestamp ? true : false}
 			roleColor={decimalToHexColor(member?.color) || '#fff'}
+<<<<<<< HEAD
 			className={styles.message}
 			highlight={mentions.me}
+=======
+>>>>>>> parent of 86f23c8 (Fix padding on messages)
 		>
 			{type === 'REPLY' ? (
 				<DiscordReply
