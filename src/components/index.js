@@ -13,6 +13,7 @@ import MessageElement from './MessageElement/MessageElement'
 import MessageField from './MessageField/MessageField'
 import UploadElement from './UploadElement/UploadElement'
 import ToggleButton from './ToggleButton/ToggleButton'
+import ToggleElement from './ToggleElement/ToggleElement'
 import UserSettings from './UserSettings/UserSettings'
 
 export {
@@ -31,5 +32,6 @@ export {
 	MessageField,
 	UploadElement,
 	ToggleButton,
+	ToggleElement,
 	UserSettings,
 }

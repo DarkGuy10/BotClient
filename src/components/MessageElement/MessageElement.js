@@ -16,11 +16,12 @@ import {
 	parseMarkdown,
 	parseTimestamp,
 	parseTwemojis,
+	formatMentions,
 } from './../../utils'
 
 const MessageElement = props => {
+	const { message } = props
 	const {
-		content,
 		embeds,
 		type,
 		author,
@@ -30,7 +31,8 @@ const MessageElement = props => {
 		repliesTo,
 		stickers,
 		attachments,
-	} = props.message
+		mentions,
+	} = message
 
 	const allowedImageTypes = [
 		'image/png',
@@ -53,6 +55,7 @@ const MessageElement = props => {
 			edited={editedTimestamp ? true : false}
 			roleColor={decimalToHexColor(member?.color) || '#fff'}
 			className={styles.message}
+			highlight={mentions.me}
 		>
 			{type === 'REPLY' ? (
 				<DiscordReply
@@ -70,7 +73,7 @@ const MessageElement = props => {
 					{parseTwemojis(parseMarkdown(shorten(repliesTo)))}
 				</DiscordReply>
 			) : null}
-			{parseTwemojis(parseMarkdown(content))}
+			{parseTwemojis(formatMentions(message))}
 
 			{stickers.map((sticker, key) => (
 				<DiscordAttachment
@@ -162,7 +165,9 @@ const MessageElement = props => {
 					<DiscordEmbed key={key} {...options}>
 						{content ? (
 							<DiscordEmbedDescription slot="description">
-								{parseTwemojis(parseMarkdown(content))}
+								{parseTwemojis(
+									formatMentions(message, content)
+								)}
 							</DiscordEmbedDescription>
 						) : null}
 						{fields.length ? (

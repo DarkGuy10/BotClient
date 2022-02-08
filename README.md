@@ -1,7 +1,9 @@
-# BotClient v0.4.0-alpha
+# BotClient v0.4.2-alpha
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 An unofficial client for logging in as a discord bot. <br>

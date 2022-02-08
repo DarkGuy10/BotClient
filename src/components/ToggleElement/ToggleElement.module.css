@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	-webkit-box-direction: normal;
+	-webkit-box-orient: vertical;
+	flex-direction: column;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.labelRow {
+	-webkit-box-orient: horizontal;
+	flex-direction: row;
+	width: 100%;
+	-webkit-box-align: start;
+	align-items: flex-start;
+	display: flex;
+	-webkit-box-direction: normal;
+}
+
+.labelRow label {
+	-webkit-box-flex: 1;
+	flex: 1;
+	display: block;
+	overflow: hidden;
+	margin-top: 0;
+	margin-bottom: 0;
+	color: var(--header-primary);
+	font-family: var(--font-primary);
+	line-height: 24px;
+	font-size: 16px;
+	font-weight: 500;
+	word-wrap: break-word;
+	cursor: pointer;
+}
+
+.divider {
+	margin-top: 20px;
+	width: 100%;
+	height: 1px;
+	border-top: thin solid var(--background-modifier-accent);
+}

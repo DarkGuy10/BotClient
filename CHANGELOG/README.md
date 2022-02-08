@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v0.4.2-alpha
+
+-   Migrated to yarn 2
+-   Added message mention formatting and highlighting
+-   Fixed multiline message rendering
+-   Created CSS overrides for @skyra-project/discord-components
+
+## v0.4.1-alpha
+
+-   Refactored a bunch of stuff; no bug fixes, no features added.
+
 ## v0.4.0-alpha
 
 -   Added User Settings (persistant login)
