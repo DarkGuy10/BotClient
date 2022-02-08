@@ -1,4 +1,4 @@
-# BotClient v0.4.2-alpha
+# BotClient v0.5.0-alpha
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 

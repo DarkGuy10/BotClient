@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.5.0-alpha
+
+-   Added replying feature
+-   Corrected styling on guild items without icons
+-   Created serializers for cleaner code
+
 ## v0.4.2-alpha
 
 -   Migrated to yarn 2
