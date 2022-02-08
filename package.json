@@ -1,6 +1,7 @@
 {
 	"name": "botclient",
-	"description": "A discord botclient made using electron, react and discord.js",
+	"productName": "Discord BotClient",
+	"description": "A discord botclient built with Electron, React and discord.js.",
 	"author": "DarkGuy10",
 	"version": "0.5.0",
 	"private": true,
@@ -35,7 +36,8 @@
 		"react-eject": "react-scripts eject",
 		"electron-build": "electron-builder",
 		"build": "yarn react-build && yarn electron-build",
-		"start": "concurrently -k \"yarn react-start\" \"wait-on tcp:127.0.0.1:3000 && electron .\""
+		"start": "concurrently -k \"yarn react-start\" \"wait-on tcp:127.0.0.1:3000 && electron .\"",
+		"postinstall": "electron-builder install-app-deps"
 	},
 	"eslintConfig": {
 		"extends": [
