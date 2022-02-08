@@ -3,7 +3,7 @@
 	"productName": "Discord BotClient",
 	"description": "A discord botclient built with Electron, React and discord.js.",
 	"author": "DarkGuy10",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"private": true,
 	"license": "MIT",
 	"repository": {

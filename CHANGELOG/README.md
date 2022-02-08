@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.6.0-alpha
+
+-   Added autoupdates
+-   Fixed build configs for `linux` and `win32`
+
 ## v0.5.0-alpha
 
 -   Added replying feature
