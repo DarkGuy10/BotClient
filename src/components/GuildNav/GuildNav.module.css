@@ -1,10 +1,36 @@
 .guildNav {
-	height: 100%;
+	position: relative;
 	width: var(--guild-nav-width);
-	background-color: var(--background-tertiary);
 	flex-shrink: 0;
+	overflow: hidden;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
 	flex-direction: column;
+	background-color: var(--background-tertiary);
+}
+
+.tree {
+	display: flex;
+	height: 100%;
+}
+
+.scroller {
+	overflow: hidden scroll;
+	padding-right: 0px;
+	user-select: none;
+	/*padding: 12px 0 0; uncomment this when DM thingy is done*/
+	background-color: var(--background-tertiary);
+	contain: layout size;
+	position: relative;
+	box-sizing: border-box;
+	min-height: 0;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+}
+
+.scroller::-webkit-scrollbar {
+	width: 0;
 }
 
 .listItem {
@@ -30,29 +56,65 @@
 	transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.hover {
+.pillHover {
 	height: 20px !important;
 	width: 100% !important;
 	background-color: white;
 }
 
-.selected {
+.pillSelected {
 	height: 40px !important;
 	width: 100% !important;
 	background-color: white;
 }
 
-.icon {
+.icon,
+.wrapper {
 	margin-left: 7px;
 	border-radius: 100%;
 	transition: 0.3s;
 	cursor: pointer;
 	height: 50px;
 	width: 50px;
-	transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+	transition: border-radius 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.icon:active,
+.wrapper:active {
+	position: relative;
+	transform: translateY(1px);
 }
 
 .icon:hover,
-.iconSelected {
+.selected,
+.wrapper:hover .acronym,
+.wrapper.selected .acronym {
 	border-radius: 40%;
+}
+
+.wrapper:hover .acronym,
+.wrapper.selected .acronym {
+	color: #fff;
+	background-color: var(--brand-experiment);
+}
+
+.acronym {
+	font-weight: 500;
+	font-family: var(--font-primary);
+	font-size: 18px;
+	line-height: 1.2em;
+	white-space: nowrap;
+	overflow: hidden;
+	transition: background-color 0.15s ease-out, color 0.15s ease-out,
+		border-radius 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+	background-color: var(--background-primary);
+	color: var(--text-normal);
+	display: flex;
+	width: 50px;
+	height: 50px;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	border-radius: 100%;
 }
