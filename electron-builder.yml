@@ -1,0 +1,21 @@
+win:
+    target:
+        - target: nsis
+          arch:
+              - x64
+        - target: portable
+          arch:
+              - x64
+nsis:
+    installerIcon: build/icon.ico
+    uninstallerIcon: build/icon.ico
+    installerHeaderIcon: build/icon.ico
+linux:
+    target:
+        - target: AppImage
+          arch:
+              - x64
+              - ia32
+    icon: build/icons
+    synopsis: Login as a discord bot!
+    category: Chat
