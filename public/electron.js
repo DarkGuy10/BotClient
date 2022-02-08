@@ -8,10 +8,18 @@ const {
 	serializeGuildMember,
 } = require('./serializers')
 const { app, BrowserWindow, shell, ipcMain } = require('electron')
+const log = require('electron-log')
+const { autoUpdater } = require('electron-updater')
 const isDev = require('electron-is-dev')
 const { Guild, BaseGuildTextChannel } = require('discord.js')
 const Store = require('electron-store')
 const appData = new Store()
+
+//-----------------------------------------------------
+// LOGGING
+autoUpdater.logger = log
+autoUpdater.logger.transports.file.level = 'info'
+log.info('App starting...')
 
 /**
  * @type {BrowserWindow}
@@ -55,7 +63,11 @@ function createMainWindow() {
 
 app.on('ready', () => {
 	// Startup code if any goes here...
-	console.log(process.version)
+
+	log.info(`Node version: ${process.version}`)
+
+	// This will be replaced with events in future
+	autoUpdater.checkForUpdatesAndNotify()
 	createMainWindow()
 })
 
@@ -103,7 +115,7 @@ ipcMain.on('login', async (event, token) => {
 			event.reply('ready', client.clientUserData)
 		})
 	} catch (error) {
-		console.log(error)
+		log.error(error)
 		event.reply('error', `[${error.code}] ${error.message}`)
 		if (appData.has('token')) {
 			event.reply('forcedAppStateUpdate', { token: '' })
@@ -165,7 +177,7 @@ ipcMain.handle(
 				currentChannel: currentChannel,
 			}
 		} catch (error) {
-			console.log(error)
+			log.error(error)
 			mainWindow.webContents.send(
 				'error',
 				`Requested guild [ID:${id}] could not be fetched.\n ${error.message}`
@@ -182,7 +194,7 @@ ipcMain.handle('selectChannel', async (event, id) => {
 			viewable: currentChannel.viewable,
 		}
 	} catch (error) {
-		console.log(error)
+		log.error(error)
 		mainWindow.webContents.send(
 			'error',
 			`Requested channel [ID:${id}] could not be fetched.\n ${error}`
@@ -194,7 +206,7 @@ ipcMain.on('messageCreate', async (event, messageOptions) => {
 	try {
 		await currentChannel.send(messageOptions)
 	} catch (error) {
-		console.log(error)
+		log.error(error)
 		event.reply('error', `[${error.code}] ${error.message}`)
 	}
 })
