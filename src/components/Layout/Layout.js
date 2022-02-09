@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './Layout.module.css'
-import { GuildNav, ChannelNav, Main, MemberNav, UserSettings } from './../'
+import { GuildNav, ChannelNav, Chat, UserSettings, UserSection } from './../'
 const { ipcRenderer } = window.require('electron')
 
 class Layout extends Component {
@@ -10,6 +10,7 @@ class Layout extends Component {
 			currentGuild: null,
 			currentChannel: null,
 			isUserSettingsOpen: false,
+			isHomeOpen: false,
 		}
 
 		this.openUserSettings = () => {
@@ -18,6 +19,15 @@ class Layout extends Component {
 
 		this.closeUserSettings = () => {
 			this.setState({ ...this.state, isUserSettingsOpen: false })
+		}
+
+		this.updateHome = (home = true) => {
+			this.setState({
+				...this.state,
+				currentGuild: null,
+				currentChannel: null,
+				isHomeOpen: home,
+			})
 		}
 
 		this.selectGuild = async id => {
@@ -34,6 +44,7 @@ class Layout extends Component {
 				...this.state,
 				currentGuild: currentGuild,
 				currentChannel: null,
+				isHomeOpen: false,
 			})
 		}
 
@@ -63,42 +74,74 @@ class Layout extends Component {
 	}
 
 	render() {
-		const { currentChannel, currentGuild, isUserSettingsOpen } = this.state
+		const { currentChannel, currentGuild, isUserSettingsOpen, isHomeOpen } =
+			this.state
 		const { clientUser, pushAlert, AppState } = this.props
-		return (
-			<div className={styles.wrapper}>
-				<GuildNav
-					currentGuild={currentGuild}
-					selectGuild={this.selectGuild}
-					pushAlert={pushAlert}
-				/>
 
-				{currentGuild && currentChannel ? (
-					<>
-						<ChannelNav
-							clientUser={clientUser}
-							currentGuild={currentGuild}
-							currentChannel={currentChannel}
-							selectChannel={this.selectChannel}
-							pushAlert={pushAlert}
-							openUserSettings={this.openUserSettings}
-						/>
-						<Main
-							currentChannel={currentChannel}
-							currentGuild={currentGuild}
-							pushAlert={pushAlert}
-						/>
-					</>
-				) : null}
-				{currentChannel && currentChannel.type !== 'DM' ? (
-					<MemberNav currentChannel={currentChannel} />
-				) : null}
-				{isUserSettingsOpen ? (
-					<UserSettings
-						closeUserSettings={this.closeUserSettings}
-						AppState={AppState}
-					/>
-				) : null}
+		return (
+			<div className={styles.appMount}>
+				<div className={styles.app}>
+					<div className={styles.appInner}>
+						<div className={styles.layers}>
+							<div className={styles.layer}>
+								<div className={styles.container}>
+									<GuildNav
+										currentGuild={currentGuild}
+										selectGuild={this.selectGuild}
+										pushAlert={pushAlert}
+										isHomeOpen={isHomeOpen}
+										updateHome={this.updateHome}
+									/>
+									<div className={styles.base}>
+										<div className={styles.content}>
+											<div className={styles.sidebar}>
+												{isHomeOpen ? (
+													<>DMNav</>
+												) : currentGuild &&
+												  currentChannel ? (
+													<ChannelNav
+														currentGuild={
+															currentGuild
+														}
+														currentChannel={
+															currentChannel
+														}
+														selectChannel={
+															this.selectChannel
+														}
+													/>
+												) : null}
+												<UserSection
+													clientUser={clientUser}
+													openUserSettings={
+														this.openUserSettings
+													}
+												/>
+											</div>
+											{currentGuild && currentChannel ? (
+												<Chat
+													currentChannel={
+														currentChannel
+													}
+													pushAlert={pushAlert}
+												/>
+											) : null}
+										</div>
+									</div>
+
+									{isUserSettingsOpen ? (
+										<UserSettings
+											closeUserSettings={
+												this.closeUserSettings
+											}
+											AppState={AppState}
+										/>
+									) : null}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		)
 	}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './ChannelNav.module.css'
-import { SVGCogsThick, SVGChannels, SVGLogout } from './../SVGHandler'
+import { SVGChannels } from './../SVGHandler'
 import { parseTwemojis } from '../../utils'
 const { ipcRenderer } = window.require('electron')
 
@@ -72,12 +72,14 @@ class ChannelNav extends Component {
 	}
 
 	render() {
-		const { currentGuild, currentChannel, openUserSettings } = this.props
+		const { currentGuild, currentChannel } = this.props
 		const channels = orderChannels(this.state.channels)
 		return (
-			<div className={styles.channelNav}>
-				<div className={styles.header}>
-					<span>{currentGuild.name}</span>
+			<nav className={styles.channelNav}>
+				<div className={styles.headerContainer}>
+					<header className={styles.header}>
+						<h1 className={styles.name}>{currentGuild.name}</h1>
+					</header>
 				</div>
 
 				<div className={styles.channels}>
@@ -98,39 +100,7 @@ class ChannelNav extends Component {
 						  ))
 						: null}
 				</div>
-
-				<div className={styles.userInfo}>
-					<img
-						src={this.props.clientUser.added.displayAvatarURL}
-						alt="Bot Avatar"
-						className={styles.avatar}
-					/>
-					<div className={styles.tagWrapper}>
-						<span className={styles.username}>
-							{this.props.clientUser.username}
-						</span>
-						<span className={styles.discriminator}>
-							#{this.props.clientUser.discriminator}
-						</span>
-					</div>
-					<button
-						className={styles.logout}
-						onClick={() => {
-							ipcRenderer.send('logout')
-						}}
-					>
-						<SVGLogout />
-					</button>
-					<button
-						className={styles.settings}
-						onClick={() => {
-							openUserSettings()
-						}}
-					>
-						<SVGCogsThick />
-					</button>
-				</div>
-			</div>
+			</nav>
 		)
 	}
 }

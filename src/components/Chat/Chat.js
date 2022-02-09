@@ -1,29 +1,22 @@
 import { DiscordMessages } from '@skyra/discord-components-react'
 import React, { Component, createRef } from 'react'
-import styles from './Main.module.css'
-import { MessageElement, MessageField } from './../'
-import { SVGChannels } from './../SVGHandler'
+import styles from './Chat.module.css'
+import { MessageElement, MessageField } from '..'
+import { SVGChannels } from '../SVGHandler'
 import { parseTwemojis } from '../../utils'
+import MemberNav from '../MemberNav/MemberNav'
 const { ipcRenderer } = window.require('electron')
 
-function Header(props) {
-	const isPrivate = !props.channel.isPrivate
-	const isRules = props.channel.isRules
+const Icon = props => {
+	const isPrivate = !props.currentChannel.isPrivate
+	const isRules = props.currentChannel.isRules
 	const svgType = isRules
 		? 'RULES'
-		: `${props.channel.type}${isPrivate ? '_LIMITED' : ''}`
-	return (
-		<div className={styles.header}>
-			{SVGChannels[svgType]}
-			<h1>{parseTwemojis(props.channel.name)}</h1>
-			{props.channel.topic ? (
-				<h2>{parseTwemojis(props.channel.topic)}</h2>
-			) : null}
-		</div>
-	)
+		: `${props.currentChannel.type}${isPrivate ? '_LIMITED' : ''}`
+	return <div className={styles.iconWrapper}>{SVGChannels[svgType]}</div>
 }
 
-class Main extends Component {
+class Chat extends Component {
 	_isMounted = false
 
 	constructor(props) {
@@ -116,31 +109,59 @@ class Main extends Component {
 		const { currentChannel, pushAlert } = this.props
 		const { loadedMessages, replyingTo } = this.state
 		return (
+			<>
+				<div className={styles.chat}>
+					<section className={styles.titleContainer}>
+						<div className={styles.children}>
+							<Icon currentChannel={currentChannel} />
+							<h3 className={styles.title}>
+								{parseTwemojis(currentChannel.name)}
+							</h3>
+							{currentChannel.topic ? (
+								<>
+									<div className={styles.divider}></div>
+									<div className={styles.topic}>
+										{parseTwemojis(currentChannel.topic)}
+									</div>
+								</>
+							) : null}
+						</div>
+					</section>
+					<div className={styles.content}>
+						<main className={styles.chatContent}>
+							<DiscordMessages
+								noBackground={true}
+								className={styles.discordMessages}
+								ref={this.messageRef}
+							>
+								{loadedMessages.map((message, index) => (
+									<MessageElement
+										key={index}
+										message={message}
+										handleReply={this.handleReply}
+										replying={replyingTo?.id === message.id}
+									/>
+								))}
+							</DiscordMessages>
+							<MessageField
+								currentChannel={currentChannel}
+								pushAlert={pushAlert}
+								handleReply={this.handleReply}
+								replyingTo={replyingTo}
+							/>
+						</main>
+						<MemberNav currentChannel={currentChannel} />
+					</div>
+				</div>
+				{/*
 			<div className={styles.main}>
 				<Header channel={currentChannel} />
-				<DiscordMessages
-					noBackground={true}
-					className={styles.discordMessages}
-					ref={this.messageRef}
-				>
-					{loadedMessages.map((message, index) => (
-						<MessageElement
-							key={index}
-							message={message}
-							handleReply={this.handleReply}
-							replying={replyingTo?.id === message.id}
-						/>
-					))}
-				</DiscordMessages>
-				<MessageField
-					currentChannel={currentChannel}
-					pushAlert={pushAlert}
-					handleReply={this.handleReply}
-					replyingTo={replyingTo}
-				/>
-			</div>
+				
+				
+			</div>*/}
+			</>
 		)
 	}
 }
 
-export default Main
+export default Chat

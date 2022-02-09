@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react'
 import styles from './GuildNav.module.css'
+import logo from './../../assets/images/logo.png'
 const { ipcRenderer } = window.require('electron')
 
 function ListItem(props) {
@@ -18,16 +19,25 @@ function ListItem(props) {
 					}
 				></span>
 			</div>
-			{props.guild.iconURL ? (
+			{props.home ? (
+				<img
+					src={logo}
+					alt="Home"
+					className={`${styles.icon} ${
+						props.selected ? styles.selected : ''
+					}`}
+					onClick={() => props.updateHome()}
+					onMouseEnter={() => updateHover(true)}
+					onMouseLeave={() => updateHover(false)}
+				/>
+			) : props.guild.iconURL ? (
 				<img
 					src={props.guild.iconURL}
 					alt={props.guild.name}
 					className={`${styles.icon} ${
 						props.selected ? styles.selected : ''
 					}`}
-					onClick={() => {
-						props.selectGuild(props.guild.id)
-					}}
+					onClick={() => props.selectGuild(props.guild.id)}
 					onMouseEnter={() => updateHover(true)}
 					onMouseLeave={() => updateHover(false)}
 				/>
@@ -68,11 +78,19 @@ class GuildNav extends Component {
 
 	render() {
 		const { guilds } = this.state
-		const { currentGuild, selectGuild } = this.props
+		const { currentGuild, selectGuild, updateHome, isHomeOpen } = this.props
 		return (
 			<nav className={styles.guildNav}>
 				<ul className={styles.tree}>
 					<div className={styles.scroller}>
+						<ListItem
+							home
+							updateHome={updateHome}
+							selected={isHomeOpen}
+						/>
+						<div className={styles.guildSeparatorWrapper}>
+							<div className={styles.guildSeperator}></div>
+						</div>
 						<div aria-label="Servers">
 							{guilds.map((guild, key) => (
 								<ListItem

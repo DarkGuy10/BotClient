@@ -1,0 +1,114 @@
+.userSection {
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	background-color: var(--background-secondary-alt);
+	z-index: 1;
+	width: 240px;
+}
+
+.container {
+	height: 52px;
+	font-size: 14px;
+	font-weight: 500;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 0 8px;
+	margin-bottom: 1px;
+}
+
+.avatarWrapper {
+	margin-right: 8px;
+}
+
+.avatar {
+	width: 35px;
+	height: 35px;
+	position: relative;
+	border-radius: 50%;
+}
+
+.nameTag {
+	user-select: text;
+	-webkit-box-flex: 1;
+	flex-grow: 1;
+	margin-right: 4px;
+	min-width: 0;
+}
+
+.usernameContainer {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 18px;
+	color: var(--text-normal);
+}
+
+.username {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: var(--header-primary);
+	line-height: 18px;
+	font-weight: 600;
+	font-size: 14px;
+	font-family: var(--font-primary);
+}
+
+.discriminator {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: var(--header-secondary);
+	line-height: 13px;
+	font-size: 12px;
+	font-family: var(--font-primary);
+}
+
+.buttons {
+	flex: 0 1 auto;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	-webkit-box-pack: start;
+	justify-content: flex-start;
+	-webkit-box-align: stretch;
+	align-items: stretch;
+	display: flex;
+}
+
+.button {
+	cursor: pointer;
+	line-height: 0;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	border-radius: 4px;
+	position: relative;
+	color: var(--interactive-normal);
+	background: transparent;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 500;
+	user-select: none;
+}
+
+.button:hover {
+	color: var(--interactive-hover);
+	background-color: var(--background-modifier-selected);
+}
+
+.button:hover svg {
+	fill: var(--interactive-hover);
+}

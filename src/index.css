@@ -435,13 +435,10 @@
 	--font-headline: Ginto Nord, Ginto, 'Helvetica Neue', Helvetica, Arial,
 		sans-serif;
 
-	--guild-nav-width: 72px;
-	--channel-nav-width: 240px;
-	--member-nav-width: 240px;
-
 	margin: 0;
 	padding: 0;
 	background-color: var(--background-secondary);
+	font-family: var(--font-primary);
 	text-rendering: optimizeLegibility;
 }
 

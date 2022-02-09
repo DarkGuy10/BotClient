@@ -4,9 +4,10 @@ import AlertManager from './AlertManager/AlertManager'
 import BotTag from './BotTag/BotTag'
 import Login from './Login/Login'
 import Layout from './Layout/Layout'
+import UserSection from './UserSection/UserSection'
 import ChannelNav from './ChannelNav/ChannelNav'
 import GuildNav from './GuildNav/GuildNav'
-import Main from './Main/Main'
+import Chat from './Chat/Chat'
 import MemberNav from './MemberNav/MemberNav'
 import MemberListItem from './MemberListItem/MemberListItem'
 import MessageElement from './MessageElement/MessageElement'
@@ -24,9 +25,10 @@ export {
 	BotTag,
 	Login,
 	Layout,
+	UserSection,
 	ChannelNav,
 	GuildNav,
-	Main,
+	Chat,
 	MemberNav,
 	MemberListItem,
 	MessageElement,
