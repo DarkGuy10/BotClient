@@ -78,13 +78,19 @@ class ChannelNav extends Component {
 			<nav className={styles.channelNav}>
 				<div className={styles.headerContainer}>
 					<header className={styles.header}>
-						<h1 className={styles.name}>{currentGuild.name}</h1>
+						<h1 className={styles.name}>
+							{parseTwemojis(currentGuild.name)}
+						</h1>
 					</header>
 				</div>
 
 				<div className={styles.channels}>
-					{channels
-						? channels.map((channel, index) => (
+					{channels && (
+						<>
+							{channels.at(0)?.type !== 'GUILD_CATEGORY' ? (
+								<div style={{ height: 16 }}></div>
+							) : null}
+							{channels.map((channel, index) => (
 								<ListItem
 									key={index}
 									channel={channel}
@@ -97,8 +103,10 @@ class ChannelNav extends Component {
 									selected={channel.id === currentChannel.id}
 									selectChannel={this.props.selectChannel}
 								/>
-						  ))
-						: null}
+							))}
+						</>
+					)}
+					<div style={{ height: 16 }}></div>
 				</div>
 			</nav>
 		)
