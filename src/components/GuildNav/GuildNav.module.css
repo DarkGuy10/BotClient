@@ -1,9 +1,8 @@
 .guildNav {
 	position: relative;
-	width: var(--guild-nav-width);
+	width: 72px;
 	flex-shrink: 0;
 	overflow: hidden;
-	display: flex;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	flex-direction: column;
@@ -19,7 +18,7 @@
 	overflow: hidden scroll;
 	padding-right: 0px;
 	user-select: none;
-	/*padding: 12px 0 0; uncomment this when DM thingy is done*/
+	padding: 12px 0 0;
 	background-color: var(--background-tertiary);
 	contain: layout size;
 	position: relative;
@@ -33,13 +32,29 @@
 	width: 0;
 }
 
+.guildSeparatorWrapper {
+	position: relative;
+	margin: 0 0 8px;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	width: 72px;
+}
+
+.guildSeperator {
+	height: 2px;
+	width: 32px;
+	border-radius: 1px;
+	background-color: var(--background-modifier-accent);
+}
+
 .listItem {
 	display: block;
 	width: 100%;
 	height: 50px;
 	user-select: none;
 	display: flex;
-	margin-top: 10px;
+	margin: 0 0 8px;
 }
 
 .pill {

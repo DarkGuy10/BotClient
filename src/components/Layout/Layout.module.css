@@ -1,9 +1,103 @@
-.wrapper {
+.appMount {
+	background-color: var(--background-tertiary);
+	position: absolute;
+	overflow: hidden;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+
+.app {
+	position: relative;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	z-index: auto;
+}
+
+.appInner {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: var(--background-tertiary);
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+}
+
+.layers {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	min-width: 0;
+	min-height: 0;
+}
+
+.layer {
+	background-color: transparent;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+}
+
+.container {
+	position: relative;
+	overflow: hidden;
 	width: 100%;
 	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 98;
 	display: flex;
+}
+
+.base {
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	overflow: hidden;
+	flex-direction: column;
+	position: relative;
+	-webkit-box-flex: 1;
+	flex-grow: 1;
+}
+
+.content {
+	position: relative;
+	display: flex;
+	-webkit-box-align: stretch;
+	align-items: stretch;
+	-webkit-box-pack: start;
+	justify-content: flex-start;
+	min-width: 0;
+	min-height: 0;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+}
+
+.sideBar {
+	flex-direction: column;
+	min-height: 0;
+	width: 240px;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	background: var(--background-secondary);
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	overflow: hidden;
 }
