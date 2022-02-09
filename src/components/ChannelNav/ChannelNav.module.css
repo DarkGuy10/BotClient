@@ -7,12 +7,9 @@
 	align-items: stretch;
 	-webkit-box-pack: start;
 	justify-content: flex-start;
-	-webkit-box-flex: 1;
-	flex: 1 1 auto;
-	min-height: 0;
-	height: calc(100% - 52px);
 	position: relative;
 	background-color: var(--background-secondary);
+	height: 100%;
 }
 
 .headerContainer {
@@ -49,9 +46,8 @@
 
 .channels {
 	overflow: hidden scroll;
-	padding-right: 2px;
+	padding-right: 12px;
 	z-index: 1;
-	width: 240px;
 }
 
 .channels::-webkit-scrollbar {

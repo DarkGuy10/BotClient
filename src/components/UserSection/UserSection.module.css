@@ -3,7 +3,6 @@
 	flex: 0 0 auto;
 	background-color: var(--background-secondary-alt);
 	z-index: 1;
-	width: 240px;
 }
 
 .container {

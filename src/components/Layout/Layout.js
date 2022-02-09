@@ -79,70 +79,48 @@ class Layout extends Component {
 		const { clientUser, pushAlert, AppState } = this.props
 
 		return (
-			<div className={styles.appMount}>
-				<div className={styles.app}>
-					<div className={styles.appInner}>
-						<div className={styles.layers}>
-							<div className={styles.layer}>
-								<div className={styles.container}>
-									<GuildNav
+			<>
+				<GuildNav
+					currentGuild={currentGuild}
+					selectGuild={this.selectGuild}
+					pushAlert={pushAlert}
+					isHomeOpen={isHomeOpen}
+					updateHome={this.updateHome}
+				/>
+				<div className={styles.base}>
+					<div className={styles.content}>
+						<div className={styles.sidebar}>
+							<div className={styles.sidebarInner}>
+								{isHomeOpen ? (
+									<>DMNav</>
+								) : currentGuild && currentChannel ? (
+									<ChannelNav
 										currentGuild={currentGuild}
-										selectGuild={this.selectGuild}
-										pushAlert={pushAlert}
-										isHomeOpen={isHomeOpen}
-										updateHome={this.updateHome}
+										currentChannel={currentChannel}
+										selectChannel={this.selectChannel}
 									/>
-									<div className={styles.base}>
-										<div className={styles.content}>
-											<div className={styles.sidebar}>
-												{isHomeOpen ? (
-													<>DMNav</>
-												) : currentGuild &&
-												  currentChannel ? (
-													<ChannelNav
-														currentGuild={
-															currentGuild
-														}
-														currentChannel={
-															currentChannel
-														}
-														selectChannel={
-															this.selectChannel
-														}
-													/>
-												) : null}
-												<UserSection
-													clientUser={clientUser}
-													openUserSettings={
-														this.openUserSettings
-													}
-												/>
-											</div>
-											{currentGuild && currentChannel ? (
-												<Chat
-													currentChannel={
-														currentChannel
-													}
-													pushAlert={pushAlert}
-												/>
-											) : null}
-										</div>
-									</div>
-
-									{isUserSettingsOpen ? (
-										<UserSettings
-											closeUserSettings={
-												this.closeUserSettings
-											}
-											AppState={AppState}
-										/>
-									) : null}
-								</div>
+								) : null}
 							</div>
+							<UserSection
+								clientUser={clientUser}
+								openUserSettings={this.openUserSettings}
+							/>
 						</div>
+						{currentGuild && currentChannel ? (
+							<Chat
+								currentChannel={currentChannel}
+								pushAlert={pushAlert}
+							/>
+						) : null}
 					</div>
 				</div>
-			</div>
+				{isUserSettingsOpen ? (
+					<UserSettings
+						closeUserSettings={this.closeUserSettings}
+						AppState={AppState}
+					/>
+				) : null}{' '}
+			</>
 		)
 	}
 }

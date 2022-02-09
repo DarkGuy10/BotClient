@@ -92,11 +92,23 @@ class App extends Component {
 			<>
 				{token ? (
 					clientIsReady ? (
-						<Layout
-							clientUser={clientUser}
-							pushAlert={this.pushAlert}
-							AppState={this.state}
-						/>
+						<div className={styles.appMount}>
+							<div className={styles.app}>
+								<div className={styles.appInner}>
+									<div className={styles.layers}>
+										<div className={styles.layer}>
+											<div className={styles.container}>
+												<Layout
+													clientUser={clientUser}
+													pushAlert={this.pushAlert}
+													AppState={this.state}
+												/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					) : (
 						<BootLoop />
 					)
