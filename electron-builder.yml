@@ -1,21 +1,16 @@
+artifactName: ${productName}-${arch}-${version}.${ext}
 win:
-    target:
-        - target: nsis
-          arch:
-              - x64
-        - target: portable
-          arch:
-              - x64
+    target: nsis
 nsis:
     installerIcon: build/icon.ico
     uninstallerIcon: build/icon.ico
     installerHeaderIcon: build/icon.ico
 linux:
-    target:
-        - target: AppImage
-          arch:
-              - x64
-              - ia32
-    icon: build/icons
+    target: AppImage
     synopsis: Login as a discord bot!
     category: Chat
+    icon: build/icon.icns
+mac:
+    target: dmg
+    category: public.app-category.social-networking
+    icon: build/icon.icns
