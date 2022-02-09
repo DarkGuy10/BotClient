@@ -1,6 +1,6 @@
 {
 	"name": "botclient",
-	"productName": "Discord BotClient",
+	"productName": "BotClient",
 	"description": "A discord botclient built with Electron, React and discord.js.",
 	"author": "DarkGuy10",
 	"version": "0.6.0",
