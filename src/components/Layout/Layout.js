@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import styles from './Layout.module.css'
-import { GuildNav, ChannelNav, Chat, UserSettings, UserSection } from './../'
+import {
+	GuildNav,
+	ChannelNav,
+	DMNav,
+	Chat,
+	UserSettings,
+	UserSection,
+} from './../'
 const { ipcRenderer } = window.require('electron')
 
 class Layout extends Component {
@@ -9,6 +16,7 @@ class Layout extends Component {
 		this.state = {
 			currentGuild: null,
 			currentChannel: null,
+			currentDM: null,
 			isUserSettingsOpen: false,
 			isHomeOpen: false,
 		}
@@ -21,12 +29,12 @@ class Layout extends Component {
 			this.setState({ ...this.state, isUserSettingsOpen: false })
 		}
 
-		this.updateHome = (home = true) => {
+		this.openHome = () => {
 			this.setState({
 				...this.state,
 				currentGuild: null,
 				currentChannel: null,
-				isHomeOpen: home,
+				isHomeOpen: true,
 			})
 		}
 
@@ -44,6 +52,7 @@ class Layout extends Component {
 				...this.state,
 				currentGuild: currentGuild,
 				currentChannel: null,
+				currentDM: false,
 				isHomeOpen: false,
 			})
 		}
@@ -67,6 +76,16 @@ class Layout extends Component {
 				})
 			this.setState({ ...this.state, currentChannel: currentChannel })
 		}
+
+		this.selectDM = async userID => {
+			if (
+				!this.state.isHomeOpen ||
+				this.state.currentDM?.recipient?.id === userID
+			)
+				return
+			const currentDM = await ipcRenderer.invoke('selectDM', userID)
+			this.setState({ ...this.state, currentDM: currentDM })
+		}
 	}
 
 	componentDidMount() {
@@ -74,8 +93,13 @@ class Layout extends Component {
 	}
 
 	render() {
-		const { currentChannel, currentGuild, isUserSettingsOpen, isHomeOpen } =
-			this.state
+		const {
+			currentChannel,
+			currentGuild,
+			currentDM,
+			isUserSettingsOpen,
+			isHomeOpen,
+		} = this.state
 		const { clientUser, pushAlert, AppState } = this.props
 
 		return (
@@ -85,14 +109,14 @@ class Layout extends Component {
 					selectGuild={this.selectGuild}
 					pushAlert={pushAlert}
 					isHomeOpen={isHomeOpen}
-					updateHome={this.updateHome}
+					openHome={this.openHome}
 				/>
 				<div className={styles.base}>
 					<div className={styles.content}>
 						<div className={styles.sidebar}>
 							<div className={styles.sidebarInner}>
 								{isHomeOpen ? (
-									<>DMNav</>
+									<DMNav selectDM={this.selectDM} />
 								) : currentGuild && currentChannel ? (
 									<ChannelNav
 										currentGuild={currentGuild}
@@ -106,9 +130,10 @@ class Layout extends Component {
 								openUserSettings={this.openUserSettings}
 							/>
 						</div>
-						{currentGuild && currentChannel ? (
+						{(currentGuild && currentChannel) ||
+						(isHomeOpen && currentDM) ? (
 							<Chat
-								currentChannel={currentChannel}
+								channel={currentChannel || currentDM}
 								pushAlert={pushAlert}
 							/>
 						) : null}
@@ -119,7 +144,7 @@ class Layout extends Component {
 						closeUserSettings={this.closeUserSettings}
 						AppState={AppState}
 					/>
-				) : null}{' '}
+				) : null}
 			</>
 		)
 	}

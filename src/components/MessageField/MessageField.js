@@ -102,14 +102,14 @@ class MessageField extends Component {
 
 	componentDidUpdate(prevProps) {
 		this.focusInput()
-		if (prevProps.currentChannel.id !== this.props.currentChannel.id) {
+		if (prevProps.channel.id !== this.props.channel.id) {
 			this.setState({ ...this.initialState })
 			this.updateField()
 		}
 	}
 
 	render() {
-		const { currentChannel, replyingTo, handleReply } = this.props
+		const { channel, replyingTo, handleReply } = this.props
 		const { files } = this.state
 		return (
 			<form
@@ -185,7 +185,7 @@ class MessageField extends Component {
 							<div className={styles.textArea}>
 								<input
 									className={styles.textAreaSlate}
-									placeholder={`Message in #${currentChannel.name}`}
+									placeholder={`Message in #${channel.name}`}
 									onInput={({ target }) => {
 										this.setState({ value: target.value })
 									}}

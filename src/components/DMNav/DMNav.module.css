@@ -1,0 +1,110 @@
+.DMNav {
+	position: relative;
+	display: flex;
+	box-sizing: border-box;
+	overflow: hidden;
+	user-select: none;
+	-webkit-box-flex: 1;
+	flex: 1;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+	background-color: var(--background-secondary);
+	height: 100%;
+}
+
+.searchBar {
+	z-index: 2;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	padding: 0 10px;
+	height: 48px;
+	-webkit-box-align: center;
+	align-items: center;
+	box-shadow: var(--elevation-low);
+	position: relative;
+	display: flex;
+}
+
+.input {
+	width: 100%;
+	height: 28px;
+	overflow: hidden;
+	border-radius: 4px;
+	background-color: var(--background-tertiary);
+	box-shadow: none;
+	color: var(--interactive-normal);
+	text-align: left;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 24px;
+	white-space: nowrap;
+	outline: none;
+	border: none;
+	font-family: var(--font-primary);
+	padding: 5px 7px;
+}
+
+.closeButton {
+	position: absolute;
+	right: 10px;
+	height: 24px;
+	width: 24px;
+	padding: 4px;
+	cursor: pointer;
+}
+
+.closeButton svg {
+	height: 14px;
+	width: 14px;
+}
+
+.closeButton path {
+	fill: var(--interactive-normal);
+}
+
+.closeButton:hover path {
+	fill: var(--interactive-hover);
+}
+
+.closeButton:active path {
+	fill: var(--interactive-active);
+}
+
+.searchLabel {
+	color: var(--text-muted);
+	text-align: left;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	font-weight: 500;
+	height: 20px;
+	margin-top: 10px;
+	font-family: var(--font-primary);
+	text-align: center;
+}
+
+.privateChannelsHeaderContainer {
+	display: flex;
+	padding: 18px 8px 4px 18px;
+	height: 40px;
+	box-sizing: border-box;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-transform: uppercase;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: 0.25px;
+	font-family: var(--font-display);
+	font-weight: 600;
+	-webkit-box-flex: 1;
+	color: var(--channels-default);
+}
+
+.headerText {
+	-webkit-box-flex: 1;
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

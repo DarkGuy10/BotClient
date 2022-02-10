@@ -26,16 +26,18 @@ const serializeMessage = async message => {
 			: null,
 		stickers: [...stickers.values()],
 		mentions: {
-			members: [...mentions.members].map(([id, each]) => {
-				return [
-					id,
-					{
-						...each,
-						color: each.displayColor,
-						displayName: each.displayName,
-					},
-				]
-			}),
+			members: mentions.members
+				? [...mentions.members].map(([id, each]) => {
+						return [
+							id,
+							{
+								...each,
+								color: each.displayColor,
+								displayName: each.displayName,
+							},
+						]
+				  })
+				: new Map(),
 			users: [...mentions.users],
 			roles: [...mentions.roles],
 			everyone: mentions.everyone,

@@ -8,11 +8,11 @@ import MemberNav from '../MemberNav/MemberNav'
 const { ipcRenderer } = window.require('electron')
 
 const Icon = props => {
-	const isPrivate = !props.currentChannel.isPrivate
-	const isRules = props.currentChannel.isRules
+	const isPrivate = props.channel.isPrivate
+	const isRules = props.channel.isRules
 	const svgType = isRules
 		? 'RULES'
-		: `${props.currentChannel.type}${isPrivate ? '_LIMITED' : ''}`
+		: `${props.channel.type}${isPrivate ? '_LIMITED' : ''}`
 	return <div className={styles.iconWrapper}>{SVGChannels[svgType]}</div>
 }
 
@@ -46,9 +46,9 @@ class Chat extends Component {
 			clearPreviousMessages = true,
 			before = null
 		) => {
-			const { currentChannel } = this.props
+			const { channel } = this.props
 			const { loadedMessages } = this.state
-			if (!currentChannel) return
+			if (!channel) return
 
 			if (clearPreviousMessages) this.setState({ ...this.initialState })
 
@@ -72,8 +72,8 @@ class Chat extends Component {
 		// the current channel
 		ipcRenderer.on('messageCreate', (event, message) => {
 			const { loadedMessages } = this.state
-			const { currentChannel } = this.props
-			if (message.channelId === currentChannel.id && this._isMounted)
+			const { channel } = this.props
+			if (message.channelId === channel.id && this._isMounted)
 				this.setState({
 					...this.state,
 					loadedMessages: [...loadedMessages, message],
@@ -101,65 +101,60 @@ class Chat extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.currentChannel.id !== this.props.currentChannel.id)
-			this.loadMessages()
+		if (prevProps.channel.id !== this.props.channel.id) this.loadMessages()
 	}
 
 	render() {
-		const { currentChannel, pushAlert } = this.props
+		const { channel, pushAlert } = this.props
 		const { loadedMessages, replyingTo } = this.state
 		return (
-			<>
-				<div className={styles.chat}>
-					<section className={styles.titleContainer}>
-						<div className={styles.children}>
-							<Icon currentChannel={currentChannel} />
-							<h3 className={styles.title}>
-								{parseTwemojis(currentChannel.name)}
-							</h3>
-							{currentChannel.topic ? (
-								<>
-									<div className={styles.divider}></div>
-									<div className={styles.topic}>
-										{parseTwemojis(currentChannel.topic)}
-									</div>
-								</>
-							) : null}
-						</div>
-					</section>
-					<div className={styles.content}>
-						<main className={styles.chatContent}>
-							<DiscordMessages
-								noBackground={true}
-								className={styles.discordMessages}
-								ref={this.messageRef}
-							>
-								{loadedMessages.map((message, index) => (
-									<MessageElement
-										key={index}
-										message={message}
-										handleReply={this.handleReply}
-										replying={replyingTo?.id === message.id}
-									/>
-								))}
-							</DiscordMessages>
-							<MessageField
-								currentChannel={currentChannel}
-								pushAlert={pushAlert}
-								handleReply={this.handleReply}
-								replyingTo={replyingTo}
-							/>
-						</main>
-						<MemberNav currentChannel={currentChannel} />
+			<div className={styles.chat}>
+				<section className={styles.titleContainer}>
+					<div className={styles.children}>
+						<Icon channel={channel} />
+						<h3 className={styles.title}>
+							{parseTwemojis(
+								channel.name || channel.recipient.username
+							)}
+						</h3>
+						{channel.topic ? (
+							<>
+								<div className={styles.divider}></div>
+								<div className={styles.topic}>
+									{parseTwemojis(channel.topic)}
+								</div>
+							</>
+						) : null}
 					</div>
+				</section>
+				<div className={styles.content}>
+					<main className={styles.chatContent}>
+						<DiscordMessages
+							noBackground={true}
+							className={styles.discordMessages}
+							ref={this.messageRef}
+						>
+							{loadedMessages.map((message, index) => (
+								<MessageElement
+									key={index}
+									message={message}
+									handleReply={this.handleReply}
+									replying={replyingTo?.id === message.id}
+								/>
+							))}
+						</DiscordMessages>
+						<MessageField
+							channel={channel}
+							pushAlert={pushAlert}
+							handleReply={this.handleReply}
+							replyingTo={replyingTo}
+						/>
+					</main>
+					{channel.type !== 'DM' && (
+						<MemberNav currentChannel={channel} />
+					)}
 				</div>
-				{/*
-			<div className={styles.main}>
-				<Header channel={currentChannel} />
-				
-				
-			</div>*/}
-			</>
+			</div>
 		)
 	}
 }

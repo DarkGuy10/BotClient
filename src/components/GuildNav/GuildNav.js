@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react'
 import styles from './GuildNav.module.css'
-import logo from './../../assets/images/logo.png'
+import logoTransparent from './../../assets/images/logo-transparent.png'
+import logoAnimated from './../../assets/images/logo-animated.gif'
 const { ipcRenderer } = window.require('electron')
 
 function ListItem(props) {
@@ -21,12 +22,14 @@ function ListItem(props) {
 			</div>
 			{props.home ? (
 				<img
-					src={logo}
+					src={
+						props.selected || hover ? logoAnimated : logoTransparent
+					}
 					alt="Home"
 					className={`${styles.icon} ${
 						props.selected ? styles.selected : ''
 					}`}
-					onClick={() => props.updateHome()}
+					onClick={() => props.openHome()}
 					onMouseEnter={() => updateHover(true)}
 					onMouseLeave={() => updateHover(false)}
 				/>
@@ -78,14 +81,14 @@ class GuildNav extends Component {
 
 	render() {
 		const { guilds } = this.state
-		const { currentGuild, selectGuild, updateHome, isHomeOpen } = this.props
+		const { currentGuild, selectGuild, openHome, isHomeOpen } = this.props
 		return (
 			<nav className={styles.guildNav}>
 				<ul className={styles.tree}>
 					<div className={styles.scroller}>
 						<ListItem
 							home
-							updateHome={updateHome}
+							openHome={openHome}
 							selected={isHomeOpen}
 						/>
 						<div className={styles.guildSeparatorWrapper}>

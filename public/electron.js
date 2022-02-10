@@ -11,7 +11,7 @@ const { app, BrowserWindow, shell, ipcMain } = require('electron')
 const log = require('electron-log')
 const { autoUpdater } = require('electron-updater')
 const isDev = require('electron-is-dev')
-const { Guild, BaseGuildTextChannel } = require('discord.js')
+const { Guild, BaseGuildTextChannel, DMChannel } = require('discord.js')
 const Store = require('electron-store')
 const appData = new Store()
 
@@ -86,6 +86,10 @@ let currentChannel
  * @type {Guild}
  */
 let currentGuild
+/**
+ * @type {DMChannel}
+ */
+let currentDM
 // ^^ These will make things easier than sending channel and guild data for every invocations
 
 ipcMain.on('login', async (event, token) => {
@@ -145,9 +149,31 @@ ipcMain.handle('channels', () => {
 	return channels
 })
 
+ipcMain.handle('dms', () => {
+	try {
+		const dms = [
+			...client.channels.cache
+				.filter(channel => channel.type === 'DM')
+				.map(each => {
+					return {
+						...each,
+						recipient: {
+							...each.recipient,
+							avatarURL: each.recipient.displayAvatarURL(),
+						},
+					}
+				}),
+		]
+		return dms
+	} catch (error) {
+		return false
+	}
+})
+
 ipcMain.handle('messages', async (event, limit) => {
+	const channel = currentChannel || currentDM
 	const promises = (
-		await currentChannel.messages.fetch({
+		await channel.messages.fetch({
 			limit: limit,
 		})
 	).map(async message => serializeMessage(message))
@@ -172,9 +198,10 @@ ipcMain.handle(
 			currentChannel = currentGuild.channels.cache.find(
 				channel => channel.type === 'GUILD_TEXT' && channel.viewable
 			)
+			currentDM = null
 			return {
-				currentGuild: currentGuild,
-				currentChannel: currentChannel,
+				currentGuild: serializeGuild(currentGuild),
+				currentChannel: serializeGuildChannel(currentChannel),
 			}
 		} catch (error) {
 			log.error(error)
@@ -189,10 +216,8 @@ ipcMain.handle(
 ipcMain.handle('selectChannel', async (event, id) => {
 	try {
 		currentChannel = await client.channels.fetch(id)
-		return {
-			...currentChannel,
-			viewable: currentChannel.viewable,
-		}
+		currentDM = null
+		return serializeGuildChannel(currentChannel)
 	} catch (error) {
 		log.error(error)
 		mainWindow.webContents.send(
@@ -202,9 +227,37 @@ ipcMain.handle('selectChannel', async (event, id) => {
 	}
 })
 
+ipcMain.handle('selectDM', async (event, userID) => {
+	try {
+		const recipient = await client.users.fetch(userID)
+		currentDM = await recipient.createDM()
+		currentGuild = null
+		currentChannel = null
+		return {
+			...currentDM,
+			recipient: {
+				...currentDM.recipient,
+				avatarURL: currentDM.recipient.displayAvatarURL(),
+			},
+		}
+	} catch (error) {
+		log.error(error)
+		mainWindow.webContents.send(
+			'error',
+			`Requested DM [userID:${userID}] could not be fetched.\n ${error}`
+		)
+	}
+})
+
 ipcMain.on('messageCreate', async (event, messageOptions) => {
 	try {
-		await currentChannel.send(messageOptions)
+		if (currentChannel) await currentChannel.send(messageOptions)
+		else if (currentDM) await currentDM.send(messageOptions)
+		else
+			throw new Error({
+				code: 'NO_SELECTED_CHANNEL',
+				message: 'Select a DM or GUILD_TEXT channel first',
+			})
 	} catch (error) {
 		log.error(error)
 		event.reply('error', `[${error.code}] ${error.message}`)
@@ -230,5 +283,21 @@ ipcMain.on('AppData', (event, method, arg) => {
 })
 
 ipcMain.on('fetchUser', async (event, id) => {
-	event.returnValue = await client.users.fetch(id)
+	try {
+		event.returnValue = await client.users.fetch(id)
+	} catch (error) {
+		event.returnValue = false
+	}
+})
+
+ipcMain.handle('fetch-User', async (event, id) => {
+	try {
+		const user = await client.users.fetch(id)
+		return {
+			...user,
+			avatarURL: user.displayAvatarURL(),
+		}
+	} catch (error) {
+		return false
+	}
 })
