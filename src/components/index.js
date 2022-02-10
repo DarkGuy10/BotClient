@@ -6,6 +6,7 @@ import Login from './Login/Login'
 import Layout from './Layout/Layout'
 import UserSection from './UserSection/UserSection'
 import ChannelNav from './ChannelNav/ChannelNav'
+import DMNav from './DMNav/DMNav'
 import GuildNav from './GuildNav/GuildNav'
 import Chat from './Chat/Chat'
 import MemberNav from './MemberNav/MemberNav'
@@ -17,6 +18,7 @@ import ToggleButton from './ToggleButton/ToggleButton'
 import ToggleElement from './ToggleElement/ToggleElement'
 import UserSettings from './UserSettings/UserSettings'
 import ReplyBar from './ReplyBar/ReplyBar'
+import DMListItem from './DMListItem/DMListItem'
 
 export {
 	App,
@@ -26,6 +28,7 @@ export {
 	Login,
 	Layout,
 	UserSection,
+	DMNav,
 	ChannelNav,
 	GuildNav,
 	Chat,
@@ -38,4 +41,5 @@ export {
 	ToggleElement,
 	UserSettings,
 	ReplyBar,
+	DMListItem,
 }

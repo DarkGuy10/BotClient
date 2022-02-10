@@ -1,0 +1,99 @@
+.topMargin5 {
+	margin-top: 5px;
+}
+
+.userItem {
+	position: relative;
+	max-width: 224px;
+	margin-left: 8px;
+	box-sizing: border-box;
+	display: block;
+	padding: 1px 0;
+	border-radius: 4px;
+	transition: none;
+	color: var(--channels-default);
+	cursor: pointer;
+}
+
+.userItem:hover {
+	color: var(--interactive-hover);
+}
+
+.layout {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	border-radius: 4px;
+	height: 45px;
+	padding: 0 8px;
+}
+
+.layout:hover {
+	background-color: var(--background-modifier-hover);
+	cursor: pointer;
+}
+
+.avatarWrapper {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	width: 32px;
+	height: 32px;
+	margin-right: 12px;
+}
+
+.avatar {
+	width: 32px;
+	height: 32px;
+	position: relative;
+	border-radius: 50%;
+}
+
+.content {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	min-width: 0;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+}
+
+.nameAndDecorators {
+	display: flex;
+	-webkit-box-pack: start;
+	justify-content: flex-start;
+	-webkit-box-align: center;
+	align-items: center;
+}
+
+.name {
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 500;
+	-webkit-box-flex: 0;
+	flex: 0 1 auto;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.overflow {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	position: relative;
+}
+
+.discriminator {
+	margin-top: -2px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 500;
+}

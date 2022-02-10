@@ -1,5 +1,6 @@
 import { ReactComponent as SVGCogsThick } from './../assets/svg/cogs-thick.svg'
 import { ReactComponent as SVGCloseButtonCircle } from './../assets/svg/close-button-circle.svg'
+import { ReactComponent as SVGDM } from './../assets/svg/dm.svg'
 import { ReactComponent as SVGText } from './../assets/svg/text.svg'
 import { ReactComponent as SVGTextLimited } from './../assets/svg/text-limited.svg'
 import { ReactComponent as SVGVoice } from './../assets/svg/voice.svg'
@@ -29,6 +30,7 @@ import { ReactComponent as SVGCloseButton } from './../assets/svg/close-button.s
 import { ReactComponent as SVGReplyButton } from './../assets/svg/reply-button.svg'
 
 const SVGChannels = {
+	DM: <SVGDM />,
 	GUILD_TEXT: <SVGText />,
 	GUILD_TEXT_LIMITED: <SVGTextLimited />,
 	GUILD_VOICE: <SVGVoice />,
