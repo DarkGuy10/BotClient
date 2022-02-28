@@ -104,7 +104,7 @@ const MessageElement = props => {
 					<DiscordAttachment
 						key={key}
 						slot="attachments"
-						url={sticker.URL}
+						url={sticker.url}
 						width={150}
 						alt={sticker.name}
 					/>
