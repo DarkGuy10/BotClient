@@ -1,4 +1,4 @@
-artifactName: ${productName}-${arch}-${version}.${ext}
+artifactName: ${productName}-${os}-${arch}.${ext}
 win:
     target: nsis
 nsis:
