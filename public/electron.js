@@ -282,15 +282,7 @@ ipcMain.on('AppData', (event, method, arg) => {
 	}
 })
 
-ipcMain.on('fetchUser', async (event, id) => {
-	try {
-		event.returnValue = await client.users.fetch(id)
-	} catch (error) {
-		event.returnValue = false
-	}
-})
-
-ipcMain.handle('fetch-User', async (event, id) => {
+ipcMain.handle('fetchUser', async (event, id) => {
 	try {
 		const user = await client.users.fetch(id)
 		return {
