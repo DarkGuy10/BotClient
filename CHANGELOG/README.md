@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.7.0-alpha
+
+-   Added DMs
+-   Fixed bug in sticker rendering
+-   Removed blocking code from mention formating
+
 ## v0.6.0-alpha
 
 -   Added autoupdates
