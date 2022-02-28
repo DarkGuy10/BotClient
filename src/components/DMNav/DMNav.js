@@ -31,7 +31,7 @@ class DMNav extends Component {
 			const value = target.value.trim()
 			let fetched
 			if (/\d{17,19}/.test(value))
-				fetched = await ipcRenderer.invoke('fetch-User', value)
+				fetched = await ipcRenderer.invoke('fetchUser', value)
 
 			this.setState({
 				...this.state,

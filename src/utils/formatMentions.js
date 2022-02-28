@@ -8,7 +8,6 @@ const {
 	ROLES_PATTERN,
 	CHANNELS_PATTERN,
 } = require('./constants')
-const { ipcRenderer } = window.require('electron')
 
 const formatMentions = (message, content = message.content) => {
 	const { mentions } = message
@@ -43,8 +42,6 @@ const formatMentions = (message, content = message.content) => {
 								<DiscordMention key={key} type={'user'}>
 									{members.get(match)?.displayName ||
 										users.get(match)?.username ||
-										ipcRenderer.sendSync('fetchUser', match)
-											?.username ||
 										`<@${match}>`}
 								</DiscordMention>
 							)
