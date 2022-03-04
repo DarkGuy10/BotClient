@@ -108,6 +108,30 @@
 	object-fit: contain;
 }
 
+.toolbar {
+	-webkit-box-flex: 0;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	flex: 0 0 auto;
+	min-width: 0;
+}
+
+.icon {
+	-webkit-box-align: center;
+	align-items: center;
+	display: flex;
+	cursor: pointer;
+}
+
+.icon svg path {
+	fill: var(--interactive-normal);
+}
+
+.icon:hover svg path {
+	fill: var(--interactive-hover);
+}
+
 .content {
 	min-width: 0;
 	min-height: 0;

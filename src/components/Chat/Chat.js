@@ -2,7 +2,12 @@ import { DiscordMessages } from '@skyra/discord-components-react'
 import React, { Component, createRef } from 'react'
 import styles from './Chat.module.css'
 import { MessageElement, MessageField } from '..'
-import { SVGChannels } from '../SVGHandler'
+import {
+	SVGChannels,
+	SVGGithubLogo,
+	SVGDiscordLogo,
+	SVGHelp,
+} from '../SVGHandler'
 import { parseTwemojis } from '../../utils'
 import MemberNav from '../MemberNav/MemberNav'
 const { ipcRenderer } = window.require('electron')
@@ -125,6 +130,23 @@ class Chat extends Component {
 								</div>
 							</>
 						) : null}
+					</div>
+					<div className={styles.toolbar}>
+						<div className={`${styles.icon} ${styles.iconWrapper}`}>
+							<a href="https://discord.gg/aZSrxwNUFD">
+								<SVGDiscordLogo />
+							</a>
+						</div>
+						<div className={`${styles.icon} ${styles.iconWrapper}`}>
+							<a href="https://github.com/DarkGuy10/BotClient/">
+								<SVGGithubLogo />
+							</a>
+						</div>
+						<div className={`${styles.icon} ${styles.iconWrapper}`}>
+							<a href="https://github.com/DarkGuy10/BotClient#readme">
+								<SVGHelp />
+							</a>
+						</div>
 					</div>
 				</section>
 				<div className={styles.content}>
