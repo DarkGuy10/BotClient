@@ -107,6 +107,7 @@ ipcMain.on('login', async (event, token) => {
 				'GUILD_MEMBERS',
 				'GUILD_PRESENCES',
 				'GUILD_EMOJIS_AND_STICKERS',
+				'GUILD_VOICE_STATES',
 			],
 		},
 		mainWindow

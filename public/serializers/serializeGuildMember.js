@@ -6,7 +6,7 @@ const { GuildMember } = require('discord.js')
  * @param {GuildMember} member
  */
 const serializeGuildMember = member => {
-	const { displayName, presence, displayColor, roles, user } = member
+	const { displayName, presence, displayColor, roles, user, voice } = member
 	return {
 		...member,
 		displayName: displayName,
@@ -22,6 +22,15 @@ const serializeGuildMember = member => {
 			},
 		},
 		avatarURL: user.displayAvatarURL(),
+		voice: {
+			...voice,
+			selfDeaf: voice.selfDeaf,
+			selfMute: voice.selfMute,
+			selfVideo: voice.selfVideo,
+			serverDeaf: voice.serverDeaf,
+			serverMute: voice.serverMute,
+			streaming: voice.streaming,
+		},
 	}
 }
 

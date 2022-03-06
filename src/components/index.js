@@ -19,6 +19,7 @@ import ToggleElement from './ToggleElement/ToggleElement'
 import UserSettings from './UserSettings/UserSettings'
 import ReplyBar from './ReplyBar/ReplyBar'
 import DMListItem from './DMListItem/DMListItem'
+import ChannelListItem from './ChannelListItem/ChannelListItem'
 
 export {
 	App,
@@ -42,4 +43,5 @@ export {
 	UserSettings,
 	ReplyBar,
 	DMListItem,
+	ChannelListItem,
 }

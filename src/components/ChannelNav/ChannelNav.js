@@ -1,42 +1,8 @@
 import React, { Component } from 'react'
 import styles from './ChannelNav.module.css'
-import { SVGChannels } from './../SVGHandler'
+import { ChannelListItem } from '..'
 import { parseTwemojis } from '../../utils'
 const { ipcRenderer } = window.require('electron')
-
-function ListItem(props) {
-	const isPrivate = props.channel.isPrivate
-	const isRules = props.channel.isRules
-	const isCategory = props.channel.type === 'GUILD_CATEGORY'
-	const isParentCollapsed = props.collpasedCategoriesId.includes(
-		props.channel.parentId
-	)
-	const isCollapsed = props.collpasedCategoriesId.includes(props.channel.id)
-	const isViewable = props.channel.viewable
-	const svgType = isRules
-		? 'RULES'
-		: `${props.channel.type}${isPrivate && !isCategory ? '_LIMITED' : ''}`
-	return (
-		<div
-			className={`${styles.listItem} ${
-				isCategory ? styles.category : ''
-			} ${isCollapsed ? styles.collapsed : ''} ${
-				isParentCollapsed ? styles.hidden : ''
-			} ${!isViewable ? styles.muted : ''} ${
-				props.selected ? styles.selected : ''
-			}`}
-			title={!isViewable ? 'Not Viewable' : ''}
-			onClick={() => {
-				isCategory
-					? props.toggleCollapseCategory(props.channel.id)
-					: props.selectChannel(props.channel.id)
-			}}
-		>
-			{SVGChannels[svgType]}
-			<div>{parseTwemojis(props.channel.name)}</div>
-		</div>
-	)
-}
 
 class ChannelNav extends Component {
 	constructor(props) {
@@ -91,7 +57,7 @@ class ChannelNav extends Component {
 								<div style={{ height: 16 }}></div>
 							) : null}
 							{channels.map((channel, index) => (
-								<ListItem
+								<ChannelListItem
 									key={index}
 									channel={channel}
 									toggleCollapseCategory={

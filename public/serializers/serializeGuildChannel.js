@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { GuildChannel } = require('discord.js')
+const serializeGuildMember = require('./serializeGuildMember')
 
 /**
  *
@@ -7,7 +8,7 @@ const { GuildChannel } = require('discord.js')
  * @returns
  */
 const serializeGuildChannel = channel => {
-	const { viewable, position, id, guild } = channel
+	const { viewable, position, id, guild, members } = channel
 	return {
 		...channel,
 		viewable: viewable,
@@ -16,6 +17,9 @@ const serializeGuildChannel = channel => {
 			.permissionsFor(guild.roles.everyone)
 			.has('VIEW_CHANNEL'),
 		isRules: id === guild.rulesChannelId,
+		members: [...members.values()].map(member =>
+			serializeGuildMember(member)
+		),
 	}
 }
 

@@ -33,6 +33,11 @@ import { ReactComponent as SVGLinkButton } from './../assets/svg/link-button.svg
 import { ReactComponent as SVGGithubLogo } from './../assets/svg/github-logo.svg'
 import { ReactComponent as SVGDiscordLogo } from './../assets/svg/discord-logo.svg'
 import { ReactComponent as SVGHelp } from './../assets/svg/help.svg'
+import { ReactComponent as SVGSelfDeaf } from './../assets/svg/self-deaf.svg'
+import { ReactComponent as SVGSelfMute } from './../assets/svg/self-mute.svg'
+import { ReactComponent as SVGServerDeaf } from './../assets/svg/server-deaf.svg'
+import { ReactComponent as SVGServerMute } from './../assets/svg/server-mute.svg'
+import { ReactComponent as SVGSelfVideo } from './../assets/svg/self-video.svg'
 
 const SVGChannels = {
 	DM: <SVGDM />,
@@ -54,6 +59,14 @@ const SVGMimes = {
 	PDF: <SVGMimePdf />,
 	TEXT: <SVGMimeText />,
 	UNKNOWN: <SVGMimeUnkown />,
+}
+
+const SVGVoiceStates = {
+	selfDeaf: <SVGSelfDeaf />,
+	selfMute: <SVGSelfMute />,
+	serverDeaf: <SVGServerDeaf />,
+	serverMute: <SVGServerMute />,
+	selfVideo: <SVGSelfVideo />,
 }
 
 export {
@@ -78,4 +91,5 @@ export {
 	SVGGithubLogo,
 	SVGDiscordLogo,
 	SVGHelp,
+	SVGVoiceStates,
 }
