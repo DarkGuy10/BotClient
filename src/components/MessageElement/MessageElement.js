@@ -18,11 +18,13 @@ import {
 	parseTwemojis,
 	formatMentions,
 } from './../../utils'
-import { SVGReplyButton } from '../SVGHandler'
+import { SVGIDButton, SVGLinkButton, SVGReplyButton } from '../SVGHandler'
 
 const MessageElement = props => {
 	const { message, handleReply, replying } = props
 	const {
+		id,
+		isDM,
 		embeds,
 		type,
 		author,
@@ -63,6 +65,24 @@ const MessageElement = props => {
 						>
 							<SVGReplyButton />
 						</div>
+						<div
+							className={styles.button}
+							onClick={() => navigator.clipboard.writeText(id)}
+						>
+							<SVGIDButton />
+						</div>
+						{!isDM && (
+							<div
+								className={styles.button}
+								onClick={() =>
+									navigator.clipboard.writeText(
+										`https://discord.com/channels/${message.guildId}/${message.channelId}/${id}`
+									)
+								}
+							>
+								<SVGLinkButton />
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

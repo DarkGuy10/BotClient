@@ -24,6 +24,7 @@ const serializeMessage = async message => {
 					displayName: member.displayName,
 			  }
 			: null,
+		isDM: message.channel.type === 'DM',
 		stickers: [
 			...stickers
 				.map(sticker => {

@@ -28,6 +28,8 @@ import { ReactComponent as SVGToggleUnchecked } from './../assets/svg/toggle-unc
 import { ReactComponent as SVGToggleChecked } from './../assets/svg/toggle-checked.svg'
 import { ReactComponent as SVGCloseButton } from './../assets/svg/close-button.svg'
 import { ReactComponent as SVGReplyButton } from './../assets/svg/reply-button.svg'
+import { ReactComponent as SVGIDButton } from './../assets/svg/id-button.svg'
+import { ReactComponent as SVGLinkButton } from './../assets/svg/link-button.svg'
 import { ReactComponent as SVGGithubLogo } from './../assets/svg/github-logo.svg'
 import { ReactComponent as SVGDiscordLogo } from './../assets/svg/discord-logo.svg'
 import { ReactComponent as SVGHelp } from './../assets/svg/help.svg'
@@ -71,6 +73,8 @@ export {
 	SVGToggleChecked,
 	SVGCloseButton,
 	SVGReplyButton,
+	SVGIDButton,
+	SVGLinkButton,
 	SVGGithubLogo,
 	SVGDiscordLogo,
 	SVGHelp,
