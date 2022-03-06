@@ -12,7 +12,6 @@ import {
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
 import {
-	decimalToHexColor,
 	parseMarkdown,
 	parseTimestamp,
 	parseTwemojis,
@@ -93,7 +92,7 @@ const MessageElement = props => {
 				verified={author.isVerifiedBot}
 				timestamp={parseTimestamp(createdTimestamp)}
 				edited={editedTimestamp ? true : false}
-				roleColor={decimalToHexColor(member?.color) || '#fff'}
+				roleColor={member?.color ? member.hexColor : '#fff'}
 				highlight={mentions.me}
 				onMouseEnter={() => updateHover(true)}
 				onMouseLeave={() => updateHover(false)}
@@ -112,7 +111,11 @@ const MessageElement = props => {
 						bot={repliesTo.author.bot}
 						verified={repliesTo.author.isVerifiedBot}
 						edited={repliesTo.editedTimestamp ? true : false}
-						roleColor={decimalToHexColor(repliesTo.member?.color)}
+						roleColor={
+							repliesTo.member?.color
+								? repliesTo.member.hexColor
+								: ''
+						}
 					>
 						{parseTwemojis(parseMarkdown(shorten(repliesTo)))}
 					</DiscordReply>
@@ -155,7 +158,7 @@ const MessageElement = props => {
 						provider,
 						video,
 						author,
-						color,
+						hexColor,
 						title,
 						footer,
 						image,
@@ -189,7 +192,7 @@ const MessageElement = props => {
 
 					if (author?.url) options['authorUrl'] = author.url
 
-					if (color) options['color'] = decimalToHexColor(color)
+					if (hexColor) options['color'] = hexColor
 
 					if (title) options['embedTitle'] = title
 
@@ -248,10 +251,13 @@ const MessageElement = props => {
 									})}
 								</DiscordEmbedFields>
 							) : null}
-
-							<DiscordEmbedFooter {...footerOptions}>
-								{footer?.text ? parseTwemojis(footer.text) : ''}
-							</DiscordEmbedFooter>
+							{footer?.text ? (
+								<DiscordEmbedFooter {...footerOptions}>
+									{footer?.text
+										? parseTwemojis(footer.text)
+										: ''}
+								</DiscordEmbedFooter>
+							) : null}
 						</DiscordEmbed>
 					)
 				})}

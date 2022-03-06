@@ -1,5 +1,4 @@
 import React from 'react'
-import { decimalToHexColor } from '../../utils'
 import { SVGCloseButtonCircle } from '../SVGHandler'
 import styles from './ReplyBar.module.css'
 
@@ -17,9 +16,9 @@ const ReplyBar = props => {
 									<span
 										className={styles.name}
 										style={{
-											color: decimalToHexColor(
-												replyingTo.member?.color
-											),
+											color: replyingTo.member?.color
+												? replyingTo.member.hexColor
+												: '',
 										}}
 									>
 										{' '}

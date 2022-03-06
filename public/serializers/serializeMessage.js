@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const { Message } = require('discord.js')
+const serializeGuildMember = require('./serializeGuildMember')
 
 /**
  *
@@ -7,7 +8,7 @@ const { Message } = require('discord.js')
  * @returns {Object}
  */
 const serializeMessage = async message => {
-	const { type, author, member, stickers, mentions, guild } = message
+	const { type, author, member, stickers, embeds, mentions, guild } = message
 	let repliesTo
 	if (type === 'REPLY') repliesTo = await message.fetchReference()
 	return {
@@ -17,14 +18,14 @@ const serializeMessage = async message => {
 			avatarURL: author.displayAvatarURL(),
 			isVerifiedBot: author.flags?.has('VERIFIED_BOT'),
 		},
-		member: member
-			? {
-					...member,
-					color: member.displayColor,
-					displayName: member.displayName,
-			  }
-			: null,
+		member: member ? serializeGuildMember(member) : null,
 		isDM: message.channel.type === 'DM',
+		embeds: embeds.map(embed => {
+			return {
+				...embed,
+				hexColor: embed.hexColor,
+			}
+		}),
 		stickers: [
 			...stickers
 				.map(sticker => {
@@ -37,17 +38,12 @@ const serializeMessage = async message => {
 		],
 		mentions: {
 			members: mentions.members
-				? [...mentions.members].map(([id, each]) => {
-						return [
-							id,
-							{
-								...each,
-								color: each.displayColor,
-								displayName: each.displayName,
-							},
-						]
-				  })
-				: new Map(),
+				? [
+						...mentions.members.mapValues(member =>
+							serializeGuildMember(member)
+						),
+				  ]
+				: [],
 			users: [...mentions.users],
 			roles: [...mentions.roles],
 			everyone: mentions.everyone,
@@ -70,11 +66,7 @@ const serializeMessage = async message => {
 								repliesTo.author.flags?.has('VERIFIED_BOT'),
 						},
 						member: repliesTo.member
-							? {
-									...repliesTo.member,
-									color: repliesTo.member.displayColor,
-									displayName: repliesTo.member.displayName,
-							  }
+							? serializeGuildMember(repliesTo.member)
 							: null,
 				  }
 				: null,

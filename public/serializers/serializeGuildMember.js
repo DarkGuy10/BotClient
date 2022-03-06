@@ -6,12 +6,22 @@ const { GuildMember } = require('discord.js')
  * @param {GuildMember} member
  */
 const serializeGuildMember = member => {
-	const { displayName, presence, displayColor, roles, user, voice } = member
+	const {
+		displayName,
+		presence,
+		displayColor,
+		displayHexColor,
+		roles,
+		user,
+		voice,
+	} = member
+
 	return {
 		...member,
 		displayName: displayName,
 		presence: presence,
 		color: displayColor,
+		hexColor: displayHexColor,
 		isHoisted: roles.hoist ? true : false,
 		isVerifiedBot: user.flags?.has('VERIFIED_BOT'),
 		roles: {

@@ -3,8 +3,8 @@
  * @param {Number} dColor Decimal color
  * @returns String
  */
-const decimalToHexColor = dColor => {
-	return dColor ? '#' + dColor.toString(16) : ''
+const decimalToHexColor = color => {
+	return color ? `#${color.toString(16).padStart(6, '0')}` : ''
 }
 
 export default decimalToHexColor
