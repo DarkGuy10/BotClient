@@ -2086,36 +2086,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@skyra/discord-components-core@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@skyra/discord-components-core@npm:3.0.1"
+"@skyra/discord-components-core@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@skyra/discord-components-core@npm:3.1.0"
   dependencies:
     "@stencil/core": ^2.12.1
     clsx: ^1.1.1
     hex-to-rgba: ^2.0.1
-  checksum: dfea50b12114401e159571cbe0afeb4a98c04a305c26b3b31b83a8174cc44187ffdc01a654b8de9ba61721515e9b7a736f5889c07b3fd6b27e151eca3c491e09
+  checksum: f347d21d1986bf02b0dd19b840850144d9014303f4dcdb5f92e99508cba294e50b968cee5c1e81c7d7053bbc173848acb7ddbd7efd8a5aed2efc82e846a80d25
   languageName: node
   linkType: hard
 
-"@skyra/discord-components-react@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@skyra/discord-components-react@npm:3.0.1"
+"@skyra/discord-components-react@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@skyra/discord-components-react@npm:3.1.0"
   dependencies:
-    "@skyra/discord-components-core": ^3.0.1
+    "@skyra/discord-components-core": ^3.1.0
     tslib: ^2.3.1
   peerDependencies:
     react: 16.8.x || 17.x
     react-dom: 16.8.x || 17.x
-  checksum: ea1aae3204dce641fc5f73ff8777cfc58e7a9de22711b9d81acaa69d7824b08e8a7cb94ce9eb8feeaa30cd3986283eb1830c8e0dddf31c48364ef103f9e2e894
+  checksum: c27a6c88e0eaaac17494aa64da7d92ad64633076ff274c9b986990a8224584d3d38967502bb12a846950271f6d57c02a10a4877e9b1c2808ac973ecdfad68e02
   languageName: node
   linkType: hard
 
 "@stencil/core@npm:^2.12.1":
-  version: 2.12.1
-  resolution: "@stencil/core@npm:2.12.1"
+  version: 2.14.0
+  resolution: "@stencil/core@npm:2.14.0"
   bin:
     stencil: bin/stencil
-  checksum: acbd781a8073eb155cabad9375fda080ee38cb642f63fda2ae8c09811f996c6282ff84cd60f7796827e31fbce4eccc3c17f2041d9c5fec2df08947ebf8bcb0ac
+  checksum: e2c68913a1c6fd518611b2a15705fa1b30d8950413e62b8599223679d511f2085fc127af76d3fb216eca0e17c1d2994d134f24a1ea7652639c83913f6ba53602
   languageName: node
   linkType: hard
 
@@ -4004,8 +4004,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "botclient@workspace:."
   dependencies:
-    "@skyra/discord-components-core": ^3.0.1
-    "@skyra/discord-components-react": ^3.0.1
+    "@skyra/discord-components-core": ^3.1.0
+    "@skyra/discord-components-react": ^3.1.0
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.2.1
