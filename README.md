@@ -6,6 +6,8 @@
   
 [![License](https://img.shields.io/github/license/darkguy10/BotClient?logo=github&color=cyan)](https://github.com/darkguy10/BotClient/blob/main/LICENSE)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/darkguy10/BotClient?color=cyan)
+[![Downloads All Releases](https://img.shields.io/github/downloads/darkguy10/BotClient/total?color=cyan)](#downloads)
+  
 [![Support Server](https://img.shields.io/discord/913296644643106846?color=cyan&label=discord&logo=discord&logoColor=whitesmoke)](https://discord.gg/aZSrxwNUFD)
 
 </div>
