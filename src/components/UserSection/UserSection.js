@@ -10,7 +10,7 @@ const UserSection = props => {
 			<div className={styles.container}>
 				<div className={styles.avatarWrapper}>
 					<img
-						src={clientUser.avatarURL}
+						src={clientUser.displayAvatarURL}
 						alt="Bot Avatar"
 						className={styles.avatar}
 					/>

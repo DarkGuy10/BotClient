@@ -27,8 +27,7 @@ class Client extends oldClient {
 
 	get clientUserData() {
 		const data = {
-			...this.user,
-			avatarURL: this.user.displayAvatarURL(),
+			...this.user.toJSON(),
 		}
 		return data
 	}
