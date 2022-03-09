@@ -515,31 +515,13 @@ input:focus {
 }
 
 a {
-	color: var(--text-link-low-saturation);
+	color: var(--text-link-low-saturation) !important;
 	text-decoration: none;
-	word-break: break-word;
+	word-break: break-word !important;
 }
 
 a:hover {
-	color: var(--text-link);
 	text-decoration: underline;
-}
-
-code {
-	font-size: 0.875rem;
-	line-height: 1.125rem;
-	text-indent: 0;
-	white-space: pre-wrap;
-	background: var(--background-tertiary);
-	border: 1px solid var(--background-tertiary);
-	display: block;
-	overflow-x: auto;
-	padding: 0.5em;
-	border-radius: 4px;
-	color: var(--header-secondary);
-	font-family: Consolas, Andale Mono WT, Andale Mono, Lucida Console,
-		Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono,
-		Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace;
 }
 
 ul,
@@ -578,10 +560,57 @@ img.twemoji {
 	white-space: pre-wrap;
 }
 
+.discord-message-markup pre,
+.discord-message-markup blockquote {
+	max-width: 90%;
+}
+
+.discord-message-markup code:not(.hljs) {
+	padding: 0.2em;
+	margin: -0.2em 0;
+	border-radius: 3px;
+	font-size: 85%;
+	font-family: var(--font-code);
+	text-indent: 0;
+	border: none;
+	white-space: pre-wrap;
+	line-height: 1.125rem;
+}
+
+.discord-message-markup code.hljs {
+	font-size: 0.875rem;
+	line-height: 1.125rem;
+	text-indent: 0;
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	border-radius: 4px;
+	color: var(--header-secondary);
+	white-space: pre-wrap;
+	font-family: var(--font-code);
+}
+
+.discord-message-markup blockquote {
+	padding-right: 8px;
+	display: flex;
+}
+
+.discord-message-markup blockquote::before {
+	content: '';
+	width: 4px;
+	border-radius: 4px;
+	margin-right: 12px;
+	background-color: var(--interactive-muted);
+}
+
 .discord-message {
 	margin: 1.0625rem 0 !important;
 	padding: 0 16px 0 14px !important;
 	border-left: 2px solid transparent;
+}
+
+.discord-message:last-of-type {
+	margin-bottom: 2em !important;
 }
 
 .discord-highlight-mention {
@@ -598,7 +627,7 @@ img.twemoji {
 	font-weight: 600 !important;
 }
 
-.discord-embed-footer span {
+.discord-embed-footer {
 	font-size: 0.75rem;
 	line-height: 1rem;
 	font-weight: 500;
@@ -608,4 +637,8 @@ img.twemoji {
 .discord-replied-message-username {
 	font-weight: 500;
 	color: var(--header-primary);
+}
+
+.discord-custom-emoji-image {
+	object-fit: contain;
 }

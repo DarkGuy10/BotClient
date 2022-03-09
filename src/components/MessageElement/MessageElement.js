@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { Component } from 'react'
 import styles from './MessageElement.module.css'
 import {
 	DiscordAttachment,
@@ -11,259 +11,387 @@ import {
 	DiscordReply,
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
-import {
-	parseMarkdown,
-	parseTimestamp,
-	parseTwemojis,
-	formatMentions,
-} from './../../utils'
+import { parseTimestamp, parseTwemojis, decimalToHexColor } from './../../utils'
 import { SVGIDButton, SVGLinkButton, SVGReplyButton } from '../SVGHandler'
+const { toHTML } = require('@darkguy10/discord-markdown')
+const { ipcRenderer } = window.require('electron')
+const HtmlToReactParser = require('html-to-react').Parser
+const htmlToReactParser = new HtmlToReactParser()
 
-const MessageElement = props => {
-	const { message, handleReply, replying } = props
-	const {
-		id,
-		isDM,
-		embeds,
-		type,
-		author,
-		member,
-		createdTimestamp,
-		editedTimestamp,
-		repliesTo,
-		stickers,
-		attachments,
-		mentions,
-	} = message
+class MessageElement extends Component {
+	constructor(props) {
+		super(props)
 
-	const [hover, updateHover] = useState(false)
+		this.state = {
+			fetchedMentions: {
+				memberOrUser: new Map(),
+				role: new Map(),
+				channel: new Map(),
+			},
+			hover: false,
+		}
 
-	const allowedImageTypes = [
-		'image/png',
-		'image/jpeg',
-		'image/gif',
-		'image/webp',
-	]
+		this.updateHover = newHoverState =>
+			this.setState({ ...this.state, hover: newHoverState })
 
-	const imageAttachments = [...attachments.values()].filter(attachment =>
-		allowedImageTypes.includes(attachment.contentType)
-	)
+		this.fetchMention = (id, type) => {
+			if (this.state.fetchedMentions[type].has(id))
+				return this.state.fetchedMentions[type].get(id)
 
-	return (
-		<>
-			<div className={styles.buttonContainer}>
-				<div
-					className={`${styles.buttons} ${hover ? styles.hover : ''}`}
-					onMouseEnter={() => updateHover(true)}
-					onMouseLeave={() => updateHover(false)}
-				>
-					<div className={styles.wrapper}>
-						<div
-							className={styles.button}
-							onClick={() => handleReply(message)}
-						>
-							<SVGReplyButton />
-						</div>
-						<div
-							className={styles.button}
-							onClick={() => navigator.clipboard.writeText(id)}
-						>
-							<SVGIDButton />
-						</div>
-						{!isDM && (
+			ipcRenderer
+				.invoke('mention', id, type, this.props.message)
+				.then(res => {
+					const { fetchedMentions } = this.state
+					let newMentions = {
+						...fetchedMentions,
+					}
+					newMentions[type].set(id, res)
+					this.setState({
+						...this.state,
+						fetchedMentions: newMentions,
+					})
+				})
+		}
+
+		this.parseDiscordMarkdown = (
+			content = this.props.message.content,
+			isForEmbed = false
+		) => {
+			const { mentions } = this.props.message
+			const channels = new Map(mentions.channels)
+			const users = new Map(mentions.users)
+			const members = new Map(mentions.members)
+			const roles = new Map(mentions.roles)
+
+			return htmlToReactParser.parse(
+				toHTML(content, {
+					embed: isForEmbed,
+					discordCallback: {
+						user: node => {
+							const memberOrUser =
+								members.get(node.id) ||
+								users.get(node.id) ||
+								this.fetchMention(node.id, 'memberOrUser')
+							return memberOrUser
+								? `<discord-mention type='user'>${escape(
+										memberOrUser?.displayName ||
+											memberOrUser?.username
+								  )}</discord-mention>`
+								: // the span tags below prevent removal of prepended '@'
+								  // on state updates
+								  `<span><discord-mention type='user'>${escape(
+										node.id
+								  )}</discord-mention></span>`
+						},
+						role: node => {
+							const role =
+								roles.get(node.id) ||
+								this.fetchMention(node.id, 'role')
+							return role
+								? `<discord-mention type='role' color=${decimalToHexColor(
+										role.color
+								  )}>${escape(role.name)}</discord-mention>`
+								: '@deleted-role'
+						},
+						channel: node => {
+							const channel =
+								channels.get(node.id) ||
+								this.fetchMention(node.id, 'channel')
+							return channel
+								? `<discord-mention type='${
+										channel.type === 'GUILD_VOICE'
+											? 'voice'
+											: 'channel'
+								  }'>${escape(channel.name)}</discord-mention>`
+								: '#deleted-channel'
+						},
+						emoji: node =>
+							`<discord-custom-emoji embed-emoji="${isForEmbed}" url="https://cdn.discordapp.com/emojis/${escape(
+								node.id
+							)}.${
+								node.animated ? 'gif' : 'webp'
+							}?size=48&quality=lossless" name="${escape(
+								node.name
+							)}"></discord-custom-emoji>`,
+						everyone: () =>
+							`<discord-mention type='user'>everyone</discord-mention>`,
+						here: () =>
+							`<discord-mention type='user'>here</discord-mention>`,
+					},
+				})
+			)
+		}
+	}
+
+	render() {
+		const { message, handleReply, replying } = this.props
+		const {
+			id,
+			isDM,
+			embeds,
+			type,
+			author,
+			member,
+			createdTimestamp,
+			editedTimestamp,
+			repliesTo,
+			stickers,
+			attachments,
+			mentions,
+		} = message
+		const { hover } = this.state
+
+		const allowedImageTypes = [
+			'image/png',
+			'image/jpeg',
+			'image/gif',
+			'image/webp',
+		]
+
+		const imageAttachments = [...attachments.values()].filter(attachment =>
+			allowedImageTypes.includes(attachment.contentType)
+		)
+
+		return (
+			<>
+				<div className={styles.buttonContainer}>
+					<div
+						className={`${styles.buttons} ${
+							hover ? styles.hover : ''
+						}`}
+						onMouseEnter={() => this.updateHover(true)}
+						onMouseLeave={() => this.updateHover(false)}
+					>
+						<div className={styles.wrapper}>
+							<div
+								className={styles.button}
+								onClick={() => handleReply(message)}
+							>
+								<SVGReplyButton />
+							</div>
 							<div
 								className={styles.button}
 								onClick={() =>
-									navigator.clipboard.writeText(
-										`https://discord.com/channels/${message.guildId}/${message.channelId}/${id}`
-									)
+									navigator.clipboard.writeText(id)
 								}
 							>
-								<SVGLinkButton />
+								<SVGIDButton />
 							</div>
-						)}
+							{!isDM && (
+								<div
+									className={styles.button}
+									onClick={() =>
+										navigator.clipboard.writeText(
+											`https://discord.com/channels/${message.guildId}/${message.channelId}/${id}`
+										)
+									}
+								>
+									<SVGLinkButton />
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
-			</div>
-			<DiscordMessage
-				author={member?.displayName ?? author.username}
-				avatar={author.avatarURL}
-				bot={author.bot}
-				verified={author.isVerifiedBot}
-				timestamp={parseTimestamp(createdTimestamp)}
-				edited={editedTimestamp ? true : false}
-				roleColor={member?.color ? member.hexColor : '#fff'}
-				highlight={mentions.me}
-				onMouseEnter={() => updateHover(true)}
-				onMouseLeave={() => updateHover(false)}
-				className={`${hover ? styles.messageHover : ''} ${
-					replying ? styles.replying : ''
-				}`}
-			>
-				{type === 'REPLY' ? (
-					<DiscordReply
-						slot="reply"
-						author={
-							repliesTo.member?.displayName ??
-							repliesTo.author.username
-						}
-						avatar={repliesTo.author.avatarURL}
-						bot={repliesTo.author.bot}
-						verified={repliesTo.author.isVerifiedBot}
-						edited={repliesTo.editedTimestamp ? true : false}
-						roleColor={
-							repliesTo.member?.color
-								? repliesTo.member.hexColor
-								: ''
-						}
-					>
-						{parseTwemojis(parseMarkdown(shorten(repliesTo)))}
-					</DiscordReply>
-				) : null}
+				<DiscordMessage
+					author={member?.displayName ?? author.username}
+					avatar={author.avatarURL}
+					bot={author.bot}
+					verified={author.isVerifiedBot}
+					timestamp={parseTimestamp(createdTimestamp)}
+					edited={editedTimestamp ? true : false}
+					roleColor={member?.color ? member.hexColor : '#fff'}
+					highlight={mentions.me}
+					onMouseEnter={() => this.updateHover(true)}
+					onMouseLeave={() => this.updateHover(false)}
+					className={`${hover ? styles.messageHover : ''} ${
+						replying ? styles.replying : ''
+					}`}
+				>
+					{type === 'REPLY' ? (
+						<DiscordReply
+							slot="reply"
+							author={
+								repliesTo.member?.displayName ??
+								repliesTo.author.username
+							}
+							avatar={repliesTo.author.avatarURL}
+							bot={repliesTo.author.bot}
+							verified={repliesTo.author.isVerifiedBot}
+							edited={repliesTo.editedTimestamp ? true : false}
+							roleColor={
+								repliesTo.member?.color
+									? repliesTo.member.hexColor
+									: ''
+							}
+						>
+							{parseTwemojis(shorten(repliesTo))}
+						</DiscordReply>
+					) : null}
 
-				{parseTwemojis(formatMentions(message))}
+					{parseTwemojis(this.parseDiscordMarkdown())}
 
-				{stickers.map((sticker, key) => (
-					<DiscordAttachment
-						key={key}
-						slot="attachments"
-						url={sticker.url}
-						width={150}
-						alt={sticker.name}
-					/>
-				))}
-
-				{imageAttachments.map((item, key) => {
-					const biggerSide =
-						item.height > item.width ? 'height' : 'width'
-					const allowance = biggerSide === 'height' ? 300 : 400
-					let sizeOptions = {}
-					sizeOptions[biggerSide] = Math.min(
-						item[biggerSide],
-						allowance
-					)
-					return (
+					{stickers.map((sticker, key) => (
 						<DiscordAttachment
 							key={key}
 							slot="attachments"
-							url={item.url}
-							alt={item.name}
-							{...sizeOptions}
+							url={sticker.url}
+							width={150}
+							alt={sticker.name}
 						/>
-					)
-				})}
+					))}
 
-				{embeds.map((embed, key) => {
-					const {
-						provider,
-						video,
-						author,
-						hexColor,
-						title,
-						footer,
-						image,
-						url,
-						timestamp,
-						thumbnail,
-						description,
-						fields,
-					} = embed
-					if (provider?.name === 'Tenor') {
+					{imageAttachments.map((item, key) => {
 						const biggerSide =
-							video.height > video.width ? 'height' : 'width'
+							item.height > item.width ? 'height' : 'width'
 						const allowance = biggerSide === 'height' ? 300 : 400
-						let options = {
-							slot: 'attachments',
-							url: embed.video.url,
-						}
-						options[biggerSide] = Math.min(
-							video[biggerSide],
+						let sizeOptions = {}
+						sizeOptions[biggerSide] = Math.min(
+							item[biggerSide],
 							allowance
 						)
-						return <DiscordTenorVideo key={key} {...options} />
-					}
-					let options = {}
-					let content = ''
-					let footerOptions = { slot: 'footer' }
-					options['slot'] = 'embeds'
-					if (author?.name) options['authorName'] = author.name
+						return (
+							<DiscordAttachment
+								key={key}
+								slot="attachments"
+								url={item.url}
+								alt={item.name}
+								{...sizeOptions}
+							/>
+						)
+					})}
 
-					if (author?.iconURL) options['authorImage'] = author.iconURL
+					{embeds.map((embed, key) => {
+						const {
+							provider,
+							video,
+							author,
+							hexColor,
+							title,
+							footer,
+							image,
+							url,
+							timestamp,
+							thumbnail,
+							description,
+							fields,
+						} = embed
+						if (provider?.name === 'Tenor') {
+							const biggerSide =
+								video.height > video.width ? 'height' : 'width'
+							const allowance =
+								biggerSide === 'height' ? 300 : 400
+							let options = {
+								slot: 'attachments',
+								url: embed.video.url,
+							}
+							options[biggerSide] = Math.min(
+								video[biggerSide],
+								allowance
+							)
+							return <DiscordTenorVideo key={key} {...options} />
+						}
+						let options = {}
+						let content = ''
+						let footerOptions = { slot: 'footer' }
+						options['slot'] = 'embeds'
+						if (author?.name) options['authorName'] = author.name
 
-					if (author?.url) options['authorUrl'] = author.url
+						if (author?.iconURL)
+							options['authorImage'] = author.iconURL
 
-					if (hexColor) options['color'] = hexColor
+						if (author?.url) options['authorUrl'] = author.url
 
-					if (title) options['embedTitle'] = title
+						if (hexColor) options['color'] = hexColor
 
-					if (image?.url) options['image'] = image.url
+						if (title) options['embedTitle'] = title
 
-					if (url) options['url'] = embed.url
+						if (image?.url) options['image'] = image.url
 
-					if (timestamp)
-						footerOptions['timestamp'] = parseTimestamp(timestamp)
-					if (footer?.iconURL)
-						footerOptions['footerImage'] = footer.iconURL
+						if (url) options['url'] = embed.url
 
-					if (video) {
-						options['video'] = video.url
-						if (provider?.name) options['provider'] = provider.name
-						if (thumbnail?.url) options['image'] = thumbnail.url
-					} else {
-						if (embed.thumbnail?.url)
-							options['thumbnail'] = embed.thumbnail.url
-						content = description
-					}
+						if (timestamp)
+							footerOptions['timestamp'] =
+								parseTimestamp(timestamp)
+						if (footer?.iconURL)
+							footerOptions['footerImage'] = footer.iconURL
 
-					let lastFieldIndex = 0
-					return (
-						<DiscordEmbed key={key} {...options}>
-							{content ? (
-								<DiscordEmbedDescription slot="description">
-									{parseTwemojis(
-										formatMentions(message, content)
-									)}
-								</DiscordEmbedDescription>
-							) : null}
-							{fields.length ? (
-								<DiscordEmbedFields slot="fields">
-									{fields.map((field, key) => {
-										let fieldOptions = {}
-										fieldOptions['fieldTitle'] = field.name
-										if (field.inline) {
-											fieldOptions['inline'] = true
-											const index =
-												!lastFieldIndex ||
-												lastFieldIndex === 3
-													? 1
-													: lastFieldIndex + 1
-											fieldOptions['inlineIndex'] = index
-											lastFieldIndex = index
-										} else lastFieldIndex = 0
-										return (
-											<DiscordEmbedField
-												{...fieldOptions}
-												key={key}
-											>
-												{field.value}
-											</DiscordEmbedField>
-										)
-									})}
-								</DiscordEmbedFields>
-							) : null}
-							{footer?.text ? (
-								<DiscordEmbedFooter {...footerOptions}>
-									{footer?.text
-										? parseTwemojis(footer.text)
-										: ''}
-								</DiscordEmbedFooter>
-							) : null}
-						</DiscordEmbed>
-					)
-				})}
-			</DiscordMessage>
-		</>
-	)
+						if (video) {
+							options['video'] = video.url
+							if (provider?.name)
+								options['provider'] = provider.name
+							if (thumbnail?.url) options['image'] = thumbnail.url
+						} else {
+							if (embed.thumbnail?.url)
+								options['thumbnail'] = embed.thumbnail.url
+							content = description
+						}
+
+						let lastFieldIndex = 0
+						return (
+							<DiscordEmbed key={key} {...options}>
+								{content ? (
+									<DiscordEmbedDescription slot="description">
+										{parseTwemojis(
+											this.parseDiscordMarkdown(
+												content,
+												true
+											)
+										)}
+									</DiscordEmbedDescription>
+								) : null}
+								{fields.length ? (
+									<DiscordEmbedFields slot="fields">
+										{fields.map((field, key) => {
+											let fieldOptions = {}
+											fieldOptions['fieldTitle'] =
+												field.name
+											if (field.inline) {
+												fieldOptions['inline'] = true
+												const index =
+													!lastFieldIndex ||
+													lastFieldIndex === 3
+														? 1
+														: lastFieldIndex + 1
+												fieldOptions['inlineIndex'] =
+													index
+												lastFieldIndex = index
+											} else lastFieldIndex = 0
+											return (
+												<DiscordEmbedField
+													{...fieldOptions}
+													key={key}
+												>
+													{field.value}
+												</DiscordEmbedField>
+											)
+										})}
+									</DiscordEmbedFields>
+								) : null}
+								{footer?.text ? (
+									<DiscordEmbedFooter {...footerOptions}>
+										{footer?.text
+											? parseTwemojis(footer.text)
+											: ''}
+									</DiscordEmbedFooter>
+								) : null}
+							</DiscordEmbed>
+						)
+					})}
+				</DiscordMessage>
+			</>
+		)
+	}
+}
+
+export default MessageElement
+
+const escape = htmlStr => {
+	return htmlStr
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;')
 }
 
 const shorten = reference => {
@@ -273,5 +401,3 @@ const shorten = reference => {
 		(reference.content.length >= allowance ? '...' : '')
 	)
 }
-
-export default MessageElement

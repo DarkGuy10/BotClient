@@ -294,3 +294,36 @@ ipcMain.handle('fetchUser', async (event, id) => {
 		return false
 	}
 })
+
+ipcMain.handle('mention', async (event, id, type, message) => {
+	try {
+		let fetched
+		switch (type) {
+			case 'channel':
+				fetched = await client.channels.fetch(id)
+				break
+
+			case 'role':
+				fetched = await client.guilds.cache
+					.get(message.guildId)
+					.roles.fetch(id)
+				break
+
+			case 'memberOrUser':
+				fetched = message.guildId
+					? serializeGuildMember(
+							await client.guilds.cache
+								.get(message.guildId)
+								.members.fetch(id)
+					  ) || (await client.users.fetch(id))
+					: await client.users.fetch(id)
+				break
+
+			default:
+				fetched = null
+		}
+		return fetched
+	} catch (error) {
+		return null
+	}
+})
