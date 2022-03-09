@@ -11,6 +11,7 @@
 		"url": "https://github.com/darkGuy10/BotClient.git"
 	},
 	"dependencies": {
+		"@darkguy10/discord-markdown": "^2.6.0",
 		"@skyra/discord-components-core": "^3.1.0",
 		"@skyra/discord-components-react": "^3.1.0",
 		"@testing-library/jest-dom": "^5.14.1",
@@ -21,11 +22,11 @@
 		"electron-log": "^4.4.6",
 		"electron-store": "^8.0.1",
 		"electron-updater": "^4.6.5",
+		"html-to-react": "^1.4.8",
 		"markdown-to-jsx": "^7.1.5",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
 		"react-scripts": "5.0.0",
-		"react-string-replace": "^0.4.4",
 		"react-twemoji": "^0.4.0",
 		"web-vitals": "^2.1.0"
 	},
