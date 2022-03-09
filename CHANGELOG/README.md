@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v0.8.0-alpha
+
+-   Added emoji parsing
+-   Added markdown parsing
+-   Added non-blocking mention fetching
+-   Voice channels now show in-call members
+-   Added message action buttons (copy link, copy id)
+-   Added title toolbar icons
+-   Fixed bug in Client#getUserData
+-   Fixed minor styling issues
+-   Rewritten docs
+
 ## v0.7.0-alpha
 
 -   Added DMs
