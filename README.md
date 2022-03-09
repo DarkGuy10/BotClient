@@ -1,36 +1,46 @@
-<div align="center">
-  
-# BotClient
-  
-**Login as a Discord Bot**
-  
-[![License](https://img.shields.io/github/license/darkguy10/BotClient?logo=github&color=cyan)](https://github.com/darkguy10/BotClient/blob/main/LICENSE)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/darkguy10/BotClient?color=cyan)
-[![Downloads All Releases](https://img.shields.io/github/downloads/darkguy10/BotClient/total?color=cyan)](#downloads)
-  
-[![Support Server](https://img.shields.io/discord/913296644643106846?color=cyan&label=discord&logo=discord&logoColor=whitesmoke)](https://discord.gg/aZSrxwNUFD)
+<h3 align="center">
+	<img src="https://raw.githubusercontent.com/darkguy10/botclient/main/public/icon.png" width="100" alt="Logo"/><br/>
+	<img src="" alt="" height="30" width="0px"/>
+	BOTCLIENT
+	<img src="" alt="" height="30" width="0px"/>
+</h3>
 
-</div>
+<h6 align="center">
+  <a href="#-features">Features</a>
+  ·
+  <a href="#-downloads">Downloads</a>
+  ·
+  <a href="#-building-from-source">Building from Source</a>
+  ·
+  <a href="#-setting-up">Setting Up</a>
+  ·
+  <a href="#-faqs">FAQs</a>
+</h6>
+
+<p align="center">
+	<a href="https://github.com/darkguy10/BotClient/stargazers">
+		<img alt="Stargazers" src="https://img.shields.io/github/stars/darkguy10/BotClient?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"></a>
+	<a href="https://github.com/darkguy10/BotClient/releases/latest">
+		<img alt="Releases" src="https://img.shields.io/github/release/darkguy10/BotClient.svg?style=for-the-badge&logo=github&color=F2CDCD&logoColor=D9E0EE&labelColor=302D41"/></a>
+	<a href="#-downloads">
+		<img alt="Downloads" src="https://img.shields.io/github/downloads/darkguy10/BotClient/total?style=for-the-badge&color=B5E8E0&logoColor=D9E0EE&labelColor=302D41"></a>
+	<a href="https://discord.com/invite/aZSrxwNUFD">
+		<img alt="Discord" src="https://img.shields.io/discord/913296644643106846?style=for-the-badge&logo=discord&color=DDB6F2&logoColor=D9E0EE&labelColor=302D41"></a>
+</p>
+
+&nbsp;
+
+<p align="center">
+  BotClient is an open-source client for logging in as a discord bot. It's built using Electron, giving it complete cross-platform support! In addition, it uses the powerful electron-updater module to provide auto-updates on all supported binaries. The project aims to be extremely expandable, so that new features and future updates can be easily added.
+</p>
+
+&nbsp;
 
 ![Demo](assets/window.png)
 
-**_Table of Contents_**
+&nbsp;
 
--   [BotClient](#botclient)
-    -   [Description](#description)
-    -   [Features](#features)
-    -   [Downloads](#downloads)
-    -   [Building from Source](#building-from-source)
-    -   [Creating a Bot](#creating-a-bot)
-    -   [Setting up BotClient](#setting-up-botclient)
-    -   [Contributors ✨](#contributors-)
-
-## Description
-
-An unofficial client for logging in as a discord bot.\
-**This project is not affliated with Discord in any way and I'm not responsible for any misuse.**
-
-## Features
+### ✨ Features
 
 -   UI and workflow modelled after the original Discord client
 -   Neatly built using React as frontend and powered by discord.js at core
@@ -38,30 +48,81 @@ An unofficial client for logging in as a discord bot.\
 -   Support for all major desktop platforms
 -   Installable binaries with auto updates
 
-## Downloads
+&nbsp;
 
-Binaries for supported platforms can be found in the [Release Section](https://github.com/darkguy10/BotClient/releases/latest/)\
-All binaries support auto-updates by default.
+### 📦 Downloads
 
-## Building from Source
+<table>
+  <tr>
+    <th>
+      Platform
+    </th>
+    <th>
+      Binary Type
+    </th>
+    <th>
+      Download Link
+    </th>
+  </tr>
+  <tr> 
+    <td>
+      Windows
+    </td>
+    <td align="center">
+      <code>NSIS installer</code>
+    </td>
+    <td>
+      <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-win-x64.exe">
+        <img alt="Stargazers" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-win-x64.exe?style=for-the-badge&logo=windows&color=DDB6F2&logoColor=D9E0EE&labelColor=302D41"></a>
+      </a>
+    </td>
+  </tr>
+  <tr> <td>Linux</td>
+    <td align="center"><code>.AppImage</code></td>
+    <td>
+      <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-linux-x86_64.AppImage"><img alt="Stargazers" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-linux-x86_64.AppImage?style=for-the-badge&logo=linux&color=F5C2E7&logoColor=D9E0EE&labelColor=302D41"></a>
+    </td>
+  </tr>
+  <tr>
+    <td>Mac</td>
+    <td align="center"><code>.dmg</code></td>
+    <td>
+      <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-mac-x64.dmg"><img alt="Stargazers" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-mac-x64.dmg?style=for-the-badge&logo=macos&color=E8A2AF&logoColor=D9E0EE&labelColor=302D41"></a>
+    </td>
+  </table>
+  
+All binaries support auto-updates.
 
-The client can also be built from source for individual platforms.\
-Make sure you have [Git CLI](https://git-scm.com/downloads), [NodeJS](https://nodejs.org/en/download/) and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) installed.
+Release notes for the latest release can be found [here](https://github.com/darkguy10/BotClient/releases/latest/).
 
-1. Clone the repository and cd into it
+&nbsp;
+
+### 🔧 Building from Source
+
+The client can also be built from source for individual platforms.
+
+#### Prerequisites
+
+-   [Git CLI](https://git-scm.com/downloads)
+-   [NodeJS](https://nodejs.org/en/download/)
+-   [Yarn](https://classic.yarnpkg.com/lang/en/docs/install)
+
+#### Building
+
+1. Clone the repository and cd into it.
 
 ```
 git clone https://github.com/DarkGuy10/BotClient.git
 cd BotClient
 ```
 
-2. Install required dependencies
+2. Install required dependencies.
 
 ```
-yarn
+yarn install
 ```
 
-3. Run the build script
+3. Run the build script.
 
 ```
 yarn build
@@ -69,46 +130,62 @@ yarn build
 
 The compiled app is in the `dist/` folder.
 
-## Creating a bot
+&nbsp;
 
-If you already have a bot, skip this step.
+### 🚀 Setting Up
 
-1. Log into the Discord Developer Portal
+#### Prerequisites
 
-2. Create a new application
+Your bot must have all three [Privileged Gateway Intents](https://discordjs.guide/popular-topics/intents.html#privileged-intents) enabled.
 
-![New Application](assets/discordapp.png)
+#### Logging in
 
-3. Inside your application go to `Bot` section and create a new Bot. Click the "Copy" button to copy your bot's token and save it somewhere; you'll need this to login later. **Don't share it with anyone!**
+Once you have downloaded and installed the client, simply run it from the start menu or any app launcher.
 
-![Create A Bot](assets/bot.png)
+You should be prompted by a login screen, enter your bot's token and hit enter.
 
-4. Now Scroll down a bit to the `Privileged Gateway Intents` section and enable all three of them. Make sure to save afterwards.
+That's literally all there is to it! ✨ <br />
+If you have any problems or questions about the client, feel free to join our [support server](https://discord.com/invite/aZSrxwNUFD) on Discord.
 
-![Intents](assets/intents.png)
+&nbsp;
 
-Congrats! You're done setting up your own Discord Bot! ✨
+#### 📚 FAQs
 
-## Setting up BotClient
+-   Q: I'm getting `[DISALLOWED_INTENTS]` error, how do I fix this?
 
-**The botclient needs privileged gateway intents to be enabled, so make sure you have all three of them checked.**
+    -   A: Your bot must have all three [Privileged Gateway Intents](https://discordjs.guide/popular-topics/intents.html#privileged-intents) enabled.
 
-![Intents](assets/intents.png)
+-   Q: The client is stuck on loading screen, how do I fix this?
 
-Once you have downloaded and installed the client, simply run it from start menu or any app launcher.\
-You should be prompted by a login screen, enter your bot's token in the field and hit Login.
+    -   A: This happens because of mis-configured appdata. Clear the client appdata by deleting your `%userprofile%\AppData\Roaming\BotClient` folder if you're on windows,`~/.config/BotClient` folder for linux or `~/Library/Application Support/BotClient` for mac.
 
-![Login](assets/login.png)
+-   Q: Is there a website version of this client?
 
-You can logout using this _very obvious_ button here
+    -   A: Nope, and there won't be one in the future, reasons being it's too much work and simply not worth it.
 
-![Logout](assets/logout.png)
+-   Q: What about Android or iOS?
+    -   A: No support for mobile devices, and will never be added either.
 
-Thats all there is to it! ✨\
-Keep in mind that the project is still in early development and is bound to have bugs.\
-If you have any problems or questions about the BotClient feel free to join our [support server](https://discord.com/invite/aZSrxwNUFD) on Discord.
+&nbsp;
 
-## Contributors ✨
+### 📜 License
+
+<a href="https://github.com/darkguy10/BotClient/blob/main/LICENSE"><img src="https://img.shields.io/github/license/darkguy10/BotClient?style=for-the-badge&labelColor=302D41&color=C9CBFF"/></a>
+
+BotClient is released under the MIT license, which grants the following permissions:
+
+-   Commercial use
+-   Distribution
+-   Modification
+-   Private use
+
+For more convoluted language, see the [LICENSE](https://github.com/darkguy10/BotClient/blob/main/LICENSE).
+
+&nbsp;
+
+### 💝 Contributors
+
+<a href="#-contributors"><img alt="GitHub contributors (via allcontributors.org)" src="https://img.shields.io/github/all-contributors/darkguy10/BotClient?style=for-the-badge&labelColor=302D41&color=B1E1A6"></a>
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
