@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Login, Layout, AlertManager } from './..'
+import { Login, Layout, AlertManager, TooltipManager } from '..'
 import { AppData } from './../../services/'
 import Markdown from 'markdown-to-jsx'
 import styles from './App.module.css'
@@ -16,11 +16,19 @@ class App extends Component {
 			clientUser: null,
 			clientIsReady: false,
 			alerts: [],
+			tooltip: null,
 		}
 
 		this.handleLogin = token => {
 			ipcRenderer.send('login', token)
 		}
+
+		// rawTooltios: {content: string, position: 'top'|'right'|'bottom'|'left', ref: ReactRef, listItem: ?boolean}
+		this.createTooltip = rawTooltip =>
+			this.setState({ ...this.state, tooltip: rawTooltip })
+
+		this.destroyTooltip = () =>
+			this.setState({ ...this.state, tooltip: null })
 
 		/**
 		 * Push an alert.
@@ -87,7 +95,7 @@ class App extends Component {
 	}
 
 	render() {
-		const { token, clientIsReady, clientUser } = this.state
+		const { token, clientIsReady, clientUser, tooltip } = this.state
 		return (
 			<>
 				{token ? (
@@ -101,12 +109,19 @@ class App extends Component {
 												<Layout
 													clientUser={clientUser}
 													pushAlert={this.pushAlert}
+													createTooltip={
+														this.createTooltip
+													}
+													destroyTooltip={
+														this.destroyTooltip
+													}
 													AppState={this.state}
 												/>
 											</div>
 										</div>
 									</div>
 								</div>
+								<TooltipManager tooltip={tooltip} />
 							</div>
 						</div>
 					) : (

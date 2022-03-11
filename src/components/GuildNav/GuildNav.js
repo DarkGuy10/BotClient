@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, createRef } from 'react'
 import styles from './GuildNav.module.css'
 import logoTransparent from './../../assets/images/logo-transparent.png'
 import logoAnimated from './../../assets/images/logo-animated.gif'
@@ -7,8 +7,10 @@ const { ipcRenderer } = window.require('electron')
 function ListItem(props) {
 	const [hover, updateHover] = useState(false)
 
+	const selfRef = createRef()
+
 	return (
-		<div className={styles.listItem}>
+		<div className={styles.listItem} ref={selfRef}>
 			<div className={styles.pill}>
 				<span
 					className={
@@ -30,8 +32,19 @@ function ListItem(props) {
 						props.selected ? styles.selected : ''
 					}`}
 					onClick={() => props.openHome()}
-					onMouseEnter={() => updateHover(true)}
-					onMouseLeave={() => updateHover(false)}
+					onMouseEnter={() => {
+						updateHover(true)
+						props.createTooltip({
+							position: 'right',
+							listItem: true,
+							content: 'Direct Messages',
+							ref: selfRef,
+						})
+					}}
+					onMouseLeave={() => {
+						updateHover(false)
+						props.destroyTooltip()
+					}}
 				/>
 			) : props.guild.iconURL ? (
 				<img
@@ -41,8 +54,19 @@ function ListItem(props) {
 						props.selected ? styles.selected : ''
 					}`}
 					onClick={() => props.selectGuild(props.guild.id)}
-					onMouseEnter={() => updateHover(true)}
-					onMouseLeave={() => updateHover(false)}
+					onMouseEnter={() => {
+						updateHover(true)
+						props.createTooltip({
+							position: 'right',
+							listItem: true,
+							content: props.guild.name,
+							ref: selfRef,
+						})
+					}}
+					onMouseLeave={() => {
+						updateHover(false)
+						props.destroyTooltip()
+					}}
 				/>
 			) : (
 				<div
@@ -52,8 +76,19 @@ function ListItem(props) {
 					onClick={() => {
 						props.selectGuild(props.guild.id)
 					}}
-					onMouseEnter={() => updateHover(true)}
-					onMouseLeave={() => updateHover(false)}
+					onMouseEnter={() => {
+						updateHover(true)
+						props.createTooltip({
+							position: 'right',
+							listItem: true,
+							content: props.guild.name,
+							ref: selfRef,
+						})
+					}}
+					onMouseLeave={() => {
+						updateHover(false)
+						props.destroyTooltip()
+					}}
 				>
 					<div className={styles.acronym}>
 						{props.guild.name
@@ -81,7 +116,14 @@ class GuildNav extends Component {
 
 	render() {
 		const { guilds } = this.state
-		const { currentGuild, selectGuild, openHome, isHomeOpen } = this.props
+		const {
+			currentGuild,
+			selectGuild,
+			openHome,
+			isHomeOpen,
+			createTooltip,
+			destroyTooltip,
+		} = this.props
 		return (
 			<nav className={styles.guildNav}>
 				<ul className={styles.tree}>
@@ -90,6 +132,8 @@ class GuildNav extends Component {
 							home
 							openHome={openHome}
 							selected={isHomeOpen}
+							createTooltip={createTooltip}
+							destroyTooltip={destroyTooltip}
 						/>
 						<div className={styles.guildSeparatorWrapper}>
 							<div className={styles.guildSeperator}></div>
@@ -101,6 +145,8 @@ class GuildNav extends Component {
 									guild={guild}
 									selected={guild.id === currentGuild?.id}
 									selectGuild={selectGuild}
+									createTooltip={createTooltip}
+									destroyTooltip={destroyTooltip}
 								/>
 							))}
 						</div>

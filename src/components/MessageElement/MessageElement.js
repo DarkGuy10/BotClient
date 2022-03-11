@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, createRef } from 'react'
 import styles from './MessageElement.module.css'
 import {
 	DiscordAttachment,
@@ -30,6 +30,10 @@ class MessageElement extends Component {
 			},
 			hover: false,
 		}
+
+		this.replyRef = createRef()
+		this.copyLinkRef = createRef()
+		this.copyIDRef = createRef()
 
 		this.updateHover = newHoverState =>
 			this.setState({ ...this.state, hover: newHoverState })
@@ -124,7 +128,13 @@ class MessageElement extends Component {
 	}
 
 	render() {
-		const { message, handleReply, replying } = this.props
+		const {
+			message,
+			handleReply,
+			replying,
+			createTooltip,
+			destroyTooltip,
+		} = this.props
 		const {
 			id,
 			isDM,
@@ -166,16 +176,19 @@ class MessageElement extends Component {
 							<div
 								className={styles.button}
 								onClick={() => handleReply(message)}
+								ref={this.replyRef}
+								onMouseEnter={() => {
+									createTooltip({
+										position: 'top',
+										content: 'Reply',
+										ref: this.replyRef,
+									})
+								}}
+								onMouseLeave={() => {
+									destroyTooltip()
+								}}
 							>
 								<SVGReplyButton />
-							</div>
-							<div
-								className={styles.button}
-								onClick={() =>
-									navigator.clipboard.writeText(id)
-								}
-							>
-								<SVGIDButton />
 							</div>
 							{!isDM && (
 								<div
@@ -185,10 +198,40 @@ class MessageElement extends Component {
 											`https://discord.com/channels/${message.guildId}/${message.channelId}/${id}`
 										)
 									}
+									ref={this.copyLinkRef}
+									onMouseEnter={() => {
+										createTooltip({
+											position: 'top',
+											content: 'Copy Link',
+											ref: this.copyLinkRef,
+										})
+									}}
+									onMouseLeave={() => {
+										destroyTooltip()
+									}}
 								>
 									<SVGLinkButton />
 								</div>
 							)}
+							<div
+								className={styles.button}
+								onClick={() =>
+									navigator.clipboard.writeText(id)
+								}
+								ref={this.copyIDRef}
+								onMouseEnter={() => {
+									createTooltip({
+										position: 'top',
+										content: 'Copy ID',
+										ref: this.copyIDRef,
+									})
+								}}
+								onMouseLeave={() => {
+									destroyTooltip()
+								}}
+							>
+								<SVGIDButton />
+							</div>
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,116 @@
+.layerContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: none !important;
+	pointer-events: none;
+	z-index: 1002;
+}
+
+.layer {
+	pointer-events: none;
+}
+
+.tooltip {
+	position: relative;
+	border-radius: 5px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	max-width: 190px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	z-index: 1002;
+	will-change: opacity, transform;
+	pointer-events: none;
+	-webkit-box-shadow: var(--elevation-high);
+	box-shadow: var(--elevation-high);
+	color: var(--text-normal);
+	animation: popup 0.07s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tooltipRight {
+	transform-origin: 0 50%;
+	-webkit-transform-origin: 0 50%;
+}
+
+.tooltipTop {
+	-webkit-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+}
+
+.tooltipBottom {
+	transform-origin: 0 50%;
+	-webkit-transform-origin: 0 50%;
+}
+
+.tooltipPrimary {
+	background-color: var(--background-floating);
+}
+
+.listItemTooltip {
+	max-width: 196px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 600;
+	word-wrap: break-word;
+	color: var(--text-normal);
+}
+
+.tooltipPrimary .tooltipPointer {
+	border-top-color: var(--background-floating);
+}
+
+.tooltipRight .tooltipPointer {
+	position: absolute;
+	right: 100%;
+	top: 50%;
+	margin-top: -5px;
+	border-left-width: 5px;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.tooltipTop .tooltipPointer {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+}
+
+.tooltipBottom .tooltipPointer {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-top-width: 5px;
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.tooltipPointer {
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	pointer-events: none;
+}
+
+.tooltipContent {
+	padding: 8px 12px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+@keyframes popup {
+	0% {
+		transform: scale(0.9);
+		opacity: 0.6;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}

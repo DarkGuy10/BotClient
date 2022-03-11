@@ -20,6 +20,7 @@ import UserSettings from './UserSettings/UserSettings'
 import ReplyBar from './ReplyBar/ReplyBar'
 import DMListItem from './DMListItem/DMListItem'
 import ChannelListItem from './ChannelListItem/ChannelListItem'
+import TooltipManager from './TooltipManager/TooltipManager'
 
 export {
 	App,
@@ -44,4 +45,5 @@ export {
 	ReplyBar,
 	DMListItem,
 	ChannelListItem,
+	TooltipManager,
 }

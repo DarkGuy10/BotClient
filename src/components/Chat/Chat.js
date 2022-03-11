@@ -94,6 +94,10 @@ class Chat extends Component {
 					this.scrollToBottom()
 			}
 		})
+
+		this.githubLinkRef = createRef()
+		this.discordLinkRef = createRef()
+		this.helpLinkRef = createRef()
 	}
 
 	componentDidMount() {
@@ -110,7 +114,7 @@ class Chat extends Component {
 	}
 
 	render() {
-		const { channel, pushAlert } = this.props
+		const { channel, pushAlert, createTooltip, destroyTooltip } = this.props
 		const { loadedMessages, replyingTo } = this.state
 		return (
 			<div className={styles.chat}>
@@ -132,17 +136,56 @@ class Chat extends Component {
 						) : null}
 					</div>
 					<div className={styles.toolbar}>
-						<div className={`${styles.icon} ${styles.iconWrapper}`}>
+						<div
+							className={`${styles.icon} ${styles.iconWrapper}`}
+							ref={this.discordLinkRef}
+							onMouseEnter={() => {
+								createTooltip({
+									position: 'bottom',
+									content: 'Support Server',
+									ref: this.discordLinkRef,
+								})
+							}}
+							onMouseLeave={() => {
+								destroyTooltip()
+							}}
+						>
 							<a href="https://discord.gg/aZSrxwNUFD">
 								<SVGDiscordLogo />
 							</a>
 						</div>
-						<div className={`${styles.icon} ${styles.iconWrapper}`}>
+						<div
+							className={`${styles.icon} ${styles.iconWrapper}`}
+							ref={this.githubLinkRef}
+							onMouseEnter={() => {
+								createTooltip({
+									position: 'bottom',
+									content: 'GitHub Repo',
+									ref: this.githubLinkRef,
+								})
+							}}
+							onMouseLeave={() => {
+								destroyTooltip()
+							}}
+						>
 							<a href="https://github.com/DarkGuy10/BotClient/">
 								<SVGGithubLogo />
 							</a>
 						</div>
-						<div className={`${styles.icon} ${styles.iconWrapper}`}>
+						<div
+							className={`${styles.icon} ${styles.iconWrapper}`}
+							ref={this.helpLinkRef}
+							onMouseEnter={() => {
+								createTooltip({
+									position: 'bottom',
+									content: 'Help',
+									ref: this.helpLinkRef,
+								})
+							}}
+							onMouseLeave={() => {
+								destroyTooltip()
+							}}
+						>
 							<a href="https://github.com/DarkGuy10/BotClient#readme">
 								<SVGHelp />
 							</a>
@@ -161,6 +204,8 @@ class Chat extends Component {
 									key={index}
 									message={message}
 									handleReply={this.handleReply}
+									createTooltip={createTooltip}
+									destroyTooltip={destroyTooltip}
 									replying={replyingTo?.id === message.id}
 								/>
 							))}

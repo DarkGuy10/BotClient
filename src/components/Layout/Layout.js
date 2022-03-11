@@ -100,7 +100,13 @@ class Layout extends Component {
 			isUserSettingsOpen,
 			isHomeOpen,
 		} = this.state
-		const { clientUser, pushAlert, AppState } = this.props
+		const {
+			clientUser,
+			pushAlert,
+			createTooltip,
+			destroyTooltip,
+			AppState,
+		} = this.props
 
 		return (
 			<>
@@ -108,6 +114,8 @@ class Layout extends Component {
 					currentGuild={currentGuild}
 					selectGuild={this.selectGuild}
 					pushAlert={pushAlert}
+					createTooltip={createTooltip}
+					destroyTooltip={destroyTooltip}
 					isHomeOpen={isHomeOpen}
 					openHome={this.openHome}
 				/>
@@ -127,6 +135,8 @@ class Layout extends Component {
 							</div>
 							<UserSection
 								clientUser={clientUser}
+								createTooltip={createTooltip}
+								destroyTooltip={destroyTooltip}
 								openUserSettings={this.openUserSettings}
 							/>
 						</div>
@@ -134,6 +144,8 @@ class Layout extends Component {
 						(isHomeOpen && currentDM) ? (
 							<Chat
 								channel={currentChannel || currentDM}
+								createTooltip={createTooltip}
+								destroyTooltip={destroyTooltip}
 								pushAlert={pushAlert}
 							/>
 						) : null}
