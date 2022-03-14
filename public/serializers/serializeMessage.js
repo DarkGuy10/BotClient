@@ -9,8 +9,15 @@ const serializeGuildMember = require('./serializeGuildMember')
  */
 const serializeMessage = async message => {
 	const { type, author, member, stickers, embeds, mentions, guild } = message
-	let repliesTo
-	if (type === 'REPLY') repliesTo = await message.fetchReference()
+
+	let repliesTo = null
+	try {
+		if (type === 'REPLY') repliesTo = await message.fetchReference()
+	} catch (error) {
+		// Fix for #31
+		// Man... I want to put an easter bug here, but idk
+	}
+
 	return {
 		...message,
 		author: {
@@ -55,21 +62,20 @@ const serializeMessage = async message => {
 						guild.me.roles.cache.has(role.id)
 				) || mentions.users.has(message.client.user.id),
 		},
-		repliesTo:
-			type === 'REPLY'
-				? {
-						...repliesTo,
-						author: {
-							...repliesTo.author,
-							avatarURL: repliesTo.author.displayAvatarURL(),
-							isVerifiedBot:
-								repliesTo.author.flags?.has('VERIFIED_BOT'),
-						},
-						member: repliesTo.member
-							? serializeGuildMember(repliesTo.member)
-							: null,
-				  }
-				: null,
+		repliesTo: repliesTo
+			? {
+					...repliesTo,
+					author: {
+						...repliesTo.author,
+						avatarURL: repliesTo.author.displayAvatarURL(),
+						isVerifiedBot:
+							repliesTo.author.flags?.has('VERIFIED_BOT'),
+					},
+					member: repliesTo.member
+						? serializeGuildMember(repliesTo.member)
+						: null,
+			  }
+			: null,
 	}
 }
 
