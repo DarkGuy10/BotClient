@@ -8,7 +8,7 @@ const serializeGuildMember = require('./serializeGuildMember')
  * @returns
  */
 const serializeGuildChannel = channel => {
-	const { viewable, position, id, guild, members } = channel
+	const { viewable, position, id, guild, members, type } = channel
 	return {
 		...channel,
 		viewable: viewable,
@@ -17,9 +17,12 @@ const serializeGuildChannel = channel => {
 			.permissionsFor(guild.roles.everyone)
 			.has('VIEW_CHANNEL'),
 		isRules: id === guild.rulesChannelId,
-		members: [...members.values()].map(member =>
-			serializeGuildMember(member)
-		),
+		members:
+			type === 'GUILD_VOICE' && members.values
+				? [...members.values()].map(member =>
+						serializeGuildMember(member)
+				  )
+				: [],
 	}
 }
 
