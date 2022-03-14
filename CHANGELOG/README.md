@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.8.2-alpha
+
+-   fix: (#31)
+
 ## v0.8.1-alpha
 
 -   fix: some non-voice channels have nullish member props, causing channel list to become empty (#31)
