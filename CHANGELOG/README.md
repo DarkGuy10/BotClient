@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.8.1-alpha
+
+-   fix: some non-voice channels have nullish member props, causing channel list to become empty (#31)
+-   fix: unhandled promise rejection while fetching message-reference (#31)
+
 ## v0.8.0-alpha
 
 -   Added emoji parsing
