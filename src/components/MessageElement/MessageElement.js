@@ -207,7 +207,7 @@ class MessageElement extends Component {
 						replying ? styles.replying : ''
 					}`}
 				>
-					{type === 'REPLY' ? (
+					{type === 'REPLY' && repliesTo ? (
 						<DiscordReply
 							slot="reply"
 							author={
