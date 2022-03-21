@@ -2,9 +2,10 @@ name: Build/release
 
 on:
     push:
-        branches:
-            - release/*
+        branches-ignore:
+            - main
         tags:
+            - v*
     pull_request:
         branches:
             - main
