@@ -115,7 +115,6 @@ class App extends Component {
 													destroyTooltip={
 														this.destroyTooltip
 													}
-													AppState={this.state}
 												/>
 											</div>
 										</div>

@@ -29,7 +29,7 @@ class UserSettings extends Component {
 	}
 
 	render() {
-		const { closeUserSettings, AppState } = this.props
+		const { closeUserSettings } = this.props
 		const { selected } = this.state
 		const { label: SelectedTitle, Component: SelectedSetting } = selected
 		return (
@@ -81,9 +81,7 @@ class UserSettings extends Component {
 											</h1>
 										</div>
 										<div className={styles.children}>
-											<SelectedSetting
-												AppState={AppState}
-											/>
+											<SelectedSetting />
 										</div>
 									</div>
 								</main>

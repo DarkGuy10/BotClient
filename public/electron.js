@@ -283,6 +283,12 @@ ipcMain.on('AppData', (event, method, arg) => {
 	}
 })
 
+// Specially added for saving current token
+// Since it should not leak from App state
+ipcMain.on('saveCurrentToken', () => {
+	appData.set('token', client.token)
+})
+
 ipcMain.handle('fetchUser', async (event, id) => {
 	try {
 		const user = await client.users.fetch(id)

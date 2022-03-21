@@ -100,13 +100,8 @@ class Layout extends Component {
 			isUserSettingsOpen,
 			isHomeOpen,
 		} = this.state
-		const {
-			clientUser,
-			pushAlert,
-			createTooltip,
-			destroyTooltip,
-			AppState,
-		} = this.props
+		const { clientUser, pushAlert, createTooltip, destroyTooltip } =
+			this.props
 
 		return (
 			<>
@@ -152,10 +147,7 @@ class Layout extends Component {
 					</div>
 				</div>
 				{isUserSettingsOpen ? (
-					<UserSettings
-						closeUserSettings={this.closeUserSettings}
-						AppState={AppState}
-					/>
+					<UserSettings closeUserSettings={this.closeUserSettings} />
 				) : null}
 			</>
 		)
