@@ -1,4 +1,4 @@
-.wrapper {
+.bootloopWrapper {
 	height: auto;
 	width: 250px;
 	position: fixed;
@@ -10,11 +10,11 @@
 	align-items: center;
 }
 
-.media {
+.bootloopMedia {
 	width: 65%;
 }
 
-.caption {
+.bootloopCaption {
 	margin: 0;
 	margin-top: 20px;
 	color: var(--text-normal);

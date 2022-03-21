@@ -3,8 +3,7 @@ import { Login, Layout, AlertManager, TooltipManager } from '..'
 import { AppData } from './../../services/'
 import Markdown from 'markdown-to-jsx'
 import styles from './App.module.css'
-import bootloop1 from './../../assets/images/bootloop1.gif'
-import bootloop2 from './../../assets/images/bootloop2.gif'
+import bootloop from './../../assets/images/bootloop.gif'
 const { ipcRenderer } = window.require('electron')
 
 class App extends Component {
@@ -124,7 +123,16 @@ class App extends Component {
 							</div>
 						</div>
 					) : (
-						<BootLoop />
+						<div className={styles.bootloopWrapper}>
+							<img
+								src={bootloop}
+								alt=""
+								className={styles.bootloopMedia}
+							/>
+							<p className={styles.bootloopCaption}>
+								Loading BotClient
+							</p>
+						</div>
 					)
 				) : (
 					<Login
@@ -137,16 +145,4 @@ class App extends Component {
 		)
 	}
 }
-
-const BootLoop = () => {
-	const bootloops = [bootloop1, bootloop2]
-	const bootloop = bootloops[Math.floor(Math.random() * bootloops.length)]
-	return (
-		<div className={styles.wrapper}>
-			<img src={bootloop} alt="" className={styles.media} />
-			<p className={styles.caption}>Loading BotClient...</p>
-		</div>
-	)
-}
-
 export default App
