@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v0.8.3-alpha
+
+-   feat: add tooltips
+-   refactor: now App state is not provided to UserSettings
+-   refactor: remove useless styles from index.css
+-   chore: update dependencies
+-   chore: remove extra assets
+-   chore: update build.yml
+
 ## v0.8.2-alpha
 
 -   fix: (#31)
