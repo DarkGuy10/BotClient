@@ -616,29 +616,3 @@ img.twemoji {
 .discord-highlight-mention {
 	border-left: 2px solid var(--info-warning-foreground);
 }
-
-.discord-author-username {
-	letter-spacing: normal !important;
-	font-size: 1rem !important;
-	line-height: 1.375rem;
-}
-
-.discord-embed-author a {
-	font-weight: 600 !important;
-}
-
-.discord-embed-footer {
-	font-size: 0.75rem;
-	line-height: 1rem;
-	font-weight: 500;
-	color: var(--text-normal);
-}
-
-.discord-replied-message-username {
-	font-weight: 500;
-	color: var(--header-primary);
-}
-
-.discord-custom-emoji-image {
-	object-fit: contain;
-}
