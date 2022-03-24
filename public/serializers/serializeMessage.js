@@ -27,6 +27,7 @@ const serializeMessage = async message => {
 		},
 		member: member ? serializeGuildMember(member) : null,
 		isDM: message.channel.type === 'DM',
+		deletable: message.deletable,
 		embeds: embeds.map(embed => {
 			return {
 				...embed,

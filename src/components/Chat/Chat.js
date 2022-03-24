@@ -95,6 +95,20 @@ class Chat extends Component {
 			}
 		})
 
+		// Remove messages from loadedMessages *if* they belong from
+		// the current channel
+		ipcRenderer.on('messageDelete', (event, messageId, channelId) => {
+			const { loadedMessages } = this.state
+			const { channel } = this.props
+			if (channelId !== channel.id || !this._isMounted) return
+			this.setState({
+				...this.state,
+				loadedMessages: loadedMessages.filter(
+					message => message.id !== messageId
+				),
+			})
+		})
+
 		this.githubLinkRef = createRef()
 		this.discordLinkRef = createRef()
 		this.helpLinkRef = createRef()

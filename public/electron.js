@@ -265,6 +265,21 @@ ipcMain.on('messageCreate', async (event, messageOptions) => {
 	}
 })
 
+ipcMain.on('messageDelete', async (event, messageId) => {
+	try {
+		if (currentChannel) await currentChannel.messages.delete(messageId)
+		else if (currentDM) await currentDM.messages.delete(messageId)
+		else
+			throw new Error({
+				code: 'NO_SELECTED_CHANNEL',
+				message: 'Select a DM or GUILD_TEXT channel first',
+			})
+	} catch (error) {
+		log.error(error)
+		event.reply('error', `[${error.code}] ${error.message}`)
+	}
+})
+
 ipcMain.on('AppData', (event, method, arg) => {
 	switch (method) {
 		case 'set':

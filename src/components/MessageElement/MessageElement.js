@@ -12,7 +12,12 @@ import {
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
 import { parseTimestamp, parseTwemojis, decimalToHexColor } from './../../utils'
-import { SVGIDButton, SVGLinkButton, SVGReplyButton } from '../SVGHandler'
+import {
+	SVGIDButton,
+	SVGLinkButton,
+	SVGReplyButton,
+	SVGTrashCan,
+} from '../SVGHandler'
 const { toHTML } = require('@darkguy10/discord-markdown')
 const { ipcRenderer } = window.require('electron')
 const HtmlToReactParser = require('html-to-react').Parser
@@ -34,6 +39,7 @@ class MessageElement extends Component {
 		this.replyRef = createRef()
 		this.copyLinkRef = createRef()
 		this.copyIDRef = createRef()
+		this.deleteRef = createRef()
 
 		this.updateHover = newHoverState =>
 			this.setState({ ...this.state, hover: newHoverState })
@@ -138,6 +144,7 @@ class MessageElement extends Component {
 		const {
 			id,
 			isDM,
+			deletable,
 			embeds,
 			type,
 			author,
@@ -232,6 +239,27 @@ class MessageElement extends Component {
 							>
 								<SVGIDButton />
 							</div>
+							{deletable && (
+								<div
+									className={styles.button}
+									onClick={() =>
+										ipcRenderer.send('messageDelete', id)
+									}
+									ref={this.deleteRef}
+									onMouseEnter={() => {
+										createTooltip({
+											position: 'top',
+											content: 'Delete',
+											ref: this.deleteRef,
+										})
+									}}
+									onMouseLeave={() => {
+										destroyTooltip()
+									}}
+								>
+									<SVGTrashCan />
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
