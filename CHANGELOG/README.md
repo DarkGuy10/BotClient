@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.9.0-alpha
+
+-   feat: delete messages
+-   fix: add highlighting on `@everyone` mentions
+-   feat: directly open DMs from message
+-   refactor: add separate component for MessageAction
+-   feat: render common system messages
+
 ## v0.8.3-alpha
 
 -   feat: add tooltips
