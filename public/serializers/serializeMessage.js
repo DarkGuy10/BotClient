@@ -57,11 +57,13 @@ const serializeMessage = async message => {
 			everyone: mentions.everyone,
 			channels: [...mentions.channels],
 			me:
+				mentions.everyone ||
 				mentions.roles.find(
 					role =>
 						guild.me.roles.botRole?.id === role.id ||
 						guild.me.roles.cache.has(role.id)
-				) || mentions.users.has(message.client.user.id),
+				) ||
+				mentions.users.has(message.client.user.id),
 		},
 		repliesTo: repliesTo
 			? {
