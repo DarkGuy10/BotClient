@@ -9,6 +9,7 @@ import {
 	DiscordEmbedFooter,
 	DiscordMessage,
 	DiscordReply,
+	DiscordSystemMessage,
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
 import { parseTimestamp, parseTwemojis, decimalToHexColor } from './../../utils'
@@ -143,6 +144,7 @@ class MessageElement extends Component {
 			stickers,
 			attachments,
 			mentions,
+			system,
 		} = message
 		const { hover } = this.state
 
@@ -159,201 +161,248 @@ class MessageElement extends Component {
 
 		return (
 			<>
-				<MessageAction
-					message={message}
-					handleReply={handleReply}
-					createTooltip={createTooltip}
-					destroyTooltip={destroyTooltip}
-					selectDM={selectDM}
-					updateHover={this.updateHover}
-					hover={hover}
-				/>
-				<DiscordMessage
-					author={member?.displayName ?? author.username}
-					avatar={author.avatarURL}
-					bot={author.bot}
-					verified={author.isVerifiedBot}
-					timestamp={parseTimestamp(createdTimestamp)}
-					edited={editedTimestamp ? true : false}
-					roleColor={member?.color ? member.hexColor : '#fff'}
-					highlight={mentions.me}
-					onMouseEnter={() => this.updateHover(true)}
-					onMouseLeave={() => this.updateHover(false)}
-					className={`${hover ? styles.messageHover : ''} ${
-						replying ? styles.replying : ''
-					}`}
-				>
-					{type === 'REPLY' && repliesTo ? (
-						<DiscordReply
-							slot="reply"
-							author={
-								repliesTo.member?.displayName ??
-								repliesTo.author.username
-							}
-							avatar={repliesTo.author.avatarURL}
-							bot={repliesTo.author.bot}
-							verified={repliesTo.author.isVerifiedBot}
-							edited={repliesTo.editedTimestamp ? true : false}
-							roleColor={
-								repliesTo.member?.color
-									? repliesTo.member.hexColor
-									: ''
-							}
+				{!system && (
+					<MessageAction
+						message={message}
+						handleReply={handleReply}
+						createTooltip={createTooltip}
+						destroyTooltip={destroyTooltip}
+						selectDM={selectDM}
+						updateHover={this.updateHover}
+						hover={hover}
+					/>
+				)}
+				{type === 'GUILD_MEMBER_JOIN' ? (
+					<DiscordSystemMessage
+						type="join"
+						className="base-discord-message"
+						timestamp={parseTimestamp(createdTimestamp)}
+					>
+						A wild{' '}
+						<i
+							style={{
+								color: member?.color ? member.hexColor : '#fff',
+							}}
 						>
-							{parseTwemojis(shorten(repliesTo))}
-						</DiscordReply>
-					) : null}
+							{member?.displayName || author.username}
+						</i>{' '}
+						has appeared!
+					</DiscordSystemMessage>
+				) : type.startsWith('USER_PREMIUM_GUILD_SUBSCRIPTION') ? (
+					<DiscordSystemMessage
+						type="boost"
+						className="base-discord-message"
+						timestamp={parseTimestamp(createdTimestamp)}
+					>
+						<i
+							style={{
+								color: member?.color ? member.hexColor : '#fff',
+							}}
+						>
+							{member?.displayName || author.username}
+						</i>{' '}
+						just boosted the server!
+					</DiscordSystemMessage>
+				) : (
+					<DiscordMessage
+						author={member?.displayName || author.username}
+						avatar={author.avatarURL}
+						bot={author.bot}
+						verified={author.isVerifiedBot}
+						timestamp={parseTimestamp(createdTimestamp)}
+						edited={editedTimestamp ? true : false}
+						roleColor={member?.color ? member.hexColor : '#fff'}
+						highlight={mentions.me}
+						onMouseEnter={() => this.updateHover(true)}
+						onMouseLeave={() => this.updateHover(false)}
+						className={`base-discord-message ${
+							hover ? styles.messageHover : ''
+						} ${replying ? styles.replying : ''}`}
+					>
+						{type === 'REPLY' && repliesTo ? (
+							<DiscordReply
+								slot="reply"
+								author={
+									repliesTo.member?.displayName ??
+									repliesTo.author.username
+								}
+								avatar={repliesTo.author.avatarURL}
+								bot={repliesTo.author.bot}
+								verified={repliesTo.author.isVerifiedBot}
+								edited={
+									repliesTo.editedTimestamp ? true : false
+								}
+								roleColor={
+									repliesTo.member?.color
+										? repliesTo.member.hexColor
+										: ''
+								}
+							>
+								{parseTwemojis(shorten(repliesTo))}
+							</DiscordReply>
+						) : null}
 
-					{parseTwemojis(this.parseDiscordMarkdown())}
+						{parseTwemojis(this.parseDiscordMarkdown())}
 
-					{stickers.map((sticker, key) => (
-						<DiscordAttachment
-							key={key}
-							slot="attachments"
-							url={sticker.url}
-							width={150}
-							alt={sticker.name}
-						/>
-					))}
-
-					{imageAttachments.map((item, key) => {
-						const biggerSide =
-							item.height > item.width ? 'height' : 'width'
-						const allowance = biggerSide === 'height' ? 300 : 400
-						let sizeOptions = {}
-						sizeOptions[biggerSide] = Math.min(
-							item[biggerSide],
-							allowance
-						)
-						return (
+						{stickers.map((sticker, key) => (
 							<DiscordAttachment
 								key={key}
 								slot="attachments"
-								url={item.url}
-								alt={item.name}
-								{...sizeOptions}
+								url={sticker.url}
+								width={150}
+								alt={sticker.name}
 							/>
-						)
-					})}
+						))}
 
-					{embeds.map((embed, key) => {
-						const {
-							provider,
-							video,
-							author,
-							hexColor,
-							title,
-							footer,
-							image,
-							url,
-							timestamp,
-							thumbnail,
-							description,
-							fields,
-						} = embed
-						if (provider?.name === 'Tenor') {
+						{imageAttachments.map((item, key) => {
 							const biggerSide =
-								video.height > video.width ? 'height' : 'width'
+								item.height > item.width ? 'height' : 'width'
 							const allowance =
 								biggerSide === 'height' ? 300 : 400
-							let options = {
-								slot: 'attachments',
-								url: embed.video.url,
-							}
-							options[biggerSide] = Math.min(
-								video[biggerSide],
+							let sizeOptions = {}
+							sizeOptions[biggerSide] = Math.min(
+								item[biggerSide],
 								allowance
 							)
-							return <DiscordTenorVideo key={key} {...options} />
-						}
-						let options = {}
-						let content = ''
-						let footerOptions = { slot: 'footer' }
-						options['slot'] = 'embeds'
-						if (author?.name) options['authorName'] = author.name
+							return (
+								<DiscordAttachment
+									key={key}
+									slot="attachments"
+									url={item.url}
+									alt={item.name}
+									{...sizeOptions}
+								/>
+							)
+						})}
 
-						if (author?.iconURL)
-							options['authorImage'] = author.iconURL
+						{embeds.map((embed, key) => {
+							const {
+								provider,
+								video,
+								author,
+								hexColor,
+								title,
+								footer,
+								image,
+								url,
+								timestamp,
+								thumbnail,
+								description,
+								fields,
+							} = embed
+							if (provider?.name === 'Tenor') {
+								const biggerSide =
+									video.height > video.width
+										? 'height'
+										: 'width'
+								const allowance =
+									biggerSide === 'height' ? 300 : 400
+								let options = {
+									slot: 'attachments',
+									url: embed.video.url,
+								}
+								options[biggerSide] = Math.min(
+									video[biggerSide],
+									allowance
+								)
+								return (
+									<DiscordTenorVideo key={key} {...options} />
+								)
+							}
+							let options = {}
+							let content = ''
+							let footerOptions = { slot: 'footer' }
+							options['slot'] = 'embeds'
+							if (author?.name)
+								options['authorName'] = author.name
 
-						if (author?.url) options['authorUrl'] = author.url
+							if (author?.iconURL)
+								options['authorImage'] = author.iconURL
 
-						if (hexColor) options['color'] = hexColor
+							if (author?.url) options['authorUrl'] = author.url
 
-						if (title) options['embedTitle'] = title
+							if (hexColor) options['color'] = hexColor
 
-						if (image?.url) options['image'] = image.url
+							if (title) options['embedTitle'] = title
 
-						if (url) options['url'] = embed.url
+							if (image?.url) options['image'] = image.url
 
-						if (timestamp)
-							footerOptions['timestamp'] =
-								parseTimestamp(timestamp)
-						if (footer?.iconURL)
-							footerOptions['footerImage'] = footer.iconURL
+							if (url) options['url'] = embed.url
 
-						if (video) {
-							options['video'] = video.url
-							if (provider?.name)
-								options['provider'] = provider.name
-							if (thumbnail?.url) options['image'] = thumbnail.url
-						} else {
-							if (embed.thumbnail?.url)
-								options['thumbnail'] = embed.thumbnail.url
-							content = description
-						}
+							if (timestamp)
+								footerOptions['timestamp'] =
+									parseTimestamp(timestamp)
+							if (footer?.iconURL)
+								footerOptions['footerImage'] = footer.iconURL
 
-						let lastFieldIndex = 0
-						return (
-							<DiscordEmbed key={key} {...options}>
-								{content ? (
-									<DiscordEmbedDescription slot="description">
-										{parseTwemojis(
-											this.parseDiscordMarkdown(
-												content,
-												true
-											)
-										)}
-									</DiscordEmbedDescription>
-								) : null}
-								{fields.length ? (
-									<DiscordEmbedFields slot="fields">
-										{fields.map((field, key) => {
-											let fieldOptions = {}
-											fieldOptions['fieldTitle'] =
-												field.name
-											if (field.inline) {
-												fieldOptions['inline'] = true
-												const index =
-													!lastFieldIndex ||
-													lastFieldIndex === 3
-														? 1
-														: lastFieldIndex + 1
-												fieldOptions['inlineIndex'] =
-													index
-												lastFieldIndex = index
-											} else lastFieldIndex = 0
-											return (
-												<DiscordEmbedField
-													{...fieldOptions}
-													key={key}
-												>
-													{field.value}
-												</DiscordEmbedField>
-											)
-										})}
-									</DiscordEmbedFields>
-								) : null}
-								{footer?.text ? (
-									<DiscordEmbedFooter {...footerOptions}>
-										{footer?.text
-											? parseTwemojis(footer.text)
-											: ''}
-									</DiscordEmbedFooter>
-								) : null}
-							</DiscordEmbed>
-						)
-					})}
-				</DiscordMessage>
+							if (video) {
+								options['video'] = video.url
+								if (provider?.name)
+									options['provider'] = provider.name
+								if (thumbnail?.url)
+									options['image'] = thumbnail.url
+							} else {
+								if (embed.thumbnail?.url)
+									options['thumbnail'] = embed.thumbnail.url
+								content = description
+							}
+
+							let lastFieldIndex = 0
+							return (
+								<DiscordEmbed key={key} {...options}>
+									{content ? (
+										<DiscordEmbedDescription slot="description">
+											{parseTwemojis(
+												this.parseDiscordMarkdown(
+													content,
+													true
+												)
+											)}
+										</DiscordEmbedDescription>
+									) : null}
+									{fields.length ? (
+										<DiscordEmbedFields slot="fields">
+											{fields.map((field, key) => {
+												let fieldOptions = {}
+												fieldOptions['fieldTitle'] =
+													field.name
+												if (field.inline) {
+													fieldOptions[
+														'inline'
+													] = true
+													const index =
+														!lastFieldIndex ||
+														lastFieldIndex === 3
+															? 1
+															: lastFieldIndex + 1
+													fieldOptions[
+														'inlineIndex'
+													] = index
+													lastFieldIndex = index
+												} else lastFieldIndex = 0
+												return (
+													<DiscordEmbedField
+														{...fieldOptions}
+														key={key}
+													>
+														{field.value}
+													</DiscordEmbedField>
+												)
+											})}
+										</DiscordEmbedFields>
+									) : null}
+									{footer?.text ? (
+										<DiscordEmbedFooter {...footerOptions}>
+											{footer?.text
+												? parseTwemojis(footer.text)
+												: ''}
+										</DiscordEmbedFooter>
+									) : null}
+								</DiscordEmbed>
+							)
+						})}
+					</DiscordMessage>
+				)}
 			</>
 		)
 	}
