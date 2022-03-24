@@ -21,6 +21,7 @@ import ReplyBar from './ReplyBar/ReplyBar'
 import DMListItem from './DMListItem/DMListItem'
 import ChannelListItem from './ChannelListItem/ChannelListItem'
 import TooltipManager from './TooltipManager/TooltipManager'
+import MessageAction from './MessageAction/MessageAction'
 
 export {
 	App,
@@ -46,4 +47,5 @@ export {
 	DMListItem,
 	ChannelListItem,
 	TooltipManager,
+	MessageAction,
 }

@@ -1,4 +1,4 @@
-import { Component, createRef } from 'react'
+import { Component } from 'react'
 import styles from './MessageElement.module.css'
 import {
 	DiscordAttachment,
@@ -12,13 +12,7 @@ import {
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
 import { parseTimestamp, parseTwemojis, decimalToHexColor } from './../../utils'
-import {
-	SVGIDButton,
-	SVGLinkButton,
-	SVGOpenDMButton,
-	SVGReplyButton,
-	SVGTrashCan,
-} from '../SVGHandler'
+import MessageAction from '../MessageAction/MessageAction'
 const { toHTML } = require('@darkguy10/discord-markdown')
 const { ipcRenderer } = window.require('electron')
 const HtmlToReactParser = require('html-to-react').Parser
@@ -36,12 +30,6 @@ class MessageElement extends Component {
 			},
 			hover: false,
 		}
-
-		this.replyRef = createRef()
-		this.openDMRef = createRef()
-		this.copyLinkRef = createRef()
-		this.copyIDRef = createRef()
-		this.deleteRef = createRef()
 
 		this.updateHover = newHoverState =>
 			this.setState({ ...this.state, hover: newHoverState })
@@ -145,9 +133,6 @@ class MessageElement extends Component {
 			destroyTooltip,
 		} = this.props
 		const {
-			id,
-			isDM,
-			deletable,
 			embeds,
 			type,
 			author,
@@ -174,117 +159,15 @@ class MessageElement extends Component {
 
 		return (
 			<>
-				<div className={styles.buttonContainer}>
-					<div
-						className={`${styles.buttons} ${
-							hover ? styles.hover : ''
-						}`}
-						onMouseEnter={() => this.updateHover(true)}
-						onMouseLeave={() => this.updateHover(false)}
-					>
-						<div className={styles.wrapper}>
-							<div
-								className={styles.button}
-								onClick={() => handleReply(message)}
-								ref={this.replyRef}
-								onMouseEnter={() => {
-									createTooltip({
-										position: 'top',
-										content: 'Reply',
-										ref: this.replyRef,
-									})
-								}}
-								onMouseLeave={() => {
-									destroyTooltip()
-								}}
-							>
-								<SVGReplyButton />
-							</div>
-							{!isDM && (
-								<>
-									<div
-										className={styles.button}
-										onClick={() => selectDM(author.id)}
-										ref={this.openDMRef}
-										onMouseEnter={() => {
-											createTooltip({
-												position: 'top',
-												content: 'Open DM',
-												ref: this.openDMRef,
-											})
-										}}
-										onMouseLeave={() => {
-											destroyTooltip()
-										}}
-									>
-										<SVGOpenDMButton />
-									</div>
-									<div
-										className={styles.button}
-										onClick={() =>
-											navigator.clipboard.writeText(
-												`https://discord.com/channels/${message.guildId}/${message.channelId}/${id}`
-											)
-										}
-										ref={this.copyLinkRef}
-										onMouseEnter={() => {
-											createTooltip({
-												position: 'top',
-												content: 'Copy Link',
-												ref: this.copyLinkRef,
-											})
-										}}
-										onMouseLeave={() => {
-											destroyTooltip()
-										}}
-									>
-										<SVGLinkButton />
-									</div>
-								</>
-							)}
-							<div
-								className={styles.button}
-								onClick={() =>
-									navigator.clipboard.writeText(id)
-								}
-								ref={this.copyIDRef}
-								onMouseEnter={() => {
-									createTooltip({
-										position: 'top',
-										content: 'Copy ID',
-										ref: this.copyIDRef,
-									})
-								}}
-								onMouseLeave={() => {
-									destroyTooltip()
-								}}
-							>
-								<SVGIDButton />
-							</div>
-							{deletable && (
-								<div
-									className={styles.button}
-									onClick={() =>
-										ipcRenderer.send('messageDelete', id)
-									}
-									ref={this.deleteRef}
-									onMouseEnter={() => {
-										createTooltip({
-											position: 'top',
-											content: 'Delete',
-											ref: this.deleteRef,
-										})
-									}}
-									onMouseLeave={() => {
-										destroyTooltip()
-									}}
-								>
-									<SVGTrashCan />
-								</div>
-							)}
-						</div>
-					</div>
-				</div>
+				<MessageAction
+					message={message}
+					handleReply={handleReply}
+					createTooltip={createTooltip}
+					destroyTooltip={destroyTooltip}
+					selectDM={selectDM}
+					updateHover={this.updateHover}
+					hover={hover}
+				/>
 				<DiscordMessage
 					author={member?.displayName ?? author.username}
 					avatar={author.avatarURL}

@@ -1,0 +1,75 @@
+.buttonContainer {
+	position: relative;
+	right: 0;
+	top: 0;
+}
+
+.buttons {
+	top: -16px;
+	position: absolute;
+	right: 0;
+	padding: 0 14px 0 32px;
+	opacity: 0;
+	z-index: 1;
+}
+
+.hover {
+	opacity: 1;
+}
+
+.wrapper {
+	background-color: var(--background-primary);
+	box-shadow: var(--elevation-stroke);
+	display: grid;
+	grid-auto-flow: column;
+	box-sizing: border-box;
+	height: 30px;
+	border-radius: 4px;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: start;
+	justify-content: flex-start;
+	user-select: none;
+	transition: box-shadow 0.1s ease-out, -webkit-box-shadow 0.1s ease-out;
+	position: relative;
+	overflow: hidden;
+}
+
+.wrapper:hover {
+	box-shadow: var(--elevation-stroke), var(--elevation-medium);
+}
+
+.button {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	height: 24px;
+	padding: 4px;
+	min-width: 30px;
+	min-height: 30px;
+	-webkit-box-flex: 0;
+	color: var(--interactive-normal);
+	cursor: pointer;
+	position: relative;
+}
+
+.button:hover {
+	color: var(--interactive-hover);
+	background-color: var(--background-modifier-hover);
+}
+
+.button:active {
+	padding-top: 5px;
+	padding-bottom: 3px;
+	color: var(--interactive-active);
+	background-color: var(--background-modifier-active);
+}
+
+.button svg {
+	width: 20px;
+	height: 20px;
+	display: block;
+	object-fit: contain;
+}
