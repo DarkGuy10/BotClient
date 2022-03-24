@@ -13,6 +13,7 @@ class DMNav extends Component {
 			searchValue: '',
 		}
 
+		this.DMCreateEventRef = null
 		this.inputRef = createRef()
 		this.updateInput = (value = '') => {
 			this.inputRef.current.value = ''
@@ -48,6 +49,15 @@ class DMNav extends Component {
 
 	componentDidMount() {
 		this.fetchDMs()
+
+		this.DMCreateEventRef = ipcRenderer.on('DMCreate', () => {
+			this.fetchDMs()
+		})
+	}
+
+	componentWillUnmount() {
+		if (this.DMCreateEventRef)
+			this.DMCreateEventRef.removeAllListeners('DMCreate')
 	}
 
 	render() {
@@ -87,7 +97,6 @@ class DMNav extends Component {
 						user={fetchedUser}
 						selectDM={this.props.selectDM}
 						clearInput={this.clearInput}
-						fetchDMs={this.fetchDMs}
 						fetched
 					/>
 				)}
@@ -102,7 +111,6 @@ class DMNav extends Component {
 						user={recipient}
 						selectDM={this.props.selectDM}
 						clearInput={this.clearInput}
-						fetchDMs={this.fetchDMs}
 					/>
 				))}
 			</nav>

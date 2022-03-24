@@ -3,7 +3,8 @@ import styles from './TooltipManager.module.css'
 const TooltipManager = props => {
 	const { tooltip } = props
 
-	if (!tooltip) return <div className={styles.layerContainer}></div>
+	if (!tooltip?.ref.current)
+		return <div className={styles.layerContainer}></div>
 
 	const positionMapping = {
 		top: 'tooltipTop',

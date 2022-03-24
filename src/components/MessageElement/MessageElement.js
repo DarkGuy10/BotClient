@@ -15,6 +15,7 @@ import { parseTimestamp, parseTwemojis, decimalToHexColor } from './../../utils'
 import {
 	SVGIDButton,
 	SVGLinkButton,
+	SVGOpenDMButton,
 	SVGReplyButton,
 	SVGTrashCan,
 } from '../SVGHandler'
@@ -37,6 +38,7 @@ class MessageElement extends Component {
 		}
 
 		this.replyRef = createRef()
+		this.openDMRef = createRef()
 		this.copyLinkRef = createRef()
 		this.copyIDRef = createRef()
 		this.deleteRef = createRef()
@@ -138,6 +140,7 @@ class MessageElement extends Component {
 			message,
 			handleReply,
 			replying,
+			selectDM,
 			createTooltip,
 			destroyTooltip,
 		} = this.props
@@ -198,27 +201,46 @@ class MessageElement extends Component {
 								<SVGReplyButton />
 							</div>
 							{!isDM && (
-								<div
-									className={styles.button}
-									onClick={() =>
-										navigator.clipboard.writeText(
-											`https://discord.com/channels/${message.guildId}/${message.channelId}/${id}`
-										)
-									}
-									ref={this.copyLinkRef}
-									onMouseEnter={() => {
-										createTooltip({
-											position: 'top',
-											content: 'Copy Link',
-											ref: this.copyLinkRef,
-										})
-									}}
-									onMouseLeave={() => {
-										destroyTooltip()
-									}}
-								>
-									<SVGLinkButton />
-								</div>
+								<>
+									<div
+										className={styles.button}
+										onClick={() => selectDM(author.id)}
+										ref={this.openDMRef}
+										onMouseEnter={() => {
+											createTooltip({
+												position: 'top',
+												content: 'Open DM',
+												ref: this.openDMRef,
+											})
+										}}
+										onMouseLeave={() => {
+											destroyTooltip()
+										}}
+									>
+										<SVGOpenDMButton />
+									</div>
+									<div
+										className={styles.button}
+										onClick={() =>
+											navigator.clipboard.writeText(
+												`https://discord.com/channels/${message.guildId}/${message.channelId}/${id}`
+											)
+										}
+										ref={this.copyLinkRef}
+										onMouseEnter={() => {
+											createTooltip({
+												position: 'top',
+												content: 'Copy Link',
+												ref: this.copyLinkRef,
+											})
+										}}
+										onMouseLeave={() => {
+											destroyTooltip()
+										}}
+									>
+										<SVGLinkButton />
+									</div>
+								</>
 							)}
 							<div
 								className={styles.button}

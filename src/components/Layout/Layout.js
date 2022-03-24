@@ -78,13 +78,14 @@ class Layout extends Component {
 		}
 
 		this.selectDM = async userID => {
-			if (
-				!this.state.isHomeOpen ||
-				this.state.currentDM?.recipient?.id === userID
-			)
-				return
+			if (this.state.currentDM?.recipient?.id === userID) return
+			if (!this.state.isHomeOpen) this.openHome()
 			const currentDM = await ipcRenderer.invoke('selectDM', userID)
-			this.setState({ ...this.state, currentDM: currentDM })
+			if (!currentDM) return
+			this.setState({
+				...this.state,
+				currentDM: currentDM,
+			})
 		}
 	}
 
@@ -142,6 +143,7 @@ class Layout extends Component {
 								createTooltip={createTooltip}
 								destroyTooltip={destroyTooltip}
 								pushAlert={pushAlert}
+								selectDM={this.selectDM}
 							/>
 						) : null}
 					</div>

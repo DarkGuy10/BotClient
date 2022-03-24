@@ -234,6 +234,7 @@ ipcMain.handle('selectDM', async (event, userID) => {
 		currentDM = await recipient.createDM()
 		currentGuild = null
 		currentChannel = null
+		mainWindow.webContents.send('DMCreate')
 		return {
 			...currentDM,
 			recipient: {
@@ -245,7 +246,7 @@ ipcMain.handle('selectDM', async (event, userID) => {
 		log.error(error)
 		mainWindow.webContents.send(
 			'error',
-			`Requested DM [userID:${userID}] could not be fetched.\n ${error}`
+			`Requested DM [userID:${userID}] could not be opened.\n ${error}`
 		)
 	}
 })

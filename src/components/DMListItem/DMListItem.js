@@ -2,16 +2,13 @@ import React from 'react'
 import styles from './DMListItem.module.css'
 
 const DMListItem = props => {
-	const { selectDM, clearInput, fetchDMs, user, fetched } = props
+	const { selectDM, clearInput, user, fetched } = props
 	return (
 		<div
 			className={`${styles.userItem} ${fetched ? styles.topMargin5 : ''}`}
 			onClick={async () => {
 				await selectDM(user.id)
-				if (fetched) {
-					clearInput()
-					fetchDMs()
-				}
+				if (fetched) clearInput()
 			}}
 		>
 			<div className={styles.layout}>

@@ -121,6 +121,7 @@ class Chat extends Component {
 
 	componentWillUnmount() {
 		this._isMounted = false
+		this.props.destroyTooltip()
 	}
 
 	componentDidUpdate(prevProps) {
@@ -128,7 +129,8 @@ class Chat extends Component {
 	}
 
 	render() {
-		const { channel, pushAlert, createTooltip, destroyTooltip } = this.props
+		const { channel, pushAlert, createTooltip, destroyTooltip, selectDM } =
+			this.props
 		const { loadedMessages, replyingTo } = this.state
 		return (
 			<div className={styles.chat}>
@@ -220,6 +222,7 @@ class Chat extends Component {
 									handleReply={this.handleReply}
 									createTooltip={createTooltip}
 									destroyTooltip={destroyTooltip}
+									selectDM={selectDM}
 									replying={replyingTo?.id === message.id}
 								/>
 							))}
