@@ -163,8 +163,10 @@
 	border: none;
 	width: 100%;
 	flex-grow: 1;
-	overflow-y: auto;
+	overflow-y: scroll;
 	background-color: inherit;
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 .discordMessages::-webkit-scrollbar {
@@ -176,4 +178,70 @@
 .discordMessages::-webkit-scrollbar-thumb {
 	border-radius: 6px;
 	background-color: var(--scrollbar-auto-scrollbar-color-thumb);
+}
+
+.channelStartContainer {
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	flex-direction: column;
+	-webkit-box-flex: 0;
+	-webkit-box-pack: end;
+	justify-content: flex-end;
+	margin: 16px;
+	user-select: none;
+}
+
+.channelStartIcon {
+	width: 68px;
+	height: 68px;
+	margin-top: 16px;
+	border-radius: 50%;
+	background-color: var(--background-accent);
+}
+
+.channelStartIcon svg {
+	width: 44px;
+	height: 44px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.channelStartIcon svg path {
+	fill: #fff;
+}
+
+.channelStartHeader {
+	font-weight: 700;
+	margin: 8px 0;
+	font-family: var(--font-display);
+	color: var(--header-primary);
+	font-size: 32px;
+	line-height: 40px;
+}
+
+.channelStartDescription {
+	color: var(--header-secondary);
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.separator {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	height: 0;
+	border-top: thin solid var(--background-modifier-accent);
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-flex: 0;
+	pointer-events: none;
+	box-sizing: border-box;
+	--divider-color: hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%);
+	margin-left: 1rem;
+	margin-right: 0.875rem;
 }

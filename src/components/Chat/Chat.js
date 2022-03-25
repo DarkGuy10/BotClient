@@ -12,13 +12,52 @@ import { parseTwemojis } from '../../utils'
 import MemberNav from '../MemberNav/MemberNav'
 const { ipcRenderer } = window.require('electron')
 
-const Icon = props => {
+const ChannelIcon = props => {
 	const isPrivate = props.channel.isPrivate
 	const isRules = props.channel.isRules
 	const svgType = isRules
 		? 'RULES'
 		: `${props.channel.type}${isPrivate ? '_LIMITED' : ''}`
-	return <div className={styles.iconWrapper}>{SVGChannels[svgType]}</div>
+	return SVGChannels[svgType]
+}
+
+const ChannelStart = props => {
+	const { name, isPrivate, type, recipient } = props.channel
+	return (
+		<div className={styles.channelStartContainer}>
+			{type === 'DM' ? (
+				<img
+					src={recipient.avatarURL}
+					className={styles.channelStartIcon}
+					alt={`${recipient.username}'s Avatar`}
+				/>
+			) : (
+				<div className={styles.channelStartIcon}>
+					<ChannelIcon channel={props.channel} />{' '}
+				</div>
+			)}
+			<h1 className={styles.channelStartHeader}>
+				{type === 'DM' ? (
+					recipient.username
+				) : (
+					<>Welcome to #{parseTwemojis(name)}!</>
+				)}
+			</h1>
+			<div className={styles.channelStartDescription}>
+				{type === 'DM' ? (
+					<>
+						This is the beginning of your direct message history
+						with <strong>@{recipient.username}</strong>.
+					</>
+				) : (
+					<>
+						This is the start of the #{parseTwemojis(name)}{' '}
+						{isPrivate && <strong>private</strong>} channel.
+					</>
+				)}
+			</div>
+		</div>
+	)
 }
 
 class Chat extends Component {
@@ -28,6 +67,7 @@ class Chat extends Component {
 		super(props)
 		this.initialState = {
 			loadedMessages: [],
+			hasReachedTop: false,
 			replyingTo: null,
 		}
 		this.state = { ...this.initialState }
@@ -35,38 +75,31 @@ class Chat extends Component {
 		this.messageRef = createRef()
 
 		this.scrollToBottom = () => {
-			// To Fix : add a loadScreen till the scrolling is complete
-			setTimeout(() => {
-				this.messageRef.current.scrollTo({
-					left: 0,
-					top:
-						this.messageRef.current.clientHeight +
-						this.messageRef.current.scrollHeight,
-				})
-			}, 0.1)
+			this.messageRef.current.scrollTo({
+				left: 0,
+				top:
+					this.messageRef.current.clientHeight +
+					this.messageRef.current.scrollHeight,
+			})
 		}
 
-		this.loadMessages = async (
-			limit = 100,
-			clearPreviousMessages = true,
-			before = null
-		) => {
+		this.loadMessages = async fetchOptions => {
+			// default fetchOptions for MessageManager#fetch looks like: {limit: 50}
 			const { channel } = this.props
 			const { loadedMessages } = this.state
 			if (!channel) return
-
-			if (clearPreviousMessages) this.setState({ ...this.initialState })
-
-			const messages = [
-				...(await ipcRenderer.invoke('messages', limit)),
-			].reverse()
+			if (!fetchOptions?.before) this.setState({ ...this.initialState })
+			const { messages, hasReachedTop } = await ipcRenderer.invoke(
+				'messages',
+				fetchOptions
+			)
 			this.setState({
 				...this.state,
-				loadedMessages: clearPreviousMessages
-					? messages
-					: [...loadedMessages, ...messages],
+				hasReachedTop: hasReachedTop,
+				loadedMessages: fetchOptions?.before
+					? [...loadedMessages, ...messages]
+					: messages,
 			})
-			if (clearPreviousMessages) this.scrollToBottom()
 		}
 
 		this.handleReply = (message = null) => {
@@ -81,7 +114,7 @@ class Chat extends Component {
 			if (message.channelId === channel.id && this._isMounted)
 				this.setState({
 					...this.state,
-					loadedMessages: [...loadedMessages, message],
+					loadedMessages: [message, ...loadedMessages],
 				})
 
 			// Scroll to bottom *if* user is already fully scrolled *with* a
@@ -116,7 +149,7 @@ class Chat extends Component {
 
 	componentDidMount() {
 		this._isMounted = true
-		this.loadMessages()
+		this.loadMessages({ limit: 100 })
 	}
 
 	componentWillUnmount() {
@@ -125,18 +158,21 @@ class Chat extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.channel.id !== this.props.channel.id) this.loadMessages()
+		if (prevProps.channel.id !== this.props.channel.id)
+			this.loadMessages({ limit: 100 })
 	}
 
 	render() {
 		const { channel, pushAlert, createTooltip, destroyTooltip, selectDM } =
 			this.props
-		const { loadedMessages, replyingTo } = this.state
+		const { loadedMessages, replyingTo, hasReachedTop } = this.state
 		return (
 			<div className={styles.chat}>
 				<section className={styles.titleContainer}>
 					<div className={styles.children}>
-						<Icon channel={channel} />
+						<div className={styles.iconWrapper}>
+							<ChannelIcon channel={channel} />
+						</div>
 						<h3 className={styles.title}>
 							{parseTwemojis(
 								channel.name || channel.recipient.username
@@ -214,10 +250,34 @@ class Chat extends Component {
 							noBackground={true}
 							className={styles.discordMessages}
 							ref={this.messageRef}
+							onScroll={({ currentTarget }) => {
+								const {
+									scrollHeight,
+									scrollTop,
+									clientHeight,
+								} = currentTarget
+								const { loadedMessages, hasReachedTop } =
+									this.state
+
+								if (
+									hasReachedTop ||
+									clientHeight - scrollTop < scrollHeight - 10
+								)
+									return
+								const oldestLoadedMessage =
+									loadedMessages[loadedMessages.length - 1]
+								if (!oldestLoadedMessage) return
+								// Negative sign because column-reverse is making scrollTop
+								// to give negative values
+								this.loadMessages({
+									limit: 50,
+									before: oldestLoadedMessage.id,
+								})
+							}}
 						>
-							{loadedMessages.map((message, index) => (
+							{loadedMessages.map(message => (
 								<MessageElement
-									key={index}
+									key={message.id}
 									message={message}
 									handleReply={this.handleReply}
 									createTooltip={createTooltip}
@@ -226,6 +286,12 @@ class Chat extends Component {
 									replying={replyingTo?.id === message.id}
 								/>
 							))}
+							{hasReachedTop && (
+								<>
+									<div className={styles.separator}></div>
+									<ChannelStart channel={channel} />
+								</>
+							)}
 						</DiscordMessages>
 						<MessageField
 							channel={channel}

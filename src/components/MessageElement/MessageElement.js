@@ -161,17 +161,6 @@ class MessageElement extends Component {
 
 		return (
 			<>
-				{!system && (
-					<MessageAction
-						message={message}
-						handleReply={handleReply}
-						createTooltip={createTooltip}
-						destroyTooltip={destroyTooltip}
-						selectDM={selectDM}
-						updateHover={this.updateHover}
-						hover={hover}
-					/>
-				)}
 				{type === 'GUILD_MEMBER_JOIN' ? (
 					<DiscordSystemMessage
 						type="join"
@@ -402,6 +391,17 @@ class MessageElement extends Component {
 							)
 						})}
 					</DiscordMessage>
+				)}
+				{!system && (
+					<MessageAction
+						message={message}
+						handleReply={handleReply}
+						createTooltip={createTooltip}
+						destroyTooltip={destroyTooltip}
+						selectDM={selectDM}
+						updateHover={this.updateHover}
+						hover={hover}
+					/>
 				)}
 			</>
 		)

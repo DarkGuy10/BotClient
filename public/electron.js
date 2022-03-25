@@ -171,17 +171,25 @@ ipcMain.handle('dms', () => {
 	}
 })
 
-ipcMain.handle('messages', async (event, limit) => {
+ipcMain.handle('messages', async (event, fetchOptions) => {
 	const channel = currentChannel || currentDM
-	const promises = (
-		await channel.messages.fetch({
-			limit: limit,
-		})
-	).map(async message => serializeMessage(message))
+	const promises = (await channel.messages.fetch(fetchOptions)).map(
+		async message => serializeMessage(message)
+	)
 
 	const messages = []
 	for (const promise of promises) messages.push(await promise)
-	return messages
+
+	const hasReachedTop =
+		messages.length < fetchOptions.limit ||
+		!(
+			await channel.messages.fetch({
+				limit: 1,
+				before: messages[messages.length - 1].id,
+			})
+		).size
+
+	return { messages: messages, hasReachedTop: hasReachedTop }
 })
 
 ipcMain.handle('members', async () => {

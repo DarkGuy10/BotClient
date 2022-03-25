@@ -609,7 +609,7 @@ img.twemoji {
 	border-left: 2px solid transparent;
 }
 
-.base-discord-message:last-of-type {
+.base-discord-message:first-of-type {
 	margin-bottom: 2em !important;
 }
 
