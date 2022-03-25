@@ -224,15 +224,24 @@ ipcMain.handle(
 
 ipcMain.handle('selectChannel', async (event, id) => {
 	try {
-		currentChannel = await client.channels.fetch(id)
+		const newChannel = await client.channels.fetch(id)
+
+		const allowedChannelTypes = ['GUILD_TEXT', 'GUILD_NEWS', 'DM']
+		if (!allowedChannelTypes.includes(newChannel.type))
+			throw new Error(
+				`Channel ${newChannel.name} [ID:${newChannel.id}] has an unsupported type: '${newChannel.type}'`
+			)
+		if (!newChannel.viewable)
+			throw new Error(
+				`Channel ${newChannel.name} [ID:${newChannel.id}] is not viewable (missing permissions).`
+			)
+
+		currentChannel = newChannel
 		currentDM = null
 		return serializeGuildChannel(currentChannel)
 	} catch (error) {
 		log.error(error)
-		mainWindow.webContents.send(
-			'error',
-			`Requested channel [ID:${id}] could not be fetched.\n ${error}`
-		)
+		mainWindow.webContents.send('error', error.message)
 	}
 })
 

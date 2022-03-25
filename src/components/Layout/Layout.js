@@ -47,7 +47,7 @@ class Layout extends Component {
 			)
 			if (!currentGuild) return
 
-			this.selectChannel(currentChannel.id, currentGuild.id)
+			this.selectChannel(currentChannel.id)
 			this.setState({
 				...this.state,
 				currentGuild: currentGuild,
@@ -60,20 +60,7 @@ class Layout extends Component {
 		this.selectChannel = async id => {
 			if (this.state.currentChannel?.id === id) return
 			const currentChannel = await ipcRenderer.invoke('selectChannel', id)
-
-			const allowedChannelTypes = ['GUILD_TEXT', 'GUILD_NEWS', 'DM']
-
-			if (!currentChannel.viewable)
-				return this.props.pushAlert({
-					type: 'warning',
-					message: `Channel ${currentChannel.name} [ID:${currentChannel.id}] is not viewable (missing permissions).`,
-				})
-
-			if (!allowedChannelTypes.includes(currentChannel.type))
-				return this.props.pushAlert({
-					type: 'warning',
-					message: `Channel ${currentChannel.name} [ID:${currentChannel.id}] has an unsupported type: '${currentChannel.type}'`,
-				})
+			if (!currentChannel) return
 			this.setState({ ...this.state, currentChannel: currentChannel })
 		}
 
