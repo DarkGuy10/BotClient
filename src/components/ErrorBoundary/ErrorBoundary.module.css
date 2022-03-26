@@ -1,0 +1,141 @@
+.wrapper {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	user-select: none;
+}
+
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	width: 600px;
+	height: auto;
+}
+
+.headerContainer {
+	flex: 0 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.headerText {
+	font-family: var(--font-header);
+	color: var(--header-primary);
+	font-size: 1.5em;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 4px;
+	cursor: default;
+}
+
+.subtext {
+	color: var(--header-secondary);
+	font-family: var(--font-header);
+	text-align: center;
+	margin-bottom: 1.5em;
+	cursor: default;
+}
+
+.reloadButton {
+	outline: none;
+	border-width: 0;
+	border-radius: 3px;
+	background-color: var(--brand-experiment);
+	color: #fff;
+	font-family: var(--font-primary);
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	padding: 12px 35px;
+	cursor: pointer;
+	transition: background-color 0.17s ease, color 0.17s ease;
+}
+
+.reloadButton:hover {
+	background-color: var(--brand-experiment-560);
+}
+
+.reloadButton:active {
+	background-color: var(--brand-experiment-600);
+}
+
+.content {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.lightFade {
+	opacity: 0.6;
+	filter: grayscale(0.6);
+	height: 150px;
+}
+
+.logsHeader {
+	margin: 1.5em 0 0.5em;
+	color: var(--header-secondary);
+	font-family: var(--font-header);
+	cursor: pointer;
+	display: flex;
+}
+
+.logsHeader::before,
+.logsHeader::after {
+	content: '';
+	flex: 1 1 auto;
+	height: 2px;
+	min-width: 100px;
+	background-color: var(--background-modifier-accent);
+	align-self: center;
+	margin: 0 5px;
+	border-radius: 3px;
+}
+
+.logsContainer {
+	flex: 1 1 auto;
+	max-height: 250px;
+	background-color: var(--info-danger-background);
+	overflow: auto;
+	padding: 1em;
+	border-radius: 4px;
+	font-size: 14px;
+	font-family: var(--font-code);
+	color: var(--text-danger);
+	white-space: pre-wrap;
+	user-select: all;
+}
+
+.logsContainer::selection {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+.logsContainer::-webkit-scrollbar {
+	width: 3px;
+	height: 100%;
+	background-color: transparent;
+	position: relative;
+	box-sizing: border-box;
+	min-height: 0;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+}
+
+.logsContainer::-webkit-scrollbar-thumb {
+	background-color: transparent;
+}
+
+.logsContainer:hover::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar-thin-thumb);
+}
+
+.logsContainer:hover::-webkit-scrollbar-track {
+	background-color: var(--scrollbar-thin-track);
+}

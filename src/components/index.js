@@ -23,6 +23,7 @@ import ChannelListItem from './ChannelListItem/ChannelListItem'
 import TooltipManager from './TooltipManager/TooltipManager'
 import MessageAction from './MessageAction/MessageAction'
 import StatusIndicator from './StatusIndicator/StatusIndicator'
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 export {
 	App,
@@ -50,4 +51,5 @@ export {
 	TooltipManager,
 	MessageAction,
 	StatusIndicator,
+	ErrorBoundary,
 }

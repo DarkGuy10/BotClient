@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Login, Layout, AlertManager, TooltipManager } from '..'
+import { Login, Layout, AlertManager, TooltipManager, ErrorBoundary } from '..'
 import { AppData } from './../../services/'
 import Markdown from 'markdown-to-jsx'
 import styles from './App.module.css'
@@ -106,7 +106,7 @@ class App extends Component {
 	render() {
 		const { token, clientIsReady, clientUser, tooltip } = this.state
 		return (
-			<>
+			<ErrorBoundary>
 				{token ? (
 					clientIsReady ? (
 						<div className={styles.appMount}>
@@ -151,7 +151,7 @@ class App extends Component {
 					/>
 				)}
 				<AlertManager alerts={this.state.alerts} />
-			</>
+			</ErrorBoundary>
 		)
 	}
 }
