@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v0.10.0-alpha
+
+-   feat: load older messages on scrolling up (#33)
+-   feat: add ErrorBoundary for handling crashes
+-   feat: add channel start header
+-   feat: add window reload shortcut
+-   feat: show status indicators
+-   fix: prevent selecting disallowed channels (#34)
+-   fix: bad autoscrolling
+-   fix: correct bad styling
+-   fix: open home by default (#35)
+-   refactor: export SVGDropDown
+-   refactor: add ready event
+
 ## v0.9.0-alpha
 
 -   feat: delete messages
