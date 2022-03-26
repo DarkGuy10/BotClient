@@ -94,4 +94,5 @@ export {
 	SVGDiscordLogo,
 	SVGHelp,
 	SVGVoiceStates,
+	SVGDropDown,
 }
