@@ -204,28 +204,25 @@ ipcMain.handle('members', async () => {
 	return members
 })
 
-ipcMain.handle(
-	'selectGuild',
-	async (event, id = client.guilds.cache.first().id) => {
-		try {
-			currentGuild = await client.guilds.fetch(id)
-			currentChannel = currentGuild.channels.cache.find(
-				channel => channel.type === 'GUILD_TEXT' && channel.viewable
-			)
-			currentDM = null
-			return {
-				currentGuild: serializeGuild(currentGuild),
-				currentChannel: serializeGuildChannel(currentChannel),
-			}
-		} catch (error) {
-			log.error(error)
-			mainWindow.webContents.send(
-				'error',
-				`Requested guild [ID:${id}] could not be fetched.\n ${error.message}`
-			)
+ipcMain.handle('selectGuild', async (event, id) => {
+	try {
+		currentGuild = await client.guilds.fetch(id)
+		currentChannel = currentGuild.channels.cache.find(
+			channel => channel.type === 'GUILD_TEXT' && channel.viewable
+		)
+		currentDM = null
+		return {
+			currentGuild: serializeGuild(currentGuild),
+			currentChannel: serializeGuildChannel(currentChannel),
 		}
+	} catch (error) {
+		log.error(error)
+		mainWindow.webContents.send(
+			'error',
+			`Requested guild [ID:${id}] could not be fetched.\n ${error.message}`
+		)
 	}
-)
+})
 
 ipcMain.handle('selectChannel', async (event, id) => {
 	try {

@@ -18,7 +18,7 @@ class Layout extends Component {
 			currentChannel: null,
 			currentDM: null,
 			isUserSettingsOpen: false,
-			isHomeOpen: false,
+			isHomeOpen: true,
 		}
 
 		this.openUserSettings = () => {
@@ -74,10 +74,6 @@ class Layout extends Component {
 				currentDM: currentDM,
 			})
 		}
-	}
-
-	componentDidMount() {
-		this.selectGuild()
 	}
 
 	render() {
