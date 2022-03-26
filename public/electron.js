@@ -50,6 +50,14 @@ function createMainWindow() {
 	mainWindow.setMenu(null)
 
 	mainWindow.webContents.on('will-navigate', (event, url) => {
+		if (
+			url ===
+			(isDev
+				? 'http://localhost:3000/'
+				: `file://${path.join(__dirname, '../build/index.html')}`)
+		)
+			return
+		console.log(url)
 		event.preventDefault()
 		shell.openExternal(url)
 	})

@@ -42,6 +42,16 @@ class App extends Component {
 	}
 
 	componentDidMount() {
+		// Window EventListeners
+		window.addEventListener(
+			'keyup',
+			event => {
+				if (event.code === 'KeyR' && event.ctrlKey)
+					window.location.reload()
+			},
+			true
+		)
+
 		// Handle all errors from discord client
 		ipcRenderer.on('error', (event, error) => {
 			this.pushAlert({
