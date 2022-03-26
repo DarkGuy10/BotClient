@@ -28,6 +28,7 @@ class Client extends oldClient {
 	get clientUserData() {
 		const data = {
 			...this.user.toJSON(),
+			presence: { ...this.user.presence },
 		}
 		return data
 	}

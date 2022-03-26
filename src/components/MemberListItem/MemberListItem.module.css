@@ -23,10 +23,26 @@
 	opacity: 1;
 }
 
-.avatar {
+.avatarWrapper {
 	width: 32px;
-	border-radius: 100%;
+	height: 32px;
 	margin-right: 12px;
+	position: relative;
+}
+
+.avatar {
+	height: 100%;
+	border-radius: 100%;
+}
+
+.statusWrapper {
+	position: absolute;
+	bottom: -3.5px;
+	right: -3.5px;
+	border: 3.5px solid var(--background-secondary);
+	background-color: var(--background-secondary);
+	border-radius: 100%;
+	display: flex;
 }
 
 .content {

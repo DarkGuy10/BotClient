@@ -129,8 +129,8 @@ class App extends Component {
 										</div>
 									</div>
 								</div>
-								<TooltipManager tooltip={tooltip} />
 							</div>
+							<TooltipManager tooltip={tooltip} />
 						</div>
 					) : (
 						<div className={styles.bootloopWrapper}>

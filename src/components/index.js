@@ -22,6 +22,7 @@ import DMListItem from './DMListItem/DMListItem'
 import ChannelListItem from './ChannelListItem/ChannelListItem'
 import TooltipManager from './TooltipManager/TooltipManager'
 import MessageAction from './MessageAction/MessageAction'
+import StatusIndicator from './StatusIndicator/StatusIndicator'
 
 export {
 	App,
@@ -48,4 +49,5 @@ export {
 	ChannelListItem,
 	TooltipManager,
 	MessageAction,
+	StatusIndicator,
 }

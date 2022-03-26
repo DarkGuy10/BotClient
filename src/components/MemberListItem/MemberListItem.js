@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './MemberListItem.module.css'
 import { parseTwemojis } from './../../utils'
-import { BotTag } from '..'
+import { BotTag, StatusIndicator } from '..'
 
 const MemberListItem = props => {
 	const { member } = props
@@ -58,6 +58,7 @@ const MemberListItem = props => {
 				break
 		}
 	}
+
 	return (
 		<>
 			<div
@@ -65,11 +66,20 @@ const MemberListItem = props => {
 					!presence ? styles.offline : ''
 				}`}
 			>
-				<img
-					src={avatarURL}
-					className={styles.avatar}
-					alt={`${displayName}'s avatar`}
-				/>
+				<div className={styles.avatarWrapper}>
+					<img
+						src={avatarURL}
+						className={styles.avatar}
+						alt={`${displayName}'s avatar`}
+					/>
+					{presence && (
+						<div className={styles.statusWrapper}>
+							<StatusIndicator
+								type={presence.status.toUpperCase()}
+							/>
+						</div>
+					)}
+				</div>
 				<div className={styles.content}>
 					<div className={styles.nameAndDecorators}>
 						<div className={styles.name}>

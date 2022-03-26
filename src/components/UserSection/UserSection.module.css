@@ -17,14 +17,26 @@
 }
 
 .avatarWrapper {
+	width: 32px;
+	height: 32px;
 	margin-right: 8px;
+	position: relative;
+	user-select: none;
 }
 
 .avatar {
-	width: 35px;
-	height: 35px;
-	position: relative;
-	border-radius: 50%;
+	height: 100%;
+	border-radius: 100%;
+}
+
+.statusWrapper {
+	position: absolute;
+	bottom: -3.5px;
+	right: -3.5px;
+	border: 3.5px solid var(--background-secondary);
+	background-color: var(--background-secondary);
+	border-radius: 100%;
+	display: flex;
 }
 
 .nameTag {
@@ -33,6 +45,7 @@
 	flex-grow: 1;
 	margin-right: 4px;
 	min-width: 0;
+	cursor: default;
 }
 
 .usernameContainer {
