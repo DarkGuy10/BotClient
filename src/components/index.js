@@ -8,6 +8,7 @@ import UserSection from './UserSection/UserSection'
 import ChannelNav from './ChannelNav/ChannelNav'
 import DMNav from './DMNav/DMNav'
 import GuildNav from './GuildNav/GuildNav'
+import GuildListItem from './GuildListItem/GuildListItem'
 import Chat from './Chat/Chat'
 import MemberNav from './MemberNav/MemberNav'
 import MemberListItem from './MemberListItem/MemberListItem'
@@ -36,6 +37,7 @@ export {
 	DMNav,
 	ChannelNav,
 	GuildNav,
+	GuildListItem,
 	Chat,
 	MemberNav,
 	MemberListItem,
