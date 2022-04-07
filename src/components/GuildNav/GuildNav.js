@@ -28,7 +28,7 @@ function ListItem(props) {
 						props.selected || hover ? logoAnimated : logoTransparent
 					}
 					alt="Home"
-					className={`${styles.icon} ${
+					className={`${styles.icon} ${styles.home} ${
 						props.selected ? styles.selected : ''
 					}`}
 					onClick={() => props.openHome()}

@@ -113,6 +113,10 @@
 	background-color: var(--brand-experiment);
 }
 
+.home {
+	background-color: var(--background-primary);
+}
+
 .acronym {
 	font-weight: 500;
 	font-family: var(--font-primary);
