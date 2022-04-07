@@ -40,6 +40,7 @@
 		"electron-build": "electron-builder",
 		"build": "yarn react-build && yarn electron-build",
 		"start": "concurrently -k \"yarn react-start\" \"wait-on tcp:127.0.0.1:3000 && electron .\"",
+		"lint": "prettier -w .",
 		"postinstall": "electron-builder install-app-deps"
 	},
 	"eslintConfig": {
