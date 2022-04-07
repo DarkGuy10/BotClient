@@ -1,4 +1,4 @@
-name: Lint and prettify code
+name: Linting
 
 # This action works with pull requests and pushes
 on:
@@ -22,3 +22,4 @@ jobs:
               uses: creyD/prettier_action@v4.2
               with:
                   commit_message: 'style(prettier): fix linting'
+                  prettier_options: --write **/*.{js,md,ts,tsx,json,yml,html,css}
