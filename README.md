@@ -73,21 +73,21 @@
     </td>
     <td>
       <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-win-x64.exe">
-        <img alt="Stargazers" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-win-x64.exe?style=for-the-badge&logo=windows&color=DDB6F2&logoColor=D9E0EE&labelColor=302D41"></a>
+        <img alt="BotClient-win-x64.exe" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-win-x64.exe?style=for-the-badge&logo=windows&color=DDB6F2&logoColor=D9E0EE&labelColor=302D41"></a>
       </a>
     </td>
   </tr>
   <tr> <td>Linux</td>
     <td align="center"><code>.AppImage</code></td>
     <td>
-      <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-linux-x86_64.AppImage"><img alt="Stargazers" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-linux-x86_64.AppImage?style=for-the-badge&logo=linux&color=F5C2E7&logoColor=D9E0EE&labelColor=302D41"></a>
+      <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-linux-x86_64.AppImage"><img alt="BotClient-linux-x86_64.AppImage" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-linux-x86_64.AppImage?style=for-the-badge&logo=linux&color=F5C2E7&logoColor=D9E0EE&labelColor=302D41"></a>
     </td>
   </tr>
   <tr>
     <td>Mac</td>
     <td align="center"><code>.dmg</code></td>
     <td>
-      <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-mac-x64.dmg"><img alt="Stargazers" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-mac-x64.dmg?style=for-the-badge&logo=macos&color=E8A2AF&logoColor=D9E0EE&labelColor=302D41"></a>
+      <a href="https://github.com/DarkGuy10/BotClient/releases/latest/download/BotClient-mac-x64.dmg"><img alt="BotClient-mac-x64.dmg" src="https://img.shields.io/github/downloads/darkguy10/BotClient/latest/BotClient-mac-x64.dmg?style=for-the-badge&logo=macos&color=E8A2AF&logoColor=D9E0EE&labelColor=302D41"></a>
     </td>
   </table>
   
@@ -149,7 +149,7 @@ If you have any problems or questions about the client, feel free to join our [s
 
 &nbsp;
 
-#### 📚 FAQs
+### 📚 FAQs
 
 -   Q: I'm getting `[DISALLOWED_INTENTS]` error, how do I fix this?
 
