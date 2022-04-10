@@ -7,7 +7,7 @@
 
 	overflow: hidden;
 	word-wrap: break-word;
-	background-color: var(--background-tertiary);
+	background-color: var(--background-floating);
 	font-size: 16px;
 	font-family: var(--font-primary);
 	font-weight: 500;
