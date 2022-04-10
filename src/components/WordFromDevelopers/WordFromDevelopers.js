@@ -27,7 +27,7 @@ const WordFromDevelopers = props => {
 							name="S_UrushiBigSmiles"
 						/>
 						<br />
-						And I shit you not, I've never had these many users
+						And I kid you not, I've never had these many users
 						before!?{' '}
 						<DiscordCustomEmoji
 							url="https://cdn.discordapp.com/emojis/818794157090537472.gif?size=44&quality=lossless"

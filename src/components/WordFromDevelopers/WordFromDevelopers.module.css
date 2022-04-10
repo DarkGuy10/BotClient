@@ -55,6 +55,7 @@
 	color: var(--header-secondary);
 	font-family: var(--font-header);
 	text-align: center;
+	font-style: italic;
 }
 
 .lightFade {
