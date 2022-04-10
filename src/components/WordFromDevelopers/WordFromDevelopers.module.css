@@ -1,0 +1,74 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	user-select: none;
+	position: relative;
+	overflow: hidden;
+	flex: 1 1 auto;
+	animation: fadeIn 0.17s 1 forwards ease-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.container {
+	margin-top: auto;
+	margin-bottom: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 600px;
+	height: auto;
+	overflow: hidden;
+	padding: 1.5em 3em;
+	border-top: 2px solid var(--background-modifier-accent);
+	border-bottom: 2px solid var(--background-modifier-accent);
+	border-radius: 4px;
+}
+
+.wrapper::before,
+.wrapper::after {
+	content: '';
+	width: 2px;
+	background-color: var(--background-modifier-accent);
+	flex: 1 1 auto;
+	margin: 10px;
+}
+
+.headerText {
+	font-family: var(--font-header);
+	color: var(--header-primary);
+	font-size: 1.5em;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-bottom: 4px;
+}
+
+.subtext {
+	color: var(--header-secondary);
+	font-family: var(--font-header);
+	text-align: center;
+}
+
+.lightFade {
+	opacity: 0.6;
+	height: 140px;
+	padding: 10px;
+}
+
+.content {
+	color: var(--text-normal);
+	font-family: var(--font-normal);
+	text-align: center;
+}
+
+.content p {
+	margin-top: 1em;
+}

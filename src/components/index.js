@@ -25,6 +25,7 @@ import TooltipManager from './TooltipManager/TooltipManager'
 import MessageAction from './MessageAction/MessageAction'
 import StatusIndicator from './StatusIndicator/StatusIndicator'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
+import WordFromDevelopers from './WordFromDevelopers/WordFromDevelopers'
 
 export {
 	App,
@@ -54,4 +55,5 @@ export {
 	MessageAction,
 	StatusIndicator,
 	ErrorBoundary,
+	WordFromDevelopers,
 }

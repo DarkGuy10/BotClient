@@ -7,6 +7,7 @@ import {
 	Chat,
 	UserSettings,
 	UserSection,
+	WordFromDevelopers,
 } from './../'
 const { ipcRenderer } = window.require('electron')
 
@@ -128,7 +129,9 @@ class Layout extends Component {
 								pushAlert={pushAlert}
 								selectDM={this.selectDM}
 							/>
-						) : null}
+						) : (
+							<WordFromDevelopers />
+						)}
 					</div>
 				</div>
 				{isUserSettingsOpen ? (
