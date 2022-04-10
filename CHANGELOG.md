@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.10.1-alpha
+
+-   feat: add WordFromDevelopers on homescreen
+-   fix: minor styling issues
+-   refactor: a bunch of stuff
+-   chore: migrate to React 18
+-   chore(deps): bump all deps
+
 ## v0.10.0-alpha
 
 -   feat: load older messages on scrolling up (#33)
