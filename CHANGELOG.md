@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.10.2-alpha
+
+-   fix: home screen message
+
 ## v0.10.1-alpha
 
 -   feat: add WordFromDevelopers on homescreen
