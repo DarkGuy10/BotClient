@@ -606,13 +606,8 @@ img.twemoji {
 .discord-message {
 	margin: 1.0625rem 0 !important;
 	padding: 0 16px 0 14px !important;
-	border-left: 2px solid transparent;
 }
 
 .base-discord-message:first-of-type {
 	margin-bottom: 2em !important;
-}
-
-.discord-highlight-mention {
-	border-left: 2px solid var(--info-warning-foreground);
 }

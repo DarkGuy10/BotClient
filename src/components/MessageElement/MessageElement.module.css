@@ -4,7 +4,18 @@
 
 .replying {
 	background-color: var(--brand-experiment-05a) !important;
-	border-left: 2px solid var(--brand-experiment) !important;
+}
+
+.replying::before {
+	content: '';
+	position: absolute;
+	display: block;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	pointer-events: none;
+	width: 2px;
+	background-color: var(--brand-experiment) !important;
 }
 
 .replying.messageHover {
