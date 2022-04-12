@@ -166,6 +166,10 @@ class Chat extends Component {
 		const { channel, pushAlert, createTooltip, destroyTooltip, selectDM } =
 			this.props
 		const { loadedMessages, replyingTo, hasReachedTop } = this.state
+
+		// Prevents complete unloading during server switching
+		if (!channel) return <div className={styles.chat}></div>
+
 		return (
 			<div className={styles.chat}>
 				<section className={styles.titleContainer}>

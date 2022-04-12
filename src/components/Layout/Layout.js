@@ -120,8 +120,7 @@ class Layout extends Component {
 								openUserSettings={this.openUserSettings}
 							/>
 						</div>
-						{(currentGuild && currentChannel) ||
-						(isHomeOpen && currentDM) ? (
+						{currentGuild || currentChannel || currentDM ? (
 							<Chat
 								channel={currentChannel || currentDM}
 								createTooltip={createTooltip}
