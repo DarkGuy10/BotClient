@@ -7,6 +7,7 @@ import { ReactComponent as SVGVoice } from './../assets/svg/voice.svg'
 import { ReactComponent as SVGVoiceLimited } from './../assets/svg/voice-limited.svg'
 import { ReactComponent as SVGRules } from './../assets/svg/rules.svg'
 import { ReactComponent as SVGAnnouncement } from './../assets/svg/announcements.svg'
+import { ReactComponent as SVGAnnouncementLimited } from './../assets/svg/announcements-limited.svg'
 import { ReactComponent as SVGDropDown } from './../assets/svg/drop-down.svg'
 import { ReactComponent as SVGUpload } from './../assets/svg/upload.svg'
 import { ReactComponent as SVGSpoilerHidden } from './../assets/svg/spoiler-hidden.svg'
@@ -48,6 +49,7 @@ const SVGChannels = {
 	GUILD_VOICE_LIMITED: <SVGVoiceLimited />,
 	RULES: <SVGRules />,
 	GUILD_NEWS: <SVGAnnouncement />,
+	GUILD_NEWS_LIMITED: <SVGAnnouncementLimited />,
 	GUILD_CATEGORY: <SVGDropDown />,
 }
 
