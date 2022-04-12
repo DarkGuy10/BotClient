@@ -53,7 +53,7 @@ const MessageAction = props => {
 					>
 						<SVGReplyButton />
 					</div>
-					{!isDM && (
+					{!isDM && !author.bot && (
 						<>
 							<div
 								className={styles.button}

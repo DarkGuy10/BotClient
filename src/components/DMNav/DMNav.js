@@ -85,7 +85,11 @@ class DMNav extends Component {
 				{(fetchedUser || searchValue) && (
 					<div className={styles.searchLabel}>
 						{fetchedUser
-							? 'Click to Open DMs'
+							? fetchedUser.isClientUser
+								? "You can't DM Yourself"
+								: fetchedUser.bot
+								? "You can't DM a Bot"
+								: 'Click to Open DMs'
 							: searchValue
 							? 'No Result'
 							: ''}
@@ -97,6 +101,7 @@ class DMNav extends Component {
 						user={fetchedUser}
 						selectDM={this.props.selectDM}
 						clearInput={this.clearInput}
+						disabled={fetchedUser.bot}
 						fetched
 					/>
 				)}

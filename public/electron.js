@@ -329,6 +329,7 @@ ipcMain.handle('fetchUser', async (event, id) => {
 		const user = await client.users.fetch(id)
 		return {
 			...user,
+			isClientUser: user.id === client.user.id,
 			avatarURL: user.displayAvatarURL(),
 		}
 	} catch (error) {

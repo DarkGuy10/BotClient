@@ -17,6 +17,12 @@
 
 .userItem:hover {
 	color: var(--interactive-hover);
+	background-color: var(--background-modifier-hover);
+}
+
+.disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
 }
 
 .layout {
@@ -26,11 +32,6 @@
 	border-radius: 4px;
 	height: 45px;
 	padding: 0 8px;
-}
-
-.layout:hover {
-	background-color: var(--background-modifier-hover);
-	cursor: pointer;
 }
 
 .avatarWrapper {
