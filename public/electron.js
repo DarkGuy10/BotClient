@@ -41,22 +41,16 @@ function createMainWindow() {
 		},
 	})
 
-	mainWindow.loadURL(
-		isDev
-			? 'http://localhost:3000'
-			: `file://${path.join(__dirname, '../build/index.html')}`
-	)
+	const mainUrl = isDev
+		? 'http://localhost:3000/'
+		: `file://${path.join(__dirname, '../build/index.html')}`
+	mainWindow.loadURL(mainUrl)
+
 	mainWindow.maximize()
 	mainWindow.setMenu(null)
 
 	mainWindow.webContents.on('will-navigate', (event, url) => {
-		if (
-			url ===
-			(isDev
-				? 'http://localhost:3000/'
-				: `file://${path.join(__dirname, '../build/index.html')}`)
-		)
-			return
+		if (url === mainUrl) return
 		console.log(url)
 		event.preventDefault()
 		shell.openExternal(url)
@@ -66,7 +60,16 @@ function createMainWindow() {
 		mainWindow = null
 	})
 
-	if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' })
+	if (isDev) {
+		const {
+			default: installExtension,
+			REACT_DEVELOPER_TOOLS,
+		} = require('electron-devtools-installer')
+		installExtension(REACT_DEVELOPER_TOOLS).then(() => {
+			log.info('Installed React Dev Tools')
+			mainWindow.webContents.openDevTools({ mode: 'detach' })
+		})
+	}
 }
 
 app.on('ready', () => {
