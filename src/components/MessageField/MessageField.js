@@ -190,6 +190,7 @@ class MessageField extends Component {
 										this.setState({ value: target.value })
 									}}
 									autoFocus
+									maxLength="2000"
 									ref={this.inputRef}
 								/>
 							</div>
