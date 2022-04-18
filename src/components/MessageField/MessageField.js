@@ -187,8 +187,13 @@ class MessageField extends Component {
 								<textarea
 									className={styles.textAreaSlate}
 									placeholder={`Message in #${channel.name}`}
-									onKeyUp={({ keyCode, shiftKey, preventDefault, target }) => {
-										if (keyCode === 13 && !shiftKey) { 
+									onKeyUp={({
+										keyCode,
+										shiftKey,
+										preventDefault,
+										target,
+									}) => {
+										if (keyCode === 13 && !shiftKey) {
 											preventDefault()
 											this.handleSubmit()
 											return
@@ -197,7 +202,8 @@ class MessageField extends Component {
 										target.style.height = '44px'
 										if (target.scrollHeight > 520) {
 											target.style.height = '520px'
-											target.style.overflow = 'hidden scroll'
+											target.style.overflow =
+												'hidden scroll'
 										} else {
 											target.style.height = `${target.scrollHeight}px`
 											target.style.overflow = 'hidden'
