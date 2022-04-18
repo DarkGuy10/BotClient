@@ -11,6 +11,7 @@ class MessageField extends Component {
 		this.initialState = {
 			value: '',
 			files: [],
+			height: '44px',
 		}
 		this.state = { ...this.initialState }
 
@@ -30,7 +31,7 @@ class MessageField extends Component {
 		}
 
 		this.handleSubmit = event => {
-			event.preventDefault()
+			if (event) event.preventDefault()
 			const { value, files } = this.state
 			const { replyingTo, handleReply } = this.props
 			if (!value && !files.length) return
@@ -183,11 +184,24 @@ class MessageField extends Component {
 								</button>
 							</div>
 							<div className={styles.textArea}>
-								<input
+								<textarea
 									className={styles.textAreaSlate}
 									placeholder={`Message in #${channel.name}`}
-									onInput={({ target }) => {
+									onKeyUp={({ keyCode, shiftKey, preventDefault, target }) => {
+										if (keyCode === 13 && !shiftKey) { 
+											preventDefault()
+											this.handleSubmit()
+											return
+										}
 										this.setState({ value: target.value })
+										target.style.height = '44px'
+										if (target.scrollHeight > 520) {
+											target.style.height = '520px'
+											target.style.overflow = 'hidden scroll'
+										} else {
+											target.style.height = `${target.scrollHeight}px`
+											target.style.overflow = 'hidden'
+										}
 									}}
 									autoFocus
 									maxLength="2000"
