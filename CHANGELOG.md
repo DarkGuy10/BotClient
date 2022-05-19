@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v0.10.3-alpha
+
+-   fix: add missing svg for private announcement channel
+-   fix: correct svg fill colors
+-   fix: disable opening DMs for other bots
+-   fix: prevent Chat component unload on server switching
+-   fix: correct replying and mention styles
+
 ## v0.10.2-alpha
 
 -   fix: home screen message
