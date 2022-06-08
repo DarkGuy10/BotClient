@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+    - name: BotClient FAQs
+      url: https://github.com/DarkGuy10/BotClient#-faqs
+      about: Please check the FAQs before creating an issue.
+    - name: BotClient Support Server
+      url: https://discord.com/invite/aZSrxwNUFD
+      about: Join our Discord server for questions or general support.
