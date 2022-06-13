@@ -18,7 +18,7 @@
 
 .container {
 	background-color: var(--channeltextarea-background);
-	max-height: 50vh;
+	max-height: 520px;
 	border-radius: 8px;
 }
 
@@ -114,9 +114,11 @@
 	border-radius: 0 8px 8px 0;
 	border-width: 0px;
 	font-family: var(--font-primary);
-	padding: 12px 18px 12px 0;
+	padding: 11px 18px 11px 0;
 	font-weight: 400;
 	font-size: 1rem;
 	line-height: 1.375rem;
 	color: var(--text-normal);
+	resize: none;
+	outline: none;
 }
