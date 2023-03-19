@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v0.10.4-alpha
+
+-   fix: upgrade discord.js to support breaking API changes (#46)
+
 ## v0.10.3-alpha
 
 -   fix: add missing svg for private announcement channel
