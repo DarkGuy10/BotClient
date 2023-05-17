@@ -1,7 +1,9 @@
 import { useRef } from 'react'
 import {
 	SVGIDButton,
+	SVGMoreButton,
 	SVGTrashCan,
+	SVGTrashCanWhite,
 	SVGReplyButton,
 	SVGLinkButton,
 	SVGOpenDMButton,
@@ -15,6 +17,8 @@ const MessageAction = props => {
 		selectDM,
 		createTooltip,
 		destroyTooltip,
+		createContextMenu,
+		destroyContextMenu,
 		updateHover,
 		message,
 		hover,
@@ -24,9 +28,7 @@ const MessageAction = props => {
 
 	const replyRef = useRef(null)
 	const openDMRef = useRef(null)
-	const copyLinkRef = useRef(null)
-	const copyIDRef = useRef(null)
-	const deleteRef = useRef(null)
+	const moreRef = useRef(null)
 
 	return (
 		<div className={styles.buttonContainer}>
@@ -72,67 +74,75 @@ const MessageAction = props => {
 							>
 								<SVGOpenDMButton />
 							</div>
-							<div
-								className={styles.button}
-								onClick={() =>
-									navigator.clipboard.writeText(
-										`https://discord.com/channels/${guildId}/${channelId}/${id}`
-									)
-								}
-								ref={copyLinkRef}
-								onMouseEnter={() => {
-									createTooltip({
-										position: 'top',
-										content: 'Copy Link',
-										ref: copyLinkRef,
-									})
-								}}
-								onMouseLeave={() => {
-									destroyTooltip()
-								}}
-							>
-								<SVGLinkButton />
-							</div>
 						</>
 					)}
 					<div
 						className={styles.button}
-						onClick={() => navigator.clipboard.writeText(id)}
-						ref={copyIDRef}
+						onClick={e => {
+							updateHover(true)
+							createContextMenu({
+								position: 'left',
+								items: [
+									{
+										type: 'button',
+										content: 'Copy Message Link',
+										icons: [<SVGLinkButton />],
+										onClick: () =>
+											destroyContextMenu() ||
+											navigator.clipboard.writeText(
+												`https://discord.com/channels/${guildId}/${channelId}/${id}`
+											),
+									},
+									{
+										type: 'button',
+										content: 'Delete Message',
+										icons: [
+											<>
+												<SVGTrashCan
+													data-hide-on-hover
+												/>
+												<SVGTrashCanWhite
+													data-hide-on-unhover
+												/>
+											</>,
+										],
+										onClick: () =>
+											destroyContextMenu() ||
+											(deletable &&
+												ipcRenderer.send(
+													'messageDelete',
+													id
+												)),
+
+										color: 'danger',
+									},
+									{ type: 'separator' },
+									{
+										type: 'button',
+										content: 'Copy Message ID',
+										icons: [<SVGIDButton />],
+										onClick: () =>
+											destroyContextMenu() ||
+											navigator.clipboard.writeText(id),
+									},
+								],
+								ref: moreRef,
+							})
+						}}
+						ref={moreRef}
 						onMouseEnter={() => {
 							createTooltip({
 								position: 'top',
-								content: 'Copy ID',
-								ref: copyIDRef,
+								content: 'More',
+								ref: moreRef,
 							})
 						}}
 						onMouseLeave={() => {
 							destroyTooltip()
 						}}
 					>
-						<SVGIDButton />
+						<SVGMoreButton />
 					</div>
-					{deletable && (
-						<div
-							className={styles.button}
-							onClick={() =>
-								ipcRenderer.send('messageDelete', id)
-							}
-							ref={deleteRef}
-							onMouseEnter={() => {
-								createTooltip({
-									position: 'top',
-									content: 'Delete',
-									ref: deleteRef,
-								})
-							}}
-							onMouseLeave={() => {
-								destroyTooltip()
-							}}
-						>
-							<SVGTrashCan />
-						</div>
-					)}
 				</div>
 			</div>
 		</div>

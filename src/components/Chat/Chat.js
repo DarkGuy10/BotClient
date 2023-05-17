@@ -163,8 +163,15 @@ class Chat extends Component {
 	}
 
 	render() {
-		const { channel, pushAlert, createTooltip, destroyTooltip, selectDM } =
-			this.props
+		const {
+			channel,
+			pushAlert,
+			createTooltip,
+			destroyTooltip,
+			createContextMenu,
+			destroyContextMenu,
+			selectDM,
+		} = this.props
 		const { loadedMessages, replyingTo, hasReachedTop } = this.state
 
 		// Prevents complete unloading during server switching
@@ -286,6 +293,8 @@ class Chat extends Component {
 									handleReply={this.handleReply}
 									createTooltip={createTooltip}
 									destroyTooltip={destroyTooltip}
+									createContextMenu={createContextMenu}
+									destroyContextMenu={destroyContextMenu}
 									selectDM={selectDM}
 									replying={replyingTo?.id === message.id}
 								/>

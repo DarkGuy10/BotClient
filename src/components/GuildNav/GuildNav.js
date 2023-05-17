@@ -25,6 +25,8 @@ class GuildNav extends Component {
 			isHomeOpen,
 			createTooltip,
 			destroyTooltip,
+			createContextMenu,
+			destroyContextMenu,
 		} = this.props
 		return (
 			<nav className={styles.guildNav}>
@@ -36,6 +38,8 @@ class GuildNav extends Component {
 							selected={isHomeOpen}
 							createTooltip={createTooltip}
 							destroyTooltip={destroyTooltip}
+							createContextMenu={createContextMenu}
+							destroyContextMenu={destroyContextMenu}
 						/>
 						<div className={styles.guildSeparatorWrapper}>
 							<div className={styles.guildSeperator}></div>
@@ -49,6 +53,8 @@ class GuildNav extends Component {
 									selectGuild={selectGuild}
 									createTooltip={createTooltip}
 									destroyTooltip={destroyTooltip}
+									createContextMenu={createContextMenu}
+									destroyContextMenu={destroyContextMenu}
 								/>
 							))}
 						</div>

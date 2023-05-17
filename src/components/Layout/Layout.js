@@ -85,8 +85,14 @@ class Layout extends Component {
 			isUserSettingsOpen,
 			isHomeOpen,
 		} = this.state
-		const { clientUser, pushAlert, createTooltip, destroyTooltip } =
-			this.props
+		const {
+			clientUser,
+			pushAlert,
+			createTooltip,
+			destroyTooltip,
+			createContextMenu,
+			destroyContextMenu,
+		} = this.props
 
 		return (
 			<>
@@ -96,6 +102,8 @@ class Layout extends Component {
 					pushAlert={pushAlert}
 					createTooltip={createTooltip}
 					destroyTooltip={destroyTooltip}
+					createContextMenu={createContextMenu}
+					destroyContextMenu={destroyContextMenu}
 					isHomeOpen={isHomeOpen}
 					openHome={this.openHome}
 				/>
@@ -117,6 +125,8 @@ class Layout extends Component {
 								clientUser={clientUser}
 								createTooltip={createTooltip}
 								destroyTooltip={destroyTooltip}
+								createContextMenu={createContextMenu}
+								destroyContextMenu={destroyContextMenu}
 								openUserSettings={this.openUserSettings}
 							/>
 						</div>
@@ -125,6 +135,8 @@ class Layout extends Component {
 								channel={currentChannel || currentDM}
 								createTooltip={createTooltip}
 								destroyTooltip={destroyTooltip}
+								createContextMenu={createContextMenu}
+								destroyContextMenu={destroyContextMenu}
 								pushAlert={pushAlert}
 								selectDM={this.selectDM}
 							/>
