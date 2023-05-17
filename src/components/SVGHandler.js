@@ -1,3 +1,4 @@
+import { ReactComponent as SVGCaret } from './../assets/svg/caret.svg'
 import { ReactComponent as SVGCogsThick } from './../assets/svg/cogs-thick.svg'
 import { ReactComponent as SVGCloseButtonCircle } from './../assets/svg/close-button-circle.svg'
 import { ReactComponent as SVGDM } from './../assets/svg/dm.svg'
@@ -13,6 +14,7 @@ import { ReactComponent as SVGUpload } from './../assets/svg/upload.svg'
 import { ReactComponent as SVGSpoilerHidden } from './../assets/svg/spoiler-hidden.svg'
 import { ReactComponent as SVGSpoilerVisible } from './../assets/svg/spoiler-visible.svg'
 import { ReactComponent as SVGTrashCan } from './../assets/svg/trash-can.svg'
+import { ReactComponent as SVGTrashCanWhite } from './../assets/svg/trash-can-white.svg'
 import { ReactComponent as SVGLogout } from './../assets/svg/logout.svg'
 import { ReactComponent as SVGMimeVideo } from './../assets/svg/mime-video.svg'
 import { ReactComponent as SVGMimeAudio } from './../assets/svg/mime-audio.svg'
@@ -30,6 +32,7 @@ import { ReactComponent as SVGToggleChecked } from './../assets/svg/toggle-check
 import { ReactComponent as SVGCloseButton } from './../assets/svg/close-button.svg'
 import { ReactComponent as SVGReplyButton } from './../assets/svg/reply-button.svg'
 import { ReactComponent as SVGIDButton } from './../assets/svg/id-button.svg'
+import { ReactComponent as SVGMoreButton } from './../assets/svg/more-button.svg'
 import { ReactComponent as SVGOpenDMButton } from './../assets/svg/open-dm.svg'
 import { ReactComponent as SVGLinkButton } from './../assets/svg/link-button.svg'
 import { ReactComponent as SVGGithubLogo } from './../assets/svg/github-logo.svg'
@@ -73,6 +76,7 @@ const SVGVoiceStates = {
 }
 
 export {
+	SVGCaret,
 	SVGChannels,
 	SVGCogsThick,
 	SVGCloseButtonCircle,
@@ -81,6 +85,7 @@ export {
 	SVGSpoilerHidden,
 	SVGSpoilerVisible,
 	SVGTrashCan,
+	SVGTrashCanWhite,
 	SVGMimes,
 	SVGBotTagVerified,
 	SVGRadioUnchecked,
@@ -90,6 +95,7 @@ export {
 	SVGCloseButton,
 	SVGReplyButton,
 	SVGIDButton,
+	SVGMoreButton,
 	SVGLinkButton,
 	SVGOpenDMButton,
 	SVGGithubLogo,

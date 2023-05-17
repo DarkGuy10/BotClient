@@ -4,6 +4,7 @@ import { AppData } from './../../services/'
 import Markdown from 'markdown-to-jsx'
 import styles from './App.module.css'
 import bootloop from './../../assets/images/bootloop.gif'
+import ContextMenuManager from '../ContextMenuManager/ContextMenuManager'
 const { ipcRenderer } = window.require('electron')
 
 class App extends Component {
@@ -16,18 +17,28 @@ class App extends Component {
 			clientIsReady: false,
 			alerts: [],
 			tooltip: null,
+			contextMenu: null,
 		}
 
 		this.handleLogin = token => {
 			ipcRenderer.send('login', token)
 		}
 
-		// rawTooltios: {content: string, position: 'top'|'right'|'bottom'|'left', ref: ReactRef, listItem: ?boolean}
+		// rawTooltip: {content: string, position: 'top'|'right'|'bottom'|'left', ref: ReactRef, listItem: ?boolean}
 		this.createTooltip = rawTooltip =>
 			this.setState({ ...this.state, tooltip: rawTooltip })
 
 		this.destroyTooltip = () =>
 			this.setState({ ...this.state, tooltip: null })
+
+		// rawContextMenuItem: {type: 'separator'}|({content: string, icons?: JSX.Element[], color: 'normal'|'danger'|'system', className?: string, onClick?: () => void} & ({type: 'button'}|{type: 'submenu', submenu: rawContextSubmenu}))
+		// rawContextSubmenu: {items: rawContextMenuItem[]}
+		// rawContextMenu: rawContextSubmenu & {position: ('top'|'right'|'bottom'|'left')|{top?: number, left?: number, bottom?: number, right?: number}, ref: ReactRef}
+		this.createContextMenu = rawContextMenu =>
+			this.setState({ ...this.state, contextMenu: rawContextMenu })
+
+		this.destroyContextMenu = () =>
+			this.setState({ ...this.state, contextMenu: null })
 
 		/**
 		 * Push an alert.
@@ -104,7 +115,8 @@ class App extends Component {
 	}
 
 	render() {
-		const { token, clientIsReady, clientUser, tooltip } = this.state
+		const { token, clientIsReady, clientUser, tooltip, contextMenu } =
+			this.state
 		return (
 			<ErrorBoundary>
 				{token ? (
@@ -124,12 +136,23 @@ class App extends Component {
 													destroyTooltip={
 														this.destroyTooltip
 													}
+													createContextMenu={
+														this.createContextMenu
+													}
+													destroyContextMenu={
+														this.destroyContextMenu
+													}
 												/>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							<ContextMenuManager
+								menu={contextMenu}
+								createContextMenu={this.createContextMenu}
+								destroyContextMenu={this.destroyContextMenu}
+							/>
 							<TooltipManager tooltip={tooltip} />
 						</div>
 					) : (

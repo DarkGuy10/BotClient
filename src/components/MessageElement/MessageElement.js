@@ -132,6 +132,8 @@ class MessageElement extends Component {
 			selectDM,
 			createTooltip,
 			destroyTooltip,
+			createContextMenu,
+			destroyContextMenu,
 		} = this.props
 		const {
 			embeds,
@@ -398,6 +400,8 @@ class MessageElement extends Component {
 						handleReply={handleReply}
 						createTooltip={createTooltip}
 						destroyTooltip={destroyTooltip}
+						createContextMenu={createContextMenu}
+						destroyContextMenu={destroyContextMenu}
 						selectDM={selectDM}
 						updateHover={this.updateHover}
 						hover={hover}
