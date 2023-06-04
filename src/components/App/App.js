@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
-import { Login, Layout, AlertManager, TooltipManager, ErrorBoundary } from '..'
+import {
+	Login,
+	Layout,
+	AlertManager,
+	TooltipManager,
+	ContextMenuManager,
+	ErrorBoundary,
+} from '..'
 import { AppData } from './../../services/'
 import Markdown from 'markdown-to-jsx'
 import styles from './App.module.css'
 import bootloop from './../../assets/images/bootloop.gif'
-import ContextMenuManager from '../ContextMenuManager/ContextMenuManager'
 const { ipcRenderer } = window.require('electron')
 
 class App extends Component {
@@ -23,6 +29,8 @@ class App extends Component {
 		this.handleLogin = token => {
 			ipcRenderer.send('login', token)
 		}
+
+		/* NOTE: This part will be redone using wrapper logic to ease with the unnecessary propagations. */
 
 		// rawTooltip: {content: string, position: 'top'|'right'|'bottom'|'left', ref: ReactRef, listItem: ?boolean}
 		this.createTooltip = rawTooltip =>

@@ -1,32 +1,32 @@
 import styles from './ContextMenuManager.module.css'
-import { createRef, forwardRef, useEffect } from 'react'
-import { SVGCaret } from '../SVGHandler'
+import { createRef, useEffect } from 'react'
+//import { SVGCaret } from '../SVGHandler'
 
 const ContextMenuManager = props => {
-	const { menu, createContextMenu, destroyContextMenu } = props
+	const { menu, destroyContextMenu } = props
 
 	let layerContainer = createRef(null)
-	function onPointerDown(e) {
-		if (layerContainer.current == null) return
-		if (layerContainer.current.contains(e.target)) return
+	const handlePointerDown = event => {
+		if (!layerContainer.current) return
+		if (layerContainer.current.contains(event.target)) return
 		destroyContextMenu()
 	}
 
-	function onKeyDown(e) {
-		if (e.key === 'Escape') destroyContextMenu(null)
+	const handleKeyDown = event => {
+		if (event.key === 'Escape') destroyContextMenu(null)
 	}
 
 	useEffect(() => {
-		window.addEventListener('mousedown', onPointerDown)
-		window.addEventListener('touchstart', onPointerDown)
-		window.addEventListener('pointerdown', onPointerDown)
-		window.addEventListener('keydown', onKeyDown)
+		window.addEventListener('mousedown', handlePointerDown)
+		window.addEventListener('touchstart', handlePointerDown)
+		window.addEventListener('pointerdown', handlePointerDown)
+		window.addEventListener('keydown', handleKeyDown)
 
 		return () => {
-			window.removeEventListener('mousedown', onPointerDown)
-			window.removeEventListener('touchstart', onPointerDown)
-			window.removeEventListener('pointerdown', onPointerDown)
-			window.removeEventListener('keydown', onKeyDown)
+			window.removeEventListener('mousedown', handlePointerDown)
+			window.removeEventListener('touchstart', handlePointerDown)
+			window.removeEventListener('pointerdown', handlePointerDown)
+			window.removeEventListener('keydown', handleKeyDown)
 		}
 	})
 
@@ -135,6 +135,7 @@ const ContextMenuManager = props => {
 								</div>
 							)
 						}
+						/* Omitting out for now due to complexities
 						case 'submenu': {
 							let containerRef = createRef(null)
 							let submenuRef = createRef(null)
@@ -217,6 +218,8 @@ const ContextMenuManager = props => {
 								</div>
 							)
 						}
+						*/
+
 						default: {
 							throw new Error(
 								`Unrecognized submenu item type ${item.type}.`

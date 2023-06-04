@@ -26,6 +26,7 @@ import MessageAction from './MessageAction/MessageAction'
 import StatusIndicator from './StatusIndicator/StatusIndicator'
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 import WordFromDevelopers from './WordFromDevelopers/WordFromDevelopers'
+import ContextMenuManager from './ContextMenuManager/ContextMenuManager'
 
 export {
 	App,
@@ -56,4 +57,5 @@ export {
 	StatusIndicator,
 	ErrorBoundary,
 	WordFromDevelopers,
+	ContextMenuManager,
 }
