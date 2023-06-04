@@ -79,7 +79,7 @@ const MessageAction = props => {
 					<div
 						className={styles.button}
 						onClick={e => {
-							updateHover(true)
+							updateHover(true) // tofix
 							createContextMenu({
 								position: 'left',
 								items: [

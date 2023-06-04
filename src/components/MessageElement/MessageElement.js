@@ -13,7 +13,7 @@ import {
 	DiscordTenorVideo,
 } from '@skyra/discord-components-react'
 import { parseTimestamp, parseTwemojis, decimalToHexColor } from './../../utils'
-import MessageAction from '../MessageAction/MessageAction'
+import { MessageAction } from '..'
 const { toHTML } = require('@darkguy10/discord-markdown')
 const { ipcRenderer } = window.require('electron')
 const HtmlToReactParser = require('html-to-react').Parser
