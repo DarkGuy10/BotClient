@@ -12,8 +12,6 @@ const GuildListItem = props => {
 		selectGuild,
 		createTooltip,
 		destroyTooltip,
-		createContextMenu,
-		destroyContextMenu,
 	} = props
 	const [hover, updateHover] = useState(false)
 	const selfRef = useRef(null)
