@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { Message } = require('discord.js')
+const { Message, MessageType, ChannelType, UserFlags } = require('discord.js')
 const serializeGuildMember = require('./serializeGuildMember')
 
 /**
@@ -12,7 +12,8 @@ const serializeMessage = async message => {
 
 	let repliesTo = null
 	try {
-		if (type === 'REPLY') repliesTo = await message.fetchReference()
+		if (type === MessageType.Reply)
+			repliesTo = await message.fetchReference()
 	} catch (error) {
 		// Fix for #31
 		// Man... I want to put an easter bug here, but idk
@@ -23,14 +24,14 @@ const serializeMessage = async message => {
 		author: {
 			...author,
 			avatarURL: author.displayAvatarURL(),
-			isVerifiedBot: author.flags?.has('VERIFIED_BOT'),
+			isVerifiedBot: author.flags?.has(UserFlags.VerifiedBot),
 		},
 		member: member ? serializeGuildMember(member) : null,
-		isDM: message.channel.type === 'DM',
+		isDM: message.channel.type === ChannelType.DM,
 		deletable: message.deletable,
 		embeds: embeds.map(embed => {
 			return {
-				...embed,
+				...embed.toJSON(),
 				hexColor: embed.hexColor,
 			}
 		}),
@@ -71,8 +72,9 @@ const serializeMessage = async message => {
 					author: {
 						...repliesTo.author,
 						avatarURL: repliesTo.author.displayAvatarURL(),
-						isVerifiedBot:
-							repliesTo.author.flags?.has('VERIFIED_BOT'),
+						isVerifiedBot: repliesTo.author.flags?.has(
+							UserFlags.VerifiedBot
+						),
 					},
 					member: repliesTo.member
 						? serializeGuildMember(repliesTo.member)

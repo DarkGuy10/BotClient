@@ -10,6 +10,7 @@ import {
 } from '../SVGHandler'
 import { parseTwemojis } from '../../utils'
 import MemberNav from '../MemberNav/MemberNav'
+import { ChannelType } from 'discord-api-types/v10'
 const { ipcRenderer } = window.require('electron')
 
 const ChannelIcon = props => {
@@ -25,7 +26,7 @@ const ChannelStart = props => {
 	const { name, isPrivate, type, recipient } = props.channel
 	return (
 		<div className={styles.channelStartContainer}>
-			{type === 'DM' ? (
+			{type === ChannelType.DM ? (
 				<img
 					src={recipient.avatarURL}
 					className={styles.channelStartIcon}
@@ -37,14 +38,14 @@ const ChannelStart = props => {
 				</div>
 			)}
 			<h1 className={styles.channelStartHeader}>
-				{type === 'DM' ? (
+				{type === ChannelType.DM ? (
 					recipient.username
 				) : (
 					<>Welcome to #{parseTwemojis(name)}!</>
 				)}
 			</h1>
 			<div className={styles.channelStartDescription}>
-				{type === 'DM' ? (
+				{type === ChannelType.DM ? (
 					<>
 						This is the beginning of your direct message history
 						with <strong>@{recipient.username}</strong>.
@@ -313,7 +314,7 @@ class Chat extends Component {
 							replyingTo={replyingTo}
 						/>
 					</main>
-					{channel.type !== 'DM' && (
+					{channel.type !== ChannelType.DM && (
 						<MemberNav currentChannel={channel} />
 					)}
 				</div>

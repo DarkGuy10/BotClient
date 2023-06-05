@@ -1,3 +1,4 @@
+import { ChannelType } from 'discord-api-types/v10'
 import { ReactComponent as SVGCaret } from './../assets/svg/caret.svg'
 import { ReactComponent as SVGCogsThick } from './../assets/svg/cogs-thick.svg'
 import { ReactComponent as SVGCloseButtonCircle } from './../assets/svg/close-button-circle.svg'
@@ -45,15 +46,15 @@ import { ReactComponent as SVGServerMute } from './../assets/svg/server-mute.svg
 import { ReactComponent as SVGSelfVideo } from './../assets/svg/self-video.svg'
 
 const SVGChannels = {
-	DM: <SVGDM />,
-	GUILD_TEXT: <SVGText />,
-	GUILD_TEXT_LIMITED: <SVGTextLimited />,
-	GUILD_VOICE: <SVGVoice />,
-	GUILD_VOICE_LIMITED: <SVGVoiceLimited />,
+	[ChannelType.DM]: <SVGDM />,
+	[ChannelType.GuildText]: <SVGText />,
+	[ChannelType.GuildText + '_LIMITED']: <SVGTextLimited />,
+	[ChannelType.GuildVoice]: <SVGVoice />,
+	[ChannelType.GuildVoice + '_LIMITED']: <SVGVoiceLimited />,
 	RULES: <SVGRules />,
-	GUILD_NEWS: <SVGAnnouncement />,
-	GUILD_NEWS_LIMITED: <SVGAnnouncementLimited />,
-	GUILD_CATEGORY: <SVGDropDown />,
+	[ChannelType.GuildAnnouncement]: <SVGAnnouncement />,
+	[ChannelType.GuildAnnouncement + '_LIMITED']: <SVGAnnouncementLimited />,
+	[ChannelType.GuildCategory]: <SVGDropDown />,
 }
 
 const SVGMimes = {

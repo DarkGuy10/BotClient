@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { ChannelType, MessageType } from 'discord-api-types/v10'
 import styles from './MessageElement.module.css'
 import {
 	DiscordAttachment,
@@ -100,7 +101,7 @@ class MessageElement extends Component {
 								this.fetchMention(node.id, 'channel')
 							return channel
 								? `<discord-mention type='${
-										channel.type === 'GUILD_VOICE'
+										channel.type === ChannelType.GuildVoice
 											? 'voice'
 											: 'channel'
 								  }'>${escape(channel.name)}</discord-mention>`
@@ -163,7 +164,7 @@ class MessageElement extends Component {
 
 		return (
 			<>
-				{type === 'GUILD_MEMBER_JOIN' ? (
+				{type === MessageType.UserJoin ? (
 					<DiscordSystemMessage
 						type="join"
 						className="base-discord-message"
@@ -179,7 +180,7 @@ class MessageElement extends Component {
 						</i>{' '}
 						has appeared!
 					</DiscordSystemMessage>
-				) : type.startsWith('USER_PREMIUM_GUILD_SUBSCRIPTION') ? (
+				) : type === MessageType.GuildBoost ? (
 					<DiscordSystemMessage
 						type="boost"
 						className="base-discord-message"
@@ -210,7 +211,7 @@ class MessageElement extends Component {
 							hover ? styles.messageHover : ''
 						} ${replying ? styles.replying : ''}`}
 					>
-						{type === 'REPLY' && repliesTo ? (
+						{type === MessageType.Reply && repliesTo ? (
 							<DiscordReply
 								slot="reply"
 								author={
@@ -265,7 +266,6 @@ class MessageElement extends Component {
 								/>
 							)
 						})}
-
 						{embeds.map((embed, key) => {
 							const {
 								provider,
@@ -351,7 +351,7 @@ class MessageElement extends Component {
 											)}
 										</DiscordEmbedDescription>
 									) : null}
-									{fields.length ? (
+									{fields?.length ? (
 										<DiscordEmbedFields slot="fields">
 											{fields.map((field, key) => {
 												let fieldOptions = {}

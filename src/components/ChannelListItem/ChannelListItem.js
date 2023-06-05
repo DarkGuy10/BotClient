@@ -1,4 +1,5 @@
 import { parseTwemojis } from '../../utils'
+import { ChannelType } from 'discord-api-types/v10'
 import { SVGChannels, SVGVoiceStates } from '../SVGHandler'
 import styles from './ChannelListItem.module.css'
 
@@ -13,7 +14,7 @@ const ChannelListItem = props => {
 	const { isPrivate, isRules, parentId, id, viewable, type, name, members } =
 		channel
 
-	const isCategory = channel.type === 'GUILD_CATEGORY'
+	const isCategory = channel.type === ChannelType.GuildCategory
 	const isParentCollapsed = collpasedCategoriesId.includes(parentId)
 	const isCollapsed = collpasedCategoriesId.includes(id)
 	const isViewable = viewable
@@ -38,7 +39,7 @@ const ChannelListItem = props => {
 				{SVGChannels[svgType]}
 				<div>{parseTwemojis(name)}</div>
 			</div>
-			{type === 'GUILD_VOICE' && members.length ? (
+			{type === ChannelType.GuildVoice && members.length ? (
 				<div className={styles.voiceMembersList}>
 					{members.map((member, key) => (
 						<div className={styles.memberContainer} key={key}>

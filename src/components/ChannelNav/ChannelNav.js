@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './ChannelNav.module.css'
 import { ChannelListItem } from '..'
 import { parseTwemojis } from '../../utils'
+import { ChannelType } from 'discord-api-types/v10'
 const { ipcRenderer } = window.require('electron')
 
 class ChannelNav extends Component {
@@ -53,7 +54,8 @@ class ChannelNav extends Component {
 				<div className={styles.channels}>
 					{channels && (
 						<>
-							{channels.at(0)?.type !== 'GUILD_CATEGORY' ? (
+							{channels.at(0)?.type !==
+							ChannelType.GuildCategory ? (
 								<div style={{ height: 16 }}></div>
 							) : null}
 							{channels.map((channel, index) => (
@@ -81,13 +83,17 @@ class ChannelNav extends Component {
 
 function orderChannels(channels) {
 	const categories = channels
-		.filter(channel => channel.type === 'GUILD_CATEGORY')
+		.filter(channel => channel.type === ChannelType.GuildCategory)
 		.sort((a, b) => a.position - b.position)
 	const texts = channels
-		.filter(channel => ['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
+		.filter(channel =>
+			[ChannelType.GuildText, ChannelType.GuildAnnouncement].includes(
+				channel.type
+			)
+		)
 		.sort((a, b) => a.position - b.position)
 	const voices = channels
-		.filter(channel => channel.type === 'GUILD_VOICE')
+		.filter(channel => channel.type === ChannelType.GuildVoice)
 		.sort((a, b) => a.position - b.position)
 	const result = [
 		...texts.filter(channel => !channel.parentId),

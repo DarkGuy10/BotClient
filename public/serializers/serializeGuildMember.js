@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { GuildMember } = require('discord.js')
+const { GuildMember, UserFlags } = require('discord.js')
 
 /**
  *
@@ -23,7 +23,7 @@ const serializeGuildMember = member => {
 		color: displayColor,
 		hexColor: displayHexColor,
 		isHoisted: roles.hoist ? true : false,
-		isVerifiedBot: user.flags?.has('VERIFIED_BOT'),
+		isVerifiedBot: user.flags?.has(UserFlags.VerifiedBot),
 		roles: {
 			...roles,
 			hoist: {

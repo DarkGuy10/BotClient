@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { GuildChannel } = require('discord.js')
+const { GuildChannel, ChannelType, PermissionFlagsBits } = require('discord.js')
 const serializeGuildMember = require('./serializeGuildMember')
 
 /**
@@ -15,10 +15,10 @@ const serializeGuildChannel = channel => {
 		position: position,
 		isPrivate: !channel
 			.permissionsFor(guild.roles.everyone)
-			.has('VIEW_CHANNEL'),
+			.has(PermissionFlagsBits.ViewChannel),
 		isRules: id === guild.rulesChannelId,
 		members:
-			type === 'GUILD_VOICE' && members.values
+			type === ChannelType.GuildVoice && members.values
 				? [...members.values()].map(member =>
 						serializeGuildMember(member)
 				  )

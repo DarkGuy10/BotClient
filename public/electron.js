@@ -11,7 +11,12 @@ const { app, BrowserWindow, shell, ipcMain } = require('electron')
 const log = require('electron-log')
 const { autoUpdater } = require('electron-updater')
 const isDev = require('electron-is-dev')
-const { Guild, BaseGuildTextChannel, DMChannel } = require('discord.js')
+const {
+	Guild,
+	BaseGuildTextChannel,
+	DMChannel,
+	ChannelType,
+} = require('discord.js')
 const Store = require('electron-store')
 const appData = new Store()
 
@@ -66,7 +71,11 @@ function createMainWindow() {
 		mainWindow = null
 	})
 
-	if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' })
+	if (isDev) {
+		const devTools = new BrowserWindow()
+		mainWindow.webContents.setDevToolsWebContents(devTools.webContents)
+		mainWindow.webContents.openDevTools({ mode: 'detach' })
+	}
 }
 
 app.on('ready', () => {
@@ -106,20 +115,7 @@ ipcMain.on('login', async (event, token) => {
 		client.destroy()
 		client = null
 	}
-	client = new Client(
-		{
-			intents: [
-				'GUILDS',
-				'DIRECT_MESSAGES',
-				'GUILD_MESSAGES',
-				'GUILD_MEMBERS',
-				'GUILD_PRESENCES',
-				'GUILD_EMOJIS_AND_STICKERS',
-				'GUILD_VOICE_STATES',
-			],
-		},
-		mainWindow
-	)
+	client = new Client({ mainWindow: mainWindow })
 	try {
 		await client.login(token)
 		if (appData.get('Storage.saveToken', true)) appData.set('token', token)
@@ -159,7 +155,7 @@ ipcMain.handle('dms', () => {
 	try {
 		const dms = [
 			...client.channels.cache
-				.filter(channel => channel.type === 'DM')
+				.filter(channel => channel.type === ChannelType.DM)
 				.map(each => {
 					return {
 						...each,
@@ -208,7 +204,8 @@ ipcMain.handle('selectGuild', async (event, id) => {
 	try {
 		currentGuild = await client.guilds.fetch(id)
 		currentChannel = currentGuild.channels.cache.find(
-			channel => channel.type === 'GUILD_TEXT' && channel.viewable
+			channel =>
+				channel.type === ChannelType.GuildText && channel.viewable
 		)
 		currentDM = null
 		return {
@@ -228,7 +225,11 @@ ipcMain.handle('selectChannel', async (event, id) => {
 	try {
 		const newChannel = await client.channels.fetch(id)
 
-		const allowedChannelTypes = ['GUILD_TEXT', 'GUILD_NEWS', 'DM']
+		const allowedChannelTypes = [
+			ChannelType.GuildText,
+			ChannelType.GuildAnnouncement,
+			ChannelType.DM,
+		]
 		if (!allowedChannelTypes.includes(newChannel.type))
 			throw new Error(
 				`Channel ${newChannel.name} [ID:${newChannel.id}] has an unsupported type: '${newChannel.type}'`
