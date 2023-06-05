@@ -21,11 +21,7 @@ const ToggleButton = props => {
 					defaultChecked={checked}
 					tabIndex={0}
 					onChange={({ target }) => {
-						if (
-							target.checked &&
-							onCheck &&
-							typeof onCheck === 'function'
-						)
+						if (target.checked && onCheck && typeof onCheck === 'function')
 							onCheck()
 						else if (
 							!target.checked &&

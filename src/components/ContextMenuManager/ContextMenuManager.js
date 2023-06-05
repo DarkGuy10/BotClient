@@ -31,9 +31,7 @@ const ContextMenuManager = props => {
 	})
 
 	if (!menu?.ref.current) {
-		return (
-			<div className={styles.layerContainer} ref={layerContainer}></div>
-		)
+		return <div className={styles.layerContainer} ref={layerContainer}></div>
 	}
 
 	const positionMapping = {
@@ -102,9 +100,7 @@ const ContextMenuManager = props => {
 							return (
 								<hr
 									key={i}
-									className={`${styles.separatorItem} ${
-										item.className ?? ''
-									}`}
+									className={`${styles.separatorItem} ${item.className ?? ''}`}
 								></hr>
 							)
 						}
@@ -117,17 +113,12 @@ const ContextMenuManager = props => {
 									key={i}
 									onClick={item.onClick ?? null}
 								>
-									<span
-										className={`${styles.buttonItemContent}`}
-									>
+									<span className={`${styles.buttonItemContent}`}>
 										{item.content}
 									</span>
 									{item.icons
 										? item.icons.map((icon, i) => (
-												<span
-													key={i}
-													className={`${styles.buttonItemIcon}`}
-												>
+												<span key={i} className={`${styles.buttonItemIcon}`}>
 													{icon}
 												</span>
 										  ))
@@ -221,9 +212,7 @@ const ContextMenuManager = props => {
 						*/
 
 						default: {
-							throw new Error(
-								`Unrecognized submenu item type ${item.type}.`
-							)
+							throw new Error(`Unrecognized submenu item type ${item.type}.`)
 						}
 					}
 				})}

@@ -76,11 +76,7 @@ const UploadElement = props => {
 									toggleSpoiler(index)
 								}}
 							>
-								{spoiler ? (
-									<SVGSpoilerHidden />
-								) : (
-									<SVGSpoilerVisible />
-								)}
+								{spoiler ? <SVGSpoilerHidden /> : <SVGSpoilerVisible />}
 							</div>
 							<div
 								className={`${styles.button} ${styles.dangerous}`}

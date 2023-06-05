@@ -40,19 +40,17 @@ class MessageElement extends Component {
 			if (this.state.fetchedMentions[type].has(id))
 				return this.state.fetchedMentions[type].get(id)
 
-			ipcRenderer
-				.invoke('mention', id, type, this.props.message)
-				.then(res => {
-					const { fetchedMentions } = this.state
-					let newMentions = {
-						...fetchedMentions,
-					}
-					newMentions[type].set(id, res)
-					this.setState({
-						...this.state,
-						fetchedMentions: newMentions,
-					})
+			ipcRenderer.invoke('mention', id, type, this.props.message).then(res => {
+				const { fetchedMentions } = this.state
+				let newMentions = {
+					...fetchedMentions,
+				}
+				newMentions[type].set(id, res)
+				this.setState({
+					...this.state,
+					fetchedMentions: newMentions,
 				})
+			})
 		}
 
 		this.parseDiscordMarkdown = (
@@ -76,8 +74,7 @@ class MessageElement extends Component {
 								this.fetchMention(node.id, 'memberOrUser')
 							return memberOrUser
 								? `<discord-mention type='user'>${escape(
-										memberOrUser?.displayName ||
-											memberOrUser?.username
+										memberOrUser?.displayName || memberOrUser?.username
 								  )}</discord-mention>`
 								: // the span tags below prevent removal of prepended '@'
 								  // on state updates
@@ -87,8 +84,7 @@ class MessageElement extends Component {
 						},
 						role: node => {
 							const role =
-								roles.get(node.id) ||
-								this.fetchMention(node.id, 'role')
+								roles.get(node.id) || this.fetchMention(node.id, 'role')
 							return role
 								? `<discord-mention type='role' color=${decimalToHexColor(
 										role.color
@@ -97,8 +93,7 @@ class MessageElement extends Component {
 						},
 						channel: node => {
 							const channel =
-								channels.get(node.id) ||
-								this.fetchMention(node.id, 'channel')
+								channels.get(node.id) || this.fetchMention(node.id, 'channel')
 							return channel
 								? `<discord-mention type='${
 										channel.type === ChannelType.GuildVoice
@@ -117,8 +112,7 @@ class MessageElement extends Component {
 							)}"></discord-custom-emoji>`,
 						everyone: () =>
 							`<discord-mention type='user'>everyone</discord-mention>`,
-						here: () =>
-							`<discord-mention type='user'>here</discord-mention>`,
+						here: () => `<discord-mention type='user'>here</discord-mention>`,
 					},
 				})
 			)
@@ -215,19 +209,14 @@ class MessageElement extends Component {
 							<DiscordReply
 								slot="reply"
 								author={
-									repliesTo.member?.displayName ??
-									repliesTo.author.username
+									repliesTo.member?.displayName ?? repliesTo.author.username
 								}
 								avatar={repliesTo.author.avatarURL}
 								bot={repliesTo.author.bot}
 								verified={repliesTo.author.isVerifiedBot}
-								edited={
-									repliesTo.editedTimestamp ? true : false
-								}
+								edited={repliesTo.editedTimestamp ? true : false}
 								roleColor={
-									repliesTo.member?.color
-										? repliesTo.member.hexColor
-										: ''
+									repliesTo.member?.color ? repliesTo.member.hexColor : ''
 								}
 							>
 								{parseTwemojis(shorten(repliesTo))}
@@ -247,15 +236,10 @@ class MessageElement extends Component {
 						))}
 
 						{imageAttachments.map((item, key) => {
-							const biggerSide =
-								item.height > item.width ? 'height' : 'width'
-							const allowance =
-								biggerSide === 'height' ? 300 : 400
+							const biggerSide = item.height > item.width ? 'height' : 'width'
+							const allowance = biggerSide === 'height' ? 300 : 400
 							let sizeOptions = {}
-							sizeOptions[biggerSide] = Math.min(
-								item[biggerSide],
-								allowance
-							)
+							sizeOptions[biggerSide] = Math.min(item[biggerSide], allowance)
 							return (
 								<DiscordAttachment
 									key={key}
@@ -283,32 +267,22 @@ class MessageElement extends Component {
 							} = embed
 							if (provider?.name === 'Tenor') {
 								const biggerSide =
-									video.height > video.width
-										? 'height'
-										: 'width'
-								const allowance =
-									biggerSide === 'height' ? 300 : 400
+									video.height > video.width ? 'height' : 'width'
+								const allowance = biggerSide === 'height' ? 300 : 400
 								let options = {
 									slot: 'attachments',
 									url: embed.video.url,
 								}
-								options[biggerSide] = Math.min(
-									video[biggerSide],
-									allowance
-								)
-								return (
-									<DiscordTenorVideo key={key} {...options} />
-								)
+								options[biggerSide] = Math.min(video[biggerSide], allowance)
+								return <DiscordTenorVideo key={key} {...options} />
 							}
 							let options = {}
 							let content = ''
 							let footerOptions = { slot: 'footer' }
 							options['slot'] = 'embeds'
-							if (author?.name)
-								options['authorName'] = author.name
+							if (author?.name) options['authorName'] = author.name
 
-							if (author?.iconURL)
-								options['authorImage'] = author.iconURL
+							if (author?.iconURL) options['authorImage'] = author.iconURL
 
 							if (author?.url) options['authorUrl'] = author.url
 
@@ -321,17 +295,13 @@ class MessageElement extends Component {
 							if (url) options['url'] = embed.url
 
 							if (timestamp)
-								footerOptions['timestamp'] =
-									parseTimestamp(timestamp)
-							if (footer?.iconURL)
-								footerOptions['footerImage'] = footer.iconURL
+								footerOptions['timestamp'] = parseTimestamp(timestamp)
+							if (footer?.iconURL) footerOptions['footerImage'] = footer.iconURL
 
 							if (video) {
 								options['video'] = video.url
-								if (provider?.name)
-									options['provider'] = provider.name
-								if (thumbnail?.url)
-									options['image'] = thumbnail.url
+								if (provider?.name) options['provider'] = provider.name
+								if (thumbnail?.url) options['image'] = thumbnail.url
 							} else {
 								if (embed.thumbnail?.url)
 									options['thumbnail'] = embed.thumbnail.url
@@ -343,39 +313,25 @@ class MessageElement extends Component {
 								<DiscordEmbed key={key} {...options}>
 									{content ? (
 										<DiscordEmbedDescription slot="description">
-											{parseTwemojis(
-												this.parseDiscordMarkdown(
-													content,
-													true
-												)
-											)}
+											{parseTwemojis(this.parseDiscordMarkdown(content, true))}
 										</DiscordEmbedDescription>
 									) : null}
 									{fields?.length ? (
 										<DiscordEmbedFields slot="fields">
 											{fields.map((field, key) => {
 												let fieldOptions = {}
-												fieldOptions['fieldTitle'] =
-													field.name
+												fieldOptions['fieldTitle'] = field.name
 												if (field.inline) {
-													fieldOptions[
-														'inline'
-													] = true
+													fieldOptions['inline'] = true
 													const index =
-														!lastFieldIndex ||
-														lastFieldIndex === 3
+														!lastFieldIndex || lastFieldIndex === 3
 															? 1
 															: lastFieldIndex + 1
-													fieldOptions[
-														'inlineIndex'
-													] = index
+													fieldOptions['inlineIndex'] = index
 													lastFieldIndex = index
 												} else lastFieldIndex = 0
 												return (
-													<DiscordEmbedField
-														{...fieldOptions}
-														key={key}
-													>
+													<DiscordEmbedField {...fieldOptions} key={key}>
 														{field.value}
 													</DiscordEmbedField>
 												)
@@ -384,9 +340,7 @@ class MessageElement extends Component {
 									) : null}
 									{footer?.text ? (
 										<DiscordEmbedFooter {...footerOptions}>
-											{footer?.text
-												? parseTwemojis(footer.text)
-												: ''}
+											{footer?.text ? parseTwemojis(footer.text) : ''}
 										</DiscordEmbedFooter>
 									) : null}
 								</DiscordEmbed>

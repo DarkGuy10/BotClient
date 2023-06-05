@@ -1,16 +1,16 @@
 artifactName: ${productName}-${os}-${arch}.${ext}
 win:
-    target: nsis
+  target: nsis
 nsis:
-    installerIcon: build/icon.ico
-    uninstallerIcon: build/icon.ico
-    installerHeaderIcon: build/icon.ico
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
 linux:
-    target: AppImage
-    synopsis: Login as a discord bot!
-    category: Chat
-    icon: build/icon.icns
+  target: AppImage
+  synopsis: Login as a discord bot!
+  category: Chat
+  icon: build/icon.icns
 mac:
-    target: dmg
-    category: public.app-category.social-networking
-    icon: build/icon.icns
+  target: dmg
+  category: public.app-category.social-networking
+  icon: build/icon.icns

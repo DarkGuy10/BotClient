@@ -39,33 +39,20 @@ class UserSettings extends Component {
 						<div className={styles.sideBarRegionScroller}>
 							<nav className={styles.sidebar}>
 								<div className={styles.side}>
-									{Settings.map(
-										({ header, subsettings }, key) => (
-											<div key={key}>
-												<div className={styles.header}>
-													{header}
-												</div>
-												{subsettings.map(
-													(item, key) => (
-														<Item
-															key={key}
-															item={item}
-															SelectedTitle={
-																SelectedTitle
-															}
-															handleSelect={
-																this
-																	.handleSelect
-															}
-														/>
-													)
-												)}
-												<div
-													className={styles.separator}
-												></div>
-											</div>
-										)
-									)}
+									{Settings.map(({ header, subsettings }, key) => (
+										<div key={key}>
+											<div className={styles.header}>{header}</div>
+											{subsettings.map((item, key) => (
+												<Item
+													key={key}
+													item={item}
+													SelectedTitle={SelectedTitle}
+													handleSelect={this.handleSelect}
+												/>
+											))}
+											<div className={styles.separator}></div>
+										</div>
+									))}
 								</div>
 							</nav>
 						</div>
@@ -76,9 +63,7 @@ class UserSettings extends Component {
 								<main className={styles.contentColumn}>
 									<div>
 										<div className={styles.sectionTitle}>
-											<h1 className={styles.title}>
-												{SelectedTitle}
-											</h1>
+											<h1 className={styles.title}>{SelectedTitle}</h1>
 										</div>
 										<div className={styles.children}>
 											<SelectedSetting />

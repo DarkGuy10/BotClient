@@ -50,9 +50,7 @@ const TooltipManager = props => {
 						}`}
 					>
 						<div className={styles.tooltipPointer}></div>
-						<div className={styles.tooltipContent}>
-							{tooltip.content}
-						</div>
+						<div className={styles.tooltipContent}>{tooltip.content}</div>
 					</div>
 				</div>
 			)}

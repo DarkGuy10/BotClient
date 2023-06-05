@@ -19,9 +19,7 @@ const serializeGuildChannel = channel => {
 		isRules: id === guild.rulesChannelId,
 		members:
 			type === ChannelType.GuildVoice && members.values
-				? [...members.values()].map(member =>
-						serializeGuildMember(member)
-				  )
+				? [...members.values()].map(member => serializeGuildMember(member))
 				: [],
 	}
 }

@@ -23,11 +23,7 @@
 }
 
 .checked {
-	background-color: hsl(
-		139,
-		calc(var(--saturation-factor, 1) * 47.3%),
-		43.9%
-	);
+	background-color: hsl(139, calc(var(--saturation-factor, 1) * 47.3%), 43.9%);
 }
 
 .unchecked {

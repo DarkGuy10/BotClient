@@ -1,43 +1,43 @@
 name: Build/release
 
 on:
-    push:
-        branches-ignore:
-            - main
-        tags:
-            - v*
-    pull_request:
-        branches:
-            - main
-    workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+    tags:
+      - v*
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-    release:
-        runs-on: ${{ matrix.os }}
+  release:
+    runs-on: ${{ matrix.os }}
 
-        strategy:
-            matrix:
-                os: [macos-latest, ubuntu-latest, windows-latest]
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
-        steps:
-            - name: Check out Git repository
-              uses: actions/checkout@v2.4.0
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2.4.0
 
-            - name: Install Node.js, NPM and Yarn
-              uses: actions/setup-node@v2.5.1
-              with:
-                  node-version: 17
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 17
 
-            - name: Electron Builder Action
-              uses: samuelmeuli/action-electron-builder@v1.6.0
-              with:
-                  # GitHub token, automatically provided to the action
-                  # (No need to define this secret in the repo settings)
-                  github_token: ${{ secrets.github_token }}
+      - name: Electron Builder Action
+        uses: samuelmeuli/action-electron-builder@v1.6.0
+        with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
 
-                  # Build React app using react-build script first
-                  build_script_name: react-build
+          # Build React app using react-build script first
+          build_script_name: react-build
 
-                  # If the commit is tagged with a version (e.g. "v1.0.0"),
-                  # release the app after building
-                  release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}

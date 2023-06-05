@@ -21,11 +21,7 @@ const GuildListItem = props => {
 			<div className={styles.pill}>
 				<span
 					className={
-						selected
-							? styles.pillSelected
-							: hover
-							? styles.pillHover
-							: ''
+						selected ? styles.pillSelected : hover ? styles.pillHover : ''
 					}
 				></span>
 			</div>

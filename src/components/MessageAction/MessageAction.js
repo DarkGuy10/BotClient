@@ -98,21 +98,13 @@ const MessageAction = props => {
 										content: 'Delete Message',
 										icons: [
 											<>
-												<SVGTrashCan
-													data-hide-on-hover
-												/>
-												<SVGTrashCanWhite
-													data-hide-on-unhover
-												/>
+												<SVGTrashCan data-hide-on-hover />
+												<SVGTrashCanWhite data-hide-on-unhover />
 											</>,
 										],
 										onClick: () =>
 											destroyContextMenu() ||
-											(deletable &&
-												ipcRenderer.send(
-													'messageDelete',
-													id
-												)),
+											(deletable && ipcRenderer.send('messageDelete', id)),
 
 										color: 'danger',
 									},
@@ -122,8 +114,7 @@ const MessageAction = props => {
 										content: 'Copy Message ID',
 										icons: [<SVGIDButton />],
 										onClick: () =>
-											destroyContextMenu() ||
-											navigator.clipboard.writeText(id),
+											destroyContextMenu() || navigator.clipboard.writeText(id),
 									},
 								],
 								ref: moreRef,

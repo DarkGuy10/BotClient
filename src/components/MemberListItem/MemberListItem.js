@@ -61,11 +61,7 @@ const MemberListItem = props => {
 
 	return (
 		<>
-			<div
-				className={`${styles.container} ${
-					!presence ? styles.offline : ''
-				}`}
-			>
+			<div className={`${styles.container} ${!presence ? styles.offline : ''}`}>
 				<div className={styles.avatarWrapper}>
 					<img
 						src={avatarURL}
@@ -74,9 +70,7 @@ const MemberListItem = props => {
 					/>
 					{presence && (
 						<div className={styles.statusWrapper}>
-							<StatusIndicator
-								type={presence.status.toUpperCase()}
-							/>
+							<StatusIndicator type={presence.status.toUpperCase()} />
 						</div>
 					)}
 				</div>

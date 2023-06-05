@@ -37,8 +37,7 @@ class MemberNav extends Component {
 							<div key={key}>
 								<h2 className={styles.header}>
 									<span>
-										{parseTwemojis(role.name)} —{' '}
-										{members.length}{' '}
+										{parseTwemojis(role.name)} — {members.length}{' '}
 									</span>
 								</h2>
 								{members.map((member, key) => (
@@ -78,15 +77,11 @@ class MemberNav extends Component {
  * @param {Array} members
  */
 const orderMembers = members => {
-	const offline = sortAlphabetically(
-		members.filter(member => !member.presence)
-	)
+	const offline = sortAlphabetically(members.filter(member => !member.presence))
 	const online = sortAlphabetically(
 		members.filter(member => member.presence && !member.isHoisted)
 	)
-	const hoisted = members.filter(
-		member => member.presence && member.isHoisted
-	)
+	const hoisted = members.filter(member => member.presence && member.isHoisted)
 
 	const uniqify = roles => {
 		return roles.filter((value, index, self) => {

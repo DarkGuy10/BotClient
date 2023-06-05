@@ -47,8 +47,8 @@ const ChannelStart = props => {
 			<div className={styles.channelStartDescription}>
 				{type === ChannelType.DM ? (
 					<>
-						This is the beginning of your direct message history
-						with <strong>@{recipient.username}</strong>.
+						This is the beginning of your direct message history with{' '}
+						<strong>@{recipient.username}</strong>.
 					</>
 				) : (
 					<>
@@ -124,8 +124,7 @@ class Chat extends Component {
 				// for some reason, messageRef gets unmounted, causing current to become undefined
 				const { clientHeight, scrollHeight, scrollTop } =
 					this.messageRef.current
-				if (scrollTop + clientHeight >= scrollHeight - 50)
-					this.scrollToBottom()
+				if (scrollTop + clientHeight >= scrollHeight - 50) this.scrollToBottom()
 			}
 		})
 
@@ -186,9 +185,7 @@ class Chat extends Component {
 							<ChannelIcon channel={channel} />
 						</div>
 						<h3 className={styles.title}>
-							{parseTwemojis(
-								channel.name || channel.recipient.username
-							)}
+							{parseTwemojis(channel.name || channel.recipient.username)}
 						</h3>
 						{channel.topic ? (
 							<>
@@ -263,13 +260,8 @@ class Chat extends Component {
 							className={styles.discordMessages}
 							ref={this.messageRef}
 							onScroll={({ currentTarget }) => {
-								const {
-									scrollHeight,
-									scrollTop,
-									clientHeight,
-								} = currentTarget
-								const { loadedMessages, hasReachedTop } =
-									this.state
+								const { scrollHeight, scrollTop, clientHeight } = currentTarget
+								const { loadedMessages, hasReachedTop } = this.state
 
 								if (
 									hasReachedTop ||

@@ -5,9 +5,9 @@ const DMListItem = props => {
 	const { selectDM, clearInput, user, fetched, disabled } = props
 	return (
 		<div
-			className={`${styles.userItem} ${
-				fetched ? styles.topMargin5 : ''
-			} ${disabled ? styles.disabled : ''}`}
+			className={`${styles.userItem} ${fetched ? styles.topMargin5 : ''} ${
+				disabled ? styles.disabled : ''
+			}`}
 			onClick={async () => {
 				if (disabled) return
 				await selectDM(user.id)
@@ -25,14 +25,10 @@ const DMListItem = props => {
 				<div className={styles.content}>
 					<div className={styles.nameAndDecorators}>
 						<div className={styles.name}>
-							<div className={styles.overflow}>
-								{user.username}
-							</div>
+							<div className={styles.overflow}>{user.username}</div>
 						</div>
 					</div>
-					<div className={styles.discriminator}>
-						#{user.discriminator}
-					</div>
+					<div className={styles.discriminator}>#{user.discriminator}</div>
 				</div>
 			</div>
 		</div>

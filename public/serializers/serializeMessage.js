@@ -12,8 +12,7 @@ const serializeMessage = async message => {
 
 	let repliesTo = null
 	try {
-		if (type === MessageType.Reply)
-			repliesTo = await message.fetchReference()
+		if (type === MessageType.Reply) repliesTo = await message.fetchReference()
 	} catch (error) {
 		// Fix for #31
 		// Man... I want to put an easter bug here, but idk
@@ -72,9 +71,7 @@ const serializeMessage = async message => {
 					author: {
 						...repliesTo.author,
 						avatarURL: repliesTo.author.displayAvatarURL(),
-						isVerifiedBot: repliesTo.author.flags?.has(
-							UserFlags.VerifiedBot
-						),
+						isVerifiedBot: repliesTo.author.flags?.has(UserFlags.VerifiedBot),
 					},
 					member: repliesTo.member
 						? serializeGuildMember(repliesTo.member)

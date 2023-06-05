@@ -204,8 +204,7 @@ ipcMain.handle('selectGuild', async (event, id) => {
 	try {
 		currentGuild = await client.guilds.fetch(id)
 		currentChannel = currentGuild.channels.cache.find(
-			channel =>
-				channel.type === ChannelType.GuildText && channel.viewable
+			channel => channel.type === ChannelType.GuildText && channel.viewable
 		)
 		currentDM = null
 		return {
@@ -347,17 +346,13 @@ ipcMain.handle('mention', async (event, id, type, message) => {
 				break
 
 			case 'role':
-				fetched = await client.guilds.cache
-					.get(message.guildId)
-					.roles.fetch(id)
+				fetched = await client.guilds.cache.get(message.guildId).roles.fetch(id)
 				break
 
 			case 'memberOrUser':
 				fetched = message.guildId
 					? serializeGuildMember(
-							await client.guilds.cache
-								.get(message.guildId)
-								.members.fetch(id)
+							await client.guilds.cache.get(message.guildId).members.fetch(id)
 					  ) || (await client.users.fetch(id))
 					: await client.users.fetch(id)
 				break

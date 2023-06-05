@@ -43,8 +43,7 @@ class MessageField extends Component {
 			let messageOptions = {}
 			if (value) messageOptions.content = value
 			if (attachments.length) messageOptions.files = attachments
-			if (replyingTo)
-				messageOptions.reply = { messageReference: replyingTo.id }
+			if (replyingTo) messageOptions.reply = { messageReference: replyingTo.id }
 			ipcRenderer.send('messageCreate', messageOptions)
 			handleReply()
 			this.updateField()
@@ -112,17 +111,10 @@ class MessageField extends Component {
 		const { channel, replyingTo, handleReply } = this.props
 		const { files } = this.state
 		return (
-			<form
-				action="#"
-				className={styles.form}
-				onSubmit={this.handleSubmit}
-			>
+			<form action="#" className={styles.form} onSubmit={this.handleSubmit}>
 				<div className={styles.channelTextArea}>
 					{replyingTo ? (
-						<ReplyBar
-							handleReply={handleReply}
-							replyingTo={replyingTo}
-						/>
+						<ReplyBar handleReply={handleReply} replyingTo={replyingTo} />
 					) : null}
 					<div
 						className={`${styles.container} ${
@@ -132,27 +124,18 @@ class MessageField extends Component {
 						{files.length ? (
 							<>
 								<ul className={styles.channelAttachmentArea}>
-									{files.map(
-										(
-											{ filename, src, mime, spoiler },
-											key
-										) => (
-											<UploadElement
-												key={key}
-												index={key}
-												filename={filename}
-												src={src}
-												mime={mime}
-												spoiler={spoiler}
-												toggleSpoiler={
-													this.toggleSpoiler
-												}
-												removeAttachment={
-													this.removeAttachment
-												}
-											/>
-										)
-									)}
+									{files.map(({ filename, src, mime, spoiler }, key) => (
+										<UploadElement
+											key={key}
+											index={key}
+											filename={filename}
+											src={src}
+											mime={mime}
+											spoiler={spoiler}
+											toggleSpoiler={this.toggleSpoiler}
+											removeAttachment={this.removeAttachment}
+										/>
+									))}
 								</ul>
 								<div className="divider"></div>
 							</>

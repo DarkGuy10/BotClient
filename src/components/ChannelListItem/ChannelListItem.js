@@ -24,13 +24,11 @@ const ChannelListItem = props => {
 	return (
 		<>
 			<div
-				className={`${styles.container} ${
-					isCategory ? styles.category : ''
-				} ${isCollapsed ? styles.collapsed : ''} ${
-					isParentCollapsed ? styles.hidden : ''
-				} ${!isViewable ? styles.muted : ''} ${
-					selected ? styles.selected : ''
-				}`}
+				className={`${styles.container} ${isCategory ? styles.category : ''} ${
+					isCollapsed ? styles.collapsed : ''
+				} ${isParentCollapsed ? styles.hidden : ''} ${
+					!isViewable ? styles.muted : ''
+				} ${selected ? styles.selected : ''}`}
 				title={!isViewable ? 'Not Viewable' : ''}
 				onClick={() =>
 					isCategory ? toggleCollapseCategory(id) : selectChannel(id)
@@ -48,9 +46,7 @@ const ChannelListItem = props => {
 								alt={`${member.user.username}'s Avatar`}
 								className={styles.avatar}
 							/>
-							<div className={styles.username}>
-								{member.displayName}
-							</div>
+							<div className={styles.username}>{member.displayName}</div>
 							<div className={styles.icons}>
 								{member.voice.serverMute ? (
 									<Icon icon="serverMute" />
@@ -62,9 +58,7 @@ const ChannelListItem = props => {
 								) : member.voice.selfDeaf ? (
 									<Icon icon="selfDeaf" />
 								) : null}
-								{member.voice.selfVideo && (
-									<Icon icon="selfVideo" />
-								)}
+								{member.voice.selfVideo && <Icon icon="selfVideo" />}
 								{member.voice.streaming && <Icon live />}
 							</div>
 						</div>
@@ -83,9 +77,7 @@ const Icon = props => {
 			}`}
 		>
 			{props.live ? (
-				<div
-					className={`${styles.liveIconSpacing} ${styles.iconSpacing}`}
-				>
+				<div className={`${styles.liveIconSpacing} ${styles.iconSpacing}`}>
 					<div className={styles.live}>Live</div>
 				</div>
 			) : (

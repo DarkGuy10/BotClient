@@ -45,29 +45,22 @@ class ChannelNav extends Component {
 			<nav className={styles.channelNav}>
 				<div className={styles.headerContainer}>
 					<header className={styles.header}>
-						<h1 className={styles.name}>
-							{parseTwemojis(currentGuild.name)}
-						</h1>
+						<h1 className={styles.name}>{parseTwemojis(currentGuild.name)}</h1>
 					</header>
 				</div>
 
 				<div className={styles.channels}>
 					{channels && (
 						<>
-							{channels.at(0)?.type !==
-							ChannelType.GuildCategory ? (
+							{channels.at(0)?.type !== ChannelType.GuildCategory ? (
 								<div style={{ height: 16 }}></div>
 							) : null}
 							{channels.map((channel, index) => (
 								<ChannelListItem
 									key={index}
 									channel={channel}
-									toggleCollapseCategory={
-										this.toggleCollapseCategory
-									}
-									collpasedCategoriesId={
-										this.state.collpasedCategoriesId
-									}
+									toggleCollapseCategory={this.toggleCollapseCategory}
+									collpasedCategoriesId={this.state.collpasedCategoriesId}
 									selected={channel.id === currentChannel.id}
 									selectChannel={this.props.selectChannel}
 								/>

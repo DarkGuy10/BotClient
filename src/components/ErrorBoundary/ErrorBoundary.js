@@ -31,12 +31,10 @@ class ErrorBoundary extends Component {
 								alt="Menhera Twig"
 								className={styles.lightFade}
 							/>
-							<h1 className={styles.headerText}>
-								Something went wrong
-							</h1>
+							<h1 className={styles.headerText}>Something went wrong</h1>
 							<div className={styles.subtext}>
-								BotClient crashed unexpectedly... Yeah this is
-								embarrassing ;-; <br />
+								BotClient crashed unexpectedly... Yeah this is embarrassing ;-;{' '}
+								<br />
 								If the crashes happen repeatedly,{' '}
 								<a href="https://github.com/DarkGuy10/BotClient/issues/new/choose">
 									open an issue
@@ -51,12 +49,9 @@ class ErrorBoundary extends Component {
 							</button>
 						</div>
 						<div className={styles.content}>
-							<div className={styles.logsHeader}>
-								Crash Report
-							</div>
+							<div className={styles.logsHeader}>Crash Report</div>
 							<div className={styles.logsContainer}>
-								{this.state.error &&
-									this.state.error.toString()}
+								{this.state.error && this.state.error.toString()}
 
 								{this.state.errorInfo.componentStack}
 							</div>

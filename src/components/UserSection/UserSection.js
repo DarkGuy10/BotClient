@@ -5,8 +5,7 @@ import styles from './UserSection.module.css'
 const { ipcRenderer } = window.require('electron')
 
 const UserSection = props => {
-	const { clientUser, openUserSettings, createTooltip, destroyTooltip } =
-		props
+	const { clientUser, openUserSettings, createTooltip, destroyTooltip } = props
 	const logoutRef = createRef()
 	const userSettingsRef = createRef()
 	return (
@@ -19,16 +18,12 @@ const UserSection = props => {
 						className={styles.avatar}
 					/>
 					<div className={styles.statusWrapper}>
-						<StatusIndicator
-							type={clientUser.presence.status.toUpperCase()}
-						/>
+						<StatusIndicator type={clientUser.presence.status.toUpperCase()} />
 					</div>
 				</div>
 				<div className={styles.nameTag}>
 					<div className={styles.usernameContainer}>
-						<div className={styles.username}>
-							{clientUser.username}
-						</div>
+						<div className={styles.username}>{clientUser.username}</div>
 					</div>
 					<div className={styles.discriminator}>
 						#{clientUser.discriminator}

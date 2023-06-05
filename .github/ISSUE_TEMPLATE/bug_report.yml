@@ -3,95 +3,95 @@ description: Something doesn't work as intended? File a bug report
 title: 'Bug: '
 labels: ['Bug: Unverified']
 assignees:
-    - darkguy10
+  - darkguy10
 body:
-    - type: markdown
-      attributes:
-          value: |
-              Thank you for helping us improve the BotClient! <img src="https://cdn.discordapp.com/emojis/816599114740924459.webp?size=96&quality=lossless" alt=":AE_HeartHug:" title=":AE_HeartHug:" height="22" width="22"  />
-              Please consider checking out with our peeps over at the [BotClient Support Server](https://discord.com/invite/aZSrxwNUFD) before filing your issue. <img src="https://cdn.discordapp.com/emojis/898284896102015006.webp?size=96&quality=lossless" alt=":ChillBar_point_right:" title=":ChillBar_point_right:" height="22" width="22"  />
-    - type: checkboxes
-      attributes:
-          label: Issue checklist
-          options:
-              - label: I have checked the FAQs.
-                required: true
-              - label: I have searched the existing issues to make sure this isn't a duplicate.
-                required: true
-              - label: I have discussed this issue on the support server.
-                required: false
-    - type: textarea
-      id: description
-      attributes:
-          label: Issue description
-          description: |
-              Describe the issue in as much detail as possible.
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us improve the BotClient! <img src="https://cdn.discordapp.com/emojis/816599114740924459.webp?size=96&quality=lossless" alt=":AE_HeartHug:" title=":AE_HeartHug:" height="22" width="22"  />
+        Please consider checking out with our peeps over at the [BotClient Support Server](https://discord.com/invite/aZSrxwNUFD) before filing your issue. <img src="https://cdn.discordapp.com/emojis/898284896102015006.webp?size=96&quality=lossless" alt=":ChillBar_point_right:" title=":ChillBar_point_right:" height="22" width="22"  />
+  - type: checkboxes
+    attributes:
+      label: Issue checklist
+      options:
+        - label: I have checked the FAQs.
+          required: true
+        - label: I have searched the existing issues to make sure this isn't a duplicate.
+          required: true
+        - label: I have discussed this issue on the support server.
+          required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue description
+      description: |
+        Describe the issue in as much detail as possible.
 
-              Tip: You can attach images or crash reports from the client.
-          placeholder: |
-              Steps to reproduce the bug:
-              1. do thing
-              2. do thing
-              3. observe behavior
-              4. see crash report (if any)
-      validations:
-          required: true
-    - type: textarea
-      id: current-behavior
-      attributes:
-          label: Current behavior
-          description: A concise description of what you're experiencing.
-          placeholder: '[Something] happens.'
-      validations:
-          required: false
-    - type: textarea
-      id: expected-behavior
-      attributes:
-          label: Expected behavior
-          description: A concise description of what you expected to happen.
-          placeholder: '[Something else] should happen.'
-      validations:
-          required: false
-    - type: input
-      id: client-version
-      attributes:
-          label: BotClient version
-          description: Which version of BotClient are you using?
-          placeholder: 'Eg: v0.10.3'
-      validations:
-          required: true
-    - type: input
-      id: os
-      attributes:
-          label: Operating System
-          description: Which OS are you running the application on?
-          placeholder: 'Eg: Manjaro Linux'
-      validations:
-          required: true
-    - type: dropdown
-      id: download
-      attributes:
-          label: How did you download the application?
-          options:
-              - From GitHub releases (or links from the readme)
-              - Built from source
-      validations:
-          required: true
-    - type: dropdown
-      id: priority
-      attributes:
-          label: Priority this issue should have
-          description: Please be realistic. If you need to elaborate on your reasoning, please use the Issue description field above.
-          options:
-              - Low (slightly annoying)
-              - Medium (should be fixed soon)
-              - High (immediate attention needed)
-      validations:
-          required: true
-    - type: textarea
-      id: additional-information
-      attributes:
-          label: Addition information
-          description: Put any extra context, weird configurations, or other important info here.
-      validations:
-          required: false
+        Tip: You can attach images or crash reports from the client.
+      placeholder: |
+        Steps to reproduce the bug:
+        1. do thing
+        2. do thing
+        3. observe behavior
+        4. see crash report (if any)
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current behavior
+      description: A concise description of what you're experiencing.
+      placeholder: '[Something] happens.'
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A concise description of what you expected to happen.
+      placeholder: '[Something else] should happen.'
+    validations:
+      required: false
+  - type: input
+    id: client-version
+    attributes:
+      label: BotClient version
+      description: Which version of BotClient are you using?
+      placeholder: 'Eg: v0.10.3'
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: Which OS are you running the application on?
+      placeholder: 'Eg: Manjaro Linux'
+    validations:
+      required: true
+  - type: dropdown
+    id: download
+    attributes:
+      label: How did you download the application?
+      options:
+        - From GitHub releases (or links from the readme)
+        - Built from source
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority this issue should have
+      description: Please be realistic. If you need to elaborate on your reasoning, please use the Issue description field above.
+      options:
+        - Low (slightly annoying)
+        - Medium (should be fixed soon)
+        - High (immediate attention needed)
+    validations:
+      required: true
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Addition information
+      description: Put any extra context, weird configurations, or other important info here.
+    validations:
+      required: false

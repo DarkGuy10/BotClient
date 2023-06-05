@@ -2,24 +2,24 @@ name: Linting
 
 # This action works with pull requests and pushes
 on:
-    pull_request:
-    push:
-    workflow_dispatch:
+  pull_request:
+  push:
+  workflow_dispatch:
 
 jobs:
-    prettier:
-        runs-on: ubuntu-latest
+  prettier:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
-              with:
-                  # Make sure the actual branch is checked out when running on pull requests
-                  ref: ${{ github.head_ref }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
 
-              # uses https://github.com/marketplace/actions/prettier-action
-            - name: Prettify code
-              uses: creyD/prettier_action@v4.3
-              with:
-                  commit_message: 'style(prettier): fix linting'
-                  prettier_options: --write **/*.{js,md,ts,tsx,json,yml,html,css}
+        # uses https://github.com/marketplace/actions/prettier-action
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          commit_message: 'style(prettier): fix linting'
+          prettier_options: --write **/*.{js,md,ts,tsx,json,yml,html,css}

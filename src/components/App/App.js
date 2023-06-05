@@ -36,8 +36,7 @@ class App extends Component {
 		this.createTooltip = rawTooltip =>
 			this.setState({ ...this.state, tooltip: rawTooltip })
 
-		this.destroyTooltip = () =>
-			this.setState({ ...this.state, tooltip: null })
+		this.destroyTooltip = () => this.setState({ ...this.state, tooltip: null })
 
 		// rawContextMenuItem: {type: 'separator'}|({content: string, icons?: JSX.Element[], color: 'normal'|'danger'|'system', className?: string, onClick?: () => void} & ({type: 'button'}|{type: 'submenu', submenu: rawContextSubmenu}))
 		// rawContextSubmenu: {items: rawContextMenuItem[]}
@@ -65,8 +64,7 @@ class App extends Component {
 		window.addEventListener(
 			'keyup',
 			event => {
-				if (event.code === 'KeyR' && event.ctrlKey)
-					window.location.reload()
+				if (event.code === 'KeyR' && event.ctrlKey) window.location.reload()
 			},
 			true
 		)
@@ -138,18 +136,10 @@ class App extends Component {
 												<Layout
 													clientUser={clientUser}
 													pushAlert={this.pushAlert}
-													createTooltip={
-														this.createTooltip
-													}
-													destroyTooltip={
-														this.destroyTooltip
-													}
-													createContextMenu={
-														this.createContextMenu
-													}
-													destroyContextMenu={
-														this.destroyContextMenu
-													}
+													createTooltip={this.createTooltip}
+													destroyTooltip={this.destroyTooltip}
+													createContextMenu={this.createContextMenu}
+													destroyContextMenu={this.destroyContextMenu}
 												/>
 											</div>
 										</div>
@@ -165,21 +155,12 @@ class App extends Component {
 						</div>
 					) : (
 						<div className={styles.bootloopWrapper}>
-							<img
-								src={bootloop}
-								alt=""
-								className={styles.bootloopMedia}
-							/>
-							<p className={styles.bootloopCaption}>
-								Loading BotClient
-							</p>
+							<img src={bootloop} alt="" className={styles.bootloopMedia} />
+							<p className={styles.bootloopCaption}>Loading BotClient</p>
 						</div>
 					)
 				) : (
-					<Login
-						handleLogin={this.handleLogin}
-						pushAlert={this.pushAlert}
-					/>
+					<Login handleLogin={this.handleLogin} pushAlert={this.pushAlert} />
 				)}
 				<AlertManager alerts={this.state.alerts} />
 			</ErrorBoundary>

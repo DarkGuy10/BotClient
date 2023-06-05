@@ -42,11 +42,11 @@
 
 ### ✨ Features
 
--   UI and workflow modelled after the original Discord client
--   Neatly built using React as frontend and powered by discord.js at core
--   Persistent token storage
--   Support for all major desktop platforms
--   Installable binaries with auto updates
+- UI and workflow modelled after the original Discord client
+- Neatly built using React as frontend and powered by discord.js at core
+- Persistent token storage
+- Support for all major desktop platforms
+- Installable binaries with auto updates
 
 &nbsp;
 
@@ -103,9 +103,9 @@ The client can also be built from source for individual platforms.
 
 #### Prerequisites
 
--   [Git CLI](https://git-scm.com/downloads)
--   [NodeJS](https://nodejs.org/en/download/)
--   [Yarn](https://classic.yarnpkg.com/lang/en/docs/install)
+- [Git CLI](https://git-scm.com/downloads)
+- [NodeJS](https://nodejs.org/en/download/)
+- [Yarn](https://classic.yarnpkg.com/lang/en/docs/install)
 
 #### Building
 
@@ -151,20 +151,20 @@ If you have any problems or questions about the client, feel free to join our [s
 
 ### 📚 FAQs
 
--   Q: I'm getting `[DISALLOWED_INTENTS]` error, how do I fix this?
+- Q: I'm getting `[DISALLOWED_INTENTS]` error, how do I fix this?
 
-    -   A: Your bot must have all three [Privileged Gateway Intents](https://discordjs.guide/popular-topics/intents.html#privileged-intents) enabled.
+  - A: Your bot must have all three [Privileged Gateway Intents](https://discordjs.guide/popular-topics/intents.html#privileged-intents) enabled.
 
--   Q: The client is stuck on loading screen, how do I fix this?
+- Q: The client is stuck on loading screen, how do I fix this?
 
-    -   A: This happens because of mis-configured appdata. Clear the client appdata by deleting your `%userprofile%\AppData\Roaming\BotClient` folder if you're on windows,`~/.config/BotClient` folder for linux or `~/Library/Application Support/BotClient` for mac.
+  - A: This happens because of mis-configured appdata. Clear the client appdata by deleting your `%userprofile%\AppData\Roaming\BotClient` folder if you're on windows,`~/.config/BotClient` folder for linux or `~/Library/Application Support/BotClient` for mac.
 
--   Q: Is there a website version of this client?
+- Q: Is there a website version of this client?
 
-    -   A: Nope, and there won't be one in the future, reasons being it's too much work and simply not worth it.
+  - A: Nope, and there won't be one in the future, reasons being it's too much work and simply not worth it.
 
--   Q: What about Android or iOS?
-    -   A: No support for mobile devices, and will never be added either.
+- Q: What about Android or iOS?
+  - A: No support for mobile devices, and will never be added either.
 
 &nbsp;
 
@@ -174,10 +174,10 @@ If you have any problems or questions about the client, feel free to join our [s
 
 BotClient is released under the MIT license, which grants the following permissions:
 
--   Commercial use
--   Distribution
--   Modification
--   Private use
+- Commercial use
+- Distribution
+- Modification
+- Private use
 
 For more convoluted language, see the [LICENSE](https://github.com/darkguy10/BotClient/blob/main/LICENSE).
 

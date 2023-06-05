@@ -74,10 +74,7 @@ class DMNav extends Component {
 						onInput={this.handleInput}
 					/>
 					{searchValue && (
-						<div
-							className={styles.closeButton}
-							onClick={this.clearInput}
-						>
+						<div className={styles.closeButton} onClick={this.clearInput}>
 							<SVGCloseButton />
 						</div>
 					)}
@@ -106,9 +103,7 @@ class DMNav extends Component {
 					/>
 				)}
 				<h2 className={styles.privateChannelsHeaderContainer}>
-					<span className={styles.headerText}>
-						Open Direct Messages
-					</span>
+					<span className={styles.headerText}>Open Direct Messages</span>
 				</h2>
 				{openDMs.map(({ recipient }, key) => (
 					<DMListItem
