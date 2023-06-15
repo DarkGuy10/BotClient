@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.11.0-alpha
+
+- feat: add context menu api
+- feat: add context menu to message elements
+- feat: migrate to `discord.js@v14`
+
 ## v0.10.4-alpha
 
 - fix: upgrade discord.js to support breaking API changes (#46)
