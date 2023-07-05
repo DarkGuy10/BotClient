@@ -12,7 +12,12 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"noFallthroughCasesInSwitch": true,
-		"outDir": "build"
+		"outDir": "build",
+		"paths": {
+			"@/utils": ["./utils"],
+			"@/typings": ["./typings"],
+			"@/classes/*": ["./classes/*"]
+		}
 	},
 	"include": ["**/*.ts"],
 	"exclude": ["node_modules"]
