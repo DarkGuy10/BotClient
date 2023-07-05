@@ -24,28 +24,10 @@ if (electronIsDev) {
 	})
 }
 
-const installExtensions = async () => {
-	/**
-	 * NOTE:
-	 * As of writing this comment, Electron does not support the `scripting` API,
-	 * which causes errors in the REACT_DEVELOPER_TOOLS extension.
-	 * A possible workaround could be to downgrade the extension but you're on your own with that.
-	 */
-	const {
-		default: installExtension,
-		//REACT_DEVELOPER_TOOLS,
-		REDUX_DEVTOOLS,
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
-	} = require('electron-devtools-installer')
-	installExtension([REDUX_DEVTOOLS]).catch(console.log)
-}
-
 const spawnAppWindow = async () => {
-	if (electronIsDev) await installExtensions()
-
 	const RESOURCES_PATH = electronIsDev
-		? path.join(process.resourcesPath, 'assets')
-		: path.join(__dirname, '../../assets')
+		? path.join(__dirname, '../../assets')
+		: path.join(process.resourcesPath, 'assets')
 
 	const getAssetPath = (...paths: string[]): string => {
 		return path.join(RESOURCES_PATH, ...paths)
