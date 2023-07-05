@@ -1,0 +1,5 @@
+/.yarn/
+/backend/build/
+/frontend/build/
+/frontend/.next/
+/dist/

@@ -36,7 +36,7 @@
 
 &nbsp;
 
-![Demo](assets/window.png)
+![Demo](demo/window.png)
 
 &nbsp;
 

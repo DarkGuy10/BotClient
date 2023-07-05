@@ -1,0 +1,3 @@
+**/build/**/*.js
+**/.next/**/*.js
+dist
