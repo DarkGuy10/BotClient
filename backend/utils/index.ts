@@ -25,8 +25,8 @@ export const fetchPrivilegedIntents = async (token: string) => {
 			{
 				headers: {
 					Authorization: `Bot ${token}`,
-					'User-Agent': 'DiscordBot'
-				}
+					'User-Agent': 'DiscordBot',
+				},
 			}
 		)
 		const { flags } = await response.json()
