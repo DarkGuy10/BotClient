@@ -22,7 +22,12 @@ export const fetchPrivilegedIntents = async (token: string) => {
 	try {
 		const response = await fetch(
 			'https://discord.com/api/v10/oauth2/applications/@me',
-			{ headers: { Authorization: `Bot ${token}` } }
+			{
+				headers: {
+					Authorization: `Bot ${token}`,
+					'User-Agent': 'DiscordBot'
+				}
+			}
 		)
 		const { flags } = await response.json()
 
