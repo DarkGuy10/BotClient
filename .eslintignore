@@ -1,3 +1,5 @@
 **/build/**/*.js
 **/.next/**/*.js
 dist
+src
+public

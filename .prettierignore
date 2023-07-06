@@ -3,3 +3,5 @@
 /frontend/build/
 /frontend/.next/
 /dist/
+/src/
+/public/
