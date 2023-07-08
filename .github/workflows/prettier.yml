@@ -16,7 +16,6 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           prettier_options: -c .
-
   eslint:
     runs-on: ubuntu-latest
     steps:

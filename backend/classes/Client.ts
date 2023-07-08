@@ -4,7 +4,7 @@ import { type BrowserWindow } from 'electron'
 import { type ClientOptions } from '@/typings'
 
 export default class Client<
-	Ready extends boolean = boolean
+	Ready extends boolean = boolean,
 > extends BaseClient<Ready> {
 	appWindow: BrowserWindow
 

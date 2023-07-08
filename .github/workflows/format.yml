@@ -1,0 +1,17 @@
+name: Formatting
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_options: -w .
+          commit_message: 'lint: run prettier from gh actions'
