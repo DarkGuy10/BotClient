@@ -3,7 +3,7 @@ import { Client as BaseClient, GatewayIntentBits, Events } from 'discord.js'
 import { type BrowserWindow } from 'electron'
 import type { ClientOptions } from '@/typings'
 
-export class Client extends BaseClient {
+export default class Client extends BaseClient {
 	appWindow: BrowserWindow
 
 	constructor(clientOptions: ClientOptions) {
