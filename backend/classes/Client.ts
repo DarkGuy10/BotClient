@@ -1,9 +1,11 @@
 import { serializeObject } from '@/utils'
 import { Client as BaseClient, GatewayIntentBits, Events } from 'discord.js'
 import { type BrowserWindow } from 'electron'
-import type { ClientOptions } from '@/typings'
+import { type ClientOptions } from '@/typings'
 
-export default class Client extends BaseClient {
+export default class Client<
+	Ready extends boolean = boolean
+> extends BaseClient<Ready> {
 	appWindow: BrowserWindow
 
 	constructor(clientOptions: ClientOptions) {
