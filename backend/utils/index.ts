@@ -15,6 +15,8 @@ export const serializeObject = (source: any) => {
 					console.error(`Error in calling getter ${key}`, error)
 				}
 		})
+
+	return sink
 }
 
 export const fetchPrivilegedIntents = async (token: string) => {
