@@ -1,14 +1,4 @@
 @font-face {
-	font-family: 'Ginto';
-	src: url('./assets/fonts/Ginto.woff') format('woff');
-	font-weight: 600;
-}
-@font-face {
-	font-family: 'Ginto';
-	src: url('./assets/fonts/Ginto-Heavy.woff') format('woff');
-	font-weight: 700;
-}
-@font-face {
 	font-family: 'Whitney';
 	src: url('./assets/fonts/Whitney-Book.woff') format('woff');
 	font-weight: 400;
@@ -427,12 +417,12 @@
 	--focus-primary: hsl(197, calc(var(--saturation-factor, 1) * 100%), 47.8%);
 
 	--font-primary: Whitney, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	--font-display: Ginto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	--font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	--font-code: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
 		'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
 		'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
 		monospace;
-	--font-headline: Ginto Nord, Ginto, 'Helvetica Neue', Helvetica, Arial,
+	--font-headline: 'Helvetica Neue', Helvetica, Arial,
 		sans-serif;
 
 	margin: 0;
