@@ -1,8 +1,8 @@
-import { GuildChannel, Channel } from 'discord.js'
+import { GuildChannel, TextBasedChannel } from 'discord.js'
 import Client from './Client'
 
 export default class Router {
-	private _currentChannel: Channel | null
+	private _currentChannel: TextBasedChannel | null
 	client: Client
 
 	constructor(client: Client) {
@@ -10,7 +10,7 @@ export default class Router {
 		this._currentChannel = null
 	}
 
-	navigateTo(targetChannel?: Channel) {
+	navigateTo(targetChannel?: TextBasedChannel) {
 		this._currentChannel = targetChannel ?? null
 		return this._currentChannel
 	}
