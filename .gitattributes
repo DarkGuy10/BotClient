@@ -1,3 +1,8 @@
 # Auto detect text files and perform LF normalization
-* text=auto
-* core.autocrlf=false
+* text eol=lf
+
+*.png binary
+*.jpg binary
+*.svg binary
+*.gif binary
+*.webp binary
