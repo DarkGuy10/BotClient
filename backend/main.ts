@@ -9,7 +9,14 @@ import ElectronStore from './classes/ElectronStore'
 import ClientError from './classes/ClientError'
 import { ClientErrorCodes } from './typings'
 import Router from './classes/Router'
-import { ChannelType, FetchMessagesOptions, GuildChannel } from 'discord.js'
+import {
+	Channel,
+	ChannelType,
+	FetchMessagesOptions,
+	GuildChannel,
+	MessageCreateOptions,
+	MessagePayload,
+} from 'discord.js'
 
 let appWindow: BrowserWindow | null = null
 let client: Client | null = null
@@ -94,11 +101,11 @@ app.on('window-all-closed', () => {
 
 /*
  * ======================================================================================
- *                                IPC Main Events: Actions
+ *                                IPC Main Events: Action
  * ======================================================================================
  */
 
-ipcMain.on('login-attempt', async (event, token) => {
+ipcMain.on('action-login', async (event, token) => {
 	try {
 		if (!appWindow) return
 		if (client) {
@@ -117,32 +124,69 @@ ipcMain.on('login-attempt', async (event, token) => {
 					token,
 				})
 			})
-		event.reply('login-success')
+		event.reply('action-login-sucess')
 	} catch (error) {
 		log.error(error)
 		event.reply('error', serializeObject(error))
-		event.reply('login-error')
+		event.reply('action-login-error')
 	}
 })
 
-ipcMain.on('logout-attempt', event => {
+ipcMain.on('action-logout', event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
 		userStore.delete(client.user.id)
 		client.destroy()
 		client = null
-		event.reply('logout-success')
+		event.reply('action-logout-success')
 	} catch (error) {
 		log.error(error)
 		event.reply('error', serializeObject(error))
-		event.reply('logout-error')
+		event.reply('action-logout-error')
+	}
+})
+
+ipcMain.on(
+	'action-messageCreate',
+	async (event, options: string | MessagePayload | MessageCreateOptions) => {
+		try {
+			if (!client?.isReady())
+				throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
+
+			if (!router?.currentChannel)
+				throw new ClientError(ClientErrorCodes.NO_SELECTED_CHANNEL)
+
+			await router.currentChannel.send(options)
+			event.reply('action-messageCreate-success')
+		} catch (error) {
+			log.error(error)
+			event.reply('error', serializeObject(error))
+			event.reply('action-messageCreate-error')
+		}
+	}
+)
+
+ipcMain.on('action-messageDelete', async (event, messageId: string) => {
+	try {
+		if (!client?.isReady())
+			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
+
+		if (!router?.currentChannel)
+			throw new ClientError(ClientErrorCodes.NO_SELECTED_CHANNEL)
+
+		await router.currentChannel.messages.delete(messageId)
+		event.reply('action-messageDelete-success')
+	} catch (error) {
+		log.error(error)
+		event.reply('error', serializeObject(error))
+		event.reply('action-messageDelete-error')
 	}
 })
 
 /*
  * ======================================================================================
- *                                IPC Main Events: Resources
+ *                                IPC Main Events: Resource
  * ======================================================================================
  */
 
@@ -154,11 +198,11 @@ ipcMain.handle('resource-guilds-all', async event => {
 		const guilds = [...(await client.guilds.fetch()).values()].map(guild =>
 			serializeObject(guild)
 		)
-		return guilds
+		return { data: { guilds }, error: false }
 	} catch (error) {
 		log.error(error)
 		event.sender.send('error', serializeObject(error))
-		return []
+		return { data: { guilds: [] }, error: true }
 	}
 })
 
@@ -173,11 +217,11 @@ ipcMain.handle('resource-guild-channels-all', async event => {
 		const guildChannels = [
 			...(await router.currentGuild.channels.fetch()).values(),
 		].map(channel => serializeObject(channel))
-		return guildChannels
+		return { data: { guildChannels }, error: false }
 	} catch (error) {
 		log.error(error)
 		event.sender.send('error', serializeObject(error))
-		return []
+		return { data: { guildChannels: [] }, error: true }
 	}
 })
 
@@ -191,11 +235,11 @@ ipcMain.handle('resource-dm-channels-all', async event => {
 				.filter(channel => channel.type === ChannelType.DM)
 				.map(channel => serializeObject(channel)),
 		]
-		return dmChannels
+		return { data: { dmChannels }, error: false }
 	} catch (error) {
 		log.error(error)
 		event.sender.send('error', serializeObject(error))
-		return []
+		return { data: { dmChannels: [] }, error: true }
 	}
 })
 
@@ -225,11 +269,11 @@ ipcMain.handle(
 					})
 				).size
 
-			return { messages, hasReachedTop }
+			return { data: { messages, hasReachedTop }, error: false }
 		} catch (error) {
 			log.error(error)
 			event.sender.send('error', serializeObject(error))
-			return { messages: [], hasReachedTop: false }
+			return { data: { messages: [], hasReachedTop: false }, error: true }
 		}
 	}
 )
@@ -248,21 +292,23 @@ ipcMain.handle('resource-guild-members-all', async event => {
 		const members = [...router.currentChannel.members.values()].map(member =>
 			serializeObject(member)
 		)
-		return members
+		return { data: { members }, error: false }
 	} catch (error) {
 		log.error(error)
 		event.sender.send('error', serializeObject(error))
-		return []
+		return { data: { members: [] }, error: true }
 	}
 })
 
+/* Events related to app data management go here*/
+
 /*
  * ======================================================================================
- *                                IPC Main Events: Navigate
+ *                                IPC Main Events: Navigation
  * ======================================================================================
  */
 
-ipcMain.handle('navigate-guild-attempt', async (event, guildId: string) => {
+ipcMain.handle('navigate-guild', async (event, guildId: string) => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -278,14 +324,66 @@ ipcMain.handle('navigate-guild-attempt', async (event, guildId: string) => {
 		if (!targetChannel)
 			throw new ClientError(ClientErrorCodes.NO_VIEWABLE_CHANNEL_IN_GUILD)
 
+		if (!targetChannel.isTextBased())
+			throw new ClientError(ClientErrorCodes.NOT_TEXT_BASED_CHANNEL)
+
 		router?.navigateTo(targetChannel)
 		return {
-			currentGuild: serializeObject(router?.currentGuild),
-			currentChannel: serializeObject(router?.currentChannel),
+			data: {
+				currentGuild: serializeObject(router?.currentGuild),
+				currentChannel: serializeObject(router?.currentChannel),
+			},
+			error: false,
 		}
 	} catch (error) {
 		log.error(error)
 		event.sender.send('error', serializeObject(error))
-		event.sender.send('navigate-guild-error')
+		return { data: { currentGuild: {}, currentChannel: {} }, error: true }
 	}
 })
+
+ipcMain.handle(
+	'navigate-channel',
+	async (event, channelOrUserId: string, isDM = false) => {
+		try {
+			if (!client?.isReady())
+				throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
+
+			let targetChannel: Channel | null
+
+			if (isDM) {
+				const recipient = await client.users.fetch(channelOrUserId)
+
+				if (!recipient)
+					throw new ClientError(ClientErrorCodes.CANNOT_FETCH_USER)
+
+				try {
+					targetChannel = await recipient.createDM()
+				} catch (error) {
+					throw new ClientError(ClientErrorCodes.CANNOT_CREATE_DM)
+				}
+			} else {
+				targetChannel = await client.channels.fetch(channelOrUserId)
+
+				if (!targetChannel || !(targetChannel instanceof GuildChannel))
+					throw new ClientError(ClientErrorCodes.CANNOT_FETCH_CHANNEL)
+
+				if (!targetChannel.isTextBased())
+					throw new ClientError(ClientErrorCodes.NOT_TEXT_BASED_CHANNEL)
+
+				if (!targetChannel.viewable)
+					throw new ClientError(ClientErrorCodes.MISSING_PERMISSIONS)
+			}
+
+			router?.navigateTo(targetChannel)
+			return {
+				data: { currentChannel: serializeObject(router?.currentChannel) },
+				error: false,
+			}
+		} catch (error) {
+			log.error(error)
+			event.sender.send('error', serializeObject(error))
+			return { data: { currentChannel: {} }, error: true }
+		}
+	}
+)
