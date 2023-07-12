@@ -155,7 +155,7 @@ ipcMain.on(
 				throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
 
 			if (!router?.currentChannel)
-				throw new ClientError(ClientErrorCodes.NO_SELECTED_CHANNEL)
+				throw new ClientError(ClientErrorCodes.NO_CURRENT_CHANNEL)
 
 			await router.currentChannel.send(options)
 			event.reply('action-messageCreate-success')
@@ -173,7 +173,7 @@ ipcMain.on('action-messageDelete', async (event, messageId: string) => {
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
 
 		if (!router?.currentChannel)
-			throw new ClientError(ClientErrorCodes.NO_SELECTED_CHANNEL)
+			throw new ClientError(ClientErrorCodes.NO_CURRENT_CHANNEL)
 
 		await router.currentChannel.messages.delete(messageId)
 		event.reply('action-messageDelete-success')
