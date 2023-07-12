@@ -7,7 +7,7 @@ import Client from '@/classes/Client'
 import { fetchPrivilegedIntents, serializeObject } from '@/utils'
 import ElectronStore from './classes/ElectronStore'
 import ClientError from './classes/ClientError'
-import { ClientErrorCodes } from './typings'
+import { AppDataSchema, ClientErrorCodes } from './typings'
 import Router from './classes/Router'
 import {
 	Channel,
@@ -21,11 +21,9 @@ import {
 let appWindow: BrowserWindow | null = null
 let client: Client | null = null
 let router: Router | null = null
-const AppData = new ElectronStore()
-const [appPreference, userStore] = AppData.createMultipleSlices(
-	'appPreference',
-	'savedUsers'
-)
+const AppData = new ElectronStore<AppDataSchema>()
+const appPreferenceStore = AppData.createSlice('appPreference')
+const userStore = AppData.createSlice('savedUsers')
 
 class AppUpdater {
 	constructor() {
@@ -116,10 +114,12 @@ ipcMain.on('action-login', async (event, token) => {
 		client = new Client({ appWindow, privilegedIntents })
 		router = new Router(client)
 		await client.login(token)
-		if (appPreference.get('tokenPersistence', true))
+		if (appPreferenceStore.get('tokenPersistence', true))
 			client.on('ready', client => {
 				userStore.set(client.user.id, {
 					username: client.user.username,
+					discriminator: client.user.discriminator,
+					id: client.user.id,
 					avatarUrl: client.user.displayAvatarURL(),
 					token,
 				})

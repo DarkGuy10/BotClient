@@ -17,7 +17,8 @@ export default class ElectronStore<
 	 * const themeStore = createSlice('theme')
 	 * const catpuccinMocha = themeStore.get('catpucchinMocha') // same as store.get('theme.catpucchinMocha')
 	 */
-	createSlice(name: string): ElectronStore<T> {
+	createSlice<K extends keyof T>(name: K): ElectronStore<T[K]> {
+		// @ts-expect-error I know what I'm doing sthu typescript
 		return new Proxy(this, {
 			get(target, prop: keyof ElectronStore) {
 				const _ = target[prop]
@@ -26,24 +27,14 @@ export default class ElectronStore<
 						apply(target, thisArg, argArray) {
 							return Reflect.apply(
 								target,
-								`${name}.${argArray.shift()}`,
+								`${String(name)}.${argArray.shift()}`,
 								argArray
 							)
 						},
 					})
 				}
-				return Reflect.get(target, `${name}.${String(prop)}`)
+				return Reflect.get(target, `${String(name)}.${String(prop)}`)
 			},
 		})
-	}
-
-	/**
-	 * Create several slices from this store.
-	 * @param args List of slice names
-	 * @example
-	 * const [sliceA, sliceB] = store.createSlices('A', 'B')
-	 */
-	createMultipleSlices(...args: string[]): ElectronStore<T>[] {
-		return args.map(arg => this.createSlice(arg))
 	}
 }
