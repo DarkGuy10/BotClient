@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GatewayIntentBits } from 'discord.js'
+import { ApplicationFlags, GatewayIntentBits } from 'discord.js'
 
 export const serializeObject = (source: any) => {
 	const sink: any = Object.assign({}, source)
@@ -20,10 +20,10 @@ export const serializeObject = (source: any) => {
 }
 
 export const fetchPrivilegedIntents = async (token: string) => {
-	const privilegedIntents = []
+	const intents = []
 	try {
 		const response = await fetch(
-			'https://discord.com/api/v10/oauth2/applications/@me',
+			'https://discord.com/api/v10/applications/@me',
 			{
 				headers: {
 					Authorization: `Bot ${token}`,
@@ -33,16 +33,16 @@ export const fetchPrivilegedIntents = async (token: string) => {
 		)
 		const { flags } = await response.json()
 
-		if ((flags & (1 << 12)) === 1 << 12 || (flags & (1 << 13)) === 1 << 13)
-			privilegedIntents.push(GatewayIntentBits.GuildPresences)
+		if ((flags & (ApplicationFlags.GatewayGuildMembers | ApplicationFlags.GatewayGuildMembersLimited)) !== 0)
+			intents.push(GatewayIntentBits.GuildMembers)
 
-		if ((flags & (1 << 14)) === 1 << 14 || (flags & (1 << 15)) === 1 << 15)
-			privilegedIntents.push(GatewayIntentBits.GuildMembers)
+		if ((flags & (ApplicationFlags.GatewayPresence | ApplicationFlags.GatewayPresenceLimited)) !== 0)
+			intents.push(GatewayIntentBits.GuildPresences)
 
-		if ((flags & (1 << 18)) === 1 << 18 || (flags & (1 << 19)) === 1 << 19)
-			privilegedIntents.push(GatewayIntentBits.MessageContent)
+		if ((flags & (ApplicationFlags.GatewayMessageContent | ApplicationFlags.GatewayMessageContentLimited)) !== 0)
+			intents.push(GatewayIntentBits.MessageContent)
 
-		return privilegedIntents
+		return intents
 	} catch (error) {
 		console.error(error)
 	}
