@@ -33,13 +33,28 @@ export const fetchPrivilegedIntents = async (token: string) => {
 		)
 		const { flags } = await response.json()
 
-		if ((flags & (ApplicationFlags.GatewayGuildMembers | ApplicationFlags.GatewayGuildMembersLimited)) !== 0)
+		if (
+			(flags &
+				(ApplicationFlags.GatewayGuildMembers |
+					ApplicationFlags.GatewayGuildMembersLimited)) !==
+			0
+		)
 			intents.push(GatewayIntentBits.GuildMembers)
 
-		if ((flags & (ApplicationFlags.GatewayPresence | ApplicationFlags.GatewayPresenceLimited)) !== 0)
+		if (
+			(flags &
+				(ApplicationFlags.GatewayPresence |
+					ApplicationFlags.GatewayPresenceLimited)) !==
+			0
+		)
 			intents.push(GatewayIntentBits.GuildPresences)
 
-		if ((flags & (ApplicationFlags.GatewayMessageContent | ApplicationFlags.GatewayMessageContentLimited)) !== 0)
+		if (
+			(flags &
+				(ApplicationFlags.GatewayMessageContent |
+					ApplicationFlags.GatewayMessageContentLimited)) !==
+			0
+		)
 			intents.push(GatewayIntentBits.MessageContent)
 
 		return intents
