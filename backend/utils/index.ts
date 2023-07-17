@@ -2,6 +2,7 @@
 import { ApplicationFlags, GatewayIntentBits } from 'discord.js'
 
 export const serializeObject = (source: any) => {
+	/*
 	const sink: any = Object.assign({}, source)
 	const proto = Object.getPrototypeOf(source)
 
@@ -17,10 +18,13 @@ export const serializeObject = (source: any) => {
 		})
 
 	return sink
+	*/
+
+	return JSON.parse(JSON.stringify(source))
 }
 
 export const fetchPrivilegedIntents = async (token: string) => {
-	const intents = []
+	const privilegedIntents = []
 	try {
 		const response = await fetch(
 			'https://discord.com/api/v10/applications/@me',
@@ -39,7 +43,7 @@ export const fetchPrivilegedIntents = async (token: string) => {
 					ApplicationFlags.GatewayGuildMembersLimited)) !==
 			0
 		)
-			intents.push(GatewayIntentBits.GuildMembers)
+			privilegedIntents.push(GatewayIntentBits.GuildMembers)
 
 		if (
 			(flags &
@@ -47,7 +51,7 @@ export const fetchPrivilegedIntents = async (token: string) => {
 					ApplicationFlags.GatewayPresenceLimited)) !==
 			0
 		)
-			intents.push(GatewayIntentBits.GuildPresences)
+			privilegedIntents.push(GatewayIntentBits.GuildPresences)
 
 		if (
 			(flags &
@@ -55,10 +59,9 @@ export const fetchPrivilegedIntents = async (token: string) => {
 					ApplicationFlags.GatewayMessageContentLimited)) !==
 			0
 		)
-			intents.push(GatewayIntentBits.MessageContent)
-
-		return intents
+			privilegedIntents.push(GatewayIntentBits.MessageContent)
 	} catch (error) {
 		console.error(error)
 	}
+	return privilegedIntents
 }
