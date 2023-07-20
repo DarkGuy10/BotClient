@@ -13,6 +13,7 @@
 		"skipLibCheck": true,
 		"noFallthroughCasesInSwitch": true,
 		"outDir": "build",
+		"baseUrl": ".",
 		"paths": {
 			"@/utils": ["./utils"],
 			"@/typings": ["./typings"],
