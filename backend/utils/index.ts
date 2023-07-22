@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ApplicationFlags, GatewayIntentBits } from 'discord.js'
+import fetch from 'node-fetch'
 
 export const serializeObject = (source: any) => {
 	/*
