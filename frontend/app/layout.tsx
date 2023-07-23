@@ -1,9 +1,7 @@
-import './globals.css'
+import './globals.scss'
 
 export const metadata = {
-	title: 'NextJS + Electron Boilerplate',
-	description:
-		'A neat boilerplate for building Electron apps, with NextJS at the frontend and pre-configured with a bunch of handy development tools.',
+	title: 'Wyvern | Dashboard',
 }
 
 export default function RootLayout({
@@ -12,7 +10,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" className="theme-dark">
 			<body>{children}</body>
 		</html>
 	)
