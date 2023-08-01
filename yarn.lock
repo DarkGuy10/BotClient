@@ -7439,9 +7439,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:14.12.0":
-  version: 14.12.0
-  resolution: "discord.js@npm:14.12.0"
+"discord.js@npm:14.12.1":
+  version: 14.12.1
+  resolution: "discord.js@npm:14.12.1"
   dependencies:
     "@discordjs/builders": ^1.6.4
     "@discordjs/collection": ^1.5.2
@@ -7457,7 +7457,7 @@ __metadata:
     tslib: ^2.6.1
     undici: ^5.22.1
     ws: ^8.13.0
-  checksum: 4ad3a3cb6cc19d39f68d0eb4623085d5b3801e4eb3f4b849043ae3c48bdd344442bbb05476e08ff6ccdaff1a0703c58d4656f66dfe1b865ebaaf01edeaf6c7c0
+  checksum: 059c6c2fdec22319e8aa8d5f54392db0066e959a7418440d1dab3b0e7814b0c4a7311ed15500147e959f9409e63e2dbe0b1f159f9c2693d8cd321a216b92fdaf
   languageName: node
   linkType: hard
 
@@ -15769,7 +15769,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.59.9
     "@typescript-eslint/parser": ^5.59.9
     concurrently: ^8.1.0
-    discord.js: 14.12.0
+    discord.js: 14.12.1
     electron: ^25.0.1
     electron-builder: ^23.6.0
     electron-debug: ^3.2.0
