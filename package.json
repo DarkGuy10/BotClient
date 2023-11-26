@@ -15,7 +15,7 @@
 		"url": "https://github.com/darkGuy10/BotClient.git"
 	},
 	"main": "backend/build/main.js",
-	"packageManager": "yarn@3.6.1",
+	"packageManager": "yarn@4.0.2",
 	"scripts": {
 		"frontend:dev": "next dev frontend",
 		"frontend:build": "next build frontend",
