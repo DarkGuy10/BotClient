@@ -57,7 +57,7 @@ const spawnAppWindow = async () => {
 		show: false,
 		webPreferences: {
 			nodeIntegration: true,
-			contextIsolation: false,
+			contextIsolation: true,
 		},
 	})
 
