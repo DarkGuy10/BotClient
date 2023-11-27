@@ -1,4 +1,4 @@
-import TextInput from './TextInput'
+import { TextInput } from './TextInput'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof TextInput> = {

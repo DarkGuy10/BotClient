@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Button from './Button'
+import { Button } from './Button'
 
 const meta: Meta<typeof Button> = {
 	component: Button,
@@ -34,8 +34,8 @@ export const Secondary: Story = {
 
 export const Cancel: Story = {
 	args: {
-		label: 'Cancel',
-		type: 'cancel',
+		label: 'Tertiary',
+		type: 'tertiary',
 	},
 }
 export const Danger: Story = {

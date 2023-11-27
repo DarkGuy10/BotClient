@@ -1,3 +1,4 @@
+'use client'
 import { type Dispatch, type SetStateAction } from 'react'
 import styles from './TextInput.module.scss'
 
@@ -7,11 +8,7 @@ interface TextInputProps {
 	setState?: Dispatch<SetStateAction<string>>
 }
 
-export default function TextInput({
-	label,
-	placeholder,
-	setState,
-}: TextInputProps) {
+export const TextInput = ({ label, placeholder, setState }: TextInputProps) => {
 	return (
 		<div className={styles.wrapper}>
 			{label && <div className={styles.label}>{label}</div>}

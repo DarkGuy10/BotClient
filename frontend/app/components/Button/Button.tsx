@@ -1,7 +1,8 @@
+'use client'
 import styles from './Button.module.scss'
 import type { MouseEventHandler } from 'react'
 
-type ButtonType = 'primary' | 'secondary' | 'cancel' | 'danger'
+type ButtonType = 'primary' | 'secondary' | 'tertiary' | 'danger'
 
 interface ButtonProps {
 	label: string
@@ -10,7 +11,7 @@ interface ButtonProps {
 	onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export default function Button({ type, label, small, onClick }: ButtonProps) {
+export const Button = ({ type, label, small, onClick }: ButtonProps) => {
 	return (
 		<button
 			onClick={onClick}
