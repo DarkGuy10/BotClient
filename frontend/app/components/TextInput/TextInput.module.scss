@@ -1,0 +1,28 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.label {
+	margin-bottom: 8px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: var(--header-secondary);
+	font-family: var(--font-display);
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.24px;
+}
+
+.inputField {
+	padding: 15px 20px;
+	background-color: var(--background-secondary);
+	color: var(--text-normal);
+	font-size: 14px;
+	border: 0;
+	border-radius: var(--radius-xs);
+	margin-bottom: var(--spacing-24);
+}
