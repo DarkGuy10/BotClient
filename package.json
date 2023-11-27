@@ -52,6 +52,7 @@
 		"@storybook/addon-essentials": "7.5.3",
 		"@storybook/addon-interactions": "7.5.3",
 		"@storybook/addon-links": "7.5.3",
+		"@storybook/addon-onboarding": "1.0.8",
 		"@storybook/blocks": "7.5.3",
 		"@storybook/nextjs": "7.5.3",
 		"@storybook/react": "7.5.3",
