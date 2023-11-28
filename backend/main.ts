@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { app, BrowserWindow, ipcMain } from 'electron'
 import log from 'electron-log'
 import { autoUpdater } from 'electron-updater'
@@ -56,8 +56,7 @@ const spawnAppWindow = async () => {
 		icon: getAssetPath('icon.png'),
 		show: false,
 		webPreferences: {
-			nodeIntegration: true,
-			contextIsolation: true,
+			preload: path.join(app.getAppPath(), 'preload.js'),
 		},
 	})
 
@@ -136,7 +135,6 @@ ipcMain.on('action-logout', event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
-		userStore.delete(client.user.id)
 		client.destroy()
 		client = null
 		event.reply('action-logout-success')
