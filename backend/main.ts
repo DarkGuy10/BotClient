@@ -102,7 +102,7 @@ app.on('window-all-closed', () => {
  * ======================================================================================
  */
 
-ipcMain.on('action-login', async (event, token) => {
+ipcMain.on('action:login', async (event, token) => {
 	try {
 		if (!appWindow) return
 		if (client) {
@@ -131,7 +131,7 @@ ipcMain.on('action-login', async (event, token) => {
 	}
 })
 
-ipcMain.on('action-logout', event => {
+ipcMain.on('action:logout', event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -146,7 +146,7 @@ ipcMain.on('action-logout', event => {
 })
 
 ipcMain.on(
-	'action-messageCreate',
+	'action:messageCreate',
 	async (event, options: string | MessagePayload | MessageCreateOptions) => {
 		try {
 			if (!client?.isReady())
@@ -165,7 +165,7 @@ ipcMain.on(
 	}
 )
 
-ipcMain.on('action-messageDelete', async (event, messageId: string) => {
+ipcMain.on('action:messageDelete', async (event, messageId: string) => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -188,7 +188,7 @@ ipcMain.on('action-messageDelete', async (event, messageId: string) => {
  * ======================================================================================
  */
 
-ipcMain.handle('resource-guilds-all', async event => {
+ipcMain.handle('resource:guilds-all', async event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -204,7 +204,7 @@ ipcMain.handle('resource-guilds-all', async event => {
 	}
 })
 
-ipcMain.handle('resource-guild-channels-all', async event => {
+ipcMain.handle('resource:guild-channels-all', async event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -223,7 +223,7 @@ ipcMain.handle('resource-guild-channels-all', async event => {
 	}
 })
 
-ipcMain.handle('resource-dm-channels-all', async event => {
+ipcMain.handle('resource:dm-channels-all', async event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -242,7 +242,7 @@ ipcMain.handle('resource-dm-channels-all', async event => {
 })
 
 ipcMain.handle(
-	'resource-messages-bulk',
+	'resource:messages-bulk',
 	async (event, fetchOptions: FetchMessagesOptions) => {
 		try {
 			if (!client?.isReady())
@@ -276,7 +276,7 @@ ipcMain.handle(
 	}
 )
 
-ipcMain.handle('resource-guild-members-all', async event => {
+ipcMain.handle('resource:guild-members-all', async event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -306,7 +306,7 @@ ipcMain.handle('resource-guild-members-all', async event => {
  * ======================================================================================
  */
 
-ipcMain.handle('navigate-guild', async (event, guildId: string) => {
+ipcMain.handle('navigate:guild', async (event, guildId: string) => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -341,7 +341,7 @@ ipcMain.handle('navigate-guild', async (event, guildId: string) => {
 })
 
 ipcMain.handle(
-	'navigate-channel',
+	'navigate:channel',
 	async (event, channelOrUserId: string, isDM = false) => {
 		try {
 			if (!client?.isReady())
