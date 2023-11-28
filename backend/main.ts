@@ -102,7 +102,7 @@ app.on('window-all-closed', () => {
  * ======================================================================================
  */
 
-ipcMain.on('action:login', async (event, token) => {
+ipcMain.handle('action:login', async (event, token) => {
 	try {
 		if (!appWindow) return
 		if (client) {
@@ -123,29 +123,29 @@ ipcMain.on('action:login', async (event, token) => {
 					token,
 				})
 			})
-		event.reply('action-login-sucess')
+		return true
 	} catch (error) {
 		log.error(error)
-		event.reply('error', serializeObject(error))
-		event.reply('action-login-error')
+		event.sender.send('error', serializeObject(error))
+		return false
 	}
 })
 
-ipcMain.on('action:logout', event => {
+ipcMain.handle('action:logout', event => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
 		client.destroy()
 		client = null
-		event.reply('action-logout-success')
+		return true
 	} catch (error) {
 		log.error(error)
-		event.reply('error', serializeObject(error))
-		event.reply('action-logout-error')
+		event.sender.send('error', serializeObject(error))
+		return false
 	}
 })
 
-ipcMain.on(
+ipcMain.handle(
 	'action:messageCreate',
 	async (event, options: string | MessagePayload | MessageCreateOptions) => {
 		try {
@@ -156,16 +156,16 @@ ipcMain.on(
 				throw new ClientError(ClientErrorCodes.NO_CURRENT_CHANNEL)
 
 			await router.currentChannel.send(options)
-			event.reply('action-messageCreate-success')
+			return true
 		} catch (error) {
 			log.error(error)
-			event.reply('error', serializeObject(error))
-			event.reply('action-messageCreate-error')
+			event.sender.send('error', serializeObject(error))
+			return false
 		}
 	}
 )
 
-ipcMain.on('action:messageDelete', async (event, messageId: string) => {
+ipcMain.handle('action:messageDelete', async (event, messageId: string) => {
 	try {
 		if (!client?.isReady())
 			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
@@ -174,11 +174,11 @@ ipcMain.on('action:messageDelete', async (event, messageId: string) => {
 			throw new ClientError(ClientErrorCodes.NO_CURRENT_CHANNEL)
 
 		await router.currentChannel.messages.delete(messageId)
-		event.reply('action-messageDelete-success')
+		return true
 	} catch (error) {
 		log.error(error)
-		event.reply('error', serializeObject(error))
-		event.reply('action-messageDelete-error')
+		event.sender.send('error', serializeObject(error))
+		return false
 	}
 })
 
