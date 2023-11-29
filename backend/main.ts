@@ -100,34 +100,42 @@ app.on('window-all-closed', () => {
  * ======================================================================================
  */
 
-ipcMain.handle('action:login', async (event, token) => {
-	try {
-		if (!appWindow) return
-		if (client) {
-			client.destroy()
-			client = null
-		}
-		const privilegedIntents = (await fetchPrivilegedIntents(token)) || []
-		client = new Client({ appWindow, privilegedIntents })
-		router = new Router(client)
-		await client.login(token)
-		console.log(`[ + ] Logged in as @${client.user?.username}`)
-		if (AppData.get('appPreference.tokenPersistence', true))
-			client.on('ready', client => {
-				AppData.set(`savedUsers.${client.user.id}`, {
-					username: client.user.username,
-					id: client.user.id,
-					avatarUrl: client.user.displayAvatarURL(),
-					token,
+ipcMain.handle(
+	'action:login',
+	async (event, tokenOrId: string, withId = false) => {
+		try {
+			if (!appWindow) return
+			if (client) {
+				client.destroy()
+				client = null
+			}
+			const token = withId
+				? AppData.get('savedUsers')[tokenOrId]?.token
+				: tokenOrId
+			if (withId && !token)
+				throw new ClientError(ClientErrorCodes.SAVED_USER_NOT_FOUND)
+			const privilegedIntents = (await fetchPrivilegedIntents(token)) || []
+			client = new Client({ appWindow, privilegedIntents })
+			router = new Router(client)
+			await client.login(token)
+			if (AppData.get('appPreferences.tokenPersistence', true))
+				client.on('ready', client => {
+					console.log(`[ + ] Logged in as @${client.user?.username}`)
+					AppData.set(`savedUsers.${client.user.id}`, {
+						username: client.user.username,
+						id: client.user.id,
+						avatarURL: client.user.displayAvatarURL(),
+						token,
+					})
 				})
-			})
-		return true
-	} catch (error) {
-		log.error(error)
-		event.sender.send('error', serializeObject(error))
-		return false
+			return true
+		} catch (error) {
+			log.error(error)
+			event.sender.send('error', serializeObject(error))
+			return false
+		}
 	}
-})
+)
 
 ipcMain.handle('action:logout', event => {
 	try {
@@ -163,6 +171,19 @@ ipcMain.handle(
 	}
 )
 
+ipcMain.handle('action:delete-saved-user', (event, userId: string) => {
+	try {
+		if (!AppData.has(`savedUsers.${userId}`))
+			throw new ClientError(ClientErrorCodes.SAVED_USER_NOT_FOUND)
+		AppData.delete(`savedUsers.${userId}` as keyof AppDataSchema)
+		return true
+	} catch (error) {
+		log.error(error)
+		event.sender.send('error', serializeObject(error))
+		return false
+	}
+})
+
 ipcMain.handle('action:messageDelete', async (event, messageId: string) => {
 	try {
 		if (!client?.isReady())
@@ -185,6 +206,21 @@ ipcMain.handle('action:messageDelete', async (event, messageId: string) => {
  *                                IPC Main Events: Resource
  * ======================================================================================
  */
+
+ipcMain.handle('resource:saved-user-data', event => {
+	try {
+		const savedUsers = Object.values(AppData.get('savedUsers')).map(
+			({ id, username, avatarURL }) => {
+				return { id, username, avatarURL }
+			}
+		)
+		return { data: { savedUsers }, error: false }
+	} catch (error) {
+		log.error(error)
+		event.sender.send('error', serializeObject(error))
+		return { data: { savedUsers: [] }, error: true }
+	}
+})
 
 ipcMain.handle('resource:guilds-all', async event => {
 	try {

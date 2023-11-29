@@ -4,23 +4,34 @@ import type {
 	MessagePayload,
 } from 'discord.js'
 
-type APIStatus = boolean
+export type APIStatus = boolean
 
-interface APIResource<T> {
+export interface APIResource<T> {
 	data: T
 	error: APIStatus
+}
+
+export interface StrippedUserSchema {
+	username: string
+	id: string
+	avatarURL: string
 }
 
 export interface IConduitAPI {
 	Action: {
 		login: (token: string) => Promise<APIStatus>
+		loginWithId: (userId: string) => Promise<APIStatus>
 		logout: () => Promise<APIStatus>
+		deleteSavedUser: (userId: string) => Promise<APIStatus>
 		messageCreate: (
 			options: string | MessagePayload | MessageCreateOptions
 		) => Promise<APIStatus>
 		messageDelete: (messageId: string) => Promise<APIStatus>
 	}
 	Resource: {
+		savedUserData: () => Promise<
+			APIResource<{ savedUsers: StrippedUserSchema[] }>
+		>
 		guildsAll: () => Promise<APIResource<any>>
 		guildChannelsAll: () => Promise<APIResource<any>>
 		dmChannelsAll: () => Promise<APIResource<any>>

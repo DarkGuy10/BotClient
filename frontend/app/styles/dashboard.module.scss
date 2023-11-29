@@ -22,10 +22,22 @@
 	flex-direction: column;
 }
 
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+}
+
 .header {
 	color: var(--header-primary);
 	font-size: 20px;
 	font-weight: 600;
 	font-family: var(--font-display);
 	margin-bottom: var(--spacing-24);
+	margin-top: var(--spacing-32);
+}
+
+.cardGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	margin: -16px 0 0 -16px;
 }

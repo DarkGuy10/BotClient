@@ -1,0 +1,73 @@
+.wrapper {
+	padding: 16px 0 0 16px;
+}
+
+.deleteButton {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -100%);
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	min-width: 40px;
+	min-height: 40px;
+	color: var(--interactive-normal);
+	cursor: pointer;
+	border: 1px solid var(--interactive-normal);
+	border-radius: 100%;
+	transition:
+		opacity 0.125s,
+		transform 0.125s;
+}
+
+.card {
+	position: relative;
+	padding: 10px;
+	cursor: pointer;
+	background-color: var(--primary-630);
+	border-radius: var(--radius-sm);
+	transition:
+		background-color 0.125s,
+		box-shadow 0.125s,
+		transform 0.125s,
+		-webkit-box-shadow 0.125s,
+		-webkit-transform 0.125s;
+
+	&:hover {
+		background-color: var(--primary-660);
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		transform: translateY(-8px);
+		padding-bottom: 15px;
+
+		.username {
+			color: var(--white-500);
+		}
+
+		.deleteButton {
+			opacity: 1;
+			transform: translate(-50%, 8px);
+		}
+	}
+}
+
+.avatar {
+	width: 100%;
+	height: auto;
+
+	border-radius: var(--radius-sm);
+	margin-bottom: var(--spacing-8);
+}
+
+.username {
+	overflow: hidden;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-weight: 500;
+	color: var(--primary-200);
+	transition: color 0.125s;
+	font-family: var(--font-primary);
+	line-height: 1.5;
+}

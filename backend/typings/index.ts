@@ -18,6 +18,7 @@ export enum ClientErrorCodes {
 	INCORRECT_IPC_CHANNEL = 'INCORRECT_IPC_CHANNEL',
 	CANNOT_FETCH_USER = 'CANNOT_FETCH_USER',
 	CANNOT_CREATE_DM = 'CANNOT_CREATE_DM',
+	SAVED_USER_NOT_FOUND = 'SAVED_USER_NOT_FOUND',
 }
 
 export const ClientErrorMessages = {
@@ -34,19 +35,19 @@ export const ClientErrorMessages = {
 	INCORRECT_IPC_CHANNEL: 'Incorrect IPC channel was used.',
 	CANNOT_FETCH_USER: 'Target used could not be fetched.',
 	CANNOT_CREATE_DM: 'A DM channel could not be created with the target user.',
+	SAVED_USER_NOT_FOUND: 'Provided userId matches none of the saved users.',
 }
 
 export interface SavedUserSchema {
 	username: string
-	discriminator: string
 	id: string
 	token: string
-	avatarUrl: string
+	avatarURL: string
 }
 
 export interface AppDataSchema {
-	appPreference: {
-		persistTokens: boolean
+	appPreferences: {
+		tokenPersistance: boolean
 	}
 	savedUsers: Record<string, SavedUserSchema>
 }
