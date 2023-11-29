@@ -5,7 +5,7 @@ import { autoUpdater } from 'electron-updater'
 import electronIsDev from 'electron-is-dev'
 import Client from './classes/Client'
 import { fetchPrivilegedIntents, serializeObject } from '@/utils'
-import ElectronStore from './classes/ElectronStore'
+import ElectronStore from 'electron-store'
 import ClientError from './classes/ClientError'
 import { AppDataSchema, ClientErrorCodes } from './typings'
 import Router from './classes/Router'
@@ -22,8 +22,6 @@ let appWindow: BrowserWindow | null = null
 let client: Client | null = null
 let router: Router | null = null
 const AppData = new ElectronStore<AppDataSchema>()
-const appPreferenceStore = AppData.createSlice('appPreference')
-const userStore = AppData.createSlice('savedUsers')
 
 class AppUpdater {
 	constructor() {
@@ -56,7 +54,7 @@ const spawnAppWindow = async () => {
 		icon: getAssetPath('icon.png'),
 		show: false,
 		webPreferences: {
-			preload: path.join(app.getAppPath(), 'preload.js'),
+			preload: path.join(__dirname, 'preload.js'),
 		},
 	})
 
@@ -113,11 +111,11 @@ ipcMain.handle('action:login', async (event, token) => {
 		client = new Client({ appWindow, privilegedIntents })
 		router = new Router(client)
 		await client.login(token)
-		if (appPreferenceStore.get('tokenPersistence', true))
+		console.log(`[ + ] Logged in as @${client.user?.username}`)
+		if (AppData.get('appPreference.tokenPersistence', true))
 			client.on('ready', client => {
-				userStore.set(client.user.id, {
+				AppData.set(`savedUsers.${client.user.id}`, {
 					username: client.user.username,
-					discriminator: client.user.discriminator,
 					id: client.user.id,
 					avatarUrl: client.user.displayAvatarURL(),
 					token,
