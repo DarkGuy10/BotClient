@@ -75,7 +75,9 @@
 	font-family: var(--font-primary);
 	padding: 10px 15px;
 	cursor: pointer;
-	transition: background-color 0.17s ease, color 0.17s ease;
+	transition:
+		background-color 0.17s ease,
+		color 0.17s ease;
 }
 
 .submit:hover {

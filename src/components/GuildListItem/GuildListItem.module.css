@@ -74,7 +74,9 @@
 	line-height: 1.2em;
 	white-space: nowrap;
 	overflow: hidden;
-	transition: background-color 0.15s ease-out, color 0.15s ease-out,
+	transition:
+		background-color 0.15s ease-out,
+		color 0.15s ease-out,
 		border-radius 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 	background-color: var(--background-primary);
 	color: var(--text-normal);

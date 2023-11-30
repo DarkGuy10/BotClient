@@ -85,11 +85,11 @@ class DMNav extends Component {
 							? fetchedUser.isClientUser
 								? "You can't DM Yourself"
 								: fetchedUser.bot
-								? "You can't DM a Bot"
-								: 'Click to Open DMs'
+								  ? "You can't DM a Bot"
+								  : 'Click to Open DMs'
 							: searchValue
-							? 'No Result'
-							: ''}
+							  ? 'No Result'
+							  : ''}
 					</div>
 				)}
 

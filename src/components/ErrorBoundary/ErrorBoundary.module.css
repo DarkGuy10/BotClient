@@ -56,7 +56,9 @@
 	line-height: 16px;
 	padding: 12px 35px;
 	cursor: pointer;
-	transition: background-color 0.17s ease, color 0.17s ease;
+	transition:
+		background-color 0.17s ease,
+		color 0.17s ease;
 }
 
 .reloadButton:hover {

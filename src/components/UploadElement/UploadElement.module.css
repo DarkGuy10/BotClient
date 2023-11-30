@@ -114,7 +114,9 @@
 	-webkit-box-pack: start;
 	justify-content: flex-start;
 	user-select: none;
-	transition: box-shadow 0.1s ease-out, -webkit-box-shadow 0.1s ease-out;
+	transition:
+		box-shadow 0.1s ease-out,
+		-webkit-box-shadow 0.1s ease-out;
 	position: relative;
 	overflow: hidden;
 }

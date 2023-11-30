@@ -422,8 +422,7 @@
 		'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
 		'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier,
 		monospace;
-	--font-headline: 'Helvetica Neue', Helvetica, Arial,
-		sans-serif;
+	--font-headline: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 	margin: 0;
 	padding: 0;
