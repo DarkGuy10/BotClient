@@ -1,10 +1,5 @@
 'use client'
-import {
-	SVGCloseButton,
-	SVGCloseButtonCircle,
-	SVGTrashCan,
-	SVGTrashCanWhite,
-} from '@/components'
+import { SVGCloseButton } from '../SVGHandler'
 import styles from './SavedProfileCard.module.scss'
 
 interface SavedProfileCardProps {
