@@ -1,4 +1,6 @@
 export * from './Button/Button'
 export * from './TextInput/TextInput'
 export * from './SavedProfileCard/SavedProfileCard'
+export * from './Tooltip/Tooltip'
+export * from './TooltipWrappable/TooltipWrappable'
 export * from './SVGHandler'

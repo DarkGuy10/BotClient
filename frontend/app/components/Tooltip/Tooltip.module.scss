@@ -1,0 +1,103 @@
+.layer {
+	position: absolute;
+	z-index: 1002;
+	pointer-events: none;
+}
+
+@mixin tooltip($transform-origin: 0% 0%) {
+	position: relative;
+	border-radius: 5px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	max-width: 190px;
+	word-wrap: break-word;
+	z-index: 1002;
+	transform-origin: $transform-origin;
+	will-change: opacity, transform;
+	pointer-events: none;
+	box-shadow: var(--elevation-high);
+	color: var(--text-normal);
+	background-color: var(--background-floating);
+	animation: popup 0.07s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pointer {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	pointer-events: none;
+	border-top-color: var(--background-floating);
+}
+
+.tooltipLeft {
+	@include tooltip();
+
+	.pointer {
+		left: 100%;
+		top: 50%;
+		margin-top: -5px;
+		border-right-width: 5px;
+		transform: rotate(-90deg);
+	}
+}
+
+.tooltipRight {
+	@include tooltip(0 50%);
+
+	.pointer {
+		right: 100%;
+		top: 50%;
+		margin-top: -5px;
+		border-left-width: 5px;
+		transform: rotate(90deg);
+	}
+}
+
+.tooltipTop {
+	@include tooltip(50% 100%);
+
+	.pointer {
+		top: 100%;
+		left: 50%;
+		margin-left: -5px;
+	}
+}
+
+.tooltipBottom {
+	@include tooltip(0 50%);
+
+	.pointer {
+		bottom: 100%;
+		left: 50%;
+		margin-left: -5px;
+		border-top-width: 5px;
+		transform: rotate(180deg);
+	}
+}
+
+.large {
+	max-width: 196px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 600;
+}
+
+.content {
+	padding: 8px 12px;
+	overflow: hidden;
+	white-space: nowrap;
+	font-family: var(--font-primary);
+}
+
+@keyframes popup {
+	0% {
+		transform: scale(0.9);
+		opacity: 0.6;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
