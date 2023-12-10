@@ -1,4 +1,5 @@
 import './globals.scss'
+import { StoreProvider } from './StoreProvider'
 
 export const metadata = {
 	title: 'Wyvern | Dashboard',
@@ -11,7 +12,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className="theme-dark">
-			<body>{children}</body>
+			<body>
+				<StoreProvider>{children}</StoreProvider>
+			</body>
 		</html>
 	)
 }
