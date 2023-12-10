@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { rootReducer } from './rootReducer'
 
 /**
  * Create a store instance per-request
  */
 export const makeStore = () => {
 	return configureStore({
-		reducer: {},
+		reducer: rootReducer,
 	})
 }
 
 export type ReduxStore = ReturnType<typeof makeStore>
 export type ReduxState = ReturnType<ReduxStore['getState']>
-export type ReduxDispatch = ReduxState['dispatch']
+export type ReduxDispatch = ReduxStore['dispatch']

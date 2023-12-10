@@ -1,3 +1,4 @@
+import { TooltipManager } from '@/components'
 import './globals.scss'
 import { StoreProvider } from './StoreProvider'
 
@@ -13,7 +14,10 @@ export default function RootLayout({
 	return (
 		<html lang="en" className="theme-dark">
 			<body>
-				<StoreProvider>{children}</StoreProvider>
+				<StoreProvider>
+					{children}
+					<TooltipManager />
+				</StoreProvider>
 			</body>
 		</html>
 	)
