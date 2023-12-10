@@ -5,6 +5,7 @@
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": false, //will change
+		"strictNullChecks": true,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
 		"esModuleInterop": true,
@@ -29,6 +30,7 @@
 	"include": [
 		"ConduitAPI.d.ts",
 		"next-env.d.ts",
+		"globals.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
