@@ -19,7 +19,7 @@ const initialState: AlertState = {
 	lastUniqueID: 0,
 }
 
-const alertSlice = createSlice({
+export const alertSlice = createSlice({
 	name: 'alerts',
 	initialState,
 	reducers: {
@@ -38,4 +38,3 @@ const alertSlice = createSlice({
 })
 
 export const { pushAlert, popAlert } = alertSlice.actions
-export default alertSlice.reducer

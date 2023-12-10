@@ -27,4 +27,3 @@ export const tooltipSlice = createSlice({
 })
 
 export const { createTooltip, destroyTooltip } = tooltipSlice.actions
-export default tooltipSlice.reducer
