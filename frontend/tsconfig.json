@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "ES6",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -24,7 +24,8 @@
 		"paths": {
 			"@/components": ["./app/components/"],
 			"@/styles/*": ["./app/styles/*"],
-			"@/redux/*": ["./lib/redux/*"]
+			"@/redux/*": ["./lib/redux/*"],
+			"@/constants": ["./utils/constants"]
 		}
 	},
 	"include": [
