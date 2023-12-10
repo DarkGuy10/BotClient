@@ -2,7 +2,7 @@
 import styles from '@/styles/dashboard.module.scss'
 import { TextInput, SavedProfileCard, Button } from '@/components'
 import { useState, useEffect } from 'react'
-import { StrippedUserSchema } from '@/ConduitAPI'
+import { StrippedUserSchema } from 'ConduitAPI'
 
 export default function Dashboard() {
 	let [inputToken, setInputToken] = useState('')
