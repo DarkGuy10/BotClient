@@ -1,4 +1,4 @@
-import { TooltipManager } from '@/components'
+import { AlertManager, TooltipManager } from '@/components'
 import './globals.scss'
 import { StoreProvider } from './StoreProvider'
 
@@ -17,6 +17,7 @@ export default function RootLayout({
 				<StoreProvider>
 					{children}
 					<TooltipManager />
+					<AlertManager />
 				</StoreProvider>
 			</body>
 		</html>

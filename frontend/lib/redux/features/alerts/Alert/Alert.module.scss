@@ -1,0 +1,43 @@
+@mixin alertBox($color) {
+	color: $color;
+	display: block;
+	width: 100%;
+	height: auto;
+	padding: 18px 20px;
+	margin-bottom: 10px;
+	overflow: hidden;
+	word-wrap: break-word;
+	background-color: var(--background-floating);
+	font-size: 16px;
+	font-family: var(--font-primary);
+	border-left: 2px solid $color;
+	font-weight: 500;
+	animation: slideIn 0.17s 1 cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes slideIn {
+	0% {
+		margin-left: 200px;
+		opacity: 0.5;
+	}
+	100% {
+		margin-left: 0;
+		opacity: 1;
+	}
+}
+
+.error {
+	@include alertBox(var(--text-danger));
+}
+
+.success {
+	@include alertBox(var(--text-positive));
+}
+
+.warning {
+	@include alertBox(var(--text-warning));
+}
+
+.system {
+	@include alertBox(var(--text-brand));
+}

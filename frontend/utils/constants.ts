@@ -1,0 +1,1 @@
+export const DEFAULT_ALERT_TIMEOUT = 4000
