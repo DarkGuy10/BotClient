@@ -2,10 +2,10 @@
 import { ApplicationFlags, GatewayIntentBits } from 'discord.js'
 
 export const serializeObject = (source: any) => {
-	/*
-	const sink: any = Object.assign({}, source)
+	const sink: any = JSON.parse(
+		JSON.stringify(source, Object.getOwnPropertyNames(source))
+	)
 	const proto = Object.getPrototypeOf(source)
-
 	Object.entries(Object.getOwnPropertyDescriptors(proto))
 		.filter(([, descriptor]) => typeof descriptor.get === 'function')
 		.forEach(([key, descriptor]) => {
@@ -16,11 +16,7 @@ export const serializeObject = (source: any) => {
 					console.error(`Error in calling getter ${key}`, error)
 				}
 		})
-
 	return sink
-	*/
-
-	return JSON.parse(JSON.stringify(source))
 }
 
 export const fetchPrivilegedIntents = async (token: string) => {
