@@ -12,6 +12,7 @@ import Router from './classes/Router'
 import {
 	Channel,
 	ChannelType,
+	ClientUser,
 	FetchMessagesOptions,
 	GuildChannel,
 	MessageCreateOptions,
@@ -118,15 +119,15 @@ ipcMain.handle(
 			client = new Client({ appWindow, privilegedIntents })
 			router = new Router(client)
 			await client.login(token)
+			await client.waitTillReady()
+			const clientUser = client.user as ClientUser // typecast because client will be Client<true> after waitTillReady()
+			console.log(`[ + ] Logged in as @${clientUser.username}`)
 			if (AppData.get('appPreferences.tokenPersistence', true))
-				client.on('ready', client => {
-					console.log(`[ + ] Logged in as @${client.user?.username}`)
-					AppData.set(`savedUsers.${client.user.id}`, {
-						username: client.user.username,
-						id: client.user.id,
-						avatarURL: client.user.displayAvatarURL(),
-						token,
-					})
+				AppData.set(`savedUsers.${clientUser.id}`, {
+					username: clientUser.username,
+					id: clientUser.id,
+					avatarURL: clientUser.displayAvatarURL(),
+					token,
 				})
 			return true
 		} catch (error) {
@@ -219,6 +220,25 @@ ipcMain.handle('resource:saved-user-data', event => {
 		log.error(error)
 		event.sender.send('error', serializeObject(error))
 		return { data: { savedUsers: [] }, error: true }
+	}
+})
+
+ipcMain.handle('resource:client-user-data', event => {
+	try {
+		if (!client?.isReady())
+			throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
+		const clientUser = {
+			id: client.user.id,
+			username: client.user.username,
+			globalName: client.user.globalName,
+			displayName: client.user.displayName,
+			avatarURL: client.user.displayAvatarURL(),
+		}
+		return { data: { clientUser }, error: false }
+	} catch (error) {
+		log.error(error)
+		event.sender.send('error', serializeObject(error))
+		return { data: { clientUser: {} }, error: true }
 	}
 })
 
