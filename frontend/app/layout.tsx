@@ -1,6 +1,10 @@
 import './globals.scss'
-import { AlertManager, CallbackBoundary, TooltipManager } from '@/components'
-import { StoreProvider } from './StoreProvider'
+import {
+	AlertManager,
+	CallbackBoundary,
+	TooltipManager,
+	StoreProvider,
+} from '@/components'
 export default function RootLayout({
 	children,
 }: {
