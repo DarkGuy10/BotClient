@@ -26,6 +26,7 @@ contextBridge.exposeInMainWorld('Conduit', {
 	},
 	Resource: {
 		savedUserData: () => ipcRenderer.invoke('resource:saved-user-data'),
+		clientUserData: () => ipcRenderer.invoke('resource:client-user-data'),
 		guildsAll: () => ipcRenderer.invoke('resource:guilds-all'),
 		guildChannelsAll: () => ipcRenderer.invoke('resource:guild-channels-all'),
 		dmChannelsAll: () => ipcRenderer.invoke('resource:dm-channels-all'),
@@ -37,5 +38,17 @@ contextBridge.exposeInMainWorld('Conduit', {
 		guild: (guildId: string) => ipcRenderer.invoke('navigate:guild', guildId),
 		channel: (channelOrUserId: string, isDM = false) =>
 			ipcRenderer.invoke('navigate:channel', channelOrUserId, isDM),
+	},
+	Callback: {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		error: (handleError: (error: any) => void) =>
+			ipcRenderer.on('error', (_event, error) => handleError(error)),
+		clearAll: () =>
+			ipcRenderer
+				.eventNames()
+				.forEach(
+					event =>
+						typeof event === 'string' && ipcRenderer.removeAllListeners(event)
+				),
 	},
 })

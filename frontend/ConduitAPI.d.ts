@@ -6,15 +6,40 @@ import type {
 
 export type APIStatus = boolean
 
-export interface APIResource<T> {
-	data: T
-	error: APIStatus
+export type APIResource_Invalid<T, condition = boolean> = {
+	error: condition
+	data: condition extends true ? {} : T
 }
+
+export type APIResource<T> =
+	| {
+			error: true
+			data: {}
+	  }
+	| {
+			error: false
+			data: T
+	  }
 
 export interface StrippedUserSchema {
 	username: string
 	id: string
 	avatarURL: string
+}
+
+export interface ClientUserData {
+	id: string
+	username: string
+	globalName: string | null
+	displayName: string
+	avatarURL: string
+}
+
+export interface APIError {
+	name: 'string'
+	message: 'string'
+	code: 'string'
+	stack: 'string'
 }
 
 export interface IConduitAPI {
@@ -32,6 +57,7 @@ export interface IConduitAPI {
 		savedUserData: () => Promise<
 			APIResource<{ savedUsers: StrippedUserSchema[] }>
 		>
+		clientUserData: () => Promise<APIResource<{ clientUser: ClientUserData }>>
 		guildsAll: () => Promise<APIResource<any>>
 		guildChannelsAll: () => Promise<APIResource<any>>
 		dmChannelsAll: () => Promise<APIResource<any>>
@@ -46,6 +72,10 @@ export interface IConduitAPI {
 			channelOrUserId: string,
 			isDM = false
 		) => Promise<APIResource<any>>
+	}
+	Callback: {
+		error: (handleError: (error: APIError) => void) => void
+		clearAll: () => void
 	}
 }
 

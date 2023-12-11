@@ -1,11 +1,6 @@
-import { AlertManager, TooltipManager } from '@/components'
 import './globals.scss'
+import { AlertManager, CallbackBoundary, TooltipManager } from '@/components'
 import { StoreProvider } from './StoreProvider'
-
-export const metadata = {
-	title: 'Wyvern | Dashboard',
-}
-
 export default function RootLayout({
 	children,
 }: {
@@ -15,9 +10,11 @@ export default function RootLayout({
 		<html lang="en" className="theme-dark">
 			<body>
 				<StoreProvider>
-					{children}
-					<TooltipManager />
-					<AlertManager />
+					<CallbackBoundary>
+						{children}
+						<TooltipManager />
+						<AlertManager />
+					</CallbackBoundary>
 				</StoreProvider>
 			</body>
 		</html>
