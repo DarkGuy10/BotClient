@@ -1,6 +1,8 @@
 'use client'
+import { useReduxDispatch } from '@/redux/hooks'
 import { SVGCloseButton } from '../SVGHandler'
 import styles from './SavedProfileCard.module.scss'
+import { pushAlert } from '@/redux/features'
 
 interface SavedProfileCardProps {
 	username: string
@@ -15,11 +17,25 @@ export const SavedProfileCard = ({
 	id,
 	fetchSavedUserData,
 }: SavedProfileCardProps) => {
+	const dispatch = useReduxDispatch()
+
 	return (
 		<div className={styles.wrapper}>
 			<div
 				className={styles.card}
-				onClick={() => window.Conduit.Action.loginWithId(id)}
+				onClick={async () => {
+					if (await window.Conduit.Action.loginWithId(id)) {
+						const { data, error } =
+							await window.Conduit.Resource.clientUserData()
+						if (!error)
+							dispatch(
+								pushAlert({
+									type: 'success',
+									message: `Successfully logged in as @${data.clientUser.username}`,
+								})
+							)
+					}
+				}}
 			>
 				<img
 					className={styles.avatar}
