@@ -33,4 +33,10 @@ export default class Client<
 			})
 		})
 	}
+
+	waitTillReady() {
+		return new Promise<void>(resolve => {
+			this.once('ready', () => resolve())
+		})
+	}
 }
