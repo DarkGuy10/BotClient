@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react'
 import { StrippedUserSchema } from 'ConduitAPI'
 import { useReduxDispatch } from '@/redux/hooks'
 import { pushAlert } from '@/redux/features'
+import { useRouter } from 'next/navigation'
 
 export default function Dashboard() {
 	let [inputToken, setInputToken] = useState('')
 	let [savedUsers, setSavedUsers] = useState<StrippedUserSchema[]>([])
 	const dispatch = useReduxDispatch()
+	const router = useRouter()
 
 	const fetchSavedUserData = async () => {
 		const { error, data } = await window.Conduit.Resource.savedUserData()
@@ -34,17 +36,17 @@ export default function Dashboard() {
 							type="primary"
 							label="Login"
 							onClick={async () => {
-								if (await window.Conduit.Action.login(inputToken)) {
-									const { data, error } =
-										await window.Conduit.Resource.clientUserData()
-									if (!error)
-										dispatch(
-											pushAlert({
-												type: 'success',
-												message: `Successfully logged in as @${data.clientUser.username}`,
-											})
-										)
-								}
+								if (!(await window.Conduit.Action.login(inputToken))) return
+								const { data, error } =
+									await window.Conduit.Resource.clientUserData()
+								if (error) return
+								dispatch(
+									pushAlert({
+										type: 'success',
+										message: `Successfully logged in as @${data.clientUser.username}`,
+									})
+								)
+								router.push('/webapp')
 							}}
 						/>
 					</div>
