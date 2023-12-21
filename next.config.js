@@ -7,8 +7,10 @@ const nextConfig = {
 	assetPrefix: process.env.NODE_ENV === 'production' ? '.' : undefined,
 	trailingSlash: true,
 	env: {
-		metaVersion: version,
-		metaRepositry: repository.url,
+		META_APP_NAME: 'BotClient',
+		META_APP_VERSION: version,
+		META_REPOSITORY_URL: repository.url,
+		META_SUPPORT_SERVER_INVITE: 'https://discord.com/invite/aZSrxwNUFD',
 	},
 	// Configure SVGR
 	webpack(config) {
