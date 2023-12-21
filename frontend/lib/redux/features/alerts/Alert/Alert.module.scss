@@ -3,19 +3,21 @@
 	display: block;
 	width: 100%;
 	height: auto;
-	padding: 18px 20px;
+	padding: 20px 15px;
 	margin-bottom: 10px;
 	overflow: hidden;
 	word-wrap: break-word;
-	background-color: var(--background-floating);
+	background-color: var(--primary-700);
 	font-size: 14px;
+	line-height: 16px;
 	font-family: var(--font-primary);
 	border-left: 2px solid $color;
 	font-weight: 500;
-	animation: slideIn 0.17s 1 cubic-bezier(0.23, 1, 0.32, 1);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	animation: slide-in 0.17s 1 cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-@keyframes slideIn {
+@keyframes slide-in {
 	0% {
 		margin-left: 200px;
 		opacity: 0.5;
