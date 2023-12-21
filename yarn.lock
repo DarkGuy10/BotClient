@@ -11928,16 +11928,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-to-jsx@npm:^7.1.7":
-  version: 7.1.7
-  resolution: "markdown-to-jsx@npm:7.1.7"
-  peerDependencies:
-    react: ">= 0.14.0"
-  checksum: 40153c82cd591ce2fb2365abd0ce462fd6f8e655e601394cc1af0b0d0d1af13ec75fb661952ac3cfda3c34bad9ffb46759ba234c836c7f6eabcf02bcc171d3a8
-  languageName: node
-  linkType: hard
-
-"markdown-to-jsx@npm:^7.1.8":
+"markdown-to-jsx@npm:^7.1.8, markdown-to-jsx@npm:^7.3.2":
   version: 7.3.2
   resolution: "markdown-to-jsx@npm:7.3.2"
   peerDependencies:
@@ -16896,7 +16887,7 @@ __metadata:
     eslint-config-next: "npm:^14.0.3"
     eslint-plugin-storybook: "npm:^0.6.15"
     html-to-react: "npm:^1.4.8"
-    markdown-to-jsx: "npm:^7.1.7"
+    markdown-to-jsx: "npm:^7.3.2"
     next: "npm:^14.0.3"
     prettier: "npm:^3.1.0"
     react: "npm:^18.2.0"
