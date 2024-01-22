@@ -1,4 +1,6 @@
 import type {
+	Awaitable,
+	ClientEvents,
 	FetchMessagesOptions,
 	MessageCreateOptions,
 	MessagePayload,
@@ -50,5 +52,27 @@ contextBridge.exposeInMainWorld('Conduit', {
 					event =>
 						typeof event === 'string' && ipcRenderer.removeAllListeners(event)
 				),
+	},
+	DiscordEvent: {
+		subscribe: <T extends keyof ClientEvents>(
+			eventName: T,
+			handler: (...args: ClientEvents[T]) => Awaitable<void>
+		) =>
+			ipcRenderer.invoke(
+				'discord-event:subscription',
+				'on',
+				eventName,
+				handler
+			),
+		unsubscribe: <T extends keyof ClientEvents>(
+			eventName: T,
+			handler: (...args: ClientEvents[T]) => Awaitable<void>
+		) =>
+			ipcRenderer.invoke(
+				'discord-event:subscription',
+				'off',
+				eventName,
+				handler
+			),
 	},
 })

@@ -10,8 +10,10 @@ import ClientError from './classes/ClientError'
 import { AppDataSchema, ClientErrorCodes } from './typings'
 import Router from './classes/Router'
 import {
+	Awaitable,
 	Channel,
 	ChannelType,
+	ClientEvents,
 	ClientUser,
 	FetchMessagesOptions,
 	GuildChannel,
@@ -436,6 +438,31 @@ ipcMain.handle(
 			log.error(error)
 			event.sender.send('error', serializeObject(error))
 			return { data: { currentChannel: {} }, error: true }
+		}
+	}
+)
+
+/*
+ * ======================================================================================
+ *                                IPC Main Events: DiscordEvent Subscriptions
+ * ======================================================================================
+ */
+
+ipcMain.handle(
+	'discord-event:subscription',
+	async <T extends keyof ClientEvents>(
+		event: Electron.IpcMainInvokeEvent,
+		type: 'on' | 'off',
+		eventName: T,
+		handler: (...args: ClientEvents[T]) => Awaitable<void>
+	) => {
+		try {
+			if (!client?.isReady)
+				throw new ClientError(ClientErrorCodes.CLIENT_NOT_READY)
+			client[type](eventName, handler)
+		} catch (error) {
+			log.error(error)
+			event.sender.send('error', serializeObject(error))
 		}
 	}
 )

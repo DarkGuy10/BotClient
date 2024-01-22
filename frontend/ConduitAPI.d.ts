@@ -1,4 +1,6 @@
 import type {
+	Awaitable,
+	ClientEvents,
 	FetchMessagesOptions,
 	MessageCreateOptions,
 	MessagePayload,
@@ -35,6 +37,12 @@ export interface ClientUserData {
 	avatarURL: string
 }
 
+export interface Guild {
+	name: string
+	id: string
+	iconURL: string | null
+}
+
 export interface APIError {
 	name: 'string'
 	message: 'string'
@@ -58,7 +66,7 @@ export interface IConduitAPI {
 			APIResource<{ savedUsers: StrippedUserSchema[] }>
 		>
 		clientUserData: () => Promise<APIResource<{ clientUser: ClientUserData }>>
-		guildsAll: () => Promise<APIResource<any>>
+		guildsAll: () => Promise<APIResource<{ guilds: Guild[] }>>
 		guildChannelsAll: () => Promise<APIResource<any>>
 		dmChannelsAll: () => Promise<APIResource<any>>
 		messagesBulk: (
@@ -76,6 +84,16 @@ export interface IConduitAPI {
 	Callback: {
 		error: (handleError: (error: APIError) => void) => void
 		clearAll: () => void
+	}
+	DiscordEvent: {
+		subscribe: <T extends keyof ClientEvents>(
+			eventName: T,
+			handler: (...args: ClientEvents[T]) => Awaitable<void>
+		) => Promise<void>
+		unsubscribe: <T extends keyof ClientEvents>(
+			eventName: T,
+			handler: (...args: ClientEvents[T]) => Awaitable<void>
+		) => Promise<void>
 	}
 }
 
