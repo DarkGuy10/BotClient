@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.12.1-alpha
+
+- fix: wrong filepath to build resources
+- fix: wrong build script in workflow file
+
 ## v0.12.0-alpha
 
 - fix: avoid login attempt with empty tokens
