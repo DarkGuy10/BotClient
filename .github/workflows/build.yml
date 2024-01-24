@@ -31,5 +31,5 @@ jobs:
         uses: samuelmeuli/action-electron-builder@v1.6.0
         with:
           github_token: ${{ secrets.github_token }}
-          build_script_name: pre-build
+          build_script_name: react-build
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
