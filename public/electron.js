@@ -110,6 +110,8 @@ let currentDM
 // ^^ These will make things easier than sending channel and guild data for every invocations
 
 ipcMain.on('login', async (event, token) => {
+	// Early return if no token was provided
+	if (!token) return
 	if (client) {
 		// Prevents client from getting duplicated
 		client.destroy()
