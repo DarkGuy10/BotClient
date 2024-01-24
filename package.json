@@ -20,14 +20,14 @@
 		"discord-api-types": "^0.37.67",
 		"discord.js": "^14.14.1",
 		"electron-is-dev": "^2.0.0",
-		"electron-log": "^4.4.6",
-		"electron-store": "^8.0.1",
-		"electron-updater": "^5.0.1",
+		"electron-log": "^5.1.0",
+		"electron-store": "^8.1.0",
+		"electron-updater": "6.1.7",
 		"html-to-react": "^1.4.8",
 		"markdown-to-jsx": "^7.1.7",
-		"react": "^18.0.0",
-		"react-dom": "^18.0.0",
-		"react-scripts": "^5.0.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-scripts": "^5.0.1",
 		"react-twemoji": "^0.5.0",
 		"web-vitals": "^2.1.4"
 	},
@@ -64,11 +64,11 @@
 	},
 	"devDependencies": {
 		"babel-plugin-module-resolver": "^4.1.0",
-		"concurrently": "^7.1.0",
-		"electron": "^18.0.3",
-		"electron-builder": "^23.0.3",
-		"prettier": "^2.6.2",
-		"wait-on": "^6.0.1"
+		"concurrently": "^8.2.2",
+		"electron": "^28.1.4",
+		"electron-builder": "24.9.1",
+		"prettier": "^3.2.4",
+		"wait-on": "^7.2.0"
 	},
 	"packageManager": "yarn@4.0.2"
 }
