@@ -4168,7 +4168,7 @@ __metadata:
     "@testing-library/user-event": "npm:^13.5.0"
     babel-plugin-module-resolver: "npm:^4.1.0"
     concurrently: "npm:^7.1.0"
-    discord-api-types: "npm:^0.37.65"
+    discord-api-types: "npm:^0.37.67"
     discord.js: "npm:^14.14.1"
     electron: "npm:^18.0.3"
     electron-builder: "npm:^23.0.3"
@@ -5660,10 +5660,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.65":
-  version: 0.37.65
-  resolution: "discord-api-types@npm:0.37.65"
-  checksum: 383715ab821fbd912a34c37ea5b048e8328d0527d2f485e1a8d6629c609ae0dd2c875c054911dfdb7d93c5ed0cc7c8604a466cb1d0bab79009010a6683c8f027
+"discord-api-types@npm:^0.37.67":
+  version: 0.37.67
+  resolution: "discord-api-types@npm:0.37.67"
+  checksum: 5b474544a82148179e3d50f3092b9aa90b4142b470df397d3e6e211bd9c0b1f99724c618d7136fccdbe9cd931d8f48b1bdcd10599c7a08a92b76408c05829692
   languageName: node
   linkType: hard
 
