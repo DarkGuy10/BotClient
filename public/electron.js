@@ -353,7 +353,7 @@ ipcMain.handle('mention', async (event, id, type, message) => {
 				fetched = message.guildId
 					? serializeGuildMember(
 							await client.guilds.cache.get(message.guildId).members.fetch(id)
-					  ) || (await client.users.fetch(id))
+						) || (await client.users.fetch(id))
 					: await client.users.fetch(id)
 				break
 

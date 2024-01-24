@@ -75,12 +75,12 @@ class MessageElement extends Component {
 							return memberOrUser
 								? `<discord-mention type='user'>${escape(
 										memberOrUser?.displayName || memberOrUser?.username
-								  )}</discord-mention>`
+									)}</discord-mention>`
 								: // the span tags below prevent removal of prepended '@'
-								  // on state updates
-								  `<span><discord-mention type='user'>${escape(
+									// on state updates
+									`<span><discord-mention type='user'>${escape(
 										node.id
-								  )}</discord-mention></span>`
+									)}</discord-mention></span>`
 						},
 						role: node => {
 							const role =
@@ -88,7 +88,7 @@ class MessageElement extends Component {
 							return role
 								? `<discord-mention type='role' color=${decimalToHexColor(
 										role.color
-								  )}>${escape(role.name)}</discord-mention>`
+									)}>${escape(role.name)}</discord-mention>`
 								: '@deleted-role'
 						},
 						channel: node => {
@@ -99,7 +99,7 @@ class MessageElement extends Component {
 										channel.type === ChannelType.GuildVoice
 											? 'voice'
 											: 'channel'
-								  }'>${escape(channel.name)}</discord-mention>`
+									}'>${escape(channel.name)}</discord-mention>`
 								: '#deleted-channel'
 						},
 						emoji: node =>

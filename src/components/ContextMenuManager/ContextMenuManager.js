@@ -121,7 +121,7 @@ const ContextMenuManager = props => {
 												<span key={i} className={`${styles.buttonItemIcon}`}>
 													{icon}
 												</span>
-										  ))
+											))
 										: null}
 								</div>
 							)

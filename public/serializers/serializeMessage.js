@@ -50,7 +50,7 @@ const serializeMessage = async message => {
 						...mentions.members.mapValues(member =>
 							serializeGuildMember(member)
 						),
-				  ]
+					]
 				: [],
 			users: [...mentions.users],
 			roles: [...mentions.roles],
@@ -76,7 +76,7 @@ const serializeMessage = async message => {
 					member: repliesTo.member
 						? serializeGuildMember(repliesTo.member)
 						: null,
-			  }
+				}
 			: null,
 	}
 }

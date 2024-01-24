@@ -1,62 +1,48 @@
 {
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": false,
-  "contributors": [
-    {
-      "login": "DarkGuy10",
-      "name": "DarkGuy10",
-      "avatar_url": "https://avatars.githubusercontent.com/u/62807269?v=4",
-      "profile": "https://promptfolio.vercel.app",
-      "contributions": [
-        "code",
-        "doc",
-        "projectManagement"
-      ]
-    },
-    {
-      "login": "Duckulus",
-      "name": "Duckulus",
-      "avatar_url": "https://avatars.githubusercontent.com/u/76813487?v=4",
-      "profile": "https://github.com/Duckulus",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "jerbear2008",
-      "name": "jerbear4328",
-      "avatar_url": "https://avatars.githubusercontent.com/u/38813665?v=4",
-      "profile": "https://github.com/jerbear2008",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "ipxter",
-      "name": "pxter",
-      "avatar_url": "https://avatars.githubusercontent.com/u/56973869?v=4",
-      "profile": "https://github.com/ipxter",
-      "contributions": [
-        "bug"
-      ]
-    },
-    {
-      "login": "SkyLayzer",
-      "name": "SkyLayzer",
-      "avatar_url": "https://avatars.githubusercontent.com/u/99122809?v=4",
-      "profile": "https://github.com/SkyLayzer",
-      "contributions": [
-        "design"
-      ]
-    }
-  ],
-  "contributorsPerLine": 7,
-  "projectName": "BotClient",
-  "projectOwner": "DarkGuy10",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "skipCi": true
+	"files": ["README.md"],
+	"imageSize": 100,
+	"commit": false,
+	"contributors": [
+		{
+			"login": "DarkGuy10",
+			"name": "DarkGuy10",
+			"avatar_url": "https://avatars.githubusercontent.com/u/62807269?v=4",
+			"profile": "https://promptfolio.vercel.app",
+			"contributions": ["code", "doc", "projectManagement"]
+		},
+		{
+			"login": "Duckulus",
+			"name": "Duckulus",
+			"avatar_url": "https://avatars.githubusercontent.com/u/76813487?v=4",
+			"profile": "https://github.com/Duckulus",
+			"contributions": ["doc"]
+		},
+		{
+			"login": "jerbear2008",
+			"name": "jerbear4328",
+			"avatar_url": "https://avatars.githubusercontent.com/u/38813665?v=4",
+			"profile": "https://github.com/jerbear2008",
+			"contributions": ["code"]
+		},
+		{
+			"login": "ipxter",
+			"name": "pxter",
+			"avatar_url": "https://avatars.githubusercontent.com/u/56973869?v=4",
+			"profile": "https://github.com/ipxter",
+			"contributions": ["bug"]
+		},
+		{
+			"login": "SkyLayzer",
+			"name": "SkyLayzer",
+			"avatar_url": "https://avatars.githubusercontent.com/u/99122809?v=4",
+			"profile": "https://github.com/SkyLayzer",
+			"contributions": ["design"]
+		}
+	],
+	"contributorsPerLine": 7,
+	"projectName": "BotClient",
+	"projectOwner": "DarkGuy10",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"skipCi": true
 }
