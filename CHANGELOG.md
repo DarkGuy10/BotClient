@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.12.0-alpha
+
+- fix: avoid login attempt with empty tokens
+- chore: bump djs-related deps
+- chore: bump electron to 28.1.4
+- chore: bump yarn to 4.0.2
+- chore: bump react, react-dom to 18.2.0
+- chore: bump react-scripts to 5.0.1
+- chore: bump misc dependencies
+
 ## v0.11.0-alpha
 
 - feat: add context menu api
